@@ -1,2 +1,35 @@
 # cpcrw_incubation
 TES incubation of 2015 CPCRW cores
+
+**Objective:**
+
+Examine how mineral boreal soils, sampled from the active layer just above permafrost, produce GHGs: how production varies with soil moisture and temperature.
+
+**Rationale:**
+
+The balance between CO2 and CH4 emissions from soils allows for particularly interesting manipulative experiments and modeling tests, as CH4 is formed under specific conditions and can be readily oxidized back to CO2. This balance thus serves as a particularly interesting mechanistic probe, and stringent test of our understanding and models.
+
+**Approach:**
+
+Sample CPCRW soils just above August frozen soil level–i.e., the base of the active layer using the large augur (7.5 cm w by 30 cm h). Cores should be kept cold, though don’t have to stay frozen, and shipped to PNNL.
+
+Sampling will, as much as possible, take place within the open call transects This will allow the two projects to compare spatial similarities in active layer and permafrost soil respiration and conditions.  We anticipate sampling will take place in the black spruce-to-birch hillslope transition zone with an average separation of 2-3 m.
+
+Split cores into six groups:
+
+1. Immediate destructive analyses
+2. Maintain at constant (field conditions) water content at 4 °C
+3. Drydown (no water added) at 4 °C
+4. Maintain at constant (field conditions) water content at 22 °C
+5. Maintain at the higher 4 °C group water content (as closely as possible to the corresponding point in time) but at 22 °C
+6. Drydown (no water added) at 22 °C
+
+This is designed to give us two control groups that maintain field moisture and different temperatures; two drydown groups; and a drydown group at 22 °C that (hopefully) follows the 4 °C moisture tracks, allowing us to unambiguously separate temperature and moisture effects.
+
+Groups (ii)-(vi) will be incubated for ~100 days at constant temperatures. Measure mass, adjust water content–for groups (ii), (iv), (v)–and measure CO2/CH4 evolution periodically. Destructive analyses at end of incubation.
+
+This will require 6 groups x 6 reps = 36 cores.
+
+The 4 and 22 °C incubation temperatures are driven by logistics (the PNNL growth chambers that can accommodate the samples and Picarro setup), but follow the incubation design of [Treat et al. (2013)](http://dx.doi.org/10.1038/nclimate2010).
+
+
