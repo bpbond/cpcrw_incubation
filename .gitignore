@@ -16,3 +16,5 @@ vignettes/*.pdf
 # Project-specific
 outputs/
 *.html
+notes.txt
+
