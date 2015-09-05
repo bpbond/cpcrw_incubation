@@ -97,6 +97,12 @@ print(p)
 save_plot("CH4_time")
 ggsave("qc_plots/CH4_time.png")
 
+#command <- "sed -i.bak s/STRING_TO_REPLACE/STRING_TO_REPLACE_IT/g index.html
+#system(command)
+
+# cat(paste("Last data:", max(smry$Date)),
+#     paste("Script run:", Sys.Date()),
+#     file = "qc_plots/info.txt", sep="\n")
 
 # Done! 
 
