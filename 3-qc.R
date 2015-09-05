@@ -82,7 +82,8 @@ smry <- summarydata %>%
 p <- qplot(Date, CO2_ppm_s, data=smry) +
   geom_line(aes(group=paste(Temperature, Treatment)), linetype=2) +
   geom_errorbar((aes(ymin=CO2_ppm_s-CO2_ppm_s_sd, ymax=CO2_ppm_s+CO2_ppm_s_sd))) +
-  facet_grid(Temperature~Treatment)
+  facet_grid(Temperature~Treatment) + 
+  ggtitle("CO2 fluxes (ppm/s, uncorrected) by date")
 print(p)
 save_plot("CO2_time")
 ggsave("qc_plots/CO2_time.png")
@@ -90,7 +91,8 @@ ggsave("qc_plots/CO2_time.png")
 p <- qplot(Date, CH4_ppb_s, data=smry) +
   geom_line(aes(group=paste(Temperature, Treatment)), linetype=2) +
   geom_errorbar((aes(ymin=CH4_ppb_s-CH4_ppb_s_sd, ymax=CH4_ppb_s+CH4_ppb_s_sd))) +
-  facet_grid(Temperature~Treatment)
+  facet_grid(Temperature~Treatment) + 
+  ggtitle("CH4 fluxes (ppb/s, uncorrected) by date")
 print(p)
 save_plot("CH4_time")
 ggsave("qc_plots/CH4_time.png")
