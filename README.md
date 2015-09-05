@@ -19,7 +19,7 @@ Script run: $SCRIPTRUN
 
 **Objective:**
 
-Examine how mineral boreal soils, sampled from the active layer just above permafrost, produce GHGs: how production varies with soil moisture and temperature.
+Examine how mineral boreal soils, sampled from the active layer just above permafrost at [CPCRW](http://www.lter.uaf.edu/bnz_cpcrw.cfm), produce GHGs: how production varies with soil moisture and temperature.
 
 **Rationale:**
 
