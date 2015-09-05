@@ -5,6 +5,11 @@ TES incubation of 2015 CPCRW cores
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/samples_by_date.png)
 
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/orphan_samples.png)
+
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CO2_time.png)
+
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CH4_time.png)
 
 ## Study objectives and approach
 
