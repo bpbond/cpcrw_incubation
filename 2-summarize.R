@@ -28,12 +28,13 @@ print(summary(rawdata))
 printlog( "Removing fractional MPVPosition" )
 rawdata <- subset(rawdata, MPVPosition == trunc(MPVPosition))
 
-# Make true dates
+# Handle dates
 printlog( "Converting date/time info to POSIXct..." )
-rawdata$DATETIME <- ymd_hms(paste(rawdata$DATE, rawdata$TIME), tz="America/Los_Angeles")
-# Force Picarro timestamps to Pacific time (UTC -8:00)
-printlog("Picarro timestamps to Pacific time")
-rawdata$DATETIME <- rawdata$DATETIME - 60 * 60 * 8
+rawdata$DATETIME <- ymd_hms(paste(rawdata$DATE, rawdata$TIME))
+# We decided to use UTC only (Peyton email 9/4/15) so this is commented out
+# # Force Picarro timestamps to Pacific time (UTC -8:00)
+# printlog("Picarro timestamps to Pacific time")
+# rawdata$DATETIME <- rawdata$DATETIME - 60 * 60 * 8
 printlog("First timestamp:")
 print(min(rawdata$DATETIME))
 printlog("Last timestamp:")
@@ -53,30 +54,27 @@ rawdata_samples <- rawdata %>%
   group_by(samplenum) %>%
   mutate(elapsed_seconds = (FRAC_HRS_SINCE_JAN1 - min(FRAC_HRS_SINCE_JAN1)) * 60 * 60) 
 
+
 # Load MPVPosition map
 printlog("Loading valve map data...")
-valvemap <- read_csv("data/DWP2014_Respiration Sample Key_21July2015.csv")
+valvemap <- read_csv("data/valvemap.csv", skip = 1)
 printlog( "Converting date/time info to POSIXct..." )
-valvemap$STARTDATE <- mdy(valvemap$STARTDATE, tz="America/Los_Angeles")
-valvemap$ENDDATE <- mdy(valvemap$ENDDATE, tz="America/Los_Angeles")
+valvemap$StartDateTime <- mdy_hm(paste(valvemap$Date, valvemap$Time_set_start))
+valvemap <- arrange(valvemap, StartDateTime)
 valvemap$valvemaprow <- 1:nrow(valvemap)
-printlog("Trimming whitespace from categorical fields...")
-valvemap$WETTING <- str_trim(valvemap$WETTING)
-valvemap$INPUT <- str_trim(valvemap$INPUT)
-valvemap$MOISTURE <- str_trim(valvemap$MOISTURE)
-valvemap$STRUCTURE <- str_trim(valvemap$STRUCTURE)
 
-printlog("Visualizing valve map...")
-p <- ggplot(valvemap, aes(STARTDATE, MPVPosition, xend=ENDDATE, yend=MPVPosition, color=STRUCTURE))
-p <- p + geom_segment(size=2)
-p <- p + geom_text(aes(label=CORE), size=4, hjust=.5, vjust=-.5, show_guide=FALSE)
-p <- p + ggtitle("Valve map data (showing core numbers)")
-print(p)
-save_plot("valvemap")
+# printlog("Visualizing valve map...")
+# p <- ggplot(valvemap, aes(StartDateTime, MPVPosition, color=Core))
+# p <- p + geom_segment(size=2)
+# p <- p + geom_text(aes(label=CORE), size=4, hjust=.5, vjust=-.5, show_guide=FALSE)
+# p <- p + ggtitle("Valve map data (showing core numbers)")
+# print(p)
+# save_plot("valvemap")
 
 # QC the valve map
 dupes <- valvemap %>% 
-  group_by(paste(STARTDATE, ENDDATE), MPVPosition) %>% 
+  filter(Core != "Ambient") %>%
+  group_by(StartDateTime, MPVPosition) %>% 
   summarise(n=n()) %>% 
   filter(n > 1)
 if(nrow(dupes)) {
@@ -85,15 +83,13 @@ if(nrow(dupes)) {
   printlog("WARNING - this will screw up the matching to Picarro data")
 }
 
-
 # Function to match up Picarro data with mapping file data
 # This is done by date and valve number (see plot saved above)
 matchfun <- function(DATETIME, MPVPosition) {
-  row <- which(DATETIME >= valvemap$STARTDATE & 
-                 DATETIME <= valvemap$ENDDATE & 
+  rowmatches <- which(DATETIME >= valvemap$StartDateTime & 
                  MPVPosition == valvemap$MPVPosition)
-  if(length(row) != 1) row <- NA
-  row
+  if(length(rowmatches) == 0) rowmatches <- NA
+  max(rowmatches)  # return latest time match
 }
 
 printlog( "Computing summary statistics for each sample..." )
@@ -137,8 +133,9 @@ summarydata_other <- rawdata_samples %>%
     N = n(),
     MPVPosition	= mean(MPVPosition),
     h2o_reported = mean(h2o_reported),
-    valvemaprow = matchfun(floor_date(mean(DATETIME), "day"), MPVPosition)
-  )
+    valvemaprow = matchfun(DATETIME, MPVPosition)
+  ) %>%
+  filter(N > 1)  # N=1 observations are...? Picarro quirk
 
 # Merge pieces together to form final summary data set
 summarydata <- summarydata_other %>%
@@ -146,24 +143,38 @@ summarydata <- summarydata_other %>%
   left_join(summarydata_maxCO2, by="samplenum") %>% 
   left_join(summarydata_maxCH4, by="samplenum")
 
+
 printlog("Merging Picarro and mapping data...")
 summarydata <- left_join(summarydata, valvemap, by=c("MPVPosition", "valvemaprow"), all.x=TRUE)
 
-# At this point we want to compute elapsed_minutes. The zero mark
-# for this calculation is the STARTDATE + STARTTIME fields in the valve map
-summarydata$STARTDATETIME <- ymd_hm(paste(summarydata$STARTDATE, 
-                                          summarydata$STARTTIME), tz="America/Los_Angeles")
-printlog("Computing elapsed minutes...")
-summarydata <- summarydata %>%
-  group_by(STARTDATETIME) %>%
-  mutate(elapsed_minutes = as.numeric(difftime(DATETIME, STARTDATETIME), units="mins"))
+stop('ok')
+
+printlog("Number of samples for each core, by date:")
+samples_by_date <- summarydata %>% 
+  mutate(Date = strftime(DATETIME, format="%D")) %>% 
+  group_by(Core, Date) %>% 
+  summarise(n = n())
+save_data(samples_by_date)
+p <- qplot(Date, Core, data=samples_by_date, geom="tile", fill=factor(n))
+p <- p + ggtitle("Number of reps by date and core") + scale_fill_discrete("Reps")
+print(p)
+save_plot("samples_by_date", ptype = ".png")
+ggsave("qc_plots/samples_by_date.png")
+
+# # At this point we want to compute elapsed_minutes. The zero mark
+# # for this calculation is the STARTDATE + STARTTIME fields in the valve map
+# summarydata$STARTDATETIME <- ymd_hm(paste(summarydata$STARTDATE, 
+#                                           summarydata$STARTTIME), tz="America/Los_Angeles")
+# printlog("Computing elapsed minutes...")
+# summarydata <- summarydata %>%
+#   group_by(STARTDATETIME) %>%
+#   mutate(elapsed_minutes = as.numeric(difftime(DATETIME, STARTDATETIME), units="mins"))
 
 
-printlog("Number of samples for each core:")
-print(summarydata %>% group_by(CORE) %>% summarise(n()) %>% as.data.frame())
+print(summarydata %>% group_by(Core) %>% summarise(n()) %>% as.data.frame())
 
 summarydata %>%   # save a list of samples and corresponding cores
-  select(DATETIME, MPVPosition, CORE) %>% 
+  select(DATETIME, MPVPosition, Core) %>% 
   save_data(fname="samplelist.csv")
 
 printlog("Summaries for max_CH4 and max_CO2:")

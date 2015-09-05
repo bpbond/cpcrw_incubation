@@ -7,7 +7,7 @@ source("0-functions.R")
 library(stringr)
 
 SCRIPTNAME  	<- "1-data.R"
-DATA_DIR      <- "data/"
+DATA_DIR      <- "data/picarro/"
 
 # -----------------------------------------------------------------------------
 # read a single output file, returning data frame

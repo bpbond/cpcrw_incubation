@@ -17,4 +17,5 @@ vignettes/*.pdf
 outputs/
 *.html
 notes.txt
+from_peyton/
 
