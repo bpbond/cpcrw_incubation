@@ -1,3 +1,5 @@
+# NOTE THIS DOESN'T WORK WITH CURRENT DATASET YET
+
 # Process Picarro data for Peyton's DWP lab experiment
 # Ben Bond-Lamberty April 2015
 
