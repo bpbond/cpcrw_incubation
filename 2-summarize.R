@@ -8,6 +8,8 @@ source("0-functions.R")
 
 SCRIPTNAME  	<- "2-summarize.R"
 RAWDATA      <- file.path(OUTPUT_DIR, "rawdata.csv.gz")  # output from script 1
+VALVEMAP     <- "data/valvemap.csv"
+TREATMENTS   <- "data/treatments.csv"
 
 library(stringr)
 
@@ -57,7 +59,7 @@ rawdata_samples <- rawdata %>%
 
 # Load MPVPosition map
 printlog("Loading valve map data...")
-valvemap <- read_csv("data/valvemap.csv", skip = 1)
+valvemap <- read_csv(VALVEMAP, skip = 1)
 printlog( "Converting date/time info to POSIXct..." )
 valvemap$StartDateTime <- mdy_hm(paste(valvemap$Date, valvemap$Time_set_start))
 valvemap <- arrange(valvemap, StartDateTime)
@@ -147,66 +149,11 @@ summarydata <- summarydata_other %>%
 printlog("Merging Picarro and mapping data...")
 summarydata <- left_join(summarydata, valvemap, by=c("MPVPosition", "valvemaprow"), all.x=TRUE)
 
-stop('ok')
+printlog("Reading and merging treatment data...")
+trtdata <- read_csv(TREATMENTS, skip=1)
+summarydata <- left_join(summarydata, trtdata, by="Core")
 
-printlog("Number of samples for each core, by date:")
-samples_by_date <- summarydata %>% 
-  mutate(Date = strftime(DATETIME, format="%D")) %>% 
-  group_by(Core, Date) %>% 
-  summarise(n = n())
-save_data(samples_by_date)
-p <- qplot(Date, Core, data=samples_by_date, geom="tile", fill=factor(n))
-p <- p + ggtitle("Number of reps by date and core") + scale_fill_discrete("Reps")
-print(p)
-save_plot("samples_by_date", ptype = ".png")
-ggsave("qc_plots/samples_by_date.png")
-
-# # At this point we want to compute elapsed_minutes. The zero mark
-# # for this calculation is the STARTDATE + STARTTIME fields in the valve map
-# summarydata$STARTDATETIME <- ymd_hm(paste(summarydata$STARTDATE, 
-#                                           summarydata$STARTTIME), tz="America/Los_Angeles")
-# printlog("Computing elapsed minutes...")
-# summarydata <- summarydata %>%
-#   group_by(STARTDATETIME) %>%
-#   mutate(elapsed_minutes = as.numeric(difftime(DATETIME, STARTDATETIME), units="mins"))
-
-
-print(summarydata %>% group_by(Core) %>% summarise(n()) %>% as.data.frame())
-
-summarydata %>%   # save a list of samples and corresponding cores
-  select(DATETIME, MPVPosition, Core) %>% 
-  save_data(fname="samplelist.csv")
-
-printlog("Summaries for max_CH4 and max_CO2:")
-summary(summarydata$max_CO2)
-summary(summarydata$max_CH4)
-
-printlog("Checking for orphan samples...")
-orphan_samples <- filter(summarydata, is.na(CORE))
-if(nrow(orphan_samples)) {
-  printlog("NOTE:", nrow(orphan_samples), "samples have no matching core numbers")
-  save_data(orphan_samples)
-
-  printlog("Visualizing orphan samples...")
-  p <- ggplot(summarydata, aes(DATETIME, MPVPosition, color=!is.na(CORE)))
-  p <- p + geom_jitter() + scale_color_discrete("Has core number")
-  p <- p + ggtitle("Orphan samples (no matching date/valve info)")
-  print(p)
-  save_plot("orphan_samples")
-}
-
-printlog("Checking for orphan cores...")
-orphan_cores <- setdiff(valvemap$CORE, summarydata$CORE)
-if(length(orphan_cores)) {
-  printlog("NOTE: cores in the valve map but not in the summary data:")
-  print(orphan_cores)
-}
-
-# Done! Drop unnecessary columns and save
-
-summarydata <- summarydata %>%
-  filter(!is.na(CORE)) %>%
-  select(-MPVPosition, -valvemaprow)
+# Done! 
 
 save_data(summarydata, scriptfolder=FALSE)
 
