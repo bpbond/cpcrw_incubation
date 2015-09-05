@@ -1,6 +1,13 @@
 # cpcrw_incubation
 TES incubation of 2015 CPCRW cores
 
+## Current diagnostics
+
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/samples_by_date.png)
+
+
+## Study objectives and approach
+
 **Objective:**
 
 Examine how mineral boreal soils, sampled from the active layer just above permafrost, produce GHGs: how production varies with soil moisture and temperature.
