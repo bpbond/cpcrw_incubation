@@ -3,6 +3,9 @@ TES incubation of 2015 CPCRW cores
 
 ## Current diagnostics
 
+Latest data: $LATESTDATA
+Script run: $SCRIPTRUN
+
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/samples_by_date.png)
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/orphan_samples.png)
