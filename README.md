@@ -5,7 +5,7 @@ TES incubation of 2015 CPCRW cores
 
 Latest data: 2015-09-04 (incubation day 4)
 
-Script run: 2015-09-06 08:39:07
+Script run: 2015-09-06 08:58:37
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/samples_by_date.png)
 

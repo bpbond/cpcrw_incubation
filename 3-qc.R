@@ -7,7 +7,13 @@ source("0-functions.R")
 SCRIPTNAME  	<- "3-qc.R"
 SUMMARYDATA      <- file.path(OUTPUT_DIR, "summarydata.csv")  # output from script 2
 
-
+# save_plot <- function(pname, p=last_plot(), ptype=".pdf", scriptfolder=TRUE, ...)
+save_diagnostic <- function(pname, ...) {
+  printlog("Saving diagnostic for", pname)
+  ggsave(paste0("qc_plots/", pname, ".png"))
+  save_plot(pname, ...)
+}
+  
 # ==============================================================================
 # Main 
 
@@ -31,9 +37,9 @@ save_data(samples_by_date)
 p <- qplot(Date, Core, data=samples_by_date, geom="tile", fill=factor(n))
 p <- p + ggtitle("Number of reps by date and core") + scale_fill_discrete("Reps")
 print(p)
-save_plot("samples_by_date", ptype = ".png")
-ggsave("qc_plots/samples_by_date.png")
-
+save_diagnostic("samples_by_date")
+#save_plot("samples_by_date", ptype = ".png")
+#ggsave("qc_plots/samples_by_date.png")
 
 # # At this point we want to compute elapsed_minutes. The zero mark
 # # for this calculation is the STARTDATE + STARTTIME fields in the valve map
@@ -66,9 +72,9 @@ p <- ggplot(summarydata, aes(DATETIME, MPVPosition, color=!is.na(Core)))
 p <- p + geom_jitter() + scale_color_discrete("Has core number")
 p <- p + ggtitle("Orphan samples (no matching date/valve info)")
 print(p)
-save_plot("orphan_samples")
-ggsave("qc_plots/orphan_samples.png")
-
+#save_plot("orphan_samples")
+#ggsave("qc_plots/orphan_samples.png")
+save_diagnostic("orphan_samples")
 
 printlog("Computing per-date summaries...")
 summarydata <- summarydata %>%
@@ -88,8 +94,9 @@ p <- qplot(Date, CO2_ppm_s, data=smry) +
   facet_grid(Temperature~Treatment) + 
   ggtitle("CO2 fluxes (ppm/s, uncorrected) by date")
 print(p)
-save_plot("CO2_time")
-ggsave("qc_plots/CO2_time.png")
+#save_plot("CO2_time")
+#ggsave("qc_plots/CO2_time.png")
+save_diagnostic("CO2_time")
 
 p <- qplot(Date, CH4_ppb_s, data=smry) +
   geom_line(aes(group=paste(Temperature, Treatment)), linetype=2) +
@@ -97,23 +104,26 @@ p <- qplot(Date, CH4_ppb_s, data=smry) +
   facet_grid(Temperature~Treatment) + 
   ggtitle("CH4 fluxes (ppb/s, uncorrected) by date")
 print(p)
-save_plot("CH4_time")
-ggsave("qc_plots/CH4_time.png")
+#save_plot("CH4_time")
+#ggsave("qc_plots/CH4_time.png")
+save_diagnostic("CH4_time")
 
 # Individual cores over time
 p <- qplot(incday, CO2_ppm_s, data=summarydata, color=paste(Treatment, Temperature))
 p <- p + ggtitle("CO2 fluxes (uncorrected) by rep, core, incubation day") + scale_color_discrete("")
 p <- p + facet_wrap(~Core)
 print(p)
-save_plot("CO2_incday")
-ggsave("qc_plots/CO2_incday.png")
+#save_plot("CO2_incday")
+#ggsave("qc_plots/CO2_incday.png")
+save_diagnostic("CO2_incday")
 
 p <- qplot(incday, CH4_ppb_s, data=summarydata, color=paste(Treatment, Temperature))
 p <- p + ggtitle("CH4 fluxes (uncorrected) by rep, core, incubation day") + scale_color_discrete("")
 p <- p + facet_wrap(~Core)
 print(p)
-save_plot("CH4_incday")
-ggsave("qc_plots/CH4_incday.png")
+#save_plot("CH4_incday")
+#ggsave("qc_plots/CH4_incday.png")
+save_diagnostic("CH4_incday")
 
 # The README functions as a quick diagnostic summary on the webpage
 printlog("Updating README.md document...")
