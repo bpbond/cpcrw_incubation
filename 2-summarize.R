@@ -136,15 +136,16 @@ summarydata_other <- rawdata_samples %>%
     MPVPosition	= mean(MPVPosition),
     h2o_reported = mean(h2o_reported),
     valvemaprow = matchfun(DATETIME, MPVPosition)
-  ) %>%
-  filter(N > 1)  # N=1 observations are...? Picarro quirk
+  ) 
 
 # Merge pieces together to form final summary data set
+printlog("Removing N=1 and MPVPosition=0 data, and merging...")
 summarydata <- summarydata_other %>%
+  filter(N > 1) %>% # N=1 observations are...? Picarro quirk
+  filter(MPVPosition > 0) %>% # ? Picarro quirk
   left_join(summarydata_min, by="samplenum") %>%
   left_join(summarydata_maxCO2, by="samplenum") %>% 
   left_join(summarydata_maxCH4, by="samplenum")
-
 
 printlog("Merging Picarro and mapping data...")
 summarydata <- left_join(summarydata, valvemap, by=c("MPVPosition", "valvemaprow"), all.x=TRUE)
