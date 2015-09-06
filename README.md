@@ -3,9 +3,9 @@ TES incubation of 2015 CPCRW cores
 
 ## Current diagnostics
 
-Latest data: 2015-09-04
+Latest data: 2015-09-04 (incubation day 4)
 
-Script run: 2015-09-05 22:24:44
+Script run: 2015-09-06 08:34:54
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/samples_by_date.png)
 
@@ -14,6 +14,10 @@ Script run: 2015-09-05 22:24:44
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CO2_time.png)
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CH4_time.png)
+
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CO2_incday.png)
+
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CH4_incday.png)
 
 ## Study objectives and approach
 
