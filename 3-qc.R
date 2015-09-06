@@ -80,7 +80,7 @@ printlog("Computing per-date summaries...")
 summarydata <- summarydata %>%
   mutate(CO2_ppm_s = (max_CO2 - min_CO2) / (max_CO2_time - min_CO2_time),
          CH4_ppb_s = (max_CH4 - min_CH4) / (max_CH4_time - min_CH4_time),
-         incday = as.numeric(difftime(DATETIME, min(DATETIME), units = "days"))) %>%
+         incday = 1 + as.numeric(difftime(DATETIME, min(DATETIME), units = "days"))) %>%
   mutate(Date = strftime(DATETIME, format="%Y-%m-%d"))
 smry <- summarydata %>%
   group_by(Date, Treatment, Temperature) %>%
