@@ -60,15 +60,15 @@ orphan_samples <- filter(summarydata, is.na(Core))
 if(nrow(orphan_samples)) {
   printlog("NOTE:", nrow(orphan_samples), "samples have no matching core numbers")
   save_data(orphan_samples)
-  
-  printlog("Visualizing orphan samples...")
-  p <- ggplot(summarydata, aes(DATETIME, MPVPosition, color=!is.na(Core)))
-  p <- p + geom_jitter() + scale_color_discrete("Has core number")
-  p <- p + ggtitle("Orphan samples (no matching date/valve info)")
-  print(p)
-  save_plot("orphan_samples")
-  ggsave("qc_plots/orphan_samples.png")
 }
+printlog("Visualizing orphan samples...")
+p <- ggplot(summarydata, aes(DATETIME, MPVPosition, color=!is.na(Core)))
+p <- p + geom_jitter() + scale_color_discrete("Has core number")
+p <- p + ggtitle("Orphan samples (no matching date/valve info)")
+print(p)
+save_plot("orphan_samples")
+ggsave("qc_plots/orphan_samples.png")
+
 
 printlog("Computing per-date summaries...")
 summarydata <- summarydata %>%
@@ -102,14 +102,14 @@ ggsave("qc_plots/CH4_time.png")
 
 # Individual cores over time
 p <- qplot(incday, CO2_ppm_s, data=summarydata, color=paste(Treatment, Temperature))
-p <- p + ggtitle("CO2 fluxes by core and incubation day") + scale_color_discrete("")
+p <- p + ggtitle("CO2 fluxes (uncorrected) by rep, core, incubation day") + scale_color_discrete("")
 p <- p + facet_wrap(~Core)
 print(p)
 save_plot("CO2_incday")
 ggsave("qc_plots/CO2_incday.png")
 
 p <- qplot(incday, CH4_ppb_s, data=summarydata, color=paste(Treatment, Temperature))
-p <- p + ggtitle("CH4 fluxes by core and incubation day") + scale_color_discrete("")
+p <- p + ggtitle("CH4 fluxes (uncorrected) by rep, core, incubation day") + scale_color_discrete("")
 p <- p + facet_wrap(~Core)
 print(p)
 save_plot("CH4_incday")
