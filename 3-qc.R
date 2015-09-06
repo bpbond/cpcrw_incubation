@@ -24,7 +24,7 @@ summarydata$DATETIME <- ymd_hms(summarydata$DATETIME)
 
 printlog("Number of samples for each core, by date:")
 samples_by_date <- summarydata %>% 
-  mutate(Date = strftime(DATETIME, format="%D")) %>% 
+  mutate(Date = strftime(DATETIME, format="%Y-%m-%d")) %>% 
   group_by(Core, Date) %>% 
   summarise(n = n())
 save_data(samples_by_date)
@@ -74,7 +74,7 @@ printlog("Computing per-date summaries...")
 smry <- summarydata %>%
   mutate(CO2_ppm_s = (max_CO2 - min_CO2) / (max_CO2_time - min_CO2_time),
          CH4_ppb_s = (max_CH4 - min_CH4) / (max_CH4_time - min_CH4_time)) %>%
-  mutate(Date = strftime(DATETIME, format="%D")) %>%
+  mutate(Date = strftime(DATETIME, format="%Y-%m-%d")) %>%
   group_by(Date, Treatment, Temperature) %>%
   summarise(CO2_ppm_s_sd = sd(CO2_ppm_s), CO2_ppm_s = mean(CO2_ppm_s),
             CH4_ppb_s_sd = sd(CH4_ppb_s), CH4_ppb_s = mean(CH4_ppb_s))
@@ -97,12 +97,13 @@ print(p)
 save_plot("CH4_time")
 ggsave("qc_plots/CH4_time.png")
 
-#command <- "sed -i.bak s/STRING_TO_REPLACE/STRING_TO_REPLACE_IT/g index.html
-#system(command)
-
-# cat(paste("Last data:", max(smry$Date)),
-#     paste("Script run:", Sys.Date()),
-#     file = "qc_plots/info.txt", sep="\n")
+printlog("Updating README.md document...")
+cmd <- paste0("sed -i .bak 's/^Latest data.*$/Latest data: ", max(smry$Date), "/' README.md")
+print(cmd)
+try(system(cmd))
+cmd <- paste0("sed -i .bak 's/^Script run.*$/Script run: ", Sys.time(), "/' README.md")
+print(cmd)
+try(system(cmd))
 
 # Done! 
 
