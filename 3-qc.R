@@ -82,11 +82,22 @@ summarydata <- summarydata %>%
          CH4_ppb_s = (max_CH4 - min_CH4) / (max_CH4_time - min_CH4_time),
          incday = 1 + as.numeric(difftime(DATETIME, min(DATETIME), units = "days"))) %>%
   mutate(Date = strftime(DATETIME, format="%Y-%m-%d"))
+
 smry <- summarydata %>%
   group_by(Date, Treatment, Temperature) %>%
   summarise(CO2_ppm_s_sd = sd(CO2_ppm_s), CO2_ppm_s = mean(CO2_ppm_s),
             CH4_ppb_s_sd = sd(CH4_ppb_s), CH4_ppb_s = mean(CH4_ppb_s),
             incday = as.numeric(round(mean(incday), 0)))
+
+# Plot CV (coefficient of variability) by treatment and date
+p <- qplot(paste(Temperature, Treatment), Date, fill=CO2_ppm_s_sd/CO2_ppm_s, data=subset(smry, Treatment != "Ambient"), geom="tile") + 
+  scale_fill_continuous("CV") + 
+  ggtitle("CV of CO2 observations by date")
+save_diagnostic("CO2_CV")
+p <- qplot(paste(Temperature, Treatment), Date, fill=CH4_ppb_s_sd/CH4_ppb_s, data=subset(smry, Treatment != "Ambient"), geom="tile") + 
+  scale_fill_continuous("CV") + 
+  ggtitle("CV of CH4 observations by date")
+save_diagnostic("CH4_CV")
 
 p <- qplot(Date, CO2_ppm_s, data=smry) +
   geom_line(aes(group=paste(Temperature, Treatment)), linetype=2) +

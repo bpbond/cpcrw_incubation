@@ -56,7 +56,6 @@ rawdata_samples <- rawdata %>%
   group_by(samplenum) %>%
   mutate(elapsed_seconds = (FRAC_HRS_SINCE_JAN1 - min(FRAC_HRS_SINCE_JAN1)) * 60 * 60) 
 
-
 # Load MPVPosition map
 printlog("Loading valve map data...")
 valvemap <- read_csv(VALVEMAP, skip = 1)
@@ -153,6 +152,16 @@ summarydata <- left_join(summarydata, valvemap, by=c("MPVPosition", "valvemaprow
 printlog("Reading and merging treatment data...")
 trtdata <- read_csv(TREATMENTS, skip=1)
 summarydata <- left_join(summarydata, trtdata, by="Core")
+
+
+printlog("Saving a comparison of MPVPosition sequence in Picarro data and valvemap")
+checkdata <- select(summarydata, DATETIME, MPVPosition)
+checkdata$sequence <- seq_len(nrow(checkdata))
+vdata <- data.frame(sequence = seq_len(nrow(valvemap)),
+                    DATETIME_valvemap = paste(valvemap$Date, valvemap$Time_set_start_UTC),
+                    MPVPosition_valvemap = valvemap$MPVPosition)
+MPVPosition_checkdata <- left_join(vdata, checkdata, by="sequence")
+save_data(MPVPosition_checkdata)
 
 # Done! 
 
