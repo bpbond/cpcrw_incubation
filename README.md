@@ -1,5 +1,5 @@
 # cpcrw_incubation
-TES incubation of 2015 CPCRW cores
+PNNL TES incubation of 2015 CPCRW cores. See below for details and experimental protocol. This work is funded by DOE's [Terrestrial Ecosystem Science Program](http://tes.science.energy.gov).
 
 ## Current diagnostics
 
