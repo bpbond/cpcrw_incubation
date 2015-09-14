@@ -62,14 +62,16 @@ if(nrow(orphan_samples)) {
 printlog("Visualizing orphan samples...")
 p <- ggplot(summarydata, aes(DATETIME, MPVPosition, color=!is.na(Core), size=is.na(Core)))
 p <- p + geom_jitter() 
-p <- p + scale_color_discrete("Has core number") + scale_size_discrete(guide = FALSE)
+p <- p + scale_color_manual("Has core number", values = c("TRUE" = "grey", "FALSE" = "red")) 
+p <- p + scale_size_discrete(guide = FALSE)
 p <- p + ggtitle("Orphan samples (no matching date/valve info)")
 save_diagnostic(p, "orphan_samples")
 
 p <- ggplot(subset(summarydata, Core != "Ambient4" & Core != "Ambient22"), 
             aes(DATETIME, Core, size = is.na(Mass_g), color = !is.na(Mass_g)))
 p <- p + geom_point() 
-p <- p + scale_color_discrete("Has mass data") + scale_size_discrete(guide = FALSE)
+p <- p + scale_color_manual("Has mass data", values = c("TRUE" = "grey", "FALSE" = "red"))
+p <- p + scale_size_discrete(guide = FALSE)
 p <- p + ggtitle("Missing mass data")
 save_diagnostic(p, "missing_mass")
 
@@ -86,6 +88,7 @@ smry <- summarydata %>%
   group_by(Date, Treatment, Temperature) %>%
   summarise(CO2_ppm_s_sd = sd(CO2_ppm_s), CO2_ppm_s = mean(CO2_ppm_s),
             CH4_ppb_s_sd = sd(CH4_ppb_s), CH4_ppb_s = mean(CH4_ppb_s),
+            Mass_g = mean(Mass_g),
             incday = as.numeric(round(mean(incday), 0)))
 
 # --------------------- Flux rates and CV ---------------------
@@ -104,6 +107,7 @@ p <- qplot(Date, CO2_ppm_s, data=smry) +
   geom_line(aes(group=paste(Temperature, Treatment)), linetype=2) +
   geom_errorbar((aes(ymin=CO2_ppm_s-CO2_ppm_s_sd, ymax=CO2_ppm_s+CO2_ppm_s_sd))) +
   facet_grid(Temperature~Treatment) + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("CO2 fluxes (ppm/s, uncorrected) by date")
 save_diagnostic(p, "CO2_time")
 
@@ -111,6 +115,7 @@ p <- qplot(Date, CH4_ppb_s, data=smry) +
   geom_line(aes(group=paste(Temperature, Treatment)), linetype=2) +
   geom_errorbar((aes(ymin=CH4_ppb_s-CH4_ppb_s_sd, ymax=CH4_ppb_s+CH4_ppb_s_sd))) +
   facet_grid(Temperature~Treatment) + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("CH4 fluxes (ppb/s, uncorrected) by date")
 save_diagnostic(p, "CH4_time")
 
@@ -124,6 +129,13 @@ p <- qplot(incday, CH4_ppb_s, data=summarydata, color=paste(Treatment, Temperatu
 p <- p + ggtitle("CH4 fluxes (uncorrected) by rep, core, incubation day") + scale_color_discrete("")
 p <- p + facet_wrap(~Core)
 save_diagnostic(p, "CH4_incday")
+
+# --------------------- Masses ---------------------
+
+p <- qplot(incday, Mass_g, data=summarydata, geom=c("point", "line"), group=Core, color=Treatment)
+p <- p + ggtitle("Core masses, by incubation day and treatment") 
+p <- p + scale_color_discrete("")
+save_diagnostic(p, "masses")
 
 # --------------------- Update README ---------------------
 

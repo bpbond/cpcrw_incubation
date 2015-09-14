@@ -5,13 +5,15 @@ PNNL TES incubation of 2015 CPCRW cores. See below for details and experimental 
 
 Latest data: 2015-09-11 (incubation day 12)
 
-Script run: 2015-09-14 06:46:44
+Script run: 2015-09-14 17:02:10
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/samples_by_date.png)
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/orphan_samples.png)
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/missing_mass.png)
+
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/masses.png)
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CO2_time.png)
 
