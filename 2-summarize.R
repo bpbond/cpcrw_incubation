@@ -7,6 +7,8 @@
 source("0-functions.R")
 
 SCRIPTNAME  	<- "2-summarize.R"
+PROBLEM       <- FALSE
+
 RAWDATA      <- file.path(OUTPUT_DIR, "rawdata.csv.gz")  # output from script 1
 VALVEMAP     <- "data/valvemap.csv"
 TREATMENTS   <- "data/treatments.csv"
@@ -21,7 +23,7 @@ sink(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), split=T) # open log
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in raw data...")
-rawdata <- gzfile(RAWDATA) %>% readr::read_csv()
+rawdata <- gzfile(RAWDATA) %>% readr::read_csv(col_types = "ccddddiiiddddddddc")
 print_dims(rawdata)
 print(summary(rawdata))
 
@@ -64,14 +66,6 @@ valvemap$StartDateTime <- mdy_hm(paste(valvemap$Date, valvemap$Time_set_start))
 valvemap <- arrange(valvemap, StartDateTime)
 valvemap$valvemaprow <- 1:nrow(valvemap)
 
-# printlog("Visualizing valve map...")
-# p <- ggplot(valvemap, aes(StartDateTime, MPVPosition, color=Core))
-# p <- p + geom_segment(size=2)
-# p <- p + geom_text(aes(label=CORE), size=4, hjust=.5, vjust=-.5, show_guide=FALSE)
-# p <- p + ggtitle("Valve map data (showing core numbers)")
-# print(p)
-# save_plot("valvemap")
-
 # QC the valve map
 dupes <- valvemap %>% 
   filter(Core != "Ambient") %>%
@@ -82,8 +76,15 @@ if(nrow(dupes)) {
   printlog("WARNING - MULTIPLE CORES ASSIGNED TO A VALVE ON A GIVEN DATE")
   print(dupes)
   printlog("WARNING - this will screw up the matching to Picarro data")
+  PROBLEM <- TRUE
 }
-
+nomass <- valvemap %>% 
+  filter(Core != "Ambient4" & Core != "Ambient22" & is.na(Mass_g))
+if(nrow(nomass)) {
+  printlog("WARNING - some cores have no mass data")
+  print(nomass)
+  PROBLEM <- TRUE
+}
 # Function to match up Picarro data with mapping file data
 # This is done by date and valve number (see plot saved above)
 matchfun <- function(DATETIME, MPVPosition) {
@@ -173,3 +174,5 @@ save_data(rawdata_samples, scriptfolder=FALSE, gzip=TRUE)
 printlog("All done with", SCRIPTNAME)
 print(sessionInfo())
 sink() # close log
+
+if(PROBLEM) warning("There was a problem - see log")

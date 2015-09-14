@@ -7,6 +7,8 @@ source("0-functions.R")
 library(stringr)
 
 SCRIPTNAME  	<- "1-data.R"
+PROBLEM       <- FALSE
+
 DATA_DIR      <- "data/picarro/"
 
 # -----------------------------------------------------------------------------
@@ -68,7 +70,7 @@ process_directory(file.path(DATA_DIR), tf)
 
 printlog(SEPARATOR)
 printlog("Reading in full data set...")
-rawdata <- readr::read_csv(tf)
+rawdata <- readr::read_csv(tf, col_types = "ccddddiiiddddddddc")
 print_dims(rawdata)
 print(summary(rawdata))
 
@@ -78,3 +80,5 @@ save_data(rawdata, scriptfolder=FALSE, gzip=TRUE)
 printlog("All done with", SCRIPTNAME)
 print(sessionInfo())
 sink() # close log
+
+if(PROBLEM) warning("There was a problem - see log")
