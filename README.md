@@ -1,5 +1,5 @@
 # cpcrw_incubation
-PNNL TES incubation of 2015 CPCRW cores. See below for details and experimental protocol. This work is funded by DOE's [Terrestrial Ecosystem Science Program](http://tes.science.energy.gov).
+PNNL TES incubation of 2015 CPCRW cores. See below for details and experimental protocol. This work is funded by DOE's [Terrestrial Ecosystem Science Program](http://tes.science.energy.gov). More information [here](http://bpbond.github.io/cpcrw_incubation).
 
 ## Current diagnostics
 
@@ -59,5 +59,4 @@ Groups (ii)-(vi) will be incubated for ~100 days at constant temperatures. Measu
 This will require 6 groups x 6 reps = 36 cores.
 
 The 4 and 22 °C incubation temperatures are driven by logistics (the PNNL growth chambers that can accommodate the samples and Picarro setup), but follow the incubation design of [Treat et al. (2013)](http://dx.doi.org/10.1038/nclimate2010).
-
 
