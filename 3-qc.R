@@ -7,7 +7,8 @@ source("0-functions.R")
 SCRIPTNAME  	<- "3-qc.R"
 PROBLEM       <- FALSE
 
-SUMMARYDATA      <- file.path(OUTPUT_DIR, "summarydata.csv")  # output from script 2
+SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata.csv")  # output from script 2
+RAWDATA      <- file.path(OUTPUT_DIR, "rawdata_samples.csv.gz")  # output from script 1
 
 save_diagnostic <- function(p, pname, ...) {
   print(p)
@@ -15,7 +16,7 @@ save_diagnostic <- function(p, pname, ...) {
   ggsave(paste0("qc_plots/", pname, ".png"))
   save_plot(pname, ...)
 }
-  
+
 # ==============================================================================
 # Main 
 
@@ -79,9 +80,6 @@ save_diagnostic(p, "missing_mass")
 
 printlog("Computing per-date summaries...")
 summarydata <- summarydata %>%
-  mutate(CO2_ppm_s = (max_CO2 - min_CO2) / (max_CO2_time - min_CO2_time),
-         CH4_ppb_s = (max_CH4 - min_CH4) / (max_CH4_time - min_CH4_time),
-         incday = 1 + as.numeric(difftime(DATETIME, min(DATETIME), units = "days"))) %>%
   mutate(Date = strftime(DATETIME, format="%Y-%m-%d"))
 
 smry <- summarydata %>%
@@ -91,7 +89,58 @@ smry <- summarydata %>%
             Mass_g = mean(Mass_g),
             incday = as.numeric(round(mean(incday), 0)))
 
-# --------------------- Flux rates and CV ---------------------
+# --------------------- Core CVs ---------------------
+
+# Peyton takes 2-3 measurements. Look at their variability
+printlog("Computing core CVs...")
+core_cv <- summarydata %>% 
+  filter(Core != "Ambient4" & Core != "Ambient22") %>%
+  group_by(Date, Core) %>% 
+  summarise(CO2_ppm_s_cv = sd(CO2_ppm_s) / mean(CO2_ppm_s),
+            min_CO2_time = mean(min_CO2_time),
+            max_CO2_time = mean(max_CO2_time),
+            samplenums = paste(unique(samplenum), collapse = " ")) %>% 
+  ungroup() %>% 
+  arrange(desc(CO2_ppm_s_cv)) %>%
+  head(n = 16)
+
+MAX_COMBINED_PLOTS <- 9
+
+printlog("Reading in raw data...")
+rawdata <- gzfile(RAWDATA) %>% readr::read_csv(col_types = "ccddddiiiddddddddccid")
+rawdata$samplenum <- as.factor(rawdata$samplenum)
+summarydata$samplenum <- as.factor(summarydata$samplenum)
+rdata_final <- sdata_final <- data.frame()
+for(i in seq_len(nrow(core_cv))) {
+  samplenums <- strsplit(core_cv$samplenums[i], " ") %>% unlist
+  rdata <- filter(rawdata, samplenum %in% samplenums)
+  plot <- paste0("#", i, ": ", core_cv$Core[i], ", ", core_cv$Date[i])
+  rdata$plot <- plot
+  sdata <- filter(summarydata, samplenum %in% samplenums)
+  sdata$plot <- plot
+  p <- ggplot(rdata, aes(elapsed_seconds, CO2_dry, color=samplenum)) + geom_point()
+  p <- p + geom_segment(data = sdata, aes(x = min_CO2_time, y = min_CO2, 
+                                          xend = max_CO2_time, yend = max_CO2,
+                                          color = samplenum), size = 5, alpha = 0.3)
+  p <- p + ggtitle(paste(i, "Core", core_cv$Core[i], core_cv$Date[i], "CV =", round(core_cv$CO2_ppm_s_cv[i], 2)))
+  save_diagnostic(p, paste0("coreCV_", i))
+
+  if(i <= MAX_COMBINED_PLOTS) {
+    rdata_final <- rbind(rdata_final, rdata)
+    sdata_final <- rbind(sdata_final, sdata)
+  }  
+}
+
+# Combined plot
+p <- ggplot(rdata_final, aes(elapsed_seconds, CO2_dry, color=samplenum)) + geom_point()
+p <- p + geom_segment(data = sdata_final, aes(x = min_CO2_time, y = min_CO2, 
+                                        xend = max_CO2_time, yend = max_CO2,
+                                        color = samplenum), size = 5, alpha = 0.3)
+p <- p + facet_wrap(~plot) + scale_color_discrete(guide = FALSE)
+p <- p + ggtitle(paste(MAX_COMBINED_PLOTS, "most variable observations"))
+save_diagnostic(p, "coreCV_combined")
+
+# --------------------- Flux rates and treatment CVs ---------------------
 
 # Plot CV (coefficient of variability) by treatment and date
 p <- qplot(paste(Temperature, Treatment), Date, fill=CO2_ppm_s_sd/CO2_ppm_s, data=subset(smry, Treatment != "Ambient"), geom="tile") + 
