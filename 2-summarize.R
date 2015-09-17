@@ -88,8 +88,10 @@ if(nrow(nomass)) {
 # Function to match up Picarro data with mapping file data
 # This is done by date and valve number (see plot saved above)
 matchfun <- function(DATETIME, MPVPosition) {
+#  DATETIME <- as.Date(DATETIME, origin = lubridate::origin)
   rowmatches <- which(DATETIME >= valvemap$StartDateTime & 
-                 MPVPosition == valvemap$MPVPosition)
+                   #     yday(DATETIME) == yday(valvemap$StartDateTime) &
+                        MPVPosition == valvemap$MPVPosition)
   if(length(rowmatches) == 0) rowmatches <- NA
   max(rowmatches)  # return latest time match
 }
@@ -154,6 +156,11 @@ printlog("Reading and merging treatment data...")
 trtdata <- read_csv(TREATMENTS, skip=1)
 summarydata <- left_join(summarydata, trtdata, by="Core")
 
+printlog("Computing per-second rates...")
+summarydata <- summarydata %>%
+  mutate(CO2_ppm_s = (max_CO2 - min_CO2) / (max_CO2_time - min_CO2_time),
+         CH4_ppb_s = (max_CH4 - min_CH4) / (max_CH4_time - min_CH4_time),
+         incday = 1 + as.numeric(difftime(DATETIME, min(DATETIME), units = "days")))
 
 printlog("Saving a comparison of MPVPosition sequence in Picarro data and valvemap")
 checkdata <- select(summarydata, DATETIME, MPVPosition)
