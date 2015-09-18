@@ -91,7 +91,7 @@ smry <- summarydata %>%
 
 # --------------------- Core CVs ---------------------
 
-# Peyton takes 2-3 measurements. Look at their variability
+# Peyton takes 2-3 measurements per core per day. Look at their variability
 printlog("Computing core CVs...")
 core_cv <- summarydata %>% 
   filter(Core != "Ambient4" & Core != "Ambient22") %>%
@@ -101,8 +101,13 @@ core_cv <- summarydata %>%
             max_CO2_time = mean(max_CO2_time),
             samplenums = paste(unique(samplenum), collapse = " ")) %>% 
   ungroup() %>% 
-  arrange(desc(CO2_ppm_s_cv)) %>%
-  head(n = 16)
+  arrange(desc(CO2_ppm_s_cv))
+
+p <-  qplot(1:nrow(core_cv), CO2_ppm_s_cv, data=core_cv)
+p <- p + ggtitle("Distribution of CO2 CV by core and date")
+save_diagnostic(p, "coreCV_distribution")
+
+core_cv <- core_cv[1:25,]    # only do this many detail plots
 
 MAX_COMBINED_PLOTS <- 9
 
@@ -123,12 +128,14 @@ for(i in seq_len(nrow(core_cv))) {
                                           xend = max_CO2_time, yend = max_CO2,
                                           color = samplenum), size = 5, alpha = 0.3)
   p <- p + ggtitle(paste(i, "Core", core_cv$Core[i], core_cv$Date[i], "CV =", round(core_cv$CO2_ppm_s_cv[i], 2)))
-  save_diagnostic(p, paste0("coreCV_", i))
 
   if(i <= MAX_COMBINED_PLOTS) {
     rdata_final <- rbind(rdata_final, rdata)
     sdata_final <- rbind(sdata_final, sdata)
-  }  
+    save_diagnostic(p, paste0("coreCV_", i))
+  } else {
+    save_plot(paste0("coreCV_", i), p = p)
+  }
 }
 
 # Combined plot
