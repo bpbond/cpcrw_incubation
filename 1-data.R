@@ -24,7 +24,7 @@ read_outputfile <- function(fqfn) {
     f <- unz(fqfn)
   }
   
-  d <- read.table(f, header=T)
+  d <- read.table(f, header = TRUE)
   
   print_dims(d)
   
@@ -39,7 +39,8 @@ read_outputfile <- function(fqfn) {
 # scan a directory and process all files in it, returning tempfile names
 process_directory <- function(input_path, tempfile) {
   samplenum <- 0
-  filelist <- list.files(path=input_path, pattern="dat$|dat.gz$|dat.zip$", recursive=T)
+  filelist <- list.files(path = input_path, pattern = "dat$|dat.gz$|dat.zip$", 
+                         recursive = TRUE)
   ncolumns <- NA
   for(f in seq_along(filelist)) {
     d <- read_outputfile(file.path(input_path, filelist[f]))
@@ -49,7 +50,8 @@ process_directory <- function(input_path, tempfile) {
     ncolumns <- ncol(d)
     
     first <- !file.exists(tempfile)
-    write.table(d, tempfile, row.names=FALSE, append=!first, col.names=first, sep=",")
+    write.table(d, tempfile, row.names = FALSE, append = !first, 
+                col.names = first, sep = ",")
   }
 }
 

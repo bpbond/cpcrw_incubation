@@ -68,7 +68,7 @@ valvemap$valvemaprow <- 1:nrow(valvemap)
 
 # QC the valve map
 dupes <- valvemap %>% 
-  filter(Core != "Ambient") %>%
+  filter(Core != "Ambient" & !is.na(MPVPosition)) %>%
   group_by(StartDateTime, MPVPosition) %>% 
   summarise(n=n()) %>% 
   filter(n > 1)
