@@ -190,7 +190,16 @@ save_diagnostic(p, "CH4_incday")
 
 p <- qplot(incday, Mass_g, data=summarydata, geom=c("point", "line"), group=Core, color=Treatment)
 p <- p + ggtitle("Core masses, by incubation day and treatment") 
-p <- p + scale_color_discrete("") + facet_grid(Temperature~.)
+
+labeldata <- summarydata %>%
+  group_by(Core, Treatment, Temperature) %>% 
+  summarise(n = n() - floor(runif(1) * 6),
+            Mass_g = nth(Mass_g, n),
+            incday = nth(incday, n))
+labeldata$incday <- labeldata$incday - runif(nrow(labeldata)) * 4
+p <- p + geom_text(data=labeldata, aes(label = Core), size = 4, show_guide = FALSE)
+p <- p + scale_color_discrete("") + facet_grid(Temperature ~ .)
+
 save_diagnostic(p, "masses")
 
 # --------------------- Update README ---------------------
