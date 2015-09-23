@@ -4,10 +4,10 @@
 
 source("0-functions.R")
 
-SCRIPTNAME  	<- "3-qc.R"
+SCRIPTNAME  	<- "4-qc.R"
 PROBLEM       <- FALSE
 
-SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata.csv")  # output from script 2
+SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata_clean.csv")  # output from script 3
 RAWDATA      <- file.path(OUTPUT_DIR, "rawdata_samples.csv.gz")  # output from script 1
 
 save_diagnostic <- function(p, pname, ...) {
