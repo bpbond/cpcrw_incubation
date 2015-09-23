@@ -88,9 +88,9 @@ if(nrow(nomass)) {
 # Function to match up Picarro data with mapping file data
 # This is done by date and valve number (see plot saved above)
 matchfun <- function(DATETIME, MPVPosition) {
-#  DATETIME <- as.Date(DATETIME, origin = lubridate::origin)
+  DATETIME <- as.POSIXct(DATETIME, origin = lubridate::origin, tz="UTC")
   rowmatches <- which(DATETIME >= valvemap$StartDateTime & 
-                   #     yday(DATETIME) == yday(valvemap$StartDateTime) &
+                        yday(DATETIME) == yday(valvemap$StartDateTime) &
                         MPVPosition == valvemap$MPVPosition)
   if(length(rowmatches) == 0) rowmatches <- NA
   max(rowmatches)  # return latest time match

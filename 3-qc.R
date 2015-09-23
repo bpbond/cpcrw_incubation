@@ -34,7 +34,7 @@ summarydata$DATETIME <- ymd_hms(summarydata$DATETIME)
 
 printlog("Number of samples for each core, by date:")
 samples_by_date <- summarydata %>% 
-  mutate(Date = strftime(DATETIME, format="%Y-%m-%d")) %>% 
+  mutate(Date = strftime(DATETIME, format = "%Y-%m-%d", tz = "UTC")) %>% 
   group_by(Core, Date) %>% 
   summarise(n = n())
 save_data(samples_by_date)
