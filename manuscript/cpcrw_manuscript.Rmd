@@ -13,15 +13,28 @@ Abstract.
 
 Introduction.
 
+Boreal forests, permafrost, importance of active layer.
+
+Moisture likely to be a strong control of C oxidation. Which form? Importance of CO2 / CH4 balance.
+
+
 #### Methods
 
-CPCRW text.
+The field component of this research took place in Caribou-Poker Creeks Research Watershed (CPCRW), part of the Bonanza Creek LTER (TODO: URL). Annual average air temperature was 􏰀3.3°C, and the average temperature in July was 16.4°C, which was the maximum in this watershed. Annual average precipitation was 269 mm, and the average precipitation of 47 mm in August was the highest in this area. 
 
-Thirty-nine soil cores, 30 cm high by TODO cm wide, were taken using a soil augur on 3-5 August 2015. We sampled from the bottom (within 0-2 cm) of the active layer, which averaged 80 cm depth. Sample points were randomly located in the transition zone described above, and separated by 2-5 m. The soil varied between TODO and TODO, and on averaged had ~20 cm of organic material over the mineral soil. Cores were kept cool in the field before being packed in dry ice and shipped to the lab in Richland, WA.
+SE slope, transition zone
 
-In the lab, the soil cores were stored in a TODO &deg;C cooler for several weeks. At that point (late August 2015), three fragmented or otherwise damaged cores were discarded. Six random cores were removed and destructively analyzed for TODO. The others were randomly assigned to one of five groups (each N=6). These groups included two incubation temperatures (4 &deg;C and 22 &deg;C) each with two moisture treatments: one in which soil moisture was maintained at field conditions, and a drought treatment in which no water was added. The fifth group was a 22 &deg;C "controlled drought" one, in which water was added so that these cores' moisture status closely matched those of the 4 &deg;C "drought" group.
+of this study site was more than TODO years according to the tree rings at stem base. Stand density of dominant Picea mariana and glauca trees (>1.3 m in height) was TODO trees ha^-1^, with a basal area of TODO m^2^ ha^-1^.
 
-The incubation experiment began on 31 August 2015.
+Thirty-nine soil cores, 30 cm high by 7.5 cm wide, were taken using a soil augur on 3-5 August 2015. We sampled from the bottom (within 0-2 cm) of the active layer, which averaged 80 cm depth. Sample points were randomly located in the transition zone described above, and separated by 2-5 m. The soil was a TODO, and on average had ~20 cm of organic material over the mineral soil. Cores were kept cool in the field before being packed in dry ice and shipped to the lab in Richland, WA.
+
+In the lab, the soil cores were stored in a TODO &deg;C cooler for several weeks. At that point (late August 2015), three fragmented or otherwise damaged cores were discarded. Six random cores were removed and destructively analyzed for TODO. The others were randomly assigned to one of five groups (each N=6). These groups included two incubation temperatures (4 &deg;C and 22 &deg;C) each with two moisture treatments: one in which soil moisture was maintained at field conditions (~28% moisture by mass), and a drought treatment in which no water was added. The fifth group was a 22 &deg;C "controlled drought" one, in which water was added so that these cores' moisture status closely matched those of the 4 &deg;C "drought" group.
+
+The incubation experiment began on 31 August 2015. Cores were put into one of two growth chambers (Conviron BDW80, Winnipeg, Canada) maintaining the 4 and 22 &deg;C temperatures. TODO: day/night cycle in chambers? We measured the cores' mass and GHG (CH~4~ and CO~2~) evolution three times in the first week, then twice per week for the first month, and then once per week for the rest of the 100-day incubation.
+
+The cores were mounted on 0.05-MPa ceramic plates (Soil Moisture Equipment Corp., Santa Barbara, CA) so that, when the plates were placed in contact with water, water would move up into the cores via capillary action. We placed the pore plates in contact with water when necessary to maintain the field moisture treatment groups at ~28% moisture, and to moderate the drying of the  22 &deg;C "controlled drought" group.
+
+For each measurement, a six-core treatment group was connected to a TODO multiplexer that was in turn connected to a Picarro TODO. Dry GHG concentration were monitored for 2 minutes, and this was repeated 2-3 times before moving on to a new treatment group. Ambient air was measured between treatment groups, and before starting measurements in a chamber. 
 
 Analysis.
 
