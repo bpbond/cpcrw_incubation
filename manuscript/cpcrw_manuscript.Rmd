@@ -1,0 +1,38 @@
+---
+title: "cpcrw_ms"
+author: "Ben Bond-Lamberty"
+date: "September 29, 2015"
+output: html_document
+---
+
+#### Abstract
+
+Abstract.
+
+#### Introduction
+
+Introduction.
+
+#### Methods
+
+CPCRW text.
+
+Thirty-nine soil cores, 30 cm high by TODO cm wide, were taken using a soil augur on 3-5 August 2015. We sampled from the bottom (within 0-2 cm) of the active layer, which averaged 80 cm depth. Sample points were randomly located in the transition zone described above, and separated by 2-5 m. The soil varied between TODO and TODO, and on averaged had ~20 cm of organic material over the mineral soil. Cores were kept cool in the field before being packed in dry ice and shipped to the lab in Richland, WA.
+
+In the lab, the soil cores were stored in a TODO &deg;C cooler for several weeks. At that point (late August 2015), three fragmented or otherwise damaged cores were discarded. Six random cores were removed and destructively analyzed for TODO. The others were randomly assigned to one of five groups (each N=6). These groups included two incubation temperatures (4 &deg;C and 22 &deg;C) each with two moisture treatments: one in which soil moisture was maintained at field conditions, and a drought treatment in which no water was added. The fifth group was a 22 &deg;C "controlled drought" one, in which water was added so that these cores' moisture status closely matched those of the 4 &deg;C "drought" group.
+
+The incubation experiment began on 31 August 2015.
+
+Analysis.
+
+#### Results
+
+Results.
+
+#### Discussion
+
+Discussion.
+
+### Acknowledgments
+
+Acknowledgments.
