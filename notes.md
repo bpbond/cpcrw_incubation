@@ -42,3 +42,18 @@ Added a `3-remove.R` script and processes a `data/removals.csv` file to remove p
 ----------------------
 
 New data added. Added an entry for `removals` file, for samplenum 659, same reason as before--Picarro just logged ambient for 2-3 days.
+
+30 September 2015
+----------------------
+
+New data added. Added an entry for `removals` file, for samplenum 724, same reason as before--Picarro just logged ambient for 2-3 days.
+
+From Peyton:
+
+>Here’s the specific Dates for your notes – I tried to fit what I did in the format of your methods – but thought I would just spell out my activities for your convenience in case I didn’t include what you were trying to convey. 
+>From August 11-14th – I weighed, measured volume, recorded notes, and prepared the cores for being incubated (i.e. assigned treatments, wrapped bottom of cores in mesh, etc.) Mesh material (~ mesh size 60) was placed on the bottom of each incubation core in order to retain the soil in each core despite having them sit on saturated pore plates. 
+>On August 17th at 16:30 Pacific Time, I placed all cores into their respective chambers (still capped) and let them equilibrate in their respective temperatures for a week. During that week I broke down the 6 pre-incubation cores and measured bulk density, moisture content, pH, particle size distribution (just because I really had to with all the schist, not because it was particularly important for the overall study – but important for these soils and trying to understand water weights). I set aside samples for enzymes and ATP in the freezer and air-dried samples for CN, and soluble CN. 
+>Staring on 24 August, I attempted to start the incubation and measure GHG with the Picarro, I quickly noticed that I needed to revamp how we were going to maintain moisture with the pore plates. So I spent the week observing rates of water loss and imbibition before I felt confident to start the incubation (I also had a set camp-date-with-hubby and visit from my mother that delayed things for that week). Basically, each core behaved so differently (so many different volumes and weights and rocks screwing with my sense of gravimetric water content) that I ended up bringing each field moist core up to the same ‘saturation’ status (i.e. basically increasing the water content of the cores to until imbibition stabilized) – which is most likely 30% water content by volume – which truthfully, we won’t know their water status until I destruct each core at the end. 
+
+Soo…It wasn’t until 31 Aug that the experiment began.  
+
