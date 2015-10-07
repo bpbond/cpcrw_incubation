@@ -4,7 +4,7 @@
 # point in time)
 # Ben Bond-Lamberty July 2015
 
-source("0-functions.R")
+source("R/0-functions.R")
 
 SCRIPTNAME  	<- "2-summarize.R"
 PROBLEM       <- FALSE

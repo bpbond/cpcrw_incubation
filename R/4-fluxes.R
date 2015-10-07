@@ -3,7 +3,7 @@
 # Process Picarro data for Peyton's DWP lab experiment
 # Ben Bond-Lamberty April 2015
 
-source("0-functions.R")
+source("R/0-functions.R")
 
 SCRIPTNAME  	<- "3-fluxes.R"
 summarydata      <- file.path(OUTPUT_DIR, "summarydata.csv")  # output from script 2
