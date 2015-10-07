@@ -11,13 +11,28 @@ Abstract.
 
 #### Introduction
 
-Introduction.
+* Boreal biome and climate change.
+ * Climate change and warming boreal biome.
+ * Variety of changes occurring - Alaska in particular.
+ * Vegetation transitions (setting up for transition zone sampling).
 
-Boreal forests, permafrost, importance of active layer.
+* Potential soils and permafrost C feedback. 
+ * Soils hold a lot of C, particularly at high latitudes.
+ * Importance of active layer.
+ * Uncertainty of climate feedback.
 
-Moisture likely to be a strong control of C oxidation. Which form? Importance of CO2 / CH4 balance.
+* Moisture likely to be a strong control of C oxidation.
+ * Cite theoretical, experimental, modeling work here. 
+ * Soil drainage/anoxia is *highly* uncertain.
+ * Will determine both magnitude and form (CO2/CH4) of oxidation.
+ * This will have different feedback effects.
 
+* Goals of this study.
+ * Sample AL soils at maximum AL depth, vegetation transition zone (high enough to warm, still lots of C).
+ * Manipulative experiment (drought and temperature) examining CO2/CH4 emissions.
+ * Link to structural/biological measurements.
 
+ 
 #### Methods
 
 The field component of this research took place in Caribou-Poker Creeks Research Watershed (CPCRW), part of the Bonanza Creek LTER (http://www.lter.uaf.edu/default.cfm). Annual average air temperature was 􏰀3.3°C, and the average temperature in July was 16.4°C, which was the maximum in this watershed. Annual average precipitation was 269 mm, and the average precipitation of 47 mm in August was the highest in this area. 
