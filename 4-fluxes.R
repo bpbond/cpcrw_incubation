@@ -12,7 +12,7 @@ summarydata      <- file.path(OUTPUT_DIR, "summarydata.csv")  # output from scri
 # ==============================================================================
 # Main 
 
-sink(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), split=T) # open log
+openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # open log
 
 printlog("Welcome to", SCRIPTNAME)
 
@@ -88,5 +88,4 @@ fluxdata <- fluxdata %>%
 save_data(fluxdata, scriptfolder=FALSE)
 
 printlog("All done with", SCRIPTNAME)
-print(sessionInfo())
-sink() # close log
+closelog()

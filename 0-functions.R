@@ -1,9 +1,8 @@
 # Template for R analysis script
 # Ben Bond-Lamberty March 2015
 
-# This is my starting point for most analysis or data processing scripts
-# Most critically, it provides lightweight logging, with sessionInfo() 
-# written at the bottom of every log; easy ggplot and data saving; 
+# Common function definitions.
+# Most critically, this file easy ggplot and data saving; 
 # logged csv[.gz|zip] read/write; and a few other handy things.
 
 INPUT_DIR     <- "data/"
@@ -11,14 +10,6 @@ OUTPUT_DIR		<- "outputs/"
 #RANDOM_SEED		<- 12345		# comment out to not set seed
 #CHECKPOINTDATE	<- "2015-03-05" # comment out to not use checkpoint
 SEPARATOR		<- "-------------------"
-
-# -----------------------------------------------------------------------------
-# Time-stamped output function
-printlog <- function(msg="", ..., ts=TRUE, cr=TRUE) {
-  if(ts) cat(date(), " ")
-  cat(msg, ...)
-  if(cr) cat("\n")
-} # printlog
 
 # -----------------------------------------------------------------------------
 # Print dimensions of data frame
@@ -92,7 +83,6 @@ if(!file.exists(OUTPUT_DIR)) {
   dir.create(OUTPUT_DIR)
 }
 
-
 # -----------------------------------------------------------------------------
 #if(exists("CHECKPOINTDATE") & require(checkpoint))
 #    try(checkpoint(CHECKPOINTDATE)) # 'try' b/c errors w/o network (issue #171)
@@ -103,4 +93,4 @@ library(dplyr)
 library(readr)
 library(lubridate)
 library(stringr)
-
+library(luzlogr)
