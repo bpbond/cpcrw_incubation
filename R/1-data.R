@@ -2,7 +2,7 @@
 # This script reads all available data, writing to a `rawdata` file
 # Ben Bond-Lamberty July 2015
 
-source("0-functions.R")
+source("R/0-functions.R")
 
 library(stringr)
 

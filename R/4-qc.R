@@ -2,7 +2,7 @@
 # Quality control
 # Ben Bond-Lamberty September 2015
 
-source("0-functions.R")
+source("R/0-functions.R")
 
 SCRIPTNAME  	<- "4-qc.R"
 PROBLEM       <- FALSE

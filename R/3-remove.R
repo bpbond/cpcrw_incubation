@@ -2,7 +2,7 @@
 # Remove bad/freaky observations
 # Ben Bond-Lamberty September 2015
 
-source("0-functions.R")
+source("R/0-functions.R")
 
 SCRIPTNAME  	<- "3-remove.R"
 PROBLEM       <- FALSE
