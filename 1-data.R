@@ -59,7 +59,7 @@ process_directory <- function(input_path, tempfile) {
 # ==============================================================================
 # Main 
 
-sink(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), split=T) # open log
+openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE)
 
 printlog("Welcome to", SCRIPTNAME)
 
@@ -80,7 +80,6 @@ printlog("Writing output file...")
 save_data(rawdata, scriptfolder=FALSE, gzip=TRUE)
 
 printlog("All done with", SCRIPTNAME)
-print(sessionInfo())
-sink() # close log
+closelog()
 
 if(PROBLEM) warning("There was a problem - see log")

@@ -13,7 +13,7 @@ REMOVALS     <- file.path("data/", "removals.csv")
 # ==============================================================================
 # Main 
 
-sink(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), split=T) # open log
+openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # open log
 
 printlog("Welcome to", SCRIPTNAME)
 
@@ -59,7 +59,6 @@ printlog("All done with removals")
 save_data(summarydata_clean, scriptfolder=FALSE)
 
 printlog("All done with", SCRIPTNAME)
-print(sessionInfo())
-sink() # close log
+closelog()
 
 if(PROBLEM) warning("There was a problem - see log")

@@ -18,7 +18,7 @@ library(stringr)
 # ==============================================================================
 # Main 
 
-sink(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), split=T) # open log
+openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # open log
 
 printlog("Welcome to", SCRIPTNAME)
 
@@ -179,7 +179,6 @@ save_data(summarydata, scriptfolder=FALSE)
 save_data(rawdata_samples, scriptfolder=FALSE, gzip=TRUE)
 
 printlog("All done with", SCRIPTNAME)
-print(sessionInfo())
-sink() # close log
+closelog()
 
 if(PROBLEM) warning("There was a problem - see log")
