@@ -35,15 +35,17 @@ Abstract.
  
 #### Methods
 
+**Field sampling**
+
 The field component of this research took place in Caribou-Poker Creeks Research Watershed (CPCRW), part of the Bonanza Creek LTER (http://www.lter.uaf.edu/default.cfm). Annual average air temperature was 􏰀3.3°C, and the average temperature in July was 16.4°C, which was the maximum in this watershed. Annual average precipitation was 269 mm, and the average precipitation of 47 mm in August was the highest in this area. 
 
-SE slope, transition zone
+SE slope, transition zone...
 
 of this study site was more than TODO years according to the tree rings at stem base. Stand density of dominant Picea mariana and glauca trees (>1.3 m in height) was TODO trees ha^-1^, with a basal area of TODO m^2^ ha^-1^.
 
 Thirty-nine soil cores, each 30 cm high by 7.5 cm wide, were taken using a soil recovery augur (AMS Inc., American Falls, ID) on 3-5 August 2015. We sampled from the bottom (within 0-2 cm) of the active layer, which averaged 80 cm depth. Sample points were randomly located in the transition zone described above, and separated by 2-5 m. The soil is characterized as a poorly-drained silt loam, and on average had ~20 cm of organic material over the mineral soil. Cores were kept cool in the field before being packed in dry ice and shipped to the lab in Richland, WA within 48-72 hours of collection.
 
-**Laboratory iincubation*
+**Laboratory incubation**
 
 In the lab, the soil cores were stored at 4 &deg;C for several days until they were weighed and prepared for incubation. At that point (11-12 August 2015), three fragmented or otherwise damaged cores were discarded, and the remaining cores were randomly assigned to one of six groups (each N=6). These groups included two incubation temperatures (4 &deg;C and 20 &deg;C) each with two moisture treatments: one in which soil moisture was maintained at field conditions (~28% moisture by volume), and a drought treatment in which no water was added and cores were allowed to dry down to ~5% moisture by volume. The fifth group was a 20 &deg;C "controlled drought" one, in which water was added so that these cores' moisture status closely matched those of the 4 &deg;C "drought" group. The final group includedsix cores for destructive, pre-incubation measurements including moisture content, pH, soil carbon and nitrogen, and bulk density. Subsamples were collected and stored at -20 &deg;C for potential enzyme activity and ATP.
 
@@ -51,11 +53,13 @@ On 18 August 2015 cores were placed into one of two growth chambers (Conviron CM
 
 For each measurement, a six-core treatment group was connected to a Picarro A0311 multiplexer that was in turn connected to a Picarro G2301 GHG Analyzer (Picarro Inc., Santa Clara, CA, USA). Dry GHG concentration were monitored for 2 minutes, and this was repeated 2-3 times before moving on to a new treatment group. Ambient air was measured between treatment groups, and before starting measurements in a chamber.
 
-Note open experiment...
-
 **Statistical analysis**
 
-Analysis.
+Analysis. Outlier exclusion. 
+
+**Data and code availability**
+
+Note open experiment...
 
 #### Results
 
