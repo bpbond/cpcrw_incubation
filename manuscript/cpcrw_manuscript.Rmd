@@ -7,6 +7,10 @@ output: html_document
 
 #### Abstract
 
+Peyton text to use in abstract:
+>The goal of this study was to characterize the chemical and biological properties of sub-Arctic, active layer soils subjected to changes in temperature and moisture. We also sought to determine the relative control temperature and moisture have on the fate of C and greenhouse gas emissions in active layer soils lying directly above permafrost. We measured carbon dioxide and methane emissions on soil at two different temperatures (4 and 20C) and moisture contents (field moist and drought-induced) throughout a 100-day incubation. We also determined soil structure, extracellular enzyme activity, total nitrogen, carbon, and the molecular composition of C pre and post-incubation cores. We hypothesized that the field moist 20˚C cores have a greater potential to lose C as both CO2 and CH4 than cores held at 4˚C due to increased aerobic and anaerobic microbial activity. We also hypothesize that drought-induced cores will have a higher potential to lose more ‘complex’ carbon compounds (aromatic-C) as these compounds are desorbed due to increased surface tension.
+
+
 Abstract.
 
 #### Introduction
