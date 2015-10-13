@@ -17,8 +17,7 @@ save_diagnostic <- function(p, pname, printit = TRUE, ...) {
   save_plot(pname, ...)
 }
 
-# ==============================================================================
-# Main 
+# Main ===========================================================================
 
 sink(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), split=T) # open log
 
@@ -30,7 +29,7 @@ print_dims(summarydata)
 
 summarydata$DATETIME <- ymd_hms(summarydata$DATETIME)
 
-# --------------------- Basic info ---------------------
+# Basic diagnostics -------------------------------------------------------
 
 printlog("Number of samples for each core, by date:")
 samples_by_date <- summarydata %>% 
@@ -52,7 +51,7 @@ printlog("Summaries for max_CH4 and max_CO2:")
 summary(summarydata$max_CO2)
 summary(summarydata$max_CH4)
 
-# --------------------- Orphan samples / missing masses ---------------------
+# Orphan samples & missing masses -----------------------------------------
 
 printlog("Checking for orphan samples...")
 orphan_samples <- filter(summarydata, is.na(Core))
