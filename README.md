@@ -44,6 +44,29 @@ Script run: 2015-10-06 09:09:56
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CH4_incday.png)
 
+## Script organization
+
+The R scripts are designed to be run in numerical order, in the sense that each depends on one or more outputs of previous scripts.
+
+* `0-functions.R` - Provides common support functions. Not intended to be called directly, as it's `source`'d from all other scripts.
+* `1-data.R` - reads in raw Picarro data files, checks that they're in a consistent format, and writes a single combined `rawdata.csv.gz` file.
+* `2-summarize.R` - The workhorse script that summarized the raw data, combines it with ancillary measurements, and writes a `summarydata.csv` output file. Specifically:
+  * Reads in the raw data, discards fractional valve position data, makes POSIXct dates
+  * Assigns **sample numbers** based on when the valve position changes and computes elapsed seconds within each sample
+  * Loads the valve map (`data/valvemap.csv`) and does some QC on it
+  * Summarizes the raw data, computing min/max for each gas, N, etc., and matching each sample number with a row in the valve map based on the timestamp and valve number
+  * Merges the summary data with the valve map and treatment data information
+  * Computes per-second rates
+* `3-remove.R` - Loads the removals file (`data/removals.csv`) and uses it to remove problematic data from the summarized data.
+* `4-qc.R` - Runs a series of diagnostic checks on the summarized data, and then updates the `README.md` timestamps:
+  * Number of samples for each core, by date
+  * Orphan samples (Picarro data with no matching core number and/or mass data)
+  * Variability between the core measurements on a given date, and detailed raw data plot of the highest
+  * Variability between cores on a given date, for each treatment
+  * Flux summaries by treatment
+  * Mass data over time, for each core
+* Other scripts are not functional yet.
+
 ## Study objectives and approach
 
 **Objective:**

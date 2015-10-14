@@ -73,7 +73,7 @@ dupes <- valvemap %>%
   summarise(n=n()) %>% 
   filter(n > 1)
 if(nrow(dupes)) {
-  printlog("WARNING - MULTIPLE CORES ASSIGNED TO A VALVE ON A GIVEN DATE")
+  flaglog("WARNING - MULTIPLE CORES ASSIGNED TO A VALVE ON A GIVEN DATE")
   print(dupes)
   printlog("WARNING - this will screw up the matching to Picarro data")
   PROBLEM <- TRUE
