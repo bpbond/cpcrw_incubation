@@ -8,9 +8,9 @@ This work is funded by DOE's [Terrestrial Ecosystem Science Program](http://tes.
 
 ## Current diagnostics
 
-Latest data: 2015-10-02 (incubation day 33)
+Latest data: 2015-10-20 (incubation day 51)
 
-Script run: 2015-10-06 09:09:56
+Script run: 2015-10-26 19:56:55
 
 ### Missing/problematic data
 

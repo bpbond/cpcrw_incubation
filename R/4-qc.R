@@ -38,6 +38,7 @@ samples_by_date <- summarydata %>%
   summarise(n = n())
 save_data(samples_by_date)
 p <- qplot(Date, Core, data=samples_by_date, geom="tile", fill=factor(n))
+p <- p + theme(axis.text.x=element_text(angle = 90))
 p <- p + ggtitle("Number of reps by date and core") + scale_fill_discrete("Reps")
 save_diagnostic(p, "samples_by_date")
 
