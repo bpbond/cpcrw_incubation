@@ -56,3 +56,7 @@ From Peyton:
 >Staring on 24 August, I attempted to start the incubation and measure GHG with the Picarro, I quickly noticed that I needed to revamp how we were going to maintain moisture with the pore plates. So I spent the week observing rates of water loss and imbibition before I felt confident to start the incubation (I also had a set camp-date-with-hubby and visit from my mother that delayed things for that week). Basically, each core behaved so differently (so many different volumes and weights and rocks screwing with my sense of gravimetric water content) that I ended up bringing each field moist core up to the same ‘saturation’ status (i.e. basically increasing the water content of the cores to until imbibition stabilized) – which is most likely 30% water content by volume – which truthfully, we won’t know their water status until I destruct each core at the end. >
 >Soo…It wasn’t until 31 Aug that the experiment began.  
 
+29 October 2015
+----------------------
+
+With today's data commit, note that the Picarro was being wonky for a first set of measurements (8 PM to 10:30 PM UTC). So Peyton re-measured, then removed these data from the CoreData file; we'll want to put relevant sample #s into the removals list. See "27 Oct Picarro readings.pdf".
