@@ -71,7 +71,7 @@ The R scripts are designed to be run in numerical order, in the sense that each 
 
 **Objective:**
 
-Examine how mineral boreal soils, sampled from the active layer just above permafrost at [CPCRW](http://www.lter.uaf.edu/bnz_cpcrw.cfm), produce GHGs: how production varies with soil moisture and temperature.
+Examine how mineral boreal soils, sampled from the active layer just above permafrost at [CPCRW](http://www.lter.uaf.edu/bnz_cpcrw.cfm), produce GHGs: how production varies with soil moisture, temperature, and other factors.
 
 **Rationale:**
 
