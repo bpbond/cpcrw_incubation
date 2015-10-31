@@ -197,14 +197,22 @@ p <- p + ggtitle("Core masses, by incubation day and treatment")
 
 labeldata <- summarydata %>%
   group_by(Core, Treatment, Temperature) %>% 
-  summarise(n = n() - floor(runif(1) * 6),
+  summarise(n = n() - floor(runif(1) * 6), # randomly position labels
             Mass_g = nth(Mass_g, n),
             incday = nth(incday, n))
 labeldata$incday <- labeldata$incday - runif(nrow(labeldata)) * 4
-p <- p + geom_text(data=labeldata, aes(label = Core), size = 4, show_guide = FALSE)
+p <- p + geom_text(data=labeldata, aes(label = Core), size = 4, show.legend = FALSE)
 p <- p + scale_color_discrete("") + facet_grid(Temperature ~ .)
-
 save_diagnostic(p, "masses")
+
+summarydata <- summarydata %>%
+  group_by(Core) %>% 
+  arrange(incday) %>%
+  mutate(Mass_change = (Mass_g - first(Mass_g)) / Mass_g * 100)
+p <- qplot(incday, Mass_change, data=summarydata, geom=c("point", "line"), group=Core, color=Treatment)
+p <- p + ylab("Change (%)") + ggtitle("Core masses, by incubation day and treatment") 
+p <- p + facet_grid(~Temperature)
+save_diagnostic(p, "masses_relative")
 
 # --------------------- Update README ---------------------
 

@@ -10,7 +10,7 @@ This work is funded by DOE's [Terrestrial Ecosystem Science Program](http://tes.
 
 Latest data: 2015-10-27 (incubation day 58)
 
-Script run: 2015-10-30 12:52:21
+Script run: 2015-10-31 06:44:28
 
 ### Missing/problematic data
 
@@ -23,6 +23,8 @@ Script run: 2015-10-30 12:52:21
 ### Observations over time
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/masses.png)
+
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/masses_relative.png)
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CO2_time.png)
 
