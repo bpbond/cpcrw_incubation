@@ -128,7 +128,7 @@ for(i in seq_len(nrow(core_cv))) {
                                           xend = max_CO2_time, yend = max_CO2,
                                           color = samplenum), size = 5, alpha = 0.3)
   p <- p + ggtitle(paste(i, "Core", core_cv$Core[i], core_cv$Date[i], "CV =", round(core_cv$CO2_ppm_s_cv[i], 2)))
-
+  
   if(i <= MAX_COMBINED_PLOTS) {
     rdata_final <- rbind(rdata_final, rdata)
     sdata_final <- rbind(sdata_final, sdata)
@@ -141,8 +141,8 @@ for(i in seq_len(nrow(core_cv))) {
 # Combined plot
 p <- ggplot(rdata_final, aes(elapsed_seconds, CO2_dry, color=samplenum)) + geom_point()
 p <- p + geom_segment(data = sdata_final, aes(x = min_CO2_time, y = min_CO2, 
-                                        xend = max_CO2_time, yend = max_CO2,
-                                        color = samplenum), size = 5, alpha = 0.3)
+                                              xend = max_CO2_time, yend = max_CO2,
+                                              color = samplenum), size = 5, alpha = 0.3)
 p <- p + facet_wrap(~plot) + scale_color_discrete(guide = FALSE)
 p <- p + ggtitle(paste(MAX_COMBINED_PLOTS, "most variable observations"))
 save_diagnostic(p, "coreCV_combined")
@@ -210,7 +210,8 @@ summarydata <- summarydata %>%
   arrange(incday) %>%
   mutate(Mass_change = (Mass_g - first(Mass_g)) / Mass_g * 100)
 p <- qplot(incday, Mass_change, data=summarydata, geom=c("point", "line"), group=Core, color=Treatment)
-p <- p + ylab("Change (%)") + ggtitle("Core masses, by incubation day and treatment") 
+p <- p + ylab("Change (%)") 
+p <- p + ggtitle("Core mass change, by incubation day and treatment") 
 p <- p + facet_grid(~Temperature)
 save_diagnostic(p, "masses_relative")
 
