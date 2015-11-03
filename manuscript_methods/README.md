@@ -2,8 +2,8 @@
 
 ## Introduction
 
-### Reproducibility
 
+### Reproducibility
 Thornton paper on archiving models
 
 ### Data loss
@@ -24,6 +24,11 @@ Push for open data and reproducible methods
 * NASA url
 * NSERC, Wellcome trust, other?
 
+### Importance
+
+Work funded by public agencies
+Increasing transparency of the process - increase public trust and access to science?
+
 ### Previous, similar efforts
 
 * BAAD
@@ -38,3 +43,9 @@ Push for open data and reproducible methods
 * Manuscript(s)
 
 ## Conclusions
+
+### Potential concerns
+
+* Not appropriate for every kind of study (e.g....)
+* Privacy concerns
+* 
