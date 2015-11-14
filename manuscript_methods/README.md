@@ -2,19 +2,25 @@
 
 ## Introduction
 
+Look at - Ruegg et al. paper on data life cycle!
+Data paper - https://peerj.com/preprints/1448/
+http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002295
 
 ### Reproducibility
+
 Thornton paper on archiving models
 
 ### Data loss
 
-Study showing 17% decline every year:  http://dx.doi.org/10.1016/j.cub.2013.11.014
+17% per year paper - Vines et al.
 
 ### Data quality
 
 "All bugs are shallow" Raymond quote
 
 ### Journals are pushing
+
+PLOS ONE, ESA, etc. policies
 
 ### Funders are pushing
 Push for open data and reproducible methods
