@@ -1,4 +1,4 @@
-# Process Picarro data for Peyton's DWP lab experiment
+# Process Picarro data for our CPCRW lab experiment
 # This script reads all available data, writing to a `rawdata` file
 # Ben Bond-Lamberty July 2015
 
