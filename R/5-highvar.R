@@ -44,7 +44,7 @@ p <- ggplot(smry_co2, aes(Date, CO2_ppm_s, color = CO2_ppm_s_sd/CO2_ppm_s)) + ge
   geom_errorbar(aes(ymin = CO2_ppm_s - CO2_ppm_s_sd, ymax = CO2_ppm_s + CO2_ppm_s_sd)) + 
   scale_color_continuous(guide = FALSE) +
   geom_text(aes(y = CO2_ppm_s + CO2_ppm_s_sd, label = Num), vjust = -0.1, hjust = 0.1)
-save_plot("summary", p = p)
+save_plot("summary_co2", p = p)
 
 ok <- TRUE
 while(ok) {
@@ -62,19 +62,29 @@ while(ok) {
     sd_co2 <- subset(summarydata, samplenum %in% samplenums)
     print(sd_co2)
     
-    p_closeup <- ggplot(sd_co2, aes(paste(Treatment, Temperature), CO2_ppm_s)) + 
-      geom_violin() + 
-      geom_text(aes(label = samplenum), position="jitter") + 
-      ggtitle(paste("Closeup look at number", n, "on incday", unique(sd_co2$incday)))
+    p_closeup <- ggplot(sd_co2, aes(DATETIME, CO2_ppm_s, fill=Core)) + 
+      geom_bar(stat='identity') + 
+      ggtitle(paste("Closeup look at number", n, "on incday", unique(sd_co2$incday))) +
+      geom_text(aes(label = samplenum), vjust = -0.5)
     print(p_closeup)
     save_plot(paste0("closeup_", n))
     
-    rd_co2 <- subset(rawdata, samplenum %in% samplenums)
+    p_distribution <- ggplot(subset(summarydata, Treatment %in% sd_co2$Treatment & Temperature %in% sd_co2$Temperature), aes(x=CO2_ppm_s)) + 
+      geom_density() + 
+      facet_grid(Temperature ~ Treatment, scales="free") + 
+      geom_vline(data=sd_co2, aes(xintercept = CO2_ppm_s, color=Core), linetype=2) +
+      ggtitle(paste("Distribution look at number", n))
+    print(p_distribution)
+    save_plot(paste0("distribution_", n))
+    
+      
+      rd_co2 <- subset(rawdata, samplenum %in% samplenums)
     p_rawcloseup <- ggplot(rd_co2, aes(elapsed_seconds, CO2_dry, color=samplenum)) +
       geom_line() +
       ggtitle(paste("Raw closeup look at number", n, "on", unique(rd_co2$DATE)))
     print(p_rawcloseup)
     save_plot(paste0("closeup_raw_", n))
+    
   } else {
     ok <- FALSE
   }
