@@ -10,7 +10,7 @@ This work is funded by DOE's [Terrestrial Ecosystem Science Program](http://tes.
 
 Latest data: 2015-12-09 (incubation day 101)
 
-Script run: 2015-12-13 07:15:37
+Script run: 2015-12-13 14:12:10
 
 ### Missing/problematic data
 
