@@ -61,7 +61,7 @@ investigate <- function(smry, summarydata, rawdata,
       
       
       rd_gas <- subset(rawdata, samplenum %in% samplenums)
-      p_rawcloseup <- ggplot(rd_gas, aes_string("elapsed_seconds", paste0(gas, "_dry"), color="samplenum")) +
+      p_rawcloseup <- ggplot(rd_gas, aes_string("elapsed_seconds", paste0(gas, "_dry"), color = "samplenum", group = "samplenum")) +
         geom_line() +
         ggtitle(paste("Raw closeup look at number", n, "on", unique(rd_gas$DATE)))
       print(p_rawcloseup)
