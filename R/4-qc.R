@@ -19,7 +19,7 @@ save_diagnostic <- function(p, pname, printit = TRUE, ...) {
 
 # Main ===========================================================================
 
-sink(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), split=T) # open log
+openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt"))) # open log
 
 printlog("Welcome to", SCRIPTNAME)
 
@@ -82,12 +82,17 @@ printlog("Computing per-date summaries...")
 summarydata <- summarydata %>%
   mutate(Date = strftime(DATETIME, format="%Y-%m-%d"))
 
-smry <- summarydata %>%
+summarydata %>%
   group_by(Date, Treatment, Temperature) %>%
   summarise(CO2_ppm_s_sd = sd(CO2_ppm_s), CO2_ppm_s = mean(CO2_ppm_s),
             CH4_ppb_s_sd = sd(CH4_ppb_s), CH4_ppb_s = mean(CH4_ppb_s),
             Mass_g = mean(Mass_g),
-            incday = as.numeric(round(mean(incday), 0)))
+            incday = as.numeric(round(mean(incday), 0)),
+            samplenums = paste(unique(samplenum), collapse = " ")) ->
+  smry
+
+treatment_summary <- smry
+save_data(treatment_summary, scriptfolder = FALSE)
 
 # --------------------- Core CVs ---------------------
 
@@ -159,17 +164,19 @@ p <- qplot(paste(Temperature, Treatment), Date, fill=CH4_ppb_s_sd/CH4_ppb_s, dat
   ggtitle("CV of CH4 observations by date")
 save_diagnostic(p, "CH4_CV")
 
-p <- qplot(Date, CO2_ppm_s, data=smry) +
-  geom_line(aes(group=paste(Temperature, Treatment)), linetype=2) +
+p <- qplot(Date, CO2_ppm_s, data=smry, color = CO2_ppm_s_sd/CO2_ppm_s) +
+  geom_line(aes(group=paste(Temperature, Treatment)), color = "grey", linetype=2) +
   geom_errorbar((aes(ymin=CO2_ppm_s-CO2_ppm_s_sd, ymax=CO2_ppm_s+CO2_ppm_s_sd))) +
+  scale_color_continuous(guide = FALSE) + 
   facet_grid(Temperature~Treatment) + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("CO2 fluxes (ppm/s, uncorrected) by date")
 save_diagnostic(p, "CO2_time")
 
-p <- qplot(Date, CH4_ppb_s, data=smry) +
-  geom_line(aes(group=paste(Temperature, Treatment)), linetype=2) +
+p <- qplot(Date, CH4_ppb_s, data=smry, color = CH4_ppb_s_sd/CH4_ppb_s) +
+  geom_line(aes(group=paste(Temperature, Treatment)), color = "grey", linetype=2) +
   geom_errorbar((aes(ymin=CH4_ppb_s-CH4_ppb_s_sd, ymax=CH4_ppb_s+CH4_ppb_s_sd))) +
+  scale_color_continuous(guide = FALSE) + 
   facet_grid(Temperature~Treatment) + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   ggtitle("CH4 fluxes (ppb/s, uncorrected) by date")
@@ -232,6 +239,6 @@ try(system(cmd))
 
 printlog("All done with", SCRIPTNAME)
 print(sessionInfo())
-sink() # close log
+closelog()
 
 if(PROBLEM) warning("There was a problem - see log")
