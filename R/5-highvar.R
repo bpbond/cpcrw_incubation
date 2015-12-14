@@ -20,7 +20,8 @@ library(digest)
 investigate <- function(smry, summarydata, rawdata, 
                         gas, gasvar, 
                         gasvar_sd = paste0(gasvar, "_sd"), 
-                        gasvar_cv = paste0(gasvar, "_cv")) {
+                        gasvar_cv = paste0(gasvar, "_cv"),
+                        gas_outlier = paste0(gas, "_outlier")) {
   
   smry$ymin <- smry[,gasvar] - smry[,gasvar_sd]
   smry$ymax <- smry[,gasvar] + smry[,gasvar_sd]
@@ -54,24 +55,25 @@ investigate <- function(smry, summarydata, rawdata,
       p_closeup <- ggplot(sd_gas, aes_string("DATETIME", gasvar, fill="Core")) + 
         geom_bar(stat='identity') + 
         ggtitle(paste("Closeup look at", group_hash, "on incday", unique(sd_gas$incday))) +
-        geom_text(aes(label = samplenum), vjust = -0.5)
+        geom_text(aes_string(label = "samplenum", color = gas_outlier), vjust = -0.5)
       print(p_closeup)
-      save_plot(paste0(gas, "_closeup_", group_hash))
+      save_plot(paste0(gas, "_closeup_", group_hash), ptype = ".png")
       
       p_distribution <- ggplot(subset(summarydata, Treatment %in% sd_gas$Treatment & Temperature %in% sd_gas$Temperature), aes_string(x = gasvar)) + 
         geom_density() + 
         facet_grid(Temperature ~ Treatment, scales = "free") + 
-        geom_vline(data=sd_gas, aes_string(xintercept = gasvar, color="Core"), linetype = 2) +
+        geom_vline(data=sd_gas, aes_string(xintercept = gasvar, color = "Core", size = gas_outlier), linetype = 2) +
+        scale_size_manual(values = c(0.5, 1.25)) +
         ggtitle(paste("Distribution look at", group_hash))
       print(p_distribution)
-      save_plot(paste0(gas, "_distribution_", group_hash))
+      save_plot(paste0(gas, "_distribution_", group_hash), ptype = ".png")
       
       rd_gas <- subset(rawdata, samplenum %in% samplenums)
       p_rawcloseup <- ggplot(rd_gas, aes_string("elapsed_seconds", paste0(gas, "_dry"), color = "samplenum", group = "samplenum")) +
         geom_line() +
         ggtitle(paste("Raw closeup look at", group_hash, "on", unique(rd_gas$DATE)))
       print(p_rawcloseup)
-      save_plot(paste0(gas, "_closeup_raw_", group_hash))
+      save_plot(paste0(gas, "_closeup_raw_", group_hash), ptype = ".png")
       
     } else {
       ok <- FALSE
@@ -94,6 +96,14 @@ summarydata$DATETIME <- ymd_hms(summarydata$DATETIME)
 printlog("Reading in treatment summaries...")
 tsummary <- read_csv(TREATMENT_SUMMARYDATA)
 tsummary$Date <- ymd(tsummary$Date)
+
+dev <- 3.2
+printlog("Computing outlier flags using deviation of", dev, "...")
+summarydata %>%
+  group_by(Treatment, Temperature) %>%
+  mutate(CO2_outlier = is_outlier(CO2_ppm_s, devs = dev),
+         CH4_outlier = is_outlier(CH4_ppb_s, devs = dev)) ->
+  summarydata
 
 # ------------------- CO2
 
