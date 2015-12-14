@@ -1,5 +1,7 @@
 # Process Picarro data for CPCRW incubation
 # Investigate treatment summaries with particularly high variability
+# Note this interactive script is only used to generate figures and statistics;
+# it doesn't make any changes to the datasets.
 # Ben Bond-Lamberty December 2015
 
 source("R/0-functions.R")
@@ -11,10 +13,13 @@ SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata_clean.csv")  # output from sc
 RAWDATA      <- file.path(OUTPUT_DIR, "rawdata_samples.csv.gz")  # output from script 1
 TREATMENT_SUMMARYDATA  <- file.path(OUTPUT_DIR, "treatment_summary.csv")  # output from script 3
 
+library(digest)
 
-
+# -----------------------------------------------------------------------------
+# make diagnostic plots etc. for a particular gas
 investigate <- function(smry, summarydata, rawdata, 
-                        gas, gasvar, gasvar_sd = paste0(gasvar, "_sd"), 
+                        gas, gasvar, 
+                        gasvar_sd = paste0(gasvar, "_sd"), 
                         gasvar_cv = paste0(gasvar, "_cv")) {
   
   smry$ymin <- smry[,gasvar] - smry[,gasvar_sd]
@@ -38,6 +43,8 @@ investigate <- function(smry, summarydata, rawdata,
     if(n %in% seq_len(nrow(smry))) {
       printlog(smry[n,])
       
+      group_hash <- paste(n, substr(digest(smry[n, "samplenums"]), 1, 6), sep = '-')
+      printlog("Hash (ID) of the sample numbers is", group_hash)
       samplenums <- smry[n, "samplenums"] %>% strsplit(" ") %>% unlist %>% as.numeric()
       
       printlog("Samples from the summary dataset:")
@@ -46,26 +53,25 @@ investigate <- function(smry, summarydata, rawdata,
       
       p_closeup <- ggplot(sd_gas, aes_string("DATETIME", gasvar, fill="Core")) + 
         geom_bar(stat='identity') + 
-        ggtitle(paste("Closeup look at number", n, "on incday", unique(sd_gas$incday))) +
+        ggtitle(paste("Closeup look at", group_hash, "on incday", unique(sd_gas$incday))) +
         geom_text(aes(label = samplenum), vjust = -0.5)
       print(p_closeup)
-      save_plot(paste0(gas, "_closeup_", n))
+      save_plot(paste0(gas, "_closeup_", group_hash))
       
       p_distribution <- ggplot(subset(summarydata, Treatment %in% sd_gas$Treatment & Temperature %in% sd_gas$Temperature), aes_string(x = gasvar)) + 
         geom_density() + 
         facet_grid(Temperature ~ Treatment, scales = "free") + 
         geom_vline(data=sd_gas, aes_string(xintercept = gasvar, color="Core"), linetype = 2) +
-        ggtitle(paste("Distribution look at number", n))
+        ggtitle(paste("Distribution look at", group_hash))
       print(p_distribution)
-      save_plot(paste0(gas, "_distribution_", n))
-      
+      save_plot(paste0(gas, "_distribution_", group_hash))
       
       rd_gas <- subset(rawdata, samplenum %in% samplenums)
       p_rawcloseup <- ggplot(rd_gas, aes_string("elapsed_seconds", paste0(gas, "_dry"), color = "samplenum", group = "samplenum")) +
         geom_line() +
-        ggtitle(paste("Raw closeup look at number", n, "on", unique(rd_gas$DATE)))
+        ggtitle(paste("Raw closeup look at", group_hash, "on", unique(rd_gas$DATE)))
       print(p_rawcloseup)
-      save_plot(paste0(gas, "_closeup_raw_", n))
+      save_plot(paste0(gas, "_closeup_raw_", group_hash))
       
     } else {
       ok <- FALSE
@@ -81,7 +87,7 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in raw data...")
-#rawdata <- read_csv(RAWDATA)
+rawdata <- readr::read_csv(RAWDATA)
 printlog("Reading in summary data...")
 summarydata <- read_csv(SUMMARYDATA)
 summarydata$DATETIME <- ymd_hms(summarydata$DATETIME)
