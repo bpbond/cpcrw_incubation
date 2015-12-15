@@ -61,7 +61,13 @@ For each measurement, a six-core treatment group was connected to a Picarro A031
 
 **Statistical analysis**
 
-Analysis. Outlier exclusion. 
+AOutlier exclusion based on 3.2 mean absolute deviations from treatment and temperature mean. We excluded X of Y (Z%) of the summarized samples for this reason.
+
+Citation: Davies, P.L. and Gather, U. (1993). "The identification of multiple outliers" (with discussion). J. Amer. Statist. Assoc., 88, 782-801.
+
+
+
+nalysis. Outlier exclusion. 
 
 **Data and code availability**
 
