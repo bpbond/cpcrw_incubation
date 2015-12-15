@@ -1,7 +1,10 @@
 # Process Picarro data for Peyton's DWP lab experiment
-# This script summarizes individual Picarro observations to summaries
-# of "samples" (groups of observations made from a given core at some
-# point in time)
+# This workhorse script summarizes individual (raw) Picarro observations to 
+# summaries of "samples" (groups of consecutive observations made from a given 
+# core at a point in time). It computes gas concentration changes, performs 
+# some QC, merges the Picarro data with valve map and other ancillary data,
+# and writes `outputs/summarydata.csv`.
+# 
 # Ben Bond-Lamberty July 2015
 
 source("R/0-functions.R")

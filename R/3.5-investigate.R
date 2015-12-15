@@ -1,12 +1,13 @@
 # Process Picarro data for CPCRW incubation
-# Investigate treatment summaries with particularly high variability
-# Note this interactive script is only used to generate figures and statistics;
+# This script is used to investigate treatment summaries with particularly high 
+# variability. Note this interactive script is only used to generate figures and 
+# statistics, identifying candidates to add to the `removals.csv` file; 
 # it doesn't make any changes to the datasets.
 # Ben Bond-Lamberty December 2015
 
 source("R/0-functions.R")
 
-SCRIPTNAME  	<- "5-highvar.R"
+SCRIPTNAME  	<- "3.5-investigate.R"
 PROBLEM       <- FALSE
 
 SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata_clean.csv")  # output from script 3

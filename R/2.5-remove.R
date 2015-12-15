@@ -1,10 +1,11 @@
 # Process Picarro data for CPCRW incubation
-# Remove bad/freaky observations
+# This script remove bad/freaky/outlier observations from the data, based
+# on the `data/removals.csv` list. It then writes `outputs/summarydata_clean.csv`.
 # Ben Bond-Lamberty September 2015
 
 source("R/0-functions.R")
 
-SCRIPTNAME  	<- "3-remove.R"
+SCRIPTNAME  	<- "2.5-remove.R"
 PROBLEM       <- FALSE
 
 SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata.csv")  # output from script 2

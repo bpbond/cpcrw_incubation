@@ -1,11 +1,11 @@
 # NOTE THIS DOESN'T WORK WITH CURRENT DATASET YET
 
-# Process Picarro data for Peyton's DWP lab experiment
+# Computes fluxes. In progress.
 # Ben Bond-Lamberty April 2015
 
 source("R/0-functions.R")
 
-SCRIPTNAME  	<- "3-fluxes.R"
+SCRIPTNAME  	<- "4-fluxes.R"
 summarydata      <- file.path(OUTPUT_DIR, "summarydata.csv")  # output from script 2
 
 

@@ -1,6 +1,4 @@
 # NOTE THIS DOESN'T WORK WITH CURRENT DATASET YET
-
-# Process Peyton's Picarro data for DWP lab experiment
 # Ben Bond-Lamberty July 2015
 
 source("0-functions.R")

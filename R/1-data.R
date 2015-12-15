@@ -1,5 +1,6 @@
 # Process Picarro data for our CPCRW lab experiment
-# This script reads all available data, writing to a `rawdata` file
+# This script reads all available Picarro outputs in `data/picarro/`,
+# concatenating and writing to an `outputs/rawdata.csv.gz` file.
 # Ben Bond-Lamberty July 2015
 
 source("R/0-functions.R")

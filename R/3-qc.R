@@ -1,10 +1,11 @@
 # Process Picarro data for CPCRW incubation
-# Quality control
+# This script produces a wide range of diagnostic and QC plots, 
+# of both the raw and (clean) summary datasets.
 # Ben Bond-Lamberty September 2015
 
 source("R/0-functions.R")
 
-SCRIPTNAME  	<- "4-qc.R"
+SCRIPTNAME  	<- "3-qc.R"
 PROBLEM       <- FALSE
 
 SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata_clean.csv")  # output from script 3
