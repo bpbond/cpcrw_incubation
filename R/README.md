@@ -10,3 +10,5 @@ This folder contains all R code for processing experimental data and analyzing r
 * `3.5-investigate.R` : This script is used to investigate treatment summaries with particularly high variability. Note this interactive script is only used to generate figures and statistics, identifying candidates to add to the `removals.csv` file; it doesn't make any changes to the datasets.
 * `4-fluxes.R` : Computes fluxes. In progress.
 * `6-plots.R` : Plotting final figures. In progress.
+
+All these scripts get their inputs entirely from disk--i.e., they don't depend on any data being present in their runtime environment. They also automatically create their own output folder in `outputs/` (creating that too if necessary).
