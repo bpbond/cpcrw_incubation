@@ -1,1 +1,41 @@
-Soil coring for CPCRW incubation experiment,,,,,,,,Date,Core,Nearest_location,MaxDepth_cm,MaxDepth_type,MaxCoreDepth_cm,OrganicThickness_cm,Odd,Notes3-Aug-2015,AL1,T5-42.5,80,Permafrost,75,,FALSE,3-Aug-2015,AL2,T5-42.5,98,Permafrost,93,,FALSE,2 m north of T5-42.53-Aug-2015,AL3,T6-40,95,Permafrost,95,,FALSE,2 m south of T6-403-Aug-2015,AL4,T6-39,82,Permafrost,82,,FALSE,1 m north of T6-393-Aug-2015,AL5,T6-43,75,Permafrost,75,35,FALSE,1 m north of T6-43; on hummock3-Aug-2015,AL6,T6-41,95,Permafrost,86,35,FALSE,3 m north of T6-41; rocks at 65 and 75 cm3-Aug-2015,AL7,T7-37,78,Permafrost,78,,FALSE,3 m south of T7-374-Aug-2015,AL8,T8-32,75,Permafrost,75,,TRUE,3 m south of T8-32; filled only 2/3 of core4-Aug-2015,AL9,T8-47,85,Permafrost,83,,FALSE,1 m north of T8-47; much more into upland forest4-Aug-2015,AL10,T9-40,77,Permafrost,77,,TRUE,"2.5 m  south of T9-40; damp and sticky clay soil, darker"4-Aug-2015,AL11,T9-41,72,Permafrost,67,,TRUE,1 m north of T9-414-Aug-2015,AL12,T9-35,78,Permafrost,78,15,FALSE,3.5 m north of T9-354-Aug-2015,AL13,T10-38,84,Permafrost,69,,FALSE,5 m south of T10-38; very clayey and sticky4-Aug-2015,AL14,T10-26,76,Permafrost,76,22.5,FALSE,1.5 m north of T10-264-Aug-2015,AL15,T10-22,82,Permafrost,81,,FALSE,1 m north of T10-224-Aug-2015,AL16,T7-39,75,Permafrost,75,,FALSE,1.5 m north of T7-394-Aug-2015,AL17,T7-36,72,Permafrost,72,,FALSE,3 m south of T7-364-Aug-2015,AL18,T7-40,81,Permafrost,81,,FALSE,3 m south of T7-40; sandy4-Aug-2015,AL19,T7-42,86,Permafrost,86,,FALSE,5 m south of T7-424-Aug-2015,AL20,T7-47,80,Permafrost,80,15,FALSE,2 m south of T7-474-Aug-2015,AL21,T5-44,80,Permafrost,80,,FALSE,2 m south of T5-444-Aug-2015,AL22,T5-43,76,Permafrost,76,,FALSE,3.5 m south of T5-434-Aug-2015,AL23,T5-44,86,Permafrost,83,23,FALSE,6 m south of T5-444-Aug-2015,AL24,T5-41,102,Permafrost,88,,FALSE,2 m north of T5-414-Aug-2015,AL25,T6-33,75,Permafrost,75,21,FALSE,3 m north of T6-334-Aug-2015,AL26,T7-32,74,Permafrost,74,,FALSE,4 m south of T7-324-Aug-2015,AL27,T7-34,82,Permafrost,82,,FALSE,5-Aug-2015,AL28,T7-50,86,Permafrost,86,15,FALSE,1 m north of T7-505-Aug-2015,AL29,T7-45,79,Permafrost,79,,FALSE,2 m south of T7-455-Aug-2015,AL30,T7-38,71,Permafrost,71,30,FALSE,5 m south of T7-385-Aug-2015,AL31,T7-40,70,Permafrost,70,,FALSE,4 m north of T7-405-Aug-2015,AL32,T8-36,71,Permafrost,71,,FALSE,2.5 m south of T8-365-Aug-2015,AL33,T9-43,74,Permafrost,74,17,FALSE,1 m north of T9-43; into forest5-Aug-2015,AL34,T9-42,74,Permafrost,74,,FALSE,5 m north of T9-425-Aug-2015,AL35,T9-44,71,Permafrost,71,20,FALSE,6 m north of T9-445-Aug-2015,AL36,T10-36,80,Permafrost,80,,FALSE,7 m south of T10-36; sticky clay5-Aug-2015,AL37,T10-22,80,Permafrost,80,28,FALSE,2 m south of T10-225-Aug-2015,AL38,T10-25,73,Permafrost,73,34,FALSE,6 m south of T10-255-Aug-2015,AL39,T9-37,80,Permafrost,75,,FALSE,3 m north of T9-37
+#Field data (sample date, location, depth, etc.) for cores in the CPCRW incubation experiment
+Date,Core,Nearest_location,MaxDepth_cm,MaxDepth_type,MaxCoreDepth_cm,OrganicThickness_cm,Odd,Notes
+3-Aug-2015,AL1,T5-42.5,80,Permafrost,75,,FALSE,
+3-Aug-2015,AL2,T5-42.5,98,Permafrost,93,,FALSE,2 m north of T5-42.5
+3-Aug-2015,AL3,T6-40,95,Permafrost,95,,FALSE,2 m south of T6-40
+3-Aug-2015,AL4,T6-39,82,Permafrost,82,,FALSE,1 m north of T6-39
+3-Aug-2015,AL5,T6-43,75,Permafrost,75,35,FALSE,1 m north of T6-43; on hummock
+3-Aug-2015,AL6,T6-41,95,Permafrost,86,35,FALSE,3 m north of T6-41; rocks at 65 and 75 cm
+3-Aug-2015,AL7,T7-37,78,Permafrost,78,,FALSE,3 m south of T7-37
+4-Aug-2015,AL8,T8-32,75,Permafrost,75,,TRUE,3 m south of T8-32; filled only 2/3 of core
+4-Aug-2015,AL9,T8-47,85,Permafrost,83,,FALSE,1 m north of T8-47; much more into upland forest
+4-Aug-2015,AL10,T9-40,77,Permafrost,77,,TRUE,"2.5 m  south of T9-40; damp and sticky clay soil, darker"
+4-Aug-2015,AL11,T9-41,72,Permafrost,67,,TRUE,1 m north of T9-41
+4-Aug-2015,AL12,T9-35,78,Permafrost,78,15,FALSE,3.5 m north of T9-35
+4-Aug-2015,AL13,T10-38,84,Permafrost,69,,FALSE,5 m south of T10-38; very clayey and sticky
+4-Aug-2015,AL14,T10-26,76,Permafrost,76,22.5,FALSE,1.5 m north of T10-26
+4-Aug-2015,AL15,T10-22,82,Permafrost,81,,FALSE,1 m north of T10-22
+4-Aug-2015,AL16,T7-39,75,Permafrost,75,,FALSE,1.5 m north of T7-39
+4-Aug-2015,AL17,T7-36,72,Permafrost,72,,FALSE,3 m south of T7-36
+4-Aug-2015,AL18,T7-40,81,Permafrost,81,,FALSE,3 m south of T7-40; sandy
+4-Aug-2015,AL19,T7-42,86,Permafrost,86,,FALSE,5 m south of T7-42
+4-Aug-2015,AL20,T7-47,80,Permafrost,80,15,FALSE,2 m south of T7-47
+4-Aug-2015,AL21,T5-44,80,Permafrost,80,,FALSE,2 m south of T5-44
+4-Aug-2015,AL22,T5-43,76,Permafrost,76,,FALSE,3.5 m south of T5-43
+4-Aug-2015,AL23,T5-44,86,Permafrost,83,23,FALSE,6 m south of T5-44
+4-Aug-2015,AL24,T5-41,102,Permafrost,88,,FALSE,2 m north of T5-41
+4-Aug-2015,AL25,T6-33,75,Permafrost,75,21,FALSE,3 m north of T6-33
+4-Aug-2015,AL26,T7-32,74,Permafrost,74,,FALSE,4 m south of T7-32
+4-Aug-2015,AL27,T7-34,82,Permafrost,82,,FALSE,
+5-Aug-2015,AL28,T7-50,86,Permafrost,86,15,FALSE,1 m north of T7-50
+5-Aug-2015,AL29,T7-45,79,Permafrost,79,,FALSE,2 m south of T7-45
+5-Aug-2015,AL30,T7-38,71,Permafrost,71,30,FALSE,5 m south of T7-38
+5-Aug-2015,AL31,T7-40,70,Permafrost,70,,FALSE,4 m north of T7-40
+5-Aug-2015,AL32,T8-36,71,Permafrost,71,,FALSE,2.5 m south of T8-36
+5-Aug-2015,AL33,T9-43,74,Permafrost,74,17,FALSE,1 m north of T9-43; into forest
+5-Aug-2015,AL34,T9-42,74,Permafrost,74,,FALSE,5 m north of T9-42
+5-Aug-2015,AL35,T9-44,71,Permafrost,71,20,FALSE,6 m north of T9-44
+5-Aug-2015,AL36,T10-36,80,Permafrost,80,,FALSE,7 m south of T10-36; sticky clay
+5-Aug-2015,AL37,T10-22,80,Permafrost,80,28,FALSE,2 m south of T10-22
+5-Aug-2015,AL38,T10-25,73,Permafrost,73,34,FALSE,6 m south of T10-25
+5-Aug-2015,AL39,T9-37,80,Permafrost,75,,FALSE,3 m north of T9-37
