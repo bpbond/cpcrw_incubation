@@ -75,9 +75,6 @@ fluxdata$CH4_flux_mgC_hr <- with(fluxdata, CH4_flux_µmol_g_s * DryMass_g) / # g
   1000 *  # to mg C
   60 * 60 # to /hr
 
-printlog("All done with", SCRIPTNAME)
-closelog()
-
 # Compute cumulative C respired
 printlog("Computing cumulative C respired...")
 fluxdata %>%
@@ -109,7 +106,7 @@ p2 <- ggplot(fluxdata, aes(incday, cumCH4_flux_mgC, group = Core)) +
 print(p2)
 save_plot("cumulative_CH4")
 
-printlog("Flux summary plots...")
+printlog("Flux summary plot...")
 fluxdata %>%
   melt(id.vars = c("Treatment", "Temperature", "Core", "incday"), 
        measure.vars = c("cumCO2_flux_mgC", "cumCH4_flux_mgC"),
@@ -121,7 +118,12 @@ fluxdata %>%
             cum_flux_mgC = mean(cum_flux_mgC)) ->
   fd_summary
 
-# Add a few dummy rows
+# Tweak the data set - factors, names, etc.
+fd_summary$Gas <- substr(fd_summary$Gas, start = 4, stop = 6)
+fd_summary$Treatment <- factor(fd_summary$Treatment, levels = c("Drought", "Controlled drought", "Field moisture"))
+fd_summary$Temperature <- as.factor(fd_summary$Temperature)
+
+# Add a few dummy rows so graph bars are spaced correctly
 dmy <- expand.grid(Treatment = unique(fd_summary$Treatment),
                    Temperature = 4,
                    Gas = unique(fd_summary$Gas),
@@ -129,18 +131,15 @@ dmy <- expand.grid(Treatment = unique(fd_summary$Treatment),
 dmy$cum_flux_mgC_sd <- NA
 dmy$cum_flux_mgC <- NA
 fd_summary <- rbind(fd_summary, dmy)
-fd_summary$Treatment <- factor(fd_summary$Treatment, levels = c("Drought", "Controlled drought", "Field moisture"))
-fd_summary$Temperature <- as.factor(fd_summary$Temperature)
-
 
 p3 <- ggplot(fd_summary, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
   geom_bar(stat='identity', position = position_dodge()) +
   geom_errorbar(aes(color = Treatment, ymin = cum_flux_mgC * .9, ymax = cum_flux_mgC + cum_flux_mgC_sd), 
                 position = position_dodge(0.9), width = 0.4) +  
   facet_grid(Gas~., scales = "free") +
+  ylab("Cumulative C (mg) over 100 days") +
   ggtitle("Cumulative C by gas, treatment, temperature")
-print(p3)
-save_plot("cumulative_gas")
+save_diagnostic(p3, "cumulative_gas")
 
 
 printlog("All done with", SCRIPTNAME)

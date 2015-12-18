@@ -11,12 +11,6 @@ PROBLEM       <- FALSE
 SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata_clean.csv")  # output from script 3
 RAWDATA      <- file.path(OUTPUT_DIR, "rawdata_samples.csv.gz")  # output from script 1
 
-save_diagnostic <- function(p, pname, printit = TRUE, ...) {
-  print(p)
-  printlog("Saving diagnostic for", pname)
-  ggsave(paste0("qc_plots/", pname, ".png"))
-  save_plot(pname, ...)
-}
 
 # Main ===========================================================================
 
@@ -186,17 +180,21 @@ save_diagnostic(p, "CH4_time")
 # Individual cores over time
 # Reorder the 'Core' factor so that facets are ordered by Treatment and Temperature
 summarydata$TT <- paste(summarydata$Treatment, summarydata$Temperature)
-sd_no_A <- summarydata %>% filter(Core != "Ambient4" & Core != "Ambient22") %>% arrange(TT)
+sd_no_A <- summarydata %>% 
+  filter(Core != "Ambient4" & Core != "Ambient22") %>% 
+  arrange(TT)
 sd_no_A$Core <- factor(sd_no_A$Core, levels = unique(as.character(sd_no_A$Core)))
 p <- qplot(incday, CO2_ppm_s, data=sd_no_A, color=TT)
 p <- p + ggtitle("CO2 fluxes (uncorrected) by rep, core, incubation day") + scale_color_discrete("")
 p <- p + facet_wrap(~Core, ncol = 6)
-save_diagnostic(p, "CO2_incday")
+print(p)
+save_plot("CO2_incday")
 
 p <- qplot(incday, CH4_ppb_s, data=sd_no_A, color=paste(Treatment, Temperature))
 p <- p + ggtitle("CH4 fluxes (uncorrected) by rep, core, incubation day") + scale_color_discrete("")
 p <- p + facet_wrap(~Core, ncol = 6)
-save_diagnostic(p, "CH4_incday")
+print(p)
+save_plot("CH4_incday")
 
 # --------------------- Masses ---------------------
 

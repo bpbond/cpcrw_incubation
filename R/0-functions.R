@@ -72,11 +72,21 @@ is_outlier <- function(x, devs=3.2) {
   # See: Davies, P.L. and Gather, U. (1993).
   # "The identification of multiple outliers" (with discussion)
   # J. Amer. Statist. Assoc., 88, 782-801.
-  
   x <- na.omit(x)
   lims <- median(x) + c(-1, 1) * devs * mad(x, constant = 1)
   x < lims[ 1 ] | x > lims[2]
 } # is_outlier
+
+# -----------------------------------------------------------------------------
+# save a plot to the diagnostic plot folder (used by README.md)
+save_diagnostic <- function(p, pname, printit = TRUE, ...) {
+  print(p)
+  printlog("Saving diagnostic for", pname)
+  ggsave(paste0("qc_plots/", pname, ".png"))
+  save_plot(pname, ...)
+}
+
+
 
 if(!file.exists(OUTPUT_DIR)) {
   printlog("Creating", OUTPUT_DIR)

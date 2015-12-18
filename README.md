@@ -40,11 +40,9 @@ Script run: 2015-12-13 14:12:10
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/coreCV_distribution.png)
 
-### Raw data
+### Cumulative fluxes
 
-![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CO2_incday.png)
-
-![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CH4_incday.png)
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/cumulative_gas.png)
 
 ## Study objectives and approach
 
