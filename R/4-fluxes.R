@@ -106,20 +106,28 @@ p2 <- ggplot(fluxdata, aes(incday, cumCH4_flux_mgC, group = Core)) +
 print(p2)
 save_plot("cumulative_CH4")
 
-printlog("Flux summary plot...")
+printlog("Calculating flux summary datasets...")
 fluxdata %>%
   melt(id.vars = c("Treatment", "Temperature", "Core", "incday"), 
        measure.vars = c("cumCO2_flux_mgC", "cumCH4_flux_mgC"),
        variable.name = "Gas") %>%
+  mutate(Gas = substr(Gas, start = 4, stop = 6)) %>%   # rename
   group_by(Treatment, Temperature, Gas, Core) %>%
   arrange(incday) %>%
-  summarise(cum_flux_mgC = last(value)) %>%
+  summarise(cum_flux_mgC = last(value)) -> 
+  fd_summary_core
+
+save_data(fd_summary_core, scriptfolder = FALSE)
+
+fd_summary_core %>%   # already grouped by Treatment, Temperature, Gas
   summarise(cum_flux_mgC_sd = sd(cum_flux_mgC),
             cum_flux_mgC = mean(cum_flux_mgC)) ->
   fd_summary
 
+
+printlog("Flux summary plot...")
+
 # Tweak the data set - factors, names, etc.
-fd_summary$Gas <- substr(fd_summary$Gas, start = 4, stop = 6)
 fd_summary$Treatment <- factor(fd_summary$Treatment, levels = c("Drought", "Controlled drought", "Field moisture"))
 fd_summary$Temperature <- as.factor(fd_summary$Temperature)
 
@@ -134,7 +142,9 @@ fd_summary <- rbind(fd_summary, dmy)
 
 p3 <- ggplot(fd_summary, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
   geom_bar(stat='identity', position = position_dodge()) +
-  geom_errorbar(aes(color = Treatment, ymin = cum_flux_mgC * .9, ymax = cum_flux_mgC + cum_flux_mgC_sd), 
+  geom_errorbar(aes(color = Treatment, 
+                    ymin = cum_flux_mgC * 0.9, 
+                    ymax = cum_flux_mgC + cum_flux_mgC_sd), 
                 position = position_dodge(0.9), width = 0.4) +  
   facet_grid(Gas~., scales = "free") +
   ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$incday)), "days")) +
