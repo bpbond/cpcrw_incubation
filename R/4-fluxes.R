@@ -137,7 +137,7 @@ p3 <- ggplot(fd_summary, aes(Temperature, cum_flux_mgC, fill = Treatment)) +
   geom_errorbar(aes(color = Treatment, ymin = cum_flux_mgC * .9, ymax = cum_flux_mgC + cum_flux_mgC_sd), 
                 position = position_dodge(0.9), width = 0.4) +  
   facet_grid(Gas~., scales = "free") +
-  ylab("Cumulative C (mg) over 100 days") +
+  ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$incday)), "days")) +
   ggtitle("Cumulative C by gas, treatment, temperature")
 save_diagnostic(p3, "cumulative_gas")
 
