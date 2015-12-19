@@ -24,6 +24,8 @@ fluxdata_orig %>%
   select(-variable) ->
   fluxdata
 
+fluxdata$Treatment <- factor(fluxdata$Treatment, levels = c("Field moisture", "Controlled drought", "Drought"))
+
 save_data(fluxdata, fname = "fluxdata_long")
 
 # -----------------------------------------------------------------------------
@@ -53,13 +55,22 @@ print(WC_effect)
 save_data(WC_effect)
 
 
-# m_co2 <- lm(cum_flux_mgC ~ Treatment * Temperature, 
-#             data=subset(fd_summary_core, Gas=="CO2"))
-# summary(m_co2)
-# 
-# m_ch4 <- lm(cum_flux_mgC ~ Treatment * Temperature, 
-#             data=subset(fd_summary_core, Gas=="CH4"))
-# summary(m_ch4)
+# -----------------------------------------------------------------------------
+# Main treatment effects
+
+# Fitting a non-mixed-effects model for now
+# TODO: later, might want to explore having Core as a random effect
+
+# Fit gases separately, just for simplicity
+printlog("Fitting CO2 model...")
+m_co2 <- lm(flux_µmol_g_s ~ Treatment * Temperature + WC_fraction,
+            data = fluxdata, subset = Gas == "CO2")
+print(summary(m_co2))
+
+printlog("Fitting CH4 model...")
+m_co2 <- lm(flux_µmol_g_s ~ Treatment * Temperature + WC_fraction,
+            data = fluxdata, subset = Gas == "CH4")
+print(summary(m_co2))
 
 
 printlog("All done with", SCRIPTNAME)
