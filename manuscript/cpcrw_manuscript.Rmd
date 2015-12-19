@@ -84,3 +84,12 @@ Discussion.
 ### Acknowledgments
 
 Acknowledgments.
+
+
+
+Table X. Summary of treatment effects on gas fluxes.
+
+Figure X. A faceted (Temperature ~ Treatment) plot showing fnormalized lux means and errors by incubation time.
+ (Basically the figure already in the README diagnostics.)
+TFigur X. 
+Core water content across the course of the experiment. (Basically the figure already in the README diagnostics.)
