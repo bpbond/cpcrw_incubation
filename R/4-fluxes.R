@@ -30,6 +30,9 @@ summarydata %>%
 # TODO: ask Peyton, what's the "Volume" column in the CoreData.xlsx file?
 fluxdata$Headspace_cm <- 5
 
+# Compute water content
+fluxdata$WC_fraction <- with(fluxdata, (Mass_g - DryMass_g) / DryMass_g)
+
 # At this point, `fluxdata` has slopes (CO2 ppm/s and CH4 ppb/s).
 # We want to convert this to mg C/g soil/s, using
 # A = dC/dt * V/M * Pa/RT (cf. Steduto et al. 2002), where
@@ -91,7 +94,7 @@ fluxdata %>%
 save_data(fluxdata, scriptfolder = FALSE)
 
 # A few diagnostic plots
-printlog("Flux diagnostic plots...")
+printlog("Cumulative flux diagnostic plots...")
 p1 <- ggplot(fluxdata, aes(incday, cumCO2_flux_mgC, group = Core)) + 
   geom_line() + 
   facet_grid(Temperature ~ Treatment) +
@@ -115,32 +118,32 @@ fluxdata %>%
   group_by(Treatment, Temperature, Gas, Core) %>%
   arrange(incday) %>%
   summarise(cum_flux_mgC = last(value)) -> 
-  fd_summary_core
+  fd_cumulative_core
 
-save_data(fd_summary_core, scriptfolder = FALSE)
+save_data(fd_cumulative_core, scriptfolder = FALSE)
 
-fd_summary_core %>%   # already grouped by Treatment, Temperature, Gas
+fd_cumulative_core %>%   # already grouped by Treatment, Temperature, Gas
   summarise(cum_flux_mgC_sd = sd(cum_flux_mgC),
             cum_flux_mgC = mean(cum_flux_mgC)) ->
-  fd_summary
+  fd_cumulative
 
 
 printlog("Flux summary plot...")
 
 # Tweak the data set - factors, names, etc.
-fd_summary$Treatment <- factor(fd_summary$Treatment, levels = c("Drought", "Controlled drought", "Field moisture"))
-fd_summary$Temperature <- as.factor(fd_summary$Temperature)
+fd_cumulative$Treatment <- factor(fd_cumulative$Treatment, levels = c("Drought", "Controlled drought", "Field moisture"))
+fd_cumulative$Temperature <- as.factor(fd_cumulative$Temperature)
 
 # Add a few dummy rows so graph bars are spaced correctly
-dmy <- expand.grid(Treatment = unique(fd_summary$Treatment),
+dmy <- expand.grid(Treatment = unique(fd_cumulative$Treatment),
                    Temperature = 4,
-                   Gas = unique(fd_summary$Gas),
+                   Gas = unique(fd_cumulative$Gas),
                    stringsAsFactors = FALSE)
 dmy$cum_flux_mgC_sd <- NA
 dmy$cum_flux_mgC <- NA
-fd_summary <- rbind(fd_summary, dmy)
+fd_cumulative <- rbind(fd_cumulative, dmy)
 
-p3 <- ggplot(fd_summary, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
+p3 <- ggplot(fd_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
   geom_bar(stat='identity', position = position_dodge()) +
   geom_errorbar(aes(color = Treatment, 
                     ymin = cum_flux_mgC * 0.9, 
