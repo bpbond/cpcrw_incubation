@@ -22,13 +22,9 @@ print_dims(drymasses)
 printlog("Merging in dry mass data...")
 summarydata %>%
   filter(Treatment != "Ambient") %>%
-  select(Core, Mass_g, Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, incday) %>%
+  select(Core, Mass_g, SoilVolume_cm3, Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, incday) %>%
   left_join(drymasses, by = 'Core') ->
   fluxdata
-
-# TEMPORARY - TODO - set headspace to constant value
-# TODO: ask Peyton, what's the "Volume" column in the CoreData.xlsx file?
-fluxdata$Headspace_cm <- 5
 
 # Compute water content
 fluxdata$WC_fraction <- with(fluxdata, (Mass_g - DryMass_g) / DryMass_g)
@@ -46,10 +42,11 @@ fluxdata$WC_fraction <- with(fluxdata, (Mass_g - DryMass_g) / DryMass_g)
 
 # The instrument tubing is 455 cm long by ID 1/16"
 V_tubing <- (1/16 * 2.54 / 2 ) ^ 2 * pi * 455
-# Headspace on the core is 7.3 cm diameter by variable height
-V_headspace <- (7.3 / 2) * pi * fluxdata$Headspace_cm
+# Headspace is in each is the total volume of the sleeve minus the soil volume
+V_headspace <- (7.5 / 2) ^ 2 * pi * 30 - fluxdata$SoilVolume_cm3
 # Internal volume of Picarro? 
 V_picarro <- 9 # Assume same as PP-Systems
+
 fluxdata$V_cm3 <- V_tubing + V_headspace + V_picarro
 
 Pa 			<- 101						# kPa				(Richland is ~120 m asl)
@@ -131,7 +128,8 @@ fd_cumulative_core %>%   # already grouped by Treatment, Temperature, Gas
 printlog("Flux summary plot...")
 
 # Tweak the data set - factors, names, etc.
-fd_cumulative$Treatment <- factor(fd_cumulative$Treatment, levels = c("Drought", "Controlled drought", "Field moisture"))
+fd_cumulative$Treatment <- factor(fd_cumulative$Treatment, 
+                                  levels = c("Drought", "Controlled drought", "Field moisture"))
 fd_cumulative$Temperature <- as.factor(fd_cumulative$Temperature)
 
 # Add a few dummy rows so graph bars are spaced correctly
@@ -144,12 +142,12 @@ dmy$cum_flux_mgC <- NA
 fd_cumulative <- rbind(fd_cumulative, dmy)
 
 p3 <- ggplot(fd_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
-  geom_bar(stat='identity', position = position_dodge()) +
+  geom_bar(stat = 'identity', position = position_dodge()) +
   geom_errorbar(aes(color = Treatment, 
                     ymin = cum_flux_mgC * 0.9, 
                     ymax = cum_flux_mgC + cum_flux_mgC_sd), 
                 position = position_dodge(0.9), width = 0.4) +  
-  facet_grid(Gas~., scales = "free") +
+  facet_grid(Gas ~ ., scales = "free") +
   ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$incday)), "days")) +
   ggtitle("Cumulative C by gas, treatment, temperature")
 save_diagnostic(p3, "cumulative_gas")
