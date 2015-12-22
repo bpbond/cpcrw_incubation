@@ -78,7 +78,7 @@ print_dims(rawdata)
 print(summary(rawdata))
 
 printlog("Writing output file...")
-save_data(rawdata, scriptfolder=FALSE, gzip=TRUE)
+save_data(rawdata, scriptfolder = FALSE, gzip = TRUE)
 
 printlog("All done with", SCRIPTNAME)
 closelog()

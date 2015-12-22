@@ -67,7 +67,7 @@ valvemap <- read_csv(VALVEMAP, skip = 1)
 printlog( "Converting date/time info to POSIXct..." )
 valvemap$StartDateTime <- mdy_hm(paste(valvemap$Date, valvemap$Time_set_start))
 valvemap <- arrange(valvemap, StartDateTime)
-valvemap$valvemaprow <- 1:nrow(valvemap)
+valvemap$valvemaprow <- seq_len(nrow(valvemap))
 
 # QC the valve map
 dupes <- valvemap %>% 
@@ -148,16 +148,16 @@ printlog("Removing N=1 and MPVPosition=0 data, and merging...")
 summarydata <- summarydata_other %>%
   filter(N > 1) %>% # N=1 observations are...? Picarro quirk
   filter(MPVPosition > 0) %>% # ? Picarro quirk
-  left_join(summarydata_min, by="samplenum") %>%
-  left_join(summarydata_maxCO2, by="samplenum") %>% 
-  left_join(summarydata_maxCH4, by="samplenum")
+  left_join(summarydata_min, by = "samplenum") %>%
+  left_join(summarydata_maxCO2, by = "samplenum") %>% 
+  left_join(summarydata_maxCH4, by = "samplenum")
 
 printlog("Merging Picarro and mapping data...")
-summarydata <- left_join(summarydata, valvemap, by=c("MPVPosition", "valvemaprow"), all.x=TRUE)
+summarydata <- left_join(summarydata, valvemap, by = c("MPVPosition", "valvemaprow"), all.x=TRUE)
 
 printlog("Reading and merging treatment data...")
-trtdata <- read_csv(TREATMENTS, skip=1)
-summarydata <- left_join(summarydata, trtdata, by="Core")
+trtdata <- read_csv(TREATMENTS, skip = 1)
+summarydata <- left_join(summarydata, trtdata, by = "Core")
 
 printlog("Computing per-second rates...")
 summarydata <- summarydata %>%
@@ -171,15 +171,15 @@ checkdata$sequence <- seq_len(nrow(checkdata))
 vdata <- data.frame(sequence = seq_len(nrow(valvemap)),
                     DATETIME_valvemap = paste(valvemap$Date, valvemap$Time_set_start_UTC),
                     MPVPosition_valvemap = valvemap$MPVPosition)
-MPVPosition_checkdata <- left_join(vdata, checkdata, by="sequence")
+MPVPosition_checkdata <- left_join(vdata, checkdata, by = "sequence")
 save_data(MPVPosition_checkdata)
 
 # Done! 
 
-save_data(summarydata, scriptfolder=FALSE)
+save_data(summarydata, scriptfolder = FALSE)
 
 #summarydata <- subset(summarydata, !is.na(CORE), select=-c(MPVPosition, valvemaprow))	
-save_data(rawdata_samples, scriptfolder=FALSE, gzip=TRUE)
+save_data(rawdata_samples, scriptfolder = FALSE, gzip = TRUE)
 
 printlog("All done with", SCRIPTNAME)
 closelog()
