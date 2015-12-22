@@ -1,1 +1,51 @@
-# This file gives 'removals' - observations we're pretty sure are outliers or errors and thus should be automatically removed,,,,,,samplenum,min_CO2_dry,max_CO2_dry,min_CH4_dry,max_CH4_dry,Reason,Category385,,,,,"Picarro was left running from 2015-09-08 21:58:39 to 2015-09-11 16:49:09, just recording ambient",Error659,,,,,"Picarro was left running from 2015-09-22 22:48:01 to 2015-09-25 16:41:06, just recording ambient",Error724,,,,,"Picarro was left running from 2015-09-25 21:00:49 to 2015-09-29 17:57:03, just recording ambient",Error790,,,,,"Picarro was left running from 2015-09-29 22:36:45 to 2015-10-02 19:34:29, just recording ambient",Error855,,,,,"Picarro was left running, just recording ambient",Error927,,,,,"Picarro was left running, just recording ambient",Error995,,,,,"Picarro was left running, just recording ambient",Error1059,,,,,"Picarro was left running, just recording ambient",Error1163,,,,,"Picarro was left running, just recording ambient",Error1255,,,,,"Picarro was left running, just recording ambient",Error1320,,,,,"Picarro was left running, just recording ambient",Error1236,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1237,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1238,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1239,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1240,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1241,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1242,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1243,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1244,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1245,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1246,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1247,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1248,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1249,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1250,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1251,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1252,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1253,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1254,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error1315,,,,,"Picarro was left running, just recording ambient",Error1316,,,,,"Picarro was left running, just recording ambient",Error1317,,,,,"Picarro was left running, just recording ambient",Error1318,,,,,"Picarro was left running, just recording ambient",Error1319,,,,,"Picarro was left running, just recording ambient",Error1269,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error1270,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error1271,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error1272,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error1273,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error1274,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error1332,,,,,"Picarro was left running, just recording ambient",Error1396,,,,,"Picarro was left running, just recording ambient",Error1460,,,,,"Picarro was left running, just recording ambient",Error1524,,,,,"Picarro was left running, just recording ambient",Error
+# This file gives 'removals' - observations we're pretty sure are outliers or errors and thus should be automatically removed,,,,,,
+samplenum,min_CO2_dry,max_CO2_dry,min_CH4_dry,max_CH4_dry,Reason,Category
+385,,,,,"Picarro was left running from 2015-09-08 21:58:39 to 2015-09-11 16:49:09, just recording ambient",Error
+659,,,,,"Picarro was left running from 2015-09-22 22:48:01 to 2015-09-25 16:41:06, just recording ambient",Error
+724,,,,,"Picarro was left running from 2015-09-25 21:00:49 to 2015-09-29 17:57:03, just recording ambient",Error
+790,,,,,"Picarro was left running from 2015-09-29 22:36:45 to 2015-10-02 19:34:29, just recording ambient",Error
+855,,,,,"Picarro was left running, just recording ambient",Error
+927,,,,,"Picarro was left running, just recording ambient",Error
+995,,,,,"Picarro was left running, just recording ambient",Error
+1059,,,,,"Picarro was left running, just recording ambient",Error
+1163,,,,,"Picarro was left running, just recording ambient",Error
+1255,,,,,"Picarro was left running, just recording ambient",Error
+1320,,,,,"Picarro was left running, just recording ambient",Error
+1236,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1237,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1238,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1239,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1240,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1241,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1242,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1243,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1244,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1245,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1246,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1247,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1248,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1249,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1250,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1251,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1252,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1253,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1254,,,,,"Peyton spreadsheet note on 11/3/15: ""Ignore all data collected past 23:14:04""",Error
+1315,,,,,"Picarro was left running, just recording ambient",Error
+1316,,,,,"Picarro was left running, just recording ambient",Error
+1317,,,,,"Picarro was left running, just recording ambient",Error
+1318,,,,,"Picarro was left running, just recording ambient",Error
+1319,,,,,"Picarro was left running, just recording ambient",Error
+1269,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error
+1270,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error
+1271,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error
+1272,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error
+1273,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error
+1274,,,,,"Peyton spreadsheet note on 11/11: ""I think we should remove these!""",Error
+1332,,,,,"Picarro was left running, just recording ambient",Error
+1396,,,,,"Picarro was left running, just recording ambient",Error
+1460,,,,,"Picarro was left running, just recording ambient",Error
+1524,,,,,"Picarro was left running, just recording ambient",Error
+583,,,,,"Peyton spreadsheet note on 9/22: Possible wonky reading",Error
+584,,,,,"Peyton spreadsheet note on 9/22: Possible wonky reading",Error
+589,,,,,"Peyton spreadsheet note on 9/22: Possible wonky reading",Error
+590,,,,,"Peyton spreadsheet note on 9/22: Possible wonky reading",Error
