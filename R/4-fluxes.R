@@ -46,7 +46,7 @@ fluxdata$V_cm3 <- V_tubing + V_headspace + V_picarro
 
 Pa 			<- 101						# kPa				(Richland is ~120 m asl)
 R 			<- 8.3145e+3			# cm3 kPa K−1 mol−1
-Tair    <- 273.1 + 20     # unknown
+Tair    <- 273.1 + fluxdata$Temperature     # C -> K
 
 # Calculate mass-corrected respiration, µmol/g soil/s
 fluxdata$CO2_flux_µmol_g_s <- 
