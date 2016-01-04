@@ -5,7 +5,6 @@ source("R/0-functions.R")
 
 SCRIPTNAME  	<- "4-fluxes.R"
 SUMMARYDATA   <- file.path(outputdir(scriptfolder = FALSE), "summarydata_clean.csv")
-DRYMASS       <- "data/drymasses.csv"
 
 # ==============================================================================
 # Main 
@@ -16,18 +15,14 @@ printlog("Welcome to", SCRIPTNAME)
 
 summarydata <- read_csv(SUMMARYDATA)
 print_dims(summarydata)
-drymasses <- read_csv(DRYMASS, skip = 1)
-print_dims(drymasses)
 
-printlog("Merging in dry mass data...")
+# Create fluxdata and compute water content
 summarydata %>%
   filter(Treatment != "Ambient") %>%
-  select(Core, Mass_g, SoilVolume_cm3, Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, incday) %>%
-  left_join(drymasses, by = 'Core') ->
+  mutate(WC_gravimetric = (Mass_g - SoilDryMass_g) / SoilDryMass_g) %>%
+  select(Core, SoilDryMass_g, SoilVolume_cm3, WC_gravimetric,
+         Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, incday) ->
   fluxdata
-
-# Compute water content
-fluxdata$WC_fraction <- with(fluxdata, (Mass_g - DryMass_g) / DryMass_g)
 
 # At this point, `fluxdata` has slopes (CO2 ppm/s and CH4 ppb/s).
 # We want to convert this to mg C/g soil/s, using
@@ -57,19 +52,19 @@ Tair    <- 273.1 + 20     # unknown
 fluxdata$CO2_flux_µmol_g_s <- 
   with(fluxdata,
        CO2_ppm_s / 1 * # from ppm/s to µmol/s
-         V_cm3 / DryMass_g * Pa / (R * Tair)) # ideal gas law
+         V_cm3 / SoilDryMass_g * Pa / (R * Tair)) # ideal gas law
 fluxdata$CH4_flux_µmol_g_s <- 
   with(fluxdata,
        CH4_ppb_s / 1000 * # from ppb/s to µmol/s
-         V_cm3 / DryMass_g * Pa / (R * Tair)) # ideal gas law
+         V_cm3 / SoilDryMass_g * Pa / (R * Tair)) # ideal gas law
 
 # Calculate flux of mg C/hr
-fluxdata$CO2_flux_mgC_hr <- with(fluxdata, CO2_flux_µmol_g_s * DryMass_g) / # get rid of /g soil
+fluxdata$CO2_flux_mgC_hr <- with(fluxdata, CO2_flux_µmol_g_s * SoilDryMass_g) / # get rid of /g soil
   1e6 * # to mol 
   12 *  # to g C
   1000 * # to mg C
   60 * 60 # to /hr
-fluxdata$CH4_flux_mgC_hr <- with(fluxdata, CH4_flux_µmol_g_s * DryMass_g) / # get rid of /g soil
+fluxdata$CH4_flux_mgC_hr <- with(fluxdata, CH4_flux_µmol_g_s * SoilDryMass_g) / # get rid of /g soil
   1e6 * # to mol 
   16 *  # to g C
   1000 *  # to mg C
