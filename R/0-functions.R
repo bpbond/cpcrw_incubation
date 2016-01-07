@@ -1,13 +1,10 @@
-# Template for R analysis script
-# Ben Bond-Lamberty March 2015
-
 # Common function definitions.
-# Most critically, this file easy ggplot and data saving; 
+# Most critically, this file provides easy ggplot and data saving; 
 # logged csv[.gz|zip] read/write; and a few other handy things.
+# Ben Bond-Lamberty March 2015
 
 INPUT_DIR     <- "data/"
 OUTPUT_DIR		<- "outputs/"
-#RANDOM_SEED		<- 12345		# comment out to not set seed
 #CHECKPOINTDATE	<- "2015-03-05" # comment out to not use checkpoint
 SEPARATOR		<- "-------------------"
 
@@ -65,7 +62,7 @@ read_csv <- function(fn, datadir=".", ...) {
     fqfn <- unz(fqfn)
   }
   invisible(read.csv(fqfn, stringsAsFactors=F, ...))
-} # read_csv
+} # read_csv (I had this name before Hadley!)
 
 # -----------------------------------------------------------------------------
 is_outlier <- function(x, devs=3.2) {
