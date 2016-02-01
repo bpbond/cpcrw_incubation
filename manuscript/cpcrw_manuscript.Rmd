@@ -1,13 +1,14 @@
 ---
-title: "cpcrw_ms"
-author: "Ben Bond-Lamberty"
-date: "September 29, 2015"
+title: "Temperature and moisture effects on greenhouse gas emissions from deep active-layer boreal soils"
+author: "Ben Bond-Lamberty, Peyton Smith, Vanessa Bailey"
+#date: "February 1, 2016"
 output: html_document
 ---
 
 #### Abstract
 
-Peyton text to use in abstract:
+Peyton potential text to use in abstract:
+
 >The goal of this study was to characterize the chemical and biological properties of sub-Arctic, active layer soils subjected to changes in temperature and moisture. We also sought to determine the relative control temperature and moisture have on the fate of C and greenhouse gas emissions in active layer soils lying directly above permafrost. We measured carbon dioxide and methane emissions on soil at two different temperatures (4 and 20C) and moisture contents (field moist and drought-induced) throughout a 100-day incubation. We also determined soil structure, extracellular enzyme activity, total nitrogen, carbon, and the molecular composition of C pre and post-incubation cores. We hypothesized that the field moist 20˚C cores have a greater potential to lose C as both CO2 and CH4 than cores held at 4˚C due to increased aerobic and anaerobic microbial activity. We also hypothesize that drought-induced cores will have a higher potential to lose more ‘complex’ carbon compounds (aromatic-C) as these compounds are desorbed due to increased surface tension.
 
 
@@ -15,57 +16,39 @@ Abstract.
 
 #### Introduction
 
-* Boreal biome and climate change.
- * Climate change and warming boreal biome.
- * Variety of changes occurring - Alaska in particular.
- * Vegetation transitions (setting up for transition zone sampling).
+High latitude ecosystems are being subjected to rapid changes in climate {IPCC, 2013 #3916} and fire occurrence and intensity {Kasischke, 2010 #2631}. This has a wide variety of effects on ecosystems and society, notably in northwestern North America and Alaska {Hinzman, 2005 #4315}. As a result, rising temperatures and increasing fire will result in permafrost degradation {Pastick, 2015 #4311} and changes in soil temperature and hydrology that are expected to increase soil greenhouse gas (GHG) fluxes to the atmosphere, promoting a positive climate feedback {Treat, 2015 #4217}{Koven, 2011 #3092}.
 
-* Potential soils and permafrost C feedback. 
- * Soils hold a lot of C, particularly at high latitudes.
- * Importance of active layer.
- * Uncertainty of climate feedback.
+The magnitude, timing, and form-in particular as methane (CH~4~) or carbon dioxide (CO~2~)-of such a feedback remain highly uncertain {Schuur, 2015 #4319}. While northern soils hold enormous quantities {Tarnocai, 2009 #2231} of potentially mineralizable soil organic carbon (SOC), vegetation succession dynamics promote permafrost resilience to even large temperature changes {Jorgenson, 2010 #2627}. Such dynamics may however be disrupted by increased fire disturbance {Johnstone, 2010 #2465}. In addition, the stability of SOC is itself highly uncertain, as it depends on soil temperature and moisture, the ages of and ratio between the carbon and nitrogen pools {Weiss, 2015 #4317}, and its protection from competent microorganisms, enzymes, and resources {Bailey, 2012 #3624}, whether by organomineral sorption, chemical lability, or physical location {Schmidt, 2011 #3135}.
 
-* Moisture likely to be a strong control of C oxidation.
- * Cite theoretical, experimental, modeling work here. 
- * Soil drainage/anoxia is *highly* uncertain.
- * Will determine both magnitude and form (CO2/CH4) of oxidation.
- * This will have different feedback effects.
+Temperature and moisture typically have strong and often interactive influences on soil GHG emissions. A long literature of laboratory incubations, field observations, and meta-analyses has documented increased CO2 fluxes with rising temperature {Davidson, 2006 #1669}{Hashimoto, 2015 #4231}{Treat, 2015 #4217}.  GHG responses to wetting and thawing dynamics are much less certain, with substantial variability between studies {Kim, 2012 #2863}. The anaerobic conditions common following permafrost thaw lower CO~2~ emissions but increase those of CH~4~ {Treat, 2015 #4217;Treat, 2014 #4213}, and interact with soil temperature effects in long-term incubations {Elberling, 2013 #3720}. Such laboratory studies have weaknesses, but their controllled environments provide an important way to elucidate the key mechanisms controlling GHG from high-latitude soils {Schuur, 2015 #4319}.
 
-* Goals of this study.
- * Sample AL soils at maximum AL depth, vegetation transition zone (high enough to warm, still lots of C).
- * Manipulative experiment (drought and temperature) examining CO2/CH4 emissions.
- * Link to structural/biological measurements.
+The goal of this study was to examine how temperature and moisture control C loss and GHG (CO~2~ and CH~4~) emissions from soils sampled from the bottom of the annual active layer--i.e., directly above permafrost--in an Alaskan boreal forest. Such deep but unfrozen soils were identified as subject to strong effects from a two-decade warming experiment in the Alaskan Arctic {Sistla, 2013 #3666}. We also aimed to characterize the chemical and biological properties of these soils as they were subjected to a 100-day incubation at difference temperature and moisture levels.We hypothesized that soils maintained at field moisture and high temperature would lose more C, both as CO~2~ and CH~4~, than cores incubated at 4˚C, due to increased aerobic and anaerobic microbial activity. In addition, cores subject to drought (reduced soil moisture) would have a higher potential to lose more ‘complex’ carbon compounds (aromatic C) as these compounds are desorbed due to increased surface tension. TODO: maybe change/reword this last sentence.
 
-The goal of this study was to characterize the chemical and biological properties of sub-Arctic, active layer soils subjected to changes in temperature and moisture. We also sought to determine the relative control temperature and moisture have on the fate of C and greenhouse gas emissions in active layer soils lying directly above permafrost. We hypothesized that the field moist 20˚C cores have a greater potential to lose C as both CO2 and CH4 than cores held at 4˚C due to increased aerobic and anaerobic microbial activity. We also hypothesized that drought-induced cores would have a higher potential to lose more ‘complex’ carbon compounds (aromatic C) as these compounds are desorbed due to increased surface tension.
-
- 
 #### Methods
 
 **Field sampling**
 
 The field component of this research took place in Caribou-Poker Creeks Research Watershed (CPCRW), part of the Bonanza Creek LTER (http://www.lter.uaf.edu/default.cfm). Annual average air temperature was -2.5 °C, and annual average precipitation was 400 mm {Petrone, 2006 #4313}. The watershed's lowlands and north-facing slopes are dominated by black spruce (*Picea mariana*), feathermoss (*Pleurozium schreberi* and others), and *Sphagnum* spp.; the drier south slopes tend to be deciduous with a mixture of quaking aspen (*Populus tremuloides*), paper birch (*Betula neoalaskana*), and patches of alder (*Alnus crispa*). 
 
-We sampled soils from a southeast slope (65.1620 °N, 147.4874 °W), in a 60 m transition zone between lowland *Picea mariana* Mill BSP. and upland *Betula neoalaskana*, with significant white spruce (*Picea glauca*) presence. Stand density in this transition zone was 4060 ± 2310 trees ha^-1^, with basal area of 27.9 ± 7.0 m^2^ ha^-1^. The forest was at least 85 years old according to tree rings at the stem base.
+We sampled soils from a southeast slope (65.1620 °N, 147.4874 °W) at CPCRW, in a 60 m transition zone between lowland *Picea mariana* Mill BSP. and upland *Betula neoalaskana*, with significant white spruce (*Picea glauca*) presence. Stand density in this transition zone was 4060 ± 2310 trees ha^-1^, with basal area of 27.9 ± 7.0 m^2^ ha^-1^. The forest was at least 90 years old {cf. \\Morishita, 2014 #4316} according to tree rings taken at the stem base of several of the largest white spruce. The soil is characterized as a poorly-drained silt loam, and on average had ~20 cm of organic material over the mineral soil.
 
-Thirty-nine soil cores, each 30 cm high by 7.5 cm wide, were taken using a soil recovery augur (AMS Inc., American Falls, ID) on 3-5 August 2015. We sampled from the bottom (within 0-2 cm) of the active layer, which averaged 80 cm depth. Sample points were randomly located in the transition zone described above, and separated by 2-5 m. The soil is characterized as a poorly-drained silt loam, and on average had ~20 cm of organic material over the mineral soil. Cores were kept cool in the field before being packed in dry ice and shipped to the lab in Richland, WA within 48-72 hours of collection.
+Thirty-nine soil cores, each 30 cm high by 7.5 cm wide, were taken using a soil recovery augur (AMS Inc., American Falls, ID) on 3-5 August 2015. We sampled from the bottom (within 0-2 cm) of the active layer, which averaged 80 cm depth. Sample points were randomly located in the transition zone described above, and separated by 2-5 m. Cores were kept cool in the field before being packed in dry ice and shipped to the lab in Richland, WA within 48-72 hours of collection.
 
 **Laboratory incubation**
 
-In the lab, the soil cores were stored at 4 °C for several days until they were weighed and prepared for incubation. At that point (11-12 August 2015), three fragmented or otherwise damaged cores were discarded, and the remaining cores were randomly assigned to one of six groups (N=6 in each group). These groups included two incubation temperatures (4 °C and 20 °C) each with two moisture treatments: one in which soil moisture was maintained at field conditions (~28% moisture by volume), and a drought treatment in which no water was added and cores were allowed to dry down to ~5% moisture by volume. The fifth group was a 20 °C "controlled drought" one, in which water was added so that these cores' moisture status closely matched those of the 4 °C "drought" group. The final 6-core group was used for destructive, pre-incubation measurements including moisture content, pH, soil carbon and nitrogen, and bulk density. Subsamples were collected and stored at -20 °C for potential enzyme activity and ATP.
+In the lab, the soil cores were stored at 4 °C for several days until they were weighed and prepared for incubation. At that point (11-12 August 2015), three fragmented or otherwise damaged cores were discarded, and the remaining cores were randomly assigned to one of six groups (N=6 in each group). These groups included two incubation temperatures (4 and 20 °C), each with two moisture treatments: one in which soil moisture was maintained at field conditions (~28% moisture by volume), and a drought treatment in which no water was added and cores were allowed to dry down to ~5% moisture by volume. The fifth group was a 20 °C "controlled drought" one, in which water was added so that these cores' moisture status closely matched those of the 4 °C "drought" group. The final 6-core group was used for destructive, pre-incubation measurements including moisture content, pH, soil carbon and nitrogen, and bulk density. Subsamples were collected and stored at -20 °C for potential enzyme activity and ATP analysis.
 
 On 18 August 2015 cores were placed into one of two growth chambers (Conviron CMP6050 Control Systems, Winnipeg, Canada) maintained at 4 and 20 °C temperatures and 70% relative humidity and allowed to equilibrate for two weeks. Starting on 31 August 2015 we measured the cores' mass and GHG (CH~4~ and CO~2~) evolution four times in the first week, then twice per week for the first month, and then once per week for the rest of the 100-day incubation. Throughout the incubation, cores were mounted on 0.05-MPa ceramic plates (Soil Moisture Equipment Corp., Santa Barbara, CA, USA) so that, when the plates were placed in contact with water, water would move up into the cores via capillary action. This was done to moderate the drying of the 20 °C "controlled drought" group. The 4 and 20 °C "field moisture" groups received additional wetting from the top of the cores to maintain their water status.
 
-For each measurement, a six-core treatment group was connected to a Picarro A0311 multiplexer that was in turn connected to a Picarro G2301 GHG Analyzer (Picarro Inc., Santa Clara, CA, USA). Dry CH~4~ and CO~2~ concentrations were monitored for 2 minutes, and this was repeated 2-3 times before moving on to a new treatment group. Cores were weighed immediately after (PEYTON) gas measurements. Ambient air was measured between treatment groups, and before starting measurements in a chamber. The incubation experiment concluded on 10 December 2015.
+For each measurement, a six-core treatment group was connected to a Picarro A0311 multiplexer that was in turn connected to a Picarro G2301 GHG Analyzer (Picarro Inc., Santa Clara, CA, USA). Dry CH~4~ and CO~2~ concentrations were monitored for 2 minutes, and this was repeated 2-3 times before moving on to a new treatment group. Cores were weighed immediately after (PEYTON) gas measurements. Ambient air was measured between treatment groups, and before starting measurements in a chamber. 
+
+The incubation experiment concluded on 10 December 2015. PEYTON: text re C, N, etc. analyses.
 
 **Statistical analysis**
 
-Outlier exclusion based on 3.2 mean absolute deviations from treatment and temperature mean. We excluded X of Y (Z%) of the summarized samples for this reason.
+Outlier exclusion based on 3.2 mean absolute deviations {Davies, 1993 #3138} from treatment and temperature mean. We excluded X of Y (Z%) of the summarized samples for this reason.
 
-Citation: Davies, P.L. and Gather, U. (1993). "The identification of multiple outliers" (with discussion). J. Amer. Statist. Assoc., 88, 782-801.
-
-
-
-nalysis. Outlier exclusion. 
+All data analysis and statistics were performed using R version 3.2.3 {R Development Core Team, 2016 #4314}.
 
 **Data and code availability**
 
@@ -79,15 +62,20 @@ Results.
 
 Discussion.
 
+Incubation experiments can only go so far though...
+Morishita et al. {, 2014 #4316} measured GHG fluxes in the field at CPCRW and nearby forests, and found CO2 production to be correlated with both soil temperature and moisture, but CH4 uptake driven by temperature only.
+
+
 ### Acknowledgments
 
 Acknowledgments.
 
 
 
-Table X. Summary of treatment effects on gas fluxes.
+Table X. Summary of temperature, WC effects on gas fluxes.
 
-Figure X. A faceted (Temperature ~ Treatment) plot showing fnormalized lux means and errors by incubation time.
- (Basically the figure already in the README diagnostics.)
-TFigur X. 
-Core water content across the course of the experiment. (Basically the figure already in the README diagnostics.)
+Figure X. A faceted (Temperature ~ Treatment) plot showing normalized flux means and errors by incubation time. (Basically the figure already in the README diagnostics.)
+
+Figure X. Core water content across the course of the experiment. (Basically the figure already in the README diagnostics.)
+
+Figure X. A pairs plot of variable correlations?
