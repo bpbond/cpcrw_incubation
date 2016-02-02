@@ -6,6 +6,8 @@ source("R/0-functions.R")
 SCRIPTNAME  	<- "4-fluxes.R"
 SUMMARYDATA   <- file.path(outputdir(scriptfolder = FALSE), "summarydata_clean.csv")
 
+DRYMASSDATA   <- "data/drymasses.csv"
+
 # ==============================================================================
 # Main 
 
@@ -15,6 +17,9 @@ printlog("Welcome to", SCRIPTNAME)
 
 summarydata <- read_csv(SUMMARYDATA)
 print_dims(summarydata)
+
+drymassdata <- read_csv(DRYMASSDATA, skip = 1)
+summarydata <- left_join(summarydata, drymassdata, by = "Core")
 
 # Create fluxdata and compute water content
 summarydata %>%
