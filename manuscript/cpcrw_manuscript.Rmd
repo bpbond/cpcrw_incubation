@@ -5,6 +5,10 @@ author: "Ben Bond-Lamberty, Peyton Smith, Vanessa Bailey"
 output: html_document
 ---
 
+```{r, echo=FALSE}
+library(dplyr)
+```
+
 #### Abstract
 
 Peyton potential text to use in abstract:
@@ -15,6 +19,8 @@ Peyton potential text to use in abstract:
 Abstract.
 
 #### Introduction
+
+Alaska forests under particular stress - browning {Ju, 2016 #4320}
 
 High latitude ecosystems are being subjected to rapid changes in climate {IPCC, 2013 #3916} and fire occurrence and intensity {Kasischke, 2010 #2631}. This has a wide variety of effects on ecosystems and society, notably in northwestern North America and Alaska {Hinzman, 2005 #4315}. As a result, rising temperatures and increasing fire will result in permafrost degradation {Pastick, 2015 #4311} and changes in soil temperature and hydrology that are expected to increase soil greenhouse gas (GHG) fluxes to the atmosphere, promoting a positive climate feedback {Treat, 2015 #4217}{Koven, 2011 #3092}.
 
@@ -44,9 +50,23 @@ For each measurement, a six-core treatment group was connected to a Picarro A031
 
 The incubation experiment concluded on 10 December 2015. PEYTON: text re C, N, etc. analyses.
 
-**Statistical analysis**
+**Data and statistical analysis**
 
-Outlier exclusion based on 3.2 mean absolute deviations {Davies, 1993 #3138} from treatment and temperature mean. We excluded X of Y (Z%) of the summarized samples for this reason.
+We measured the rise in GHG concentrations from its minimum value (in the first 10 seconds of measurement after the analyzer was sealed to the soil core) to its maximum (in the first 45 seconds), considering this as the flux rate in ppm s^-1^ (CO2) or ppb s^-1^ (CH4). This value was calculated for each sample, i.e. each individual core measurement throughout the 100-day incubation. 
+
+```{r, echo=FALSE}
+# compute outlier and exclusion numbers
+sdn <- readLines("../outputs/summarydata.csv") %>% length
+sdcn <- readLines("../outputs/summarydata_clean.csv") %>% length
+en <- readLines("../outputs/2.5-remove/excluded_data.csv") %>% length
+rn <- readLines("../outputs/2.5-remove/removed_data.csv") %>% length
+```
+
+Anomalous data were excluded based on their being more than 3.2 mean absolute deviations {Davies, 1993 #3138} from the treatment and temperature mean. We excluded `r en` of `r sdn` (`r round(en/sdn*100)`%) of the summarized samples for this reason. Other data (`r rn` of `r sdn`, `r round(rn/sdn*100)`%) were removed because of known instrument problems, e.g. the analyzer was left running after leaving a chamber. The final number of valid flux samples from the 100-day incubation was `r sdcn`.
+
+* joined with mass data
+* flux computation
+* stats
 
 All data analysis and statistics were performed using R version 3.2.3 {R Development Core Team, 2016 #4314}.
 
