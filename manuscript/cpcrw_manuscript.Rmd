@@ -68,11 +68,7 @@ Anomalous data were excluded based on their being more than 3.2 mean absolute de
 * flux computation
 * stats
 
-All data analysis and statistics were performed using R version 3.2.3 {R Development Core Team, 2016 #4314}.
-
-**Data and code availability**
-
-Note open experiment...
+All data analysis and statistics were performed using R version 3.2.3 {R Development Core Team, 2016 #4314}. This experiment was run as an "open experiment" with all analysis code, data (raw to final), diagnostics, etc., available in real time at https://github.com/bpbond/cpcrw_incubation. The flux data backing the main results have also been archived at TODO.
 
 #### Results
 
