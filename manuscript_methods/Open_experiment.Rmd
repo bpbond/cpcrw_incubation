@@ -1,46 +1,13 @@
 ---
 title: "Running an open experiment: transparency and reproducibility in soil and ecosystem science"
-author: "Ben Bond-Lamberty"
+author: "Ben Bond-Lamberty, Peyton Smith, and Vanessa Bailey"
 date: "February 2, 2016"
 output: html_document
 ---
 
 #### Introduction
 
-Look at - Ruegg et al. paper on data life cycle!
-Data paper - https://peerj.com/preprints/1448/
-http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002295
-
-Peyton's notes:
-
->Add to Introduction: 
->Reichman et al 2011 Science 331.pdf
->
->Wolkovich, E. M., Regetz, J. and O'Connor, M. I. (2012), Advances in global change research require open science by individual researchers. Glob Change Biol, 18: 2102–2110. doi:10.1111/j.1365-2486.2012.02693.x
->
->Add to reproducibility literature:
->http://journals.plos.org/plosbiology/article?id=10.1371%2Fjournal.pbio.1002333
-
-#### Why more openness in science?
-
-* Reproducibility
-
-Thornton paper on archiving models
-
-* Data loss
-
-17% per year paper - Vines et al.
-
-* Data quality
-
-"All bugs are shallow" Raymond quote
-
-* Increasing transparency of the process - increase public trust and access to science
-
-* Value of collected databases - makes this easier
-* BAAD TRY, FLUXNET, Dong-Gill, SRDB
-
-#### Push and pull: funders, journals, and society
+General intro.
 
 PLOS ONE, ESA, etc. policies
 
@@ -49,7 +16,43 @@ PLOS ONE, ESA, etc. policies
 * NASA url
 * NSERC, Wellcome trust, other?
 
-#### Running a fully open experiment: one example
+
+*Reproducibility*
+
+Surveying the 2000-2014 biomedical literature, Iqbal et al. {, 2016 #4334} found that none of 441 randomly-chosen studies provided raw data, and only one provided full protocols.
+
+"Reproducibility of experimental results is a fundamental criterion for credible scientific research" {Thornton, 2005 #2310}. More difficult for modeling work; this is a subset of the more general problem with respect to digital media, software, etc. (CITATION?).
+
+Scripted systems for data analysis! E.g. R {R Development Core Team, 2016 #4314}, Kepler (https://kepler-project.org) or Taverna (http://www.taverna.org.uk) record all infrmation about the data processing, analytical process and decisions, and statistical analysis.
+
+
+*Data loss*
+
+Vines et al. {, 2014 #4130} published a shocking result, based on surveying 516 articles from 2 to 22 years old: the odds of a data set being available fell by 17% each year, and the chances that the contact author's email address still worked declined by 7% per year. Reichman et al. {, 2011 #2862} estimated that less than 1% of ecological data collected is made available after publication, and noted, as an example, that most current and historical data relevant to the recent *Deepwater Horizon* oil spill are already inaccessible or lost {Reichman, 2011 #2862}.
+
+Scientists' use of strong and consistent data curation practices {Hart, 2015 #4292}{Rüegg, 2014 #3886} can mitigate the problem, but all our anecdotal experience and quantitative studies {Vines, 2014 #4130} suggest that in the long term, data cannot be reliably preserved by individual researchers.
+
+Data loss hits ecosystem, soil, and global change ecology particularly hard, as global to local climate changes make ecological data effectively irreproducible {Wolkovich, 2012 #3303}: we can never remeasure exactly the same system state.
+
+
+*Data and code quality*
+
+Providing open code does not magically produce bug-free code, or mistake free analyses {Easterbrook, 2014 #4137}. But it does encourage authors to invest the time upfront to clean up their code, data, and documentation when a paper is written, rather than deferring this task (often, forever).
+
+Potential to increase pulic trust in research results.
+
+
+*Enabling synthetic and global-scale analyses*
+
+Many refs in {Wolkovich, 2012 #3303}.
+
+BAAD {Falster, 2015 #4209}, TRY {Kattge, 2011 #3064}, FLUXNET {Baldocchi, 2001 #2883}, SRDB {Bond-Lamberty, 2010 #2320}.
+
+
+#### An open experiment: one example
+
+This is example, we hope, of the impact of individual scientists {Wolkovich, 2012 #3303}.
+
 
 * GitHub
 * Diagnostics page(s)
@@ -59,6 +62,11 @@ PLOS ONE, ESA, etc. policies
 * Manuscript(s)
 
 #### Conclusions
+
+
+Do we adequately credit researchers who contribute to global databases {Kattge, 2011 #3064} that subsequently produce high-impact papers {Díaz, 2016 #4318}?
+
+Such meta-analyses rely on the collection of primary data, and it is critical that field and experimental researchers efforts are adequately valued and cited {Kueffer, 2011 #4335}.
 
 
 This model not appropriate for everyone/thing!
