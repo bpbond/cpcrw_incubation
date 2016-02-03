@@ -1,0 +1,18 @@
+The first run has 2 min core, followed by 1 min ambient for 3 different cores, run in duplicate
+Then there is a 'normal' run of those 3 cores measured for 2 minutes one right after the other. 
+
+If you have time and feel like seeing if it makes a difference in our measurements, feel free to play around with it and let me know the results. 
+Thanks. 
+
+Peyton        
+
+
+Your message is ready to be sent with the following file or link attachments:
+
+CFADS2283-20150923-185928Z-DataLog_User.dat
+CFADS2283-20150923-195933Z-DataLog_User.dat
+CFADS2283-20150923-202036Z-DataLog_User.dat
+Cores weights_Test Run_23 Sept 2015.xlsx
+
+
+Note: To protect against computer viruses, e-mail programs may prevent sending or receiving certain types of file attachments.  Check your e-mail security settings to determine how attachments are handled.

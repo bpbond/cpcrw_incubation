@@ -64,6 +64,8 @@ This is example, we hope, of the impact of individual scientists {Wolkovich, 201
 #### Conclusions
 
 
+VLB: Supplementary Information sections have become repositories of data and of non-core analyses. How does our open experiment replace (improve upon?) SI? Thoughts?
+
 Do we adequately credit researchers who contribute to global databases {Kattge, 2011 #3064} that subsequently produce high-impact papers {Díaz, 2016 #4318}?
 
 Such meta-analyses rely on the collection of primary data, and it is critical that field and experimental researchers efforts are adequately valued and cited {Kueffer, 2011 #4335}.
