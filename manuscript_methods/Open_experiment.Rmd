@@ -53,7 +53,6 @@ BAAD {Falster, 2015 #4209}, TRY {Kattge, 2011 #3064}, FLUXNET {Baldocchi, 2001 #
 
 This is example, we hope, of the impact of individual scientists {Wolkovich, 2012 #3303}.
 
-
 * GitHub
 * Diagnostics page(s)
 * Data: raw to summarized to final
@@ -71,11 +70,21 @@ Do we adequately credit researchers who contribute to global databases {Kattge, 
 Such meta-analyses rely on the collection of primary data, and it is critical that field and experimental researchers efforts are adequately valued and cited {Kueffer, 2011 #4335}.
 
 
-This model not appropriate for everyone/thing!
+We don't present this model as perfect. First, there are a number of "best practices" of scientific computing {Wilson, 2014 #4337} that we did not employ: for example, there was no unit testing to ensure module correctness, nor an automated build tool automating the workflow (i.e., the individual scripts all have to be run manually).
+
+Nor is this examine appropriate, or applicable, to all scientific research, even just in the fields of soil, ecosystem, and global change science.
 
 Potential concerns
 
-* Not appropriate for every kind of study
 * Fear of "being scooped"
 * Question of open from beginning or only after publication
 * Privacy concerns
+
+
+**References**
+
+
+**Figure 1.** The 'repository' containing all code and data of a recent soil incubation experiment. From top to bottom: raw data from a lab analyzer is uploaded; an initial script processes raw data into a standardized, summarized form; a second script looks for inconsistencies and outliers in the data; a third computes final data products, summaries, statistics, and figures; and a final one integrates these products to produce a submission-ready manuscript. (This schematic slightly simplifies the actual repository structure.) The repository is publicly available at https://github.com/bpbond/cpcrw_incubation, and throughout the experiment showed real-time updated diagnostics summarizing progress.
+
+![Repository and workflow](figureX.png)
+
