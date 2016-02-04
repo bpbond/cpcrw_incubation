@@ -14,6 +14,8 @@ Researchers in soil and ecosystem science, and almost every other field, as incr
 
 General intro.
 
+Pushing scientists towards "best practices" in dealing with data and code {Hart, 2015 #4292;Wilson, 2014 #4337}.
+
 Journals are adopting increasingly stringent data access and deposition policies, e.g. Scientific Data (http://www.nature.com/sdata/data-policies), PLOS ONE (http://journals.plos.org/plosone/s/data-availability),  {Scientific Data, 2016 #4339}{PLOS ONE, 2014 #4338}, and Science (http://www.sciencemag.org/authors/science-editorial-policies#data-deposition). These policies generally share common assumptions and goals: maximizing access to scientific data; encouraging deposition into structured repositories as opposed to journal supplementary information; and specifying that it is not acceptable for authors to be solely responsible for ensuring data access.
 
 Funders are moving in this direction as well, with organizations such as the U.S. National Science Foundation (http://www.nsf.gov/bfa/dias/policy/dmp.jsp) and the U.K. Wellcome Trust (http://www.wellcome.ac.uk/About-us/Policy/Spotlight-issues/Data-sharing/Data-management-and-sharing/index.htm) requiring explicit data management plans, unfettered reasonable access to primary data, and use of established repositories.
@@ -64,6 +66,8 @@ This is example, we hope, of the impact of individual scientists {Wolkovich, 201
 * Manuscript(s)
 
 #### Conclusions
+
+Transparency is no magic panacea ensuring reproducibility {Easterbrook, 2014 #4137}, and it raises genuine concerns about, for example, protecting scientists from harassment {Lewandowsky, 2016 #4342}. We also recognize that our professional and career incentives do not yet align well with "an open research culture" {Nosek, 2015 #4343}.
 
 
 VLB: Supplementary Information sections have become repositories of data and of non-core analyses. How does our open experiment replace (improve upon?) SI? Thoughts?
