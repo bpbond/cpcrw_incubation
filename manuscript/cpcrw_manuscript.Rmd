@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r, echo=FALSE}
-library(dplyr)
+library(dplyr, warn.conflicts = FALSE)
 ```
 
 #### Abstract
@@ -66,6 +66,11 @@ Anomalous data were excluded based on their being more than 3.2 mean absolute de
 
 * joined with mass data
 * flux computation
+
+The GHG concentration measurements for each sample (i.e., each gas, core, and date/time) were used to calculate a linear rate of change (δc/δt), based on the concentration rise from a minimum (at 2-10 seconds after measurement began) to a maximum (at 10-45 seconds). Each core’s respiration flux (F) was then calculated following e.g. Steduto et al. {, 2002 #3383} as $F=\frac{\delta c}{\delta t} \frac{V}{M} \frac{P_a}{RT}$ where V is the core-specific system volume, M the core dry mass as determined at the end of the incubation, Pa atmospheric pressure (101 kPa; the incubation chambers were ~120 m a.s.l.), R the universal gas constant (8.3 x 10^-3^ m^3^ kPa mol^-1^ K^-1^) and T the chamber air temperature (K) at time of measurement. The final respiration rate was expressed as mg C kg soil^-1^ day^-1^. TODO check all units
+
+Q10 computation
+
 * stats
 
 All data analysis and statistics were performed using R version 3.2.3 {R Development Core Team, 2016 #4314}. This experiment was run as an "open experiment" with all analysis code, data (raw to final), diagnostics, etc., available in real time at https://github.com/bpbond/cpcrw_incubation. The flux data backing the main results have also been archived at TODO.
