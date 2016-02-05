@@ -12,87 +12,86 @@ Researchers in soil and ecosystem science, and almost every other field, as incr
 
 #### Introduction
 
-General intro.
+A wide variety of forces are pushing scientists to increase data access, both pre- and post-publication, and towards "best practices" in dealing with data and code {Hart, 2015 #4292;Wilson, 2014 #4337}. 
 
-Pushing scientists towards "best practices" in dealing with data and code {Hart, 2015 #4292;Wilson, 2014 #4337}.
-
-Journals are adopting increasingly stringent data access and deposition policies, e.g. Scientific Data (http://www.nature.com/sdata/data-policies), PLOS ONE (http://journals.plos.org/plosone/s/data-availability),  {Scientific Data, 2016 #4339}{PLOS ONE, 2014 #4338}, and Science (http://www.sciencemag.org/authors/science-editorial-policies#data-deposition). These policies generally share common assumptions and goals: maximizing access to scientific data; encouraging deposition into structured repositories as opposed to journal supplementary information; and specifying that it is not acceptable for authors to be solely responsible for ensuring data access.
+Journals are adopting increasingly stringent data access and deposition policies, e.g. Scientific Data (http://www.nature.com/sdata/data-policies), PLOS ONE (http://journals.plos.org/plosone/s/data-availability), and Science (http://www.sciencemag.org/authors/science-editorial-policies#data-deposition). These policies generally share common assumptions and goals: maximizing access to scientific data; encouraging deposition into structured repositories as opposed to journal supplementary information; and specifying that it is not acceptable for authors to be solely responsible for ensuring data access.
 
 Funders are moving in this direction as well, with organizations such as the U.S. National Science Foundation (http://www.nsf.gov/bfa/dias/policy/dmp.jsp) and the U.K. Wellcome Trust (http://www.wellcome.ac.uk/About-us/Policy/Spotlight-issues/Data-sharing/Data-management-and-sharing/index.htm) requiring explicit data management plans, unfettered reasonable access to primary data, and use of established repositories.
 
-Finally, growing numbers of scientists are pushing for open data on moral/political (why should the public fund scientists if the latter aren't producing demonstrably replicable and reusable results?) grounds, also on purely scientific ones: ensuring reproducibility {Stodden, 2011 #4340}. This latter issue--reproducibility--is at the heart of science {Kuhn, 1962 #4341} and has a number of facets worth considering briefly.
+Finally, growing numbers of scientists are pushing for open science and data on moral/political grounds, as well as purely scientific ones, in particular ensuring reproducibility {Stodden, 2011 #4340}. We briefly discuss what we see as the primary arguments for data sharing and openness, before detailing a recent "open experiment" example.
 
-*Reproducibility*
+**Reproducibility**
 
-Surveying the 2000-2014 biomedical literature, Iqbal et al. {, 2016 #4334} found that none of 441 randomly-chosen studies provided raw data, and only one provided full protocols.
+Reproducibility of experimental results is at the heart of science {Kuhn, 1962 #4341}. Too often, however, it is impossible to attempt, because sufficient details and data are not publicly available. For example, surveying the 2000-2014 biomedical literature, Iqbal et al. {, 2016 #4334} found that none of 441 randomly-chosen studies provided raw data, and only one provided full protocols. 
 
-"Reproducibility of experimental results is a fundamental criterion for credible scientific research" {Thornton, 2005 #2310}. More difficult for modeling work; this is a subset of the more general problem with respect to digital media, software, etc. (CITATION?).
+As code and data have become increasingly intertwined, the availability of the former has become a fundamental problem as well. Modeling groups have worked to improve reproducibility and archiving praactices {Thornton, 2005 #2310}. For scientists without programming skills, scripted systems for data analysis! E.g. R {R Development Core Team, 2016 #4314}, Kepler (https://kepler-project.org) or Taverna (http://www.taverna.org.uk) record information about the data processing, analytical process and decisions, and statistical analysis.
 
-Scripted systems for data analysis! E.g. R {R Development Core Team, 2016 #4314}, Kepler (https://kepler-project.org) or Taverna (http://www.taverna.org.uk) record all infrmation about the data processing, analytical process and decisions, and statistical analysis. This and other best practices of scientific computing {Wilson, 2014 #4337} help produce reproducible, robust, and transparent science.
+**Data loss**
 
-*Data loss*
+Vines et al. {, 2014 #4130} published a shocking result, based on surveying 516 biology articles from 2 to 22 years old: the odds of a data set being available fell by 17% each year, and the chances that the contact author's email address still worked declined by 7% per year. Similarly, Reichman et al. {, 2011 #2862} estimated that less than 1% of ecological data collected is made available after publication, and noted, as an example, that most current and historical data relevant to the recent *Deepwater Horizon* oil spill are already inaccessible or lost {Reichman, 2011 #2862}. In global change ecology, Wolkovich et al. {, 2012 #3303} reported that only ~10% of raw data sets were eventually shared in their attempt to conduct a high-profile meta-analysis {Wolkovich, 2012 #3331}. 
 
-Vines et al. {, 2014 #4130} published a shocking result, based on surveying 516 articles from 2 to 22 years old: the odds of a data set being available fell by 17% each year, and the chances that the contact author's email address still worked declined by 7% per year. Reichman et al. {, 2011 #2862} estimated that less than 1% of ecological data collected is made available after publication, and noted, as an example, that most current and historical data relevant to the recent *Deepwater Horizon* oil spill are already inaccessible or lost {Reichman, 2011 #2862}.
-
-Scientists' use of strong and consistent data curation practices {Hart, 2015 #4292}{Rüegg, 2014 #3886} can mitigate the problem, but all our anecdotal experience and quantitative studies {Vines, 2014 #4130} suggest that in the long term, data cannot be reliably preserved by individual researchers.
-
-Data loss hits ecosystem, soil, and global change ecology particularly hard, as global to local climate changes make ecological data effectively irreproducible {Wolkovich, 2012 #3303}: we can never remeasure exactly the same system state.
-
-A subtler data loss issue is the "file drawer problem" {Rosenthal, 1979 #2291}.
-
-
-*Data and code quality*
-
-Providing open code does not magically produce bug-free code, or mistake free analyses {Easterbrook, 2014 #4137}. But it does encourage authors to invest the time upfront to clean up their code, data, and documentation when a paper is written, rather than deferring this task (often, forever).
-
-Potential to increase pulic trust in research results.
-
-*Enabling synthetic and global-scale analyses*
-
-Many refs in {Wolkovich, 2012 #3303}.
-
-BAAD {Falster, 2015 #4209}, TRY {Kattge, 2011 #3064}, FLUXNET {Baldocchi, 2001 #2883}, SRDB {Bond-Lamberty, 2010 #2320}.
-
-
-#### An open experiment: one example
-
-This is example, we hope, of the impact of individual scientists {Wolkovich, 2012 #3303}.
-
-* GitHub
-* Diagnostics page(s)
-* Data: raw to summarized to final
-* All statistical analyses
-* "LRB" - notes 
-* Manuscript(s)
-
-#### Conclusions
-
-Transparency is no magic panacea ensuring reproducibility {Easterbrook, 2014 #4137}, and it raises genuine concerns about, for example, protecting scientists from harassment {Lewandowsky, 2016 #4342}. We also recognize that our professional and career incentives do not yet align well with "an open research culture" {Nosek, 2015 #4343}.
-
+Data loss hits ecosystem, soil, and global change ecology particularly hard, as global to local climate changes make ecological data effectively irreproducible {Wolkovich, 2012 #3303}: we can never remeasure exactly the same system state. A subtler data loss issue is the "file drawer problem" {Rosenthal, 1979 #2291}, where unpublished but potentially valuable data are lost fovever. Scientists' use of strong and consistent data curation practices {Hart, 2015 #4292}{Rüegg, 2014 #3886} can mitigate the problem, but all our anecdotal experience and quantitative studies {Vines, 2014 #4130} suggest that in the long term, data cannot be reliably preserved by individual researchers. This in turns means that the role of established, structured data and code repositories is critical.
 
 VLB: Supplementary Information sections have become repositories of data and of non-core analyses. How does our open experiment replace (improve upon?) SI? Thoughts?
 
-Do we adequately credit researchers who contribute to global databases {Kattge, 2011 #3064} that subsequently produce high-impact papers {Díaz, 2016 #4318}?
 
-Such meta-analyses rely on the collection of primary data, and it is critical that field and experimental researchers efforts are adequately valued and cited {Kueffer, 2011 #4335}.
+**Data and code quality**
+
+Providing open code does not magically produce bug-free code, or mistake free analyses {Easterbrook, 2014 #4137}. But it does encourage authors to invest the time upfront to clean up their code, data, and documentation when a paper is written, rather than deferring this task (often, forever).
+
+**Enabling synthetic and global-scale analyses**
+
+With greater data availability comes the potential to assemble large, internally consistent data sets--examples in biogeosciences and ecology include BAAD {Falster, 2015 #4209}, TRY {Kattge, 2011 #3064}, FLUXNET {Baldocchi, 2001 #2883}, and SRDB {Bond-Lamberty, 2010 #2320}. In turn, these data enable powerful meta-analyses and syntheses {Wolkovich, 2012 #3303}.
+
+**Institutional and social trust**
+
+Why should the public fund scientists if the latter aren't producing demonstrably replicable and reusable results?
+
+Potential to increase public trust in research results.
+
+Governmental efforts {Holdren, 2013 #4344}.
+
+#### An open experiment: one example
+
+In early 2015, we planned a laboratory incubation experiment to characterize the chemical and biological properties of sub-Arctic, active layer soils subjected to changes in temperature and moisture. In this experiment, we would measure greenhouse gas fluxes from soil cores over 100 days, and measure the cores' physical, chemical, and biological characteristics under temperature and moisture changes. This required (i) a multidisciplinary team that was not located in one time zone; (ii) integrating a variety of different data; (iii) performing quality control and diagnostics rapidly, so if e.g. instrument problems arose we would lose only the minimum amount of time and data; (iv) tightly integrating data, statistical analyses, and manuscript results.
+
+We used GitHub, a web-based Git repository hosting service, to...
+  "Git"" is a version control system...
+  A "repository"" is ...
+  A "web-based hosting service" is...
+
+The design of our repository is shown in **Figure 1**. Explain...
+
+This system had a number of desirable capabilities and characteristics:
+
+* The entire data processing and analytical system is online and documented.
+* The version control system let us make incremental changes, work out problems, look at histories (i.e., who made what change when). A issue tracker let us discuss problems, reference changes in the repository, create to-do lists, and assign responsibilities.
+* The public nature of the repository encouraged us to flesh out documentation, use clean and clear coding, and think about the longer-term ramifications of decisions.
+* Real-time diagnostics... (**Figure 2**)... Investing the effort to set up a software pipeline BEFOREHAND meant that we could reliably and easily identify and diagnose problems.
+* Everything necessary to reproduce study results.
+* Manuscripts as well! In fact, the "source code" for this manuscript, as well as its history, can be viewed at https://github.com/bpbond/cpcrw_incubation/blob/master/manuscript_methods/Open_experiment.Rmd.
+* Information webpage on the experiment and broader project.
 
 
-We don't present this model as perfect. First, there are a number of "best practices" of scientific computing {Wilson, 2014 #4337} that we did not employ: for example, there was no unit testing to ensure module correctness, nor an automated build tool automating the workflow (i.e., the individual scripts all have to be run manually).
+#### Conclusions
 
-Nor is this examine appropriate, or applicable, to all scientific research, even just in the fields of soil, ecosystem, and global change science.
+Transparency is no magic panacea ensuring reproducibility {Easterbrook, 2014 #4137}, and it raises genuine concerns about, for example, protecting scientists from harassment {Lewandowsky, 2016 #4342}. Scientists also frequently raise a variety of other concerns about data sharing, for example being "scooped" not receiving sufficient credit, and time constraints {Wolkovich, 2012 #3303}. We cannot easily dismiss of these these: for example, does our community adequately credit researchers who contribute to global databases that subsequently produce high-impact papers? Such meta-analyses rely on the collection of primary data, and it is critical that field and experimental researchers efforts are adequately valued and cited {Kueffer, 2011 #4335}. We also recognize that, in general, our professional and career incentives do not yet align well with "an open research culture" {Nosek, 2015 #4343}.
 
-Potential concerns
+Nor is the model we present here--this public repository that was updated throughout the experiment and publication process--perfect. First, there are a number of "best practices" of scientific computing {Wilson, 2014 #4337} that we did not employ: for example, there was no unit testing to ensure module correctness, nor an automated build tool automating the workflow (i.e., the individual scripts all have to be run manually). Second, it may not not be appropriate for applicable to all study types, even just in our professional fields of soil, ecosystem, and global change science. (And it certainly is not appropriate for sensitive human-subject data.) Third, Git and GitHub are designed for working with code, not data, and this causes some ...
 
-* Fear of "being scooped"
-* Question of open from beginning or only after publication
-* Privacy concerns
+Nonetheless... conclude.
+
+This is example, we hope, of the impact of individual scientists' decisions and practices {Wolkovich, 2012 #3303}.
+
 
 
 **References**
 
-TODO - maybe a second figure showing one of the diagnostic plots, partway through the incubation?
 
 **Figure 1.** The 'repository' containing all code and data of a recent soil incubation experiment. From top to bottom: raw data from a lab analyzer is uploaded; an initial script processes raw data into a standardized, summarized form; a second script looks for inconsistencies and outliers in the data; a third computes final data products, summaries, statistics, and figures; and a final one integrates these products to produce a submission-ready manuscript. (This schematic slightly simplifies the actual repository structure.) The repository is publicly available at https://github.com/bpbond/cpcrw_incubation, and throughout the experiment showed real-time updated diagnostics summarizing progress.
 
-![Repository and workflow](figureX.png)
+![Repository and workflow](figure1.png)
 
+**Figure 2.** Two of the many diagnostic figures that were produced, in real time, as the incubation experiment proceeded. They show (top) the number of replicate measurements made on each soil core, by date of measurement, and (bottom) measurements with a data mismatch problem, indicating a data entry or other error (in the figure no errors, which would be in red, are extant). A wide range of similar diagnostic graphics (see https://github.com/bpbond/cpcrw_incubation#current-diagnostics) and statistics let us quickly identify problems or interesting patterns in the data.
+
+![Sample diagnostics](figure2.png)
