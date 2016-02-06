@@ -112,9 +112,14 @@ core_cv <- core_cv[1:25,]    # only do this many detail plots
 MAX_COMBINED_PLOTS <- 9
 
 printlog("Reading in raw data...")
-rawdata <- gzfile(RAWDATA) %>% readr::read_csv(col_types = "ccddddiiiddddddddccid")
+rawdata <- gzfile(RAWDATA) %>% 
+  readr::read_csv(col_types = "ccddddiiiddddddddccid")
 rawdata$samplenum <- as.factor(rawdata$samplenum)
 summarydata$samplenum <- as.factor(summarydata$samplenum)
+
+# -----------------------------------------------------------------------------
+# Per-core plots of computed concentration changes
+
 rdata_final <- sdata_final <- data.frame()
 for(i in seq_len(nrow(core_cv))) {
   samplenums <- strsplit(core_cv$samplenums[i], " ") %>% unlist
@@ -147,7 +152,8 @@ p <- p + facet_wrap(~plot) + scale_color_discrete(guide = FALSE)
 p <- p + ggtitle(paste(MAX_COMBINED_PLOTS, "most variable observations"))
 save_diagnostic(p, "coreCV_combined")
 
-# --------------------- Flux rates and treatment CVs ---------------------
+# -----------------------------------------------------------------------------
+# Flux rates and treatment CVs
 
 # Plot CV (coefficient of variability) by treatment and date
 p <- qplot(paste(Temperature, Treatment), Date, fill=CO2_ppm_s_sd/CO2_ppm_s, data=subset(smry, Treatment != "Ambient"), geom="tile") + 
@@ -177,7 +183,9 @@ p <- qplot(Date, CH4_ppb_s, data=smry, color = CH4_ppb_s_sd/CH4_ppb_s) +
   ggtitle("CH4 fluxes (ppb/s, uncorrected) by date")
 save_diagnostic(p, "CH4_time")
 
+# -----------------------------------------------------------------------------
 # Individual cores over time
+
 # Reorder the 'Core' factor so that facets are ordered by Treatment and Temperature
 summarydata$TT <- paste(summarydata$Treatment, summarydata$Temperature)
 sd_no_A <- summarydata %>% 
@@ -196,7 +204,8 @@ p <- p + facet_wrap(~Core, ncol = 6)
 print(p)
 save_plot("CH4_incday")
 
-# --------------------- Masses ---------------------
+# -----------------------------------------------------------------------------
+# Mass diagnostics
 
 p <- qplot(incday, Mass_g, data=summarydata, geom=c("point", "line"), group=Core, color=Treatment)
 p <- p + ggtitle("Core masses, by incubation day and treatment") 
@@ -221,7 +230,8 @@ p <- p + ggtitle("Core mass change, by incubation day and treatment")
 p <- p + facet_grid(~Temperature)
 save_diagnostic(p, "masses_relative")
 
-# --------------------- Update README ---------------------
+# -----------------------------------------------------------------------------
+# Update README
 
 # The README functions as a quick diagnostic summary on the webpage
 printlog("Updating README.md document...")
@@ -234,6 +244,7 @@ cmd <- paste0("sed -i .bak 's/^Script run.*$/Script run: ", Sys.time(), "/' READ
 print(cmd)
 try(system(cmd))
 
+# -----------------------------------------------------------------------------
 # Done! 
 
 printlog("All done with", SCRIPTNAME)

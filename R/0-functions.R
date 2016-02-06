@@ -8,7 +8,6 @@ OUTPUT_DIR		<- "outputs/"
 #CHECKPOINTDATE	<- "2015-03-05" # comment out to not use checkpoint
 SEPARATOR		<- "-------------------"
 
-# Wallowing in the Hadleyverse...
 library(ggplot2)       # 2.0.0
 theme_set(theme_bw())
 library(dplyr)         # 0.4.3
@@ -91,7 +90,6 @@ save_diagnostic <- function(p, pname, printit = TRUE, ...) {
   ggsave(paste0("qc_plots/", pname, ".png"))
   save_plot(pname, ...)
 }
-
 
 
 if(!file.exists(OUTPUT_DIR)) {

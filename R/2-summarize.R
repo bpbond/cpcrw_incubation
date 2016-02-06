@@ -54,6 +54,9 @@ rawdata <- readr::read_csv(RAWDATA, col_types = "ccddddiiiddddddddc") %>%
 print_dims(rawdata)
 print(summary(rawdata))
 
+# -----------------------------------------------------------------------------
+# Prep work: data cleaning, dates, sample numbers
+
 # Fractional solenoid values mean that the analyzer was shifting
 # between two samples. Discard these.
 printlog("Removing fractional MPVPosition")
@@ -89,6 +92,9 @@ valvemap$StartDateTime <- mdy_hm(paste(valvemap$Date, valvemap$Time_set_start))
 valvemap <- arrange(valvemap, StartDateTime)
 valvemap$valvemaprow <- seq_len(nrow(valvemap))
 qc_valvemap(valvemap)
+
+# -----------------------------------------------------------------------------
+# Compute concentration changes and match the Picarro data with valvemap data
 
 # Function to match up Picarro data with mapping file data
 # This is done by date and valve number (see plot saved above)
@@ -171,6 +177,7 @@ vdata <- data.frame(sequence = seq_len(nrow(valvemap)),
 MPVPosition_checkdata <- left_join(vdata, checkdata, by = "sequence")
 save_data(MPVPosition_checkdata)
 
+# -----------------------------------------------------------------------------
 # Done! 
 
 save_data(summarydata, scriptfolder = FALSE)

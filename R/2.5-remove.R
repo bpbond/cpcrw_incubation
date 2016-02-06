@@ -26,6 +26,9 @@ summarydata <- read_csv(SUMMARYDATA) %>%
   mutate(DATETIME = ymd_hms(DATETIME))
 print_dims(summarydata)
 
+# -----------------------------------------------------------------------------
+# Removals - outliers or errors that should be automatically removed
+
 printlog("Reading in removal data...")
 removals <- read_csv(REMOVALS, skip = 1)
 
@@ -60,14 +63,18 @@ for(i in seq_len(nrow(removals))) {
   } else {
     stop("Method not implemented yet!")
   }
-  
+
+    
   printlog("Summary data observations removed:", nrow(removed))
   removed_data <- rbind(removed_data, removed)
   printlog("Summary data observations excluded:", nrow(excluded))
   excluded_data <- rbind(excluded_data, excluded)
 }
 
+# -----------------------------------------------------------------------------
+# Exclusions - based on statistical test
 
+# -----------------------------------------------------------------------------
 # Done! 
 
 printlog(SEPARATOR)

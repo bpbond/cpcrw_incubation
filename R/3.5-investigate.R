@@ -106,7 +106,8 @@ summarydata %>%
          CH4_outlier = is_outlier(CH4_ppb_s, devs = dev)) ->
   summarydata
 
-# ------------------- CO2
+# -----------------------------------------------------------------------------
+# CO2
 
 printlog("Looking at high-variability CO2...")
 tsummary %>%
@@ -125,7 +126,8 @@ smry_co2$CO2_ppm_s_cv <- with(smry_co2, CO2_ppm_s_sd / CO2_ppm_s)
 investigate(smry = smry_co2, summarydata = summarydata, rawdata = rawdata, 
             gas = "CO2", gasvar = "CO2_ppm_s")
 
-# ------------------- CH4
+# -----------------------------------------------------------------------------
+# CH4
 
 printlog("Looking at high-variability CH4...")
 tsummary %>%
@@ -144,6 +146,7 @@ smry_ch4$CH4_ppb_s_cv <- with(smry_ch4, CH4_ppb_s_sd / CH4_ppb_s)
 investigate(smry = smry_ch4, summarydata = summarydata, rawdata = rawdata, 
             gas = "CH4", gasvar = "CH4_ppb_s")
 
+# -----------------------------------------------------------------------------
 # Done! 
 
 printlog("All done with", SCRIPTNAME)
