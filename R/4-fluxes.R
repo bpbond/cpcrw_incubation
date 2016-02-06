@@ -4,9 +4,12 @@
 source("R/0-functions.R")
 
 SCRIPTNAME  	<- "4-fluxes.R"
-SUMMARYDATA   <- file.path(outputdir(scriptfolder = FALSE), "summarydata_clean.csv")
+PROBLEM       <- FALSE
 
+SUMMARYDATA   <- file.path(outputdir(scriptfolder = FALSE), "summarydata_clean.csv")
 DRYMASSDATA   <- "data/drymasses.csv"
+
+library(reshape2)      # 1.4.1
 
 # ==============================================================================
 # Main 
@@ -155,3 +158,5 @@ save_diagnostic(p3, "cumulative_gas")
 
 printlog("All done with", SCRIPTNAME)
 closelog()
+
+if(PROBLEM) warning("There was a problem - see log")

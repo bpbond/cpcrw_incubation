@@ -5,8 +5,6 @@
 
 source("R/0-functions.R")
 
-library(stringr)
-
 SCRIPTNAME  	<- "1-data.R"
 PROBLEM       <- FALSE
 

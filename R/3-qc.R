@@ -1,6 +1,6 @@
 # Process Picarro data for CPCRW incubation
-# This script produces a wide range of diagnostic and QC plots, 
-# of both the raw and (clean) summary datasets.
+# This script produces a wide range of diagnostic and QC plots, of both the raw 
+# and (clean) summary datasets. It doesn't change anything in the data pipeline.
 # Ben Bond-Lamberty September 2015
 
 source("R/0-functions.R")

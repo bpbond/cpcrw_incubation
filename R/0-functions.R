@@ -8,6 +8,15 @@ OUTPUT_DIR		<- "outputs/"
 #CHECKPOINTDATE	<- "2015-03-05" # comment out to not use checkpoint
 SEPARATOR		<- "-------------------"
 
+# Wallowing in the Hadleyverse...
+library(ggplot2)       # 2.0.0
+theme_set(theme_bw())
+library(dplyr)         # 0.4.3
+library(readr)         # 0.2.2
+library(lubridate)     # 1.5.0
+library(stringr)       # 1.0.0
+library(luzlogr)       # 0.1.2
+
 # -----------------------------------------------------------------------------
 # Print dimensions of data frame
 print_dims <- function(d, dname=deparse(substitute(d))) {
@@ -93,11 +102,3 @@ if(!file.exists(OUTPUT_DIR)) {
 # -----------------------------------------------------------------------------
 #if(exists("CHECKPOINTDATE") & require(checkpoint))
 #    try(checkpoint(CHECKPOINTDATE)) # 'try' b/c errors w/o network (issue #171)
-library(ggplot2)
-theme_set(theme_bw())
-library(reshape2)
-library(dplyr)
-library(readr)
-library(lubridate)
-library(stringr)
-library(luzlogr)

@@ -16,7 +16,29 @@ RAWDATA      <- file.path(OUTPUT_DIR, "rawdata.csv.gz")  # output from script 1
 VALVEMAP     <- "data/valvemap.csv"
 TREATMENTS   <- "data/treatments.csv"
 
-library(stringr)
+# -----------------------------------------------------------------------------
+# QC the valvemap data
+qc_valvemap <- function(valvemap) {
+  # QC the valve map
+  dupes <- valvemap %>% 
+    filter(Core != "Ambient" & !is.na(MPVPosition)) %>%
+    group_by(StartDateTime, MPVPosition) %>% 
+    summarise(n = n()) %>% 
+    filter(n > 1)
+  if(nrow(dupes)) {
+    flaglog("WARNING - MULTIPLE CORES ASSIGNED TO A VALVE ON A GIVEN DATE")
+    print(dupes)
+    printlog("WARNING - this will screw up the matching to Picarro data")
+    PROBLEM <- TRUE
+  }
+  nomass <- valvemap %>% 
+    filter(Core != "Ambient4" & Core != "Ambient22" & is.na(Mass_g))
+  if(nrow(nomass)) {
+    printlog("WARNING - some cores have no mass data")
+    print(nomass)
+    PROBLEM <- TRUE
+  }
+} # qc_valvemap
 
 # ==============================================================================
 # Main 
@@ -26,22 +48,20 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in raw data...")
-rawdata <- gzfile(RAWDATA) %>% readr::read_csv(col_types = "ccddddiiiddddddddc")
+rawdata <- readr::read_csv(RAWDATA, col_types = "ccddddiiiddddddddc") %>%
+  # immediate discard columns we don't need
+  select(DATE, TIME, MPVPosition, CH4_dry, CO2_dry, h2o_reported)
 print_dims(rawdata)
 print(summary(rawdata))
 
 # Fractional solenoid values mean that the analyzer was shifting
 # between two samples. Discard these.
-printlog( "Removing fractional MPVPosition" )
+printlog("Removing fractional MPVPosition")
 rawdata <- subset(rawdata, MPVPosition == trunc(MPVPosition))
 
 # Handle dates
-printlog( "Converting date/time info to POSIXct..." )
+printlog("Converting date/time info to POSIXct...")
 rawdata$DATETIME <- ymd_hms(paste(rawdata$DATE, rawdata$TIME))
-# We decided to use UTC only (Peyton email 9/4/15) so this is commented out
-# # Force Picarro timestamps to Pacific time (UTC -8:00)
-# printlog("Picarro timestamps to Pacific time")
-# rawdata$DATETIME <- rawdata$DATETIME - 60 * 60 * 8
 printlog("First timestamp:")
 print(min(rawdata$DATETIME))
 printlog("Last timestamp:")
@@ -59,35 +79,17 @@ rawdata$samplenum <- cumsum(!oldsampleflag)
 printlog("Computing elapsed seconds...")
 rawdata_samples <- rawdata %>%
   group_by(samplenum) %>%
-  mutate(elapsed_seconds = (FRAC_HRS_SINCE_JAN1 - min(FRAC_HRS_SINCE_JAN1)) * 60 * 60) 
+  mutate(elapsed_seconds = difftime(DATETIME, min(DATETIME), units = "secs"))
 
-# Load MPVPosition map
+# Load and QC the valvemap data
 printlog("Loading valve map data...")
 valvemap <- read_csv(VALVEMAP, skip = 1)
 printlog( "Converting date/time info to POSIXct..." )
 valvemap$StartDateTime <- mdy_hm(paste(valvemap$Date, valvemap$Time_set_start))
 valvemap <- arrange(valvemap, StartDateTime)
 valvemap$valvemaprow <- seq_len(nrow(valvemap))
+qc_valvemap(valvemap)
 
-# QC the valve map
-dupes <- valvemap %>% 
-  filter(Core != "Ambient" & !is.na(MPVPosition)) %>%
-  group_by(StartDateTime, MPVPosition) %>% 
-  summarise(n=n()) %>% 
-  filter(n > 1)
-if(nrow(dupes)) {
-  flaglog("WARNING - MULTIPLE CORES ASSIGNED TO A VALVE ON A GIVEN DATE")
-  print(dupes)
-  printlog("WARNING - this will screw up the matching to Picarro data")
-  PROBLEM <- TRUE
-}
-nomass <- valvemap %>% 
-  filter(Core != "Ambient4" & Core != "Ambient22" & is.na(Mass_g))
-if(nrow(nomass)) {
-  printlog("WARNING - some cores have no mass data")
-  print(nomass)
-  PROBLEM <- TRUE
-}
 # Function to match up Picarro data with mapping file data
 # This is done by date and valve number (see plot saved above)
 matchfun <- function(DATETIME, MPVPosition) {
@@ -109,28 +111,24 @@ MAX_MAXCONC_TIME <- 45  # the maximum concentration has to occur in first 45 s
 summarydata_min <- rawdata_samples %>%
   filter(elapsed_seconds <= MAX_MINCONC_TIME) %>%
   group_by(samplenum) %>%
-  summarise(
-    min_CO2 = min(CO2_dry),
-    min_CO2_time = nth(elapsed_seconds, which.min(CO2_dry)),
-    min_CH4 = min(CH4_dry),
-    min_CH4_time = nth(elapsed_seconds, which.min(CH4_dry))
-  )
+  summarise(min_CO2 = min(CO2_dry),
+            min_CO2_time = nth(elapsed_seconds, which.min(CO2_dry)),
+            min_CH4 = min(CH4_dry),
+            min_CH4_time = nth(elapsed_seconds, which.min(CH4_dry)))
 
 # Now we want to look for the max concentration AFTER the minimum
 rawdata_temp <- rawdata_samples %>%
-  left_join(summarydata_min, by="samplenum") 
+  left_join(summarydata_min, by = "samplenum") 
+
 summarydata_maxCO2 <- rawdata_temp %>%
   filter(elapsed_seconds > min_CO2_time & elapsed_seconds < MAX_MAXCONC_TIME) %>%
-  summarise(
-    max_CO2 = max(CO2_dry),
-    max_CO2_time = nth(elapsed_seconds, which.max(CO2_dry))
-  )
+  summarise(max_CO2 = max(CO2_dry),
+            max_CO2_time = nth(elapsed_seconds, which.max(CO2_dry))
+            )
 summarydata_maxCH4 <- rawdata_temp %>%
   filter(elapsed_seconds > min_CH4_time & elapsed_seconds < MAX_MAXCONC_TIME) %>%
-  summarise(
-    max_CH4 = max(CH4_dry),
-    max_CH4_time = nth(elapsed_seconds, which.max(CH4_dry))
-  )
+  summarise(max_CH4 = max(CH4_dry),
+            max_CH4_time = nth(elapsed_seconds, which.max(CH4_dry)))
 
 # Final pipeline: misc other data, and match up with valve map entries
 summarydata_other <- rawdata_samples %>%
@@ -140,8 +138,7 @@ summarydata_other <- rawdata_samples %>%
     N = n(),
     MPVPosition	= mean(MPVPosition),
     h2o_reported = mean(h2o_reported),
-    valvemaprow = matchfun(DATETIME, MPVPosition)
-  ) 
+    valvemaprow = matchfun(DATETIME, MPVPosition)) 
 
 # Merge pieces together to form final summary data set
 printlog("Removing N=1 and MPVPosition=0 data, and merging...")
@@ -177,8 +174,6 @@ save_data(MPVPosition_checkdata)
 # Done! 
 
 save_data(summarydata, scriptfolder = FALSE)
-
-#summarydata <- subset(summarydata, !is.na(CORE), select=-c(MPVPosition, valvemaprow))	
 save_data(rawdata_samples, scriptfolder = FALSE, gzip = TRUE)
 
 printlog("All done with", SCRIPTNAME)

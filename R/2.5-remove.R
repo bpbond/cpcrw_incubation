@@ -7,6 +7,7 @@ source("R/0-functions.R")
 
 SCRIPTNAME  	<- "2.5-remove.R"
 PROBLEM       <- FALSE
+
 CATEGORY_ERROR <- "Error"
 CATEGORY_OUTLIER <- "Outlier"
 
@@ -21,10 +22,9 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in summary data...")
-summarydata <- read_csv(SUMMARYDATA)
+summarydata <- read_csv(SUMMARYDATA) %>%
+  mutate(DATETIME = ymd_hms(DATETIME))
 print_dims(summarydata)
-
-summarydata$DATETIME <- ymd_hms(summarydata$DATETIME)
 
 printlog("Reading in removal data...")
 removals <- read_csv(REMOVALS, skip = 1)
