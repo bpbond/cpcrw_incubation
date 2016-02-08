@@ -1,7 +1,6 @@
 ---
-title: "Temperature and moisture effects on greenhouse gas emissions from deep active-layer boreal soils"
+title: Temperature and moisture effects on greenhouse gas emissions from deep active-layer boreal soils
 author: "Ben Bond-Lamberty, Peyton Smith, Vanessa Bailey"
-#date: "February 1, 2016"
 output: html_document
 ---
 
@@ -57,7 +56,9 @@ The incubation experiment concluded on 10 December 2015. PEYTON: text re C, N, e
 We measured the rise in GHG concentrations from its minimum value (in the first 10 seconds of measurement after the analyzer was sealed to the soil core) to its maximum (in the first 45 seconds), considering this as the flux rate in ppm s^-1^ (CO2) or ppb s^-1^ (CH4). This value was calculated for each sample, i.e. each individual core measurement throughout the 100-day incubation. 
 
 ```{r, echo=FALSE}
-# compute outlier and exclusion numbers
+# TODO: this isn't good--fragile if files move or change names
+# Want everything in-memory (or something)
+# Compute outlier and exclusion numbers
 sdn <- readLines("../outputs/summarydata.csv") %>% length
 sdcn <- readLines("../outputs/summarydata_clean.csv") %>% length
 en <- readLines("../outputs/3-remove/excluded_data.csv") %>% length
@@ -102,8 +103,7 @@ Acknowledgments.
 # Print out the `WC_effect` data frame in a nice-looking table
 WC_effect$Gas[WC_effect$Gas == "CO2"] <- "CO<sub>2</sub>"  # html
 WC_effect$Gas[WC_effect$Gas == "CH4"] <- "CH<sub>4</sub>"  # html
-knitr::kable(WC_effect, digits = 3, 
-             col.names = c("Treatment", "Temperature", "Gas", "R<sup>2</sup>", "Sigma", "P", "AIC"))
+knitr::kable(WC_effect, digits = 3, col.names = c("Gas", "Treatment", "Temperature", "R<sup>2</sup>", "Sigma", "P", "AIC"))
 ```
 
 
@@ -111,6 +111,17 @@ knitr::kable(WC_effect, digits = 3,
 
 **Figure 1.** Core water content across the course of the experiment. (Basically the figure already in the README diagnostics.)
 
-**Figure 2.** A faceted (Temperature ~ Treatment) plot showing normalized flux means and errors by incubation time. (Basically the figure already in the README diagnostics.)
+**Figure 2.** A faceted (Temperature ~ Treatment) plot showing normalized CO2 flux means and errors by incubation time. (Basically the figure already in the README diagnostics.)
 
-**Figure 3.** Cumulative fluxes over the incubation.
+```{r, echo=FALSE}
+print(figureB)
+```
+
+**Figure 3.** A faceted (Temperature ~ Treatment) plot showing normalized CH4 flux means and errors by incubation time. (Basically the figure already in the README diagnostics.)
+
+```{r, echo=FALSE}
+print(figureC)
+```
+
+
+**Figure 4.** Cumulative fluxes over the incubation.

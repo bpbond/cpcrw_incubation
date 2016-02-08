@@ -36,6 +36,34 @@ save_data(fluxdata, fname = "fluxdata_long")
 
 
 # -----------------------------------------------------------------------------
+# Fluxes over time figure
+
+printlog("fluxes over time...")
+fluxdata %>%
+  mutate(incday = floor(inctime_days)) %>%
+  group_by(Gas, Temperature,Treatment, incday) %>%
+  summarise(flux = mean(flux_µmol_g_s), flux_sd = sd(flux_µmol_g_s)) ->
+  fluxdata_figsBC
+
+figsBC <- function(fd) {
+  panellabels <- 
+  ggplot(fd, aes(incday, flux)) + 
+    geom_point() + 
+    facet_grid(Temperature ~ Treatment) + 
+    geom_errorbar(aes(ymin = flux - flux_sd, ymax = flux + flux_sd)) +
+    xlab("Incubation day") + ylab(expression(µmol~g^{-1}~s^{-1}))
+}
+
+fluxdata_figsBC %>%
+  filter(Gas == "CO2") %>%
+  figsBC ->
+  figureB
+fluxdata_figsBC %>%
+  filter(Gas == "CH4") %>%
+  figsBC ->
+  figureC
+
+# -----------------------------------------------------------------------------
 # Examine data distribution
 # Log-transforming doesn't fix the lack of normality in our data,
 # but it's a major improvement; see graphs.
@@ -78,12 +106,12 @@ save_data(shapiro_trans)
 printlog("Summarizing WC effect...")
 fluxdata %>%
   filter(flux_µmol_g_s > 0) %>%
-  group_by(Treatment, Temperature, Gas) %>%
+  group_by(Gas, Treatment, Temperature) %>%
   filter(!outlier) %>%
   do(mod = lm(log(flux_µmol_g_s) ~ WC_gravimetric, data = .)) %>%
   glance(mod) %>%
-  select(Treatment, Temperature, Gas, adj.r.squared, sigma, p.value, AIC) ->
-#  mutate(signif = p.value < 0.05) ->
+  select(Gas, Treatment, Temperature, adj.r.squared, sigma, p.value, AIC) ->
+  #  mutate(signif = p.value < 0.05) ->
   WC_effect
 
 print(WC_effect)
