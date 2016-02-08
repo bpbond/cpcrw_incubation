@@ -92,10 +92,12 @@ fluxdata %>%
   mutate(incday = floor(inctime_days)) %>%
   group_by(Treatment, Temperature, incday) %>% 
   mutate(CO2_outlier = is_outlier(CO2_flux_µmol_g_s, devs = 3.0), 
-         # CH4 is so crazy variable we use a higher exclusion cutoff
+         # CH4 is so variable we use a higher exclusion cutoff
          CH4_outlier = is_outlier(CH4_flux_µmol_g_s, devs = 5.0)) %>%
   select(-incday) ->
   fluxdata
+
+fluxdata$incday <- NULL  # why doesn't the `select` above work?
 
 p <- ggplot(fluxdata, aes(inctime_days, CO2_flux_µmol_g_s, color = CO2_outlier))
 p <- p + geom_point() + facet_grid(Temperature~Treatment)
