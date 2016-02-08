@@ -7,6 +7,7 @@ SCRIPTNAME  	<- "5-analyze.R"
 FLUXDATA   <- file.path(outputdir(scriptfolder = FALSE), "fluxdata.csv")
 
 library(broom)  # 0.4.0
+library(reshape2) # 1.4.1
 
 # ==============================================================================
 # Main 
@@ -89,7 +90,7 @@ save_data(WC_effect)
 
 
 # -----------------------------------------------------------------------------
-# Main treatment effects
+# Effects of temperature and moisture on gas fluxes
 
 # Fitting a non-mixed-effects model for now
 # TODO: later, might want to explore having Core as a random effect
@@ -100,13 +101,20 @@ m_co2 <- lm(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric,
             data = fluxdata, subset = Gas == "CO2")
 print(summary(m_co2))
 
+# TODO: a Q10 calculation. Use nls?
+# Q10 = R2/R1 ^ (10/(T2-T1))
+# fit_q10_model <- function( d ) {		# returns model or NA if nls errors out
+#   tryCatch( nls( Resp_mass ~ R20 * Q10 ^ ( ( Tair-20 )/10 ), data=d, start=c( R20=5, Q10=2 ) ),
+#             error=function( e ) NA )
+# }
+
 #lme(effort ~ Type, data = ergoStool, random = ~ 1 | Subject))
 # library(nlme)
 # m_co2_lme <- lme(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric,
 #                  data = fluxdata, random = ~ 1 | Core)
 
 printlog("Fitting CH4 model...")
-m_ch4 <- lm(log(flux_µmol_g_s) ~ Temperature + WC_gravimetric,
+m_ch4 <- lm(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric,
             data = fluxdata, subset = Gas == "CH4")
 print(summary(m_ch4))
 
