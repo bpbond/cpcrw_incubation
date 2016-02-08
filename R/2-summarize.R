@@ -166,7 +166,7 @@ printlog("Computing per-second rates...")
 summarydata <- summarydata %>%
   mutate(CO2_ppm_s = (max_CO2 - min_CO2) / (max_CO2_time - min_CO2_time),
          CH4_ppb_s = (max_CH4 - min_CH4) / (max_CH4_time - min_CH4_time),
-         incday = 1 + as.numeric(difftime(DATETIME, min(DATETIME), units = "days")))
+         inctime_days = 1 + as.numeric(difftime(DATETIME, min(DATETIME), units = "days")))
 
 printlog("Saving a comparison of MPVPosition sequence in Picarro data and valvemap")
 checkdata <- select(summarydata, DATETIME, MPVPosition)
