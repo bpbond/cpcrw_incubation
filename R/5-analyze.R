@@ -79,15 +79,36 @@ printlog("Summarizing WC effect...")
 fluxdata %>%
   filter(flux_µmol_g_s > 0) %>%
   group_by(Treatment, Temperature, Gas) %>%
+  filter(!outlier) %>%
   do(mod = lm(log(flux_µmol_g_s) ~ WC_gravimetric, data = .)) %>%
   glance(mod) %>%
-  select(Treatment, Temperature, Gas, adj.r.squared, sigma, p.value, AIC) %>%
-  mutate(signif = p.value < 0.05) ->
+  select(Treatment, Temperature, Gas, adj.r.squared, sigma, p.value, AIC) ->
+#  mutate(signif = p.value < 0.05) ->
   WC_effect
 
 print(WC_effect)
 save_data(WC_effect)
 
+# -----------------------------------------------------------------------------
+# Per-core models - look at R2, etc. variability
+
+# printlog("Per-core models...")
+# fluxdata %>%
+#   filter(flux_µmol_g_s > 0) %>%
+#   group_by(Core, Gas) %>%
+#   do(mod = lm(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric, data = .)) %>%
+#   glance(mod) %>%
+#   select(Core, Gas, adj.r.squared, sigma, p.value, AIC) ->
+#   per_core_models
+# 
+# print(per_core_models)
+# save_data(per_core_models)
+# 
+# p <- ggplot(per_core_models, aes(adj.r.squared)) + geom_histogram(bins = 30)
+# p <- p + facet_grid(Gas ~ .) 
+# p <- p + ggtitle("Per-core temp, WC models")
+# print(p)
+# save_plot("per_core_models")
 
 # -----------------------------------------------------------------------------
 # Effects of temperature and moisture on gas fluxes

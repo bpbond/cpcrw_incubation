@@ -5,8 +5,10 @@ author: "Ben Bond-Lamberty, Peyton Smith, Vanessa Bailey"
 output: html_document
 ---
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, results='hide', message=FALSE, fig.keep='none'}
 library(dplyr, warn.conflicts = FALSE)
+setwd("../")
+source("R/5-analyze.R")
 ```
 
 #### Abstract
@@ -58,11 +60,11 @@ We measured the rise in GHG concentrations from its minimum value (in the first 
 # compute outlier and exclusion numbers
 sdn <- readLines("../outputs/summarydata.csv") %>% length
 sdcn <- readLines("../outputs/summarydata_clean.csv") %>% length
-en <- readLines("../outputs/2.5-remove/excluded_data.csv") %>% length
-rn <- readLines("../outputs/2.5-remove/removed_data.csv") %>% length
+en <- readLines("../outputs/3-remove/excluded_data.csv") %>% length
+rn <- readLines("../outputs/3-remove/removed_data.csv") %>% length
 ```
 
-Anomalous data were excluded based on their being more than 3.2 mean absolute deviations {Davies, 1993 #3138} from the treatment and temperature mean. We excluded `r en` of `r sdn` (`r round(en/sdn*100)`%) of the summarized samples for this reason. Other data (`r rn` of `r sdn`, `r round(rn/sdn*100)`%) were removed because of known instrument problems, e.g. the analyzer was left running after leaving a chamber. The final number of valid flux samples from the 100-day incubation was `r sdcn`.
+Anomalous data were excluded based on their being more than 3.2 mean absolute deviations {Davies, 1993 #3138} from the treatment mean on each day. We excluded `r en` of `r sdn` (`r round(en/sdn*100)`%) of the summarized samples for this reason. Other data (`r rn` of `r sdn`, `r round(rn/sdn*100)`%) were removed because of known instrument problems, e.g. the analyzer was left running after leaving a chamber. The final number of valid flux samples from the 100-day incubation was `r sdcn`.
 
 * joined with mass data
 * flux computation
@@ -87,16 +89,28 @@ Incubation experiments can only go so far though...
 Morishita et al. {, 2014 #4316} measured GHG fluxes in the field at CPCRW and nearby forests, and found CO2 production to be correlated with both soil temperature and moisture, but CH4 uptake driven by temperature only.
 
 
-### Acknowledgments
+#### Acknowledgments
 
 Acknowledgments.
 
+#### References
 
 
-Table X. Summary of temperature, WC effects on gas fluxes.
+**Table 1.** Summary of gravimetric water content effects on gas fluxes, by treatment and temperature.
 
-Figure X. A faceted (Temperature ~ Treatment) plot showing normalized flux means and errors by incubation time. (Basically the figure already in the README diagnostics.)
+```{r kable, echo=FALSE}
+# Print out the `WC_effect` data frame in a nice-looking table
+WC_effect$Gas[WC_effect$Gas == "CO2"] <- "CO<sub>2</sub>"  # html
+WC_effect$Gas[WC_effect$Gas == "CH4"] <- "CH<sub>4</sub>"  # html
+knitr::kable(WC_effect, digits = 3, 
+             col.names = c("Treatment", "Temperature", "Gas", "R<sup>2</sup>", "Sigma", "P", "AIC"))
+```
 
-Figure X. Core water content across the course of the experiment. (Basically the figure already in the README diagnostics.)
 
-Figure X. A pairs plot of variable correlations?
+**Table 2.** Effect of temperature and WC on cumulative C fluxes for each gas.
+
+**Figure 1.** Core water content across the course of the experiment. (Basically the figure already in the README diagnostics.)
+
+**Figure 2.** A faceted (Temperature ~ Treatment) plot showing normalized flux means and errors by incubation time. (Basically the figure already in the README diagnostics.)
+
+**Figure 3.** Cumulative fluxes over the incubation.
