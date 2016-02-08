@@ -31,7 +31,7 @@ summarydata %>%
   filter(Treatment != "Ambient") %>%
   mutate(WC_gravimetric = (Mass_g - SoilDryMass_g) / SoilDryMass_g) %>%
   select(Core, SoilDryMass_g, SoilVolume_cm3, WC_gravimetric,
-         Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, incday) ->
+         Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, inctime_days) ->
   fluxdata
 
 # -----------------------------------------------------------------------------
@@ -88,22 +88,25 @@ fluxdata$CH4_flux_mgC_hr <- with(fluxdata, CH4_flux_µmol_g_s * SoilDryMass_g) /
 # For each gas, group by Treatment, Temperature, and incubation day
 
 printlog("Identifying and plotting outliers...")
-fluxdata %>% 
-  group_by(Treatment, Temperature, floor(incday)) %>% 
+fluxdata %>%
+  mutate(incday = floor(inctime_days)) %>%
+  group_by(Treatment, Temperature, incday) %>% 
   mutate(CO2_outlier = is_outlier(CO2_flux_µmol_g_s), 
-         CH4_outlier = is_outlier(CH4_flux_µmol_g_s)) -> 
+         CH4_outlier = is_outlier(CH4_flux_µmol_g_s)) %>%
+  select(-incday) ->
   fluxdata
 
-p <- ggplot(fluxdata, aes(incday, CO2_flux_µmol_g_s, color = CO2_outlier))
+p <- ggplot(fluxdata, aes(inctime_days, CO2_flux_µmol_g_s, color = CO2_outlier))
 p <- p + geom_point() + facet_grid(Temperature~Treatment)
-p <- p + ggtitle("Mass-corrected flux rates")
+p <- p + ggtitle("Dry mass-corrected flux rates")
 print(p)
-save_plot("CO2_outliers")
-p <- ggplot(fluxdata, aes(incday, CH4_flux_µmol_g_s, color = CH4_outlier))
+#save_plot("CO2_outliers")
+save_diagnostic(p, "CO2_outliers")
+p <- ggplot(fluxdata, aes(inctime_days, CH4_flux_µmol_g_s, color = CH4_outlier))
 p <- p + geom_point() + facet_grid(Temperature~Treatment)
-p <- p + ggtitle("Mass-corrected flux rates")
+p <- p + ggtitle("Dry mass-corrected flux rates")
 print(p)
-save_plot("CH4_outliers")
+save_diagnostic(p, "CH4_outliers")
 
 save_data(fluxdata, scriptfolder = FALSE)
 
@@ -111,32 +114,43 @@ save_data(fluxdata, scriptfolder = FALSE)
 # -----------------------------------------------------------------------------
 # Compute cumulative C respired
 
-# TODO: need to ignore outlier observations
-
 printlog("Computing cumulative C respired...")
+
+# Create a 'clean' column with no flux rates flagged as outliers
+fluxdata$CO2_flux_mgC_hr_clean <- fluxdata$CO2_flux_mgC_hr
+fluxdata$CO2_flux_mgC_hr_clean[fluxdata$CO2_outlier] <- NA
+fluxdata$CH4_flux_mgC_hr_clean <- fluxdata$CH4_flux_mgC_hr
+fluxdata$CH4_flux_mgC_hr_clean[fluxdata$CH4_outlier] <- NA
+
+# Interpolate the missing (b/c outlier) flux rates, then compute cumulative emissions
 fluxdata %>%
   group_by(Core) %>%
-  arrange(incday) %>%
-  mutate(delta_hrs = (incday - lag(incday)) * 24,
-         CO2_flux_mgC = CO2_flux_mgC_hr * delta_hrs,
+  arrange(inctime_days) %>%
+  mutate(CO2_flux_mgC_hr_interp = approx(inctime_days, CO2_flux_mgC_hr_clean, xout = inctime_days, rule = 2)$y,
+         CH4_flux_mgC_hr_interp = approx(inctime_days, CH4_flux_mgC_hr_clean, xout = inctime_days, rule = 2)$y) %>%
+  group_by(Core) %>%
+  mutate(delta_hrs = (inctime_days - lag(inctime_days)) * 24,
+         CO2_flux_mgC = CO2_flux_mgC_hr_interp * delta_hrs,
          cumCO2_flux_mgC = c(0, cumsum(CO2_flux_mgC[-1])),
-         CH4_flux_mgC = CH4_flux_mgC_hr * delta_hrs,
+         CH4_flux_mgC = CH4_flux_mgC_hr_interp * delta_hrs,
          cumCH4_flux_mgC = c(0, cumsum(CH4_flux_mgC[-1]))) %>%
-  select(-CO2_flux_mgC, -CH4_flux_mgC) ->
+  select(-CO2_flux_mgC_hr_interp, -CH4_flux_mgC_hr_interp,
+         -CO2_flux_mgC_hr_clean, -CH4_flux_mgC_hr_clean) ->
   fluxdata
+
 
 # -----------------------------------------------------------------------------
 # A few diagnostic plots
 
 printlog("Cumulative flux diagnostic plots...")
-p1 <- ggplot(fluxdata, aes(incday, cumCO2_flux_mgC, group = Core)) + 
+p1 <- ggplot(fluxdata, aes(inctime_days, cumCO2_flux_mgC, group = Core)) + 
   geom_line() + 
   facet_grid(Temperature ~ Treatment) +
   ggtitle("Cumulative CO2 by core and treatment")
 print(p1)
 save_plot("cumulative_CO2")
 
-p2 <- ggplot(fluxdata, aes(incday, cumCH4_flux_mgC, group = Core)) + 
+p2 <- ggplot(fluxdata, aes(inctime_days, cumCH4_flux_mgC, group = Core)) + 
   geom_line() + 
   facet_grid(Temperature ~ Treatment) + 
   ggtitle("Cumulative CH4 by core and treatment")
@@ -148,12 +162,12 @@ save_plot("cumulative_CH4")
 
 printlog("Calculating flux summary datasets...")
 fluxdata %>%
-  melt(id.vars = c("Treatment", "Temperature", "Core", "incday"), 
+  melt(id.vars = c("Treatment", "Temperature", "Core", "inctime_days"), 
        measure.vars = c("cumCO2_flux_mgC", "cumCH4_flux_mgC"),
        variable.name = "Gas") %>%
   mutate(Gas = substr(Gas, start = 4, stop = 6)) %>%   # rename
   group_by(Treatment, Temperature, Gas, Core) %>%
-  arrange(incday) %>%
+  arrange(inctime_days) %>%
   summarise(cum_flux_mgC = last(value)) -> 
   fd_cumulative_core
 
@@ -188,7 +202,7 @@ p3 <- ggplot(fd_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) +
                     ymax = cum_flux_mgC + cum_flux_mgC_sd), 
                 position = position_dodge(0.9), width = 0.4) +  
   facet_grid(Gas ~ ., scales = "free") +
-  ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$incday)), "days")) +
+  ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$inctime_days)), "days")) +
   ggtitle("Cumulative C by gas, treatment, temperature")
 save_diagnostic(p3, "cumulative_gas")
 

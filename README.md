@@ -40,6 +40,10 @@ Script run: 2016-01-04 11:00:16
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/coreCV_distribution.png)
 
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CO2_outliers.png)
+
+![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/CH4_outliers.png)
+
 ### Cumulative fluxes
 
 ![](https://github.com/bpbond/cpcrw_incubation/blob/master/qc_plots/cumulative_gas.png)
