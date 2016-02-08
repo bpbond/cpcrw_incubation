@@ -84,15 +84,16 @@ fluxdata$CH4_flux_mgC_hr <- with(fluxdata, CH4_flux_µmol_g_s * SoilDryMass_g) /
   60 * 60 # to /hr
 
 # -----------------------------------------------------------------------------
-# Outlier identification
+# Outlier identification - see 
 # For each gas, group by Treatment, Temperature, and incubation day
 
 printlog("Identifying and plotting outliers...")
 fluxdata %>%
   mutate(incday = floor(inctime_days)) %>%
   group_by(Treatment, Temperature, incday) %>% 
-  mutate(CO2_outlier = is_outlier(CO2_flux_µmol_g_s), 
-         CH4_outlier = is_outlier(CH4_flux_µmol_g_s)) %>%
+  mutate(CO2_outlier = is_outlier(CO2_flux_µmol_g_s, devs = 3.0), 
+         # CH4 is so crazy variable we use a higher exclusion cutoff
+         CH4_outlier = is_outlier(CH4_flux_µmol_g_s, devs = 5.0)) %>%
   select(-incday) ->
   fluxdata
 
