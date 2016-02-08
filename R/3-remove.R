@@ -5,7 +5,7 @@
 
 source("R/0-functions.R")
 
-SCRIPTNAME  	<- "2.5-remove.R"
+SCRIPTNAME  	<- "3-remove.R"
 PROBLEM       <- FALSE
 
 CATEGORY_ERROR <- "Error"
