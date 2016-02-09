@@ -29,7 +29,9 @@ summarydata <- left_join(summarydata, drymassdata, by = "Core")
 
 summarydata %>%
   filter(Treatment != "Ambient") %>%
-  mutate(WC_gravimetric = (Mass_g - SoilDryMass_g) / SoilDryMass_g) %>%
+  mutate(WC_gravimetric = 
+           (Mass_g - CoreSleeveMass_g - NonsoilMassLarge_g - SoilDryMass_g) / 
+           (SoilDryMass_g)) %>%
   select(Core, SoilDryMass_g, SoilVolume_cm3, WC_gravimetric,
          Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, inctime_days) ->
   fluxdata
