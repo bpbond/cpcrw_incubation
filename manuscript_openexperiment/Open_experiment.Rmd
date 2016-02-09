@@ -1,10 +1,14 @@
 ---
 title: 'Running an open experiment: transparency and reproducibility in soil and ecosystem
   science'
-author: "Ben Bond-Lamberty, Peyton Smith, and Vanessa Bailey"
+author: "Ben Bond-Lamberty^1^, Peyton Smith^2^, Vanessa Bailey^2^"
 date: "February 2, 2016"
 output: html_document
 ---
+^1^Joint Global Change Research Institute, DOE Pacific Northwest National Laboratory, College Park, MD USA; 
+bondlamberty@pnnl.gov
+
+^2^Biological Sciences Division, Pacific Northwest National Laboratory, Richland, WA USA
 
 #### Abstract
 
