@@ -192,15 +192,15 @@ fd_cumulative$Treatment <- factor(fd_cumulative$Treatment,
 fd_cumulative$Temperature <- as.factor(fd_cumulative$Temperature)
 
 # Add a few dummy rows so graph bars are spaced correctly
-dmy <- expand.grid(Treatment = unique(fd_cumulative$Treatment),
+dmy <- data.frame(Treatment = "Controlled drought",
                    Temperature = 4,
                    Gas = unique(fd_cumulative$Gas),
+                   cum_flux_mgC = NA,
+                   cum_flux_mgC_sd = NA,
                    stringsAsFactors = FALSE)
-dmy$cum_flux_mgC_sd <- NA
-dmy$cum_flux_mgC <- NA
-fd_cumulative <- rbind(fd_cumulative, dmy)
+fluxdata_cumulative <- rbind(fd_cumulative, dmy)
 
-p3 <- ggplot(fd_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
+p3 <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
   geom_bar(stat = 'identity', position = position_dodge()) +
   geom_errorbar(aes(color = Treatment, 
                     ymin = cum_flux_mgC * 0.9, 
@@ -210,6 +210,7 @@ p3 <- ggplot(fd_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) +
   ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$inctime_days)), "days")) +
   ggtitle("Cumulative C by gas, treatment, temperature")
 save_diagnostic(p3, "cumulative_gas")
+save_data(fluxdata_cumulative, scriptfolder = FALSE)
 
 # -----------------------------------------------------------------------------
 # Done!

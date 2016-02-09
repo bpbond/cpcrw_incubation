@@ -5,6 +5,7 @@ source("R/0-functions.R")
 
 SCRIPTNAME  	<- "5-analyze.R"
 FLUXDATA   <- file.path(outputdir(scriptfolder = FALSE), "fluxdata.csv")
+FLUXDATA_CUMULATIVE <- file.path(outputdir(scriptfolder = FALSE), "fluxdata_cumulative.csv")
 
 library(broom)  # 0.4.0
 library(reshape2) # 1.4.1
@@ -71,6 +72,23 @@ fluxdata_figsBC %>%
   figureC
 
 # -----------------------------------------------------------------------------
+# Cumulative flux figure
+
+fluxdata_cumulative <- read_csv(FLUXDATA_CUMULATIVE)
+fluxdata_cumulative$Treatment <- factor(fluxdata_cumulative$Treatment, 
+                                        levels = c("Field moisture", "Controlled drought", "Drought"))
+fluxdata_cumulative$Temperature <- as.factor(fluxdata_cumulative$Temperature)
+
+figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
+  geom_bar(stat = 'identity', position = position_dodge()) +
+  geom_errorbar(aes(color = Treatment, 
+                    ymin = cum_flux_mgC * 0.9, 
+                    ymax = cum_flux_mgC + cum_flux_mgC_sd), 
+                position = position_dodge(0.9), width = 0.4) +  
+  facet_grid(Gas ~ ., scales = "free") +
+  ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$inctime_days)), "days"))
+
+# -----------------------------------------------------------------------------
 # Examine data distribution
 # Log-transforming doesn't fix the lack of normality in our data,
 # but it's a major improvement; see graphs.
@@ -116,7 +134,7 @@ fluxdata %>%
   group_by(Gas, Treatment, Temperature) %>%
   filter(!outlier) %>%
   do(mod = lm(log(flux_µmol_g_s) ~ WC_gravimetric, data = .)) %>%
-  glance(mod) %>%
+  broom::glance(mod) %>%
   select(Gas, Treatment, Temperature, adj.r.squared, sigma, p.value, AIC) ->
   #  mutate(signif = p.value < 0.05) ->
   WC_effect

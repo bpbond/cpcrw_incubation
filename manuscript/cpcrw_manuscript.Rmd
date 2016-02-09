@@ -1,8 +1,12 @@
 ---
 title: Temperature and moisture effects on greenhouse gas emissions from deep active-layer boreal soils
-author: "Ben Bond-Lamberty, Peyton Smith, Vanessa Bailey"
+author: "Ben Bond-Lamberty^1^, Peyton Smith^2^, Vanessa Bailey^2^"
 output: html_document
 ---
+^1^Joint Global Change Research Institute, DOE Pacific Northwest National Laboratory, College Park, MD USA; 
+bondlamberty@pnnl.gov
+
+^2^Biological Sciences Division, Pacific Northwest National Laboratory, Richland, WA USA
 
 ```{r, echo=FALSE, results='hide', message=FALSE, fig.keep='none'}
 library(dplyr, warn.conflicts = FALSE)
@@ -11,11 +15,6 @@ source("R/5-analyze.R")
 ```
 
 #### Abstract
-
-Peyton potential text to use in abstract:
-
->The goal of this study was to characterize the chemical and biological properties of sub-Arctic, active layer soils subjected to changes in temperature and moisture. We also sought to determine the relative control temperature and moisture have on the fate of C and greenhouse gas emissions in active layer soils lying directly above permafrost. We measured carbon dioxide and methane emissions on soil at two different temperatures (4 and 20C) and moisture contents (field moist and drought-induced) throughout a 100-day incubation. We also determined soil structure, extracellular enzyme activity, total nitrogen, carbon, and the molecular composition of C pre and post-incubation cores. We hypothesized that the field moist 20˚C cores have a greater potential to lose C as both CO2 and CH4 than cores held at 4˚C due to increased aerobic and anaerobic microbial activity. We also hypothesize that drought-induced cores will have a higher potential to lose more ‘complex’ carbon compounds (aromatic-C) as these compounds are desorbed due to increased surface tension.
-
 
 Abstract.
 
@@ -29,7 +28,7 @@ The magnitude, timing, and form-in particular as methane (CH~4~) or carbon dioxi
 
 Temperature and moisture typically have strong and often interactive influences on soil GHG emissions. A long literature of laboratory incubations, field observations, and meta-analyses has documented increased CO2 fluxes with rising temperature {Davidson, 2006 #1669}{Hashimoto, 2015 #4231}{Treat, 2015 #4217}. GHG responses to wetting and thawing dynamics are much less certain, with substantial variability between studies {Kim, 2012 #2863}. The anaerobic conditions common following permafrost thaw lower CO~2~ emissions but increase those of CH~4~ {Treat, 2015 #4217;Treat, 2014 #4213}, and interact with soil temperature effects in long-term incubations {Elberling, 2013 #3720}. Such laboratory studies have weaknesses, but their controllled environments provide an important way to elucidate the key mechanisms controlling GHG from high-latitude soils {Schuur, 2015 #4319}.
 
-The goal of this study was to examine how temperature and moisture control C loss and GHG (CO~2~ and CH~4~) emissions from soils sampled from the bottom of the annual active layer--i.e., directly above permafrost--in an Alaskan boreal forest. Such deep but unfrozen soils were identified as subject to strong effects from a two-decade warming experiment in the Alaskan Arctic {Sistla, 2013 #3666}. We also aimed to characterize the chemical and biological properties of these soils as they were subjected to a 100-day incubation at difference temperature and moisture levels.We hypothesized that soils maintained at field moisture and high temperature would lose more C, both as CO~2~ and CH~4~, than cores incubated at 4˚C, due to increased aerobic and anaerobic microbial activity. In addition, cores subject to drought (reduced soil moisture) would have a higher potential to lose more ‘complex’ carbon compounds (aromatic C) as these compounds are desorbed due to increased surface tension. TODO: maybe change/reword this last sentence.
+The goal of this study was to examine how temperature and moisture control C loss and GHG (CO~2~ and CH~4~) emissions from soils sampled from the bottom of the annual active layer--i.e., directly above permafrost--in an Alaskan boreal forest. Such deep but unfrozen soils were identified as subject to strong effects from a two-decade warming experiment in the Alaskan Arctic {Sistla, 2013 #3666}. We also aimed to characterize the chemical and biological properties of these soils as they were subjected to a 100-day incubation at difference temperature and moisture levels. We hypothesized that soils maintained at field moisture and high temperature would lose more C, both as CO~2~ and CH~4~, than cores incubated at 4˚C, due to increased aerobic and anaerobic microbial activity. In addition, cores subject to drought (reduced soil moisture) would have a higher potential to lose more ‘complex’ carbon compounds (aromatic C) as these compounds are desorbed due to increased surface tension. TODO: maybe change/reword this last sentence.
 
 #### Methods
 
@@ -65,7 +64,7 @@ en <- readLines("../outputs/3-remove/excluded_data.csv") %>% length
 rn <- readLines("../outputs/3-remove/removed_data.csv") %>% length
 ```
 
-Anomalous data were excluded based on their being more than 3.2 mean absolute deviations {Davies, 1993 #3138} from the treatment mean on each day. We excluded `r en` of `r sdn` (`r round(en/sdn*100)`%) of the summarized samples for this reason. Other data (`r rn` of `r sdn`, `r round(rn/sdn*100)`%) were removed because of known instrument problems, e.g. the analyzer was left running after leaving a chamber. The final number of valid flux samples from the 100-day incubation was `r sdcn`.
+Anomalous data were excluded based on their being more than 3.0 (for CO~2~) or 5.0 (for CH~4~) mean absolute deviations {Davies, 1993 #3138} from the treatment mean within each day, treatment, and temperature. We excluded `r en` of `r sdn` (`r round(en/sdn*100)`%) of the summarized samples for this reason. Other data (`r rn` of `r sdn`, `r round(rn/sdn*100)`%) were removed because of known instrument problems, e.g. the analyzer was left running after leaving a chamber. The final number of valid flux samples from the 100-day incubation was `r sdcn`.
 
 The GHG concentration measurements for each sample (i.e., each gas, core, and date/time) were used to calculate a linear rate of change (δc/δt), based on the concentration rise from a minimum (at 2-10 seconds after measurement began) to a maximum (at 10-45 seconds). Each core’s respiration flux (F) was then calculated following e.g. Steduto et al. {, 2002 #3383} as $F=\frac{\delta c}{\delta t} \frac{V}{M} \frac{P_a}{RT}$ where V is the core-specific system volume, M the core dry mass as determined at the end of the incubation, Pa atmospheric pressure (101 kPa; the incubation chambers were ~120 m a.s.l.), R the universal gas constant (8.3 x 10^-3^ m^3^ kPa mol^-1^ K^-1^) and T the chamber air temperature (K) at time of measurement. The final respiration rate was expressed on a dry soil mass basis (mg C kg soil^-1^ day^-1^). TODO check all units
 
@@ -74,17 +73,19 @@ The GHG concentration measurements for each sample (i.e., each gas, core, and da
 * Q10 computation
 * stats
 
-All data analysis and statistics were performed using R version 3.2.3 {R Development Core Team, 2016 #4314}. This experiment was run as an "open experiment" with all analysis code, data (raw to final), diagnostics, etc., available in real time at https://github.com/bpbond/cpcrw_incubation. The flux data backing the main results have also been archived at TODO.
+All data analysis and statistics were performed using R version 3.2.3 {R Development Core Team, 2016 #4314}. This experiment was run as an "open experiment" with all analysis code, data (from raw instrument data to final summaries), diagnostics, etc., available at https://github.com/bpbond/cpcrw_incubation. The flux data backing the main results have been archived at TODO.
 
 #### Results
 
 * Soil WC changes over incubation (Figure 1)
 
+* Soil C, N, DOC means
+
 * Gas fluxes over incubation (Figures 2 and 3)
-* Statistical tests of WC and temperature on fluxes
+* Statistical tests of WC, T, C, N on individual core fluxes (Table 2)
 
 * Cumulative fluxes (Figure 4)
-* CO2:CH4 ratio
+* CO2:CH4 ratios
 * Statistical tests of WC and temperature on cumulative fluxes
 
 #### Discussion
@@ -105,6 +106,7 @@ This research was supported by Office of Science of the U.S. Department of Energ
 
 #### References
 
+------
 
 **Table 1.** Summary of gravimetric water content effects on gas fluxes, by treatment and temperature.
 
@@ -115,26 +117,28 @@ WC_effect$Gas[WC_effect$Gas == "CH4"] <- "CH<sub>4</sub>"  # html
 knitr::kable(WC_effect, digits = 3, col.names = c("Gas", "Treatment", "Temperature", "R<sup>2</sup>", "Sigma", "P", "AIC"))
 ```
 
+**Table 2.** Statistical tests of WC, T, C, N on individual core fluxes.
 
-**Table 2.** Effect of temperature and WC on cumulative C fluxes for each gas.
-
-**Figure 1.** Core water content across the course of the experiment. (Basically the figure already in the README diagnostics.)
+**Figure 1.** Core water content across the course of the experiment.
 
 ```{r, echo=FALSE}
 print(figureA)
 ```
 
-**Figure 2.** A faceted (Temperature ~ Treatment) plot showing normalized CO2 flux means and errors by incubation time. (Basically the figure already in the README diagnostics.)
+**Figure 2.** A faceted (Temperature ~ Treatment) plot showing normalized CO2 flux means and errors by incubation time.
 
 ```{r, echo=FALSE}
 print(figureB)
 ```
 
-**Figure 3.** A faceted (Temperature ~ Treatment) plot showing normalized CH4 flux means and errors by incubation time. (Basically the figure already in the README diagnostics.)
+**Figure 3.** A faceted (Temperature ~ Treatment) plot showing normalized CH4 flux means and errors by incubation time.
 
 ```{r, echo=FALSE}
 print(figureC)
 ```
 
-
 **Figure 4.** Cumulative fluxes over the incubation.
+
+```{r, echo=FALSE, warning=FALSE}
+print(figureD)   # TODO: wtf is going on here?
+```
