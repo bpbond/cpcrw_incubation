@@ -34,6 +34,13 @@ fluxdata$Treatment <- factor(fluxdata$Treatment, levels = c("Field moisture", "C
 
 save_data(fluxdata, fname = "fluxdata_long")
 
+# -----------------------------------------------------------------------------
+# Water content over time figure
+
+figureA <- ggplot(fluxdata_orig, aes(inctime_days, WC_gravimetric * 100, color=Treatment, group=Core)) 
+figureA <- figureA + geom_point() + geom_line()
+figureA <- figureA + facet_grid(~Temperature) 
+figureA <- figureA + xlab("Incubation day") + ylab("Gravimetric water content (%)")
 
 # -----------------------------------------------------------------------------
 # Fluxes over time figure
