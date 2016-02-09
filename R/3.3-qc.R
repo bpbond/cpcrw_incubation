@@ -65,7 +65,7 @@ p <- p + scale_size_discrete(guide = FALSE)
 p <- p + ggtitle("Orphan samples (no matching date/valve info)")
 save_diagnostic(p, "orphan_samples")
 
-p <- ggplot(subset(summarydata, Core != "Ambient4" & Core != "Ambient22"), 
+p <- ggplot(subset(summarydata, Core != "Ambient4" & Core != "Ambient20"), 
             aes(DATETIME, Core, size = is.na(Mass_g), color = !is.na(Mass_g)))
 p <- p + geom_point() 
 p <- p + scale_color_manual("Has mass data", values = c("TRUE" = "grey", "FALSE" = "red"))
@@ -98,7 +98,7 @@ save_data(treatment_summary, scriptfolder = FALSE)
 printlog(SEPARATOR)
 printlog("Computing core CVs...")
 core_cv <- summarydata %>% 
-  filter(Core != "Ambient4" & Core != "Ambient22") %>%
+  filter(Core != "Ambient4" & Core != "Ambient20") %>%
   group_by(Date, Core) %>% 
   summarise(CO2_ppm_s_cv = sd(CO2_ppm_s) / mean(CO2_ppm_s),
             min_CO2_time = mean(min_CO2_time),
@@ -202,7 +202,7 @@ printlog("Individual cores over time")
 # Reorder the 'Core' factor so that facets are ordered by Treatment and Temperature
 summarydata$TT <- paste(summarydata$Treatment, summarydata$Temperature)
 sd_no_A <- summarydata %>% 
-  filter(Core != "Ambient4" & Core != "Ambient22") %>% 
+  filter(Core != "Ambient4" & Core != "Ambient20") %>% 
   arrange(TT)
 sd_no_A$Core <- factor(sd_no_A$Core, levels = unique(as.character(sd_no_A$Core)))
 p <- qplot(inctime_days, CO2_ppm_s, data = sd_no_A, color = TT)
@@ -211,7 +211,7 @@ p <- p + facet_wrap(~Core, ncol = 6)
 print(p)
 save_plot("CO2_incday")
 
-p <- qplot(incday, CH4_ppb_s, data = sd_no_A, color = paste(Treatment, Temperature))
+p <- qplot(inctime_days, CH4_ppb_s, data = sd_no_A, color = paste(Treatment, Temperature))
 p <- p + ggtitle("CH4 fluxes (uncorrected) by rep, core, incubation day") + scale_color_discrete("")
 p <- p + facet_wrap(~Core, ncol = 6)
 print(p)

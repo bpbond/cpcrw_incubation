@@ -32,7 +32,7 @@ qc_valvemap <- function(valvemap) {
     PROBLEM <- TRUE
   }
   nomass <- valvemap %>% 
-    filter(Core != "Ambient4" & Core != "Ambient22" & is.na(Mass_g))
+    filter(Core != "Ambient4" & Core != "Ambient20" & is.na(Mass_g))
   if(nrow(nomass)) {
     printlog("WARNING - some cores have no mass data")
     print(nomass)
