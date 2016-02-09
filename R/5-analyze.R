@@ -142,6 +142,11 @@ fluxdata %>%
 print(WC_effect)
 save_data(WC_effect)
 
+# A quick visualization
+p <- qplot(WC_gravimetric, flux_µmol_g_s, data=fluxdata) 
+p <- p + facet_grid(Gas~Temperature, scales="free") + geom_smooth(method='lm')
+save_plot(p, pname = "WC_gravimetric_effect")
+
 # -----------------------------------------------------------------------------
 # Per-core models - look at R2, etc. variability
 

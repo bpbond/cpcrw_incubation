@@ -27,14 +27,33 @@ summarydata <- left_join(summarydata, drymassdata, by = "Core")
 # -----------------------------------------------------------------------------
 # Create fluxdata and compute water content
 
+printlog("Computing water contents...")
 summarydata %>%
   filter(Treatment != "Ambient") %>%
   mutate(WC_gravimetric = 
            (Mass_g - CoreSleeveMass_g - NonsoilMassLarge_g - SoilDryMass_g) / 
-           (SoilDryMass_g)) %>%
-  select(Core, SoilDryMass_g, SoilVolume_cm3, WC_gravimetric,
+           (SoilDryMass_g),
+         WC_volumetric = (Mass_g - CoreSleeveMass_g - NonsoilMassLarge_g - SoilDryMass_g) / 
+           (SoilVolume_cm3)) %>%
+  select(Core, SoilDryMass_g, SoilVolume_cm3, WC_gravimetric, WC_volumetric,
          Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, inctime_days) ->
   fluxdata
+
+print(summary(fluxdata$WC_gravimetric))
+print(summary(fluxdata$WC_volumetric))
+
+p <- ggplot(fluxdata, aes(inctime_days, WC_gravimetric, color=paste(Treatment, Temperature), group=Core))
+p <- p + geom_line() + facet_wrap(~Core) + scale_color_discrete("")
+print(p)
+save_plot("WC_gravimetric")
+
+printlog("WC_gravimetric summary by core:")
+fluxdata %>% 
+  group_by(Core) %>% 
+  summarise_each(funs(min, mean, max), WC_gravimetric) %>% 
+  arrange(mean) %>%
+  as.data.frame %>%
+  print
 
 # -----------------------------------------------------------------------------
 # Flux computation
