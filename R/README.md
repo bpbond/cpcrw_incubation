@@ -8,7 +8,7 @@ This folder contains all R code for processing experimental data and analyzing r
 * `3-remove.R` : This script removes known bad/freaky observations from the data, based on the `data/removals.csv` list. It then writes `outputs/summarydata_clean.csv`.
 * `3.3-qc.R` : This **OPTIONAL** script produces a wide range of diagnostic and QC plots, of both the raw and (clean) summary datasets.
 * `3.5-investigate.R` : This **OPTIONAL** and **INTERACTIVE** script is used to investigate treatment summaries with particularly high variability. Note this is only used to generate figures and statistics, identifying candidates to add to the `removals.csv` file; it doesn't make any changes to the datasets.
-* `4-fluxes.R` : Computes fluxes. In progress. This script removals outliers (?) TODO.
-* `6-plots.R` : Plotting final figures. In progress.
+* `4-fluxes.R` : Computes fluxes, flags outlier fluxes, and computes cumulative fluxes (first removing and interpolating the outliers). 
+* `5-analyze.R` : Final figures and runs statistical tests. This script is called by the `cpcrw_manuscript.Rmd` presentation file that generates the manuscript.
 
 All these scripts get their inputs entirely from disk--i.e., they don't depend on any data being present in their runtime environment. They also automatically create their own output folder in `outputs/` (creating that too if necessary).
