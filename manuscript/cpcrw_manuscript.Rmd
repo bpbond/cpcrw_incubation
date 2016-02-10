@@ -8,13 +8,15 @@ bondlamberty@pnnl.gov
 
 ^2^Biological Sciences Division, Pacific Northwest National Laboratory, Richland, WA USA
 
-```{r, echo=FALSE, results='hide', message=FALSE, fig.keep='none'}
+```{r setup, echo=FALSE, fig.keep='none', message=FALSE, results='hide'}
+library(dplyr, warn.conflicts = FALSE)
+
 pclean <- function(x) {  # pretty formatting of p-values
   ifelse(x < 0.001, "< 0.001", paste("=", formatC(x, digits = 3, format = 'f'))) %>%
     paste("P", .)
 }
 
-library(dplyr, warn.conflicts = FALSE)
+# Run the analysis script, which will leave a lot of figures, tables, and data in memory for us
 setwd("../")
 source("R/5-analyze.R")
 ```
@@ -47,7 +49,7 @@ Thirty-nine soil cores, each 30 cm high by 7.5 cm wide, were taken using a soil 
 
 **Laboratory incubation**
 
-In the lab, the soil cores were stored at 4 °C for several days until they were weighed and prepared for incubation. At that point (11-12 August 2015), three fragmented or otherwise damaged cores were discarded, and the remaining cores were randomly assigned to one of six groups (N=6 in each group). These groups included two incubation temperatures (4 and 20 °C), each with two moisture treatments: one in which soil moisture was maintained at field conditions (~28% moisture by volume), and a drought treatment in which no water was added and cores were allowed to dry down to ~5% moisture by volume. The fifth group was a 20 °C "controlled drought" one, in which water was added so that these cores' moisture status closely matched those of the 4 °C "drought" group. The final 6-core group was used for destructive, pre-incubation measurements including moisture content, pH, soil carbon and nitrogen, and bulk density. Subsamples were collected and stored at -20 °C for dissolved organic carbon measurements.
+In the lab, the soil cores were stored at 4 °C for several days until they were weighed and prepared for incubation. At that point (11-12 August 2015), three fragmented or otherwise damaged cores were discarded, and the remaining cores were randomly assigned to one of six groups (N=6 in each group). These groups included two incubation temperatures (4 and 20 °C), each with two moisture treatments: one in which soil moisture was maintained at field conditions (~28% moisture by volume), and a drought treatment in which no water was added and cores were allowed to dry down to ~5% moisture by volume. The fifth group was a 20 °C "controlled drought" one, in which water was added so that these cores' moisture status would close matched those of the 4 °C "drought" cores, which we anticipated would dry more slowly than their 20 °C counterparts. The final 6-core group was used for destructive, pre-incubation measurements including moisture content, pH, soil carbon and nitrogen, and bulk density. Subsamples were collected and stored at -20 °C for dissolved organic carbon measurements.
 
 On 18 August 2015 cores were placed into one of two growth chambers (Conviron CMP6050 Control Systems, Winnipeg, Canada) maintained at 4 and 20 °C temperatures and 70% relative humidity and allowed to equilibrate for two weeks. Starting on 31 August 2015 we measured the cores' mass and GHG (CH~4~ and CO~2~) evolution four times in the first week, then twice per week for the first month, and then once per week for the rest of the 100-day incubation. Throughout the incubation, cores were mounted on 0.05-MPa ceramic plates (Soil Moisture Equipment Corp., Santa Barbara, CA, USA) so that, when the plates were placed in contact with water, water would move up into the cores via capillary action. This was done to moderate the drying of the 20 °C "controlled drought" group. The 4 and 20 °C "field moisture" groups received additional wetting from the top of the cores to maintain their water status.
 
@@ -59,17 +61,17 @@ The incubation experiment concluded on 9 December 2015, following the final CO~2
 
 We measured the rise in GHG concentrations from its minimum value (in the first 10 seconds of measurement after the analyzer was sealed to the soil core) to its maximum (in the first 45 seconds), considering this as the flux rate in ppm s^-1^ (CO~2~) or ppb s^-1^ (CH~4~). This value was calculated for each sample, i.e. each individual core measurement throughout the 100-day incubation. 
 
-```{r, echo=FALSE}
+```{r compute_excludes, echo=FALSE}
+# Compute outlier and exclusion numbers
 # TODO: this isn't good--fragile if files move or change names
 # Want everything in-memory (or something)
-# Compute outlier and exclusion numbers
-sdn <- readLines("../outputs/summarydata.csv") %>% length
-sdcn <- readLines("../outputs/summarydata_clean.csv") %>% length
-en <- readLines("../outputs/3-remove/excluded_data.csv") %>% length
 rn <- readLines("../outputs/3-remove/removed_data.csv") %>% length
+sdn <- readLines("../outputs/summarydata.csv") %>% length
+fluxn <- nrow(fluxdata)
+en <- sum(fluxdata$outlier)
 ```
 
-Anomalous data were excluded based on their being more than 3.0 (for CO~2~) or 5.0 (for CH~4~) mean absolute deviations {Davies, 1993 #3138} from the treatment mean within each day, treatment, and temperature. We excluded `r en` of `r sdn` (`r round(en/sdn*100)`%) of the summarized samples for this reason. Other data (`r rn` of `r sdn`, `r round(rn/sdn*100)`%) were removed because of known instrument problems, e.g. the analyzer was left running after leaving a chamber. The final number of valid flux samples from the 100-day incubation was `r sdcn`.
+Anomalous data were excluded based on their being more than `r CO2_EXCLUDE_DEVS` (for CO~2~) or `r CH4_EXCLUDE_DEVS` (for CH~4~) mean absolute deviations {Davies, 1993 #3138} from the treatment mean within each day, treatment, and temperature. We excluded `r en` of `r fluxn` (`r round(en/fluxn*100)`%) of the gas flux measurements for this reason. Other data (`r round(rn/sdn*100)`%) were removed because of known instrument problems, e.g. the analyzer was left running after leaving a chamber. The final number of valid flux samples from the 100-day incubation was `r sum(!fluxdata$outlier)`.
 
 The GHG concentration measurements for each sample (i.e., each gas, core, and date/time) were used to calculate a linear rate of change (δc/δt), based on the concentration rise from a minimum (at 2-10 seconds after measurement began) to a maximum (at 10-45 seconds). Each core’s respiration flux (F) was then calculated following e.g. Steduto et al. {, 2002 #3383} as $F=\frac{\delta c}{\delta t} \frac{V}{M} \frac{P_a}{RT}$ where V is the core-specific system volume, M the core dry mass as determined at the end of the incubation, Pa atmospheric pressure (101 kPa; the incubation chambers were ~120 m a.s.l.), R the universal gas constant (8.3 x 10^-3^ m^3^ kPa mol^-1^ K^-1^) and T the chamber air temperature (K) at time of measurement. The final respiration rate was expressed on a dry soil mass basis (mg C kg soil^-1^ day^-1^). TODO check all units
 
@@ -89,15 +91,17 @@ All data analysis and statistics were performed using R version 3.2.3 {R Develop
 * Soil C, N, DOC means
 
 * Gas fluxes over incubation (Figures 2 and 3)
+
 * Statistical tests of WC, T, C, N on individual core fluxes (Table 2)
 
 * Cumulative fluxes (Figure 4)
 
-Cumulative CO~2~ evolved was highly affected by temperature (`r pclean(co2_hsd$Temperature["p adj"])`), and field moisture cores emitted significantly more CO~2~ than the other two treatments at both temperatures (P < 0.001 for both). There was no difference between the 20 °C drought and controlled drought treatments (`r pclean(co2_hsd$Treatment["Drought-Controlled drought", "p adj"])`). Neither temperature (`r pclean(ch4_hsd$Temperature[,"p adj"])`) nor treatment (mean `r pclean(mean(ch4_hsd$Treatment[,"p adj"]))`) was a significant factor in predicting cumulative CH~4~ fluxes.
+Cumulative CO~2~ evolved was highly affected by temperature (`r pclean(co2_hsd$Temperature["p adj"])`), and "field moisture" cores emitted significantly more CO~2~ than the other two treatments at both temperatures (P < 0.001 for both). There was no difference between the 20 °C "drought" and "controlled drought" treatments (`r pclean(co2_hsd$Treatment["Drought-Controlled drought", "p adj"])`). Neither temperature (`r pclean(ch4_hsd$Temperature[,"p adj"])`) nor treatment (mean `r pclean(mean(ch4_hsd$Treatment[,"p adj"]))`) was a significant factor in predicting cumulative CH~4~ fluxes.
 
 * CO2:CH4 ratios
 
-```{r, echo=FALSE}
+```{r compute_ratios, echo=FALSE}
+# Ratio data is stored in the `gas_ratio` d.f. computed by analysis script
 minmag <- min(gas_ratio$CO2CH4_ratio) %>% log10 %>% floor %>%
   c("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")[.]
 minratio <- min(gas_ratio$CO2CH4_ratio / 1e6)  %>% formatC(digits = 1, format = 'f')
@@ -108,9 +112,8 @@ maxtrt <- gas_ratio$Treatment[which.max(gas_ratio$CO2CH4_ratio)]
 maxtemp <- gas_ratio$Temperature[which.max(gas_ratio$CO2CH4_ratio)]
 ```
 
-The production of C from CO~2~ was over `r minmag` order of magnitudes higher than that from CH~4~, with CO~2~:CH~4~ ratios ranging from `r minratio` million in the `r mintemp` °C `r maxtrt` treatment, to `r maxratio` million in the `r maxtemp` °C `r maxtrt` treatment.
+The production of C from CO~2~ was over `r minmag` order of magnitudes higher than that from CH~4~, with CO~2~:CH~4~ C ratios ranging from `r minratio` million in the `r mintemp` °C "`r maxtrt`" treatment, to `r maxratio` million in the `r maxtemp` °C "`r maxtrt`" treatment.
 
-* Statistical tests of WC and temperature on cumulative fluxes
 
 #### Discussion
 
@@ -134,7 +137,7 @@ This research was supported by Office of Science of the U.S. Department of Energ
 
 **Table 1.** Summary of gravimetric water content effects on gas fluxes, by treatment and temperature.
 
-```{r kable, echo=FALSE}
+```{r table1, echo=FALSE}
 # Print out the `WC_effect` data frame in a nice-looking table
 WC_effect$Gas[WC_effect$Gas == "CO2"] <- "CO<sub>2</sub>"  # html
 WC_effect$Gas[WC_effect$Gas == "CH4"] <- "CH<sub>4</sub>"  # html
@@ -143,26 +146,26 @@ knitr::kable(WC_effect, digits = 3, col.names = c("Gas", "Treatment", "Temperatu
 
 **Table 2.** Statistical tests of WC, T, C, N on individual core fluxes.
 
-**Figure 1.** Core water content across the course of the experiment.
+**Figure 1.** Core water content across the course of the incubation experiment by temperature (left panel 4 °C, right panel 20 °C) and treatment.
 
-```{r, echo=FALSE}
-print(figureA)
+```{r figureA, echo=FALSE}
+figureA
 ```
 
 **Figure 2.** A faceted (Temperature ~ Treatment) plot showing normalized CO2 flux means and errors by incubation time.
 
-```{r, echo=FALSE}
-print(figureB)
+```{r figureB, echo=FALSE}
+figureB
 ```
 
 **Figure 3.** A faceted (Temperature ~ Treatment) plot showing normalized CH4 flux means and errors by incubation time.
 
-```{r, echo=FALSE}
-print(figureC)
+```{r figureC, echo=FALSE}
+figureC
 ```
 
 **Figure 4.** Cumulative fluxes over the incubation.
 
-```{r, echo=FALSE, warning=FALSE}
-print(figureD)   # TODO: wtf is going on here?
+```{r figureD, echo=FALSE, warning=FALSE}
+figureD
 ```

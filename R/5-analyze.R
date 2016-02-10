@@ -39,10 +39,10 @@ save_data(fluxdata, fname = "fluxdata_long")
 # -----------------------------------------------------------------------------
 # Water content over time figure
 
-figureA <- ggplot(fluxdata_orig, aes(inctime_days, WC_gravimetric * 100, color=Treatment, group=Core)) 
+figureA <- ggplot(fluxdata_orig, aes(inctime_days, WC_gravimetric, color=Treatment, group=Core)) 
 figureA <- figureA + geom_point() + geom_line()
 figureA <- figureA + facet_grid(~Temperature) 
-figureA <- figureA + xlab("Incubation day") + ylab("Gravimetric water content (%)")
+figureA <- figureA + xlab("Incubation day") + ylab("Gravimetric water content (fraction dry mass)")
 
 # -----------------------------------------------------------------------------
 # Fluxes over time figure
