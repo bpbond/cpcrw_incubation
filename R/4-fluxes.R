@@ -112,9 +112,9 @@ printlog("Identifying and plotting outliers...")
 fluxdata %>%
   mutate(incday = floor(inctime_days)) %>%
   group_by(Treatment, Temperature, incday) %>% 
-  mutate(CO2_outlier = is_outlier(CO2_flux_µmol_g_s, devs = 3.0), 
+  mutate(CO2_outlier = is_outlier(CO2_flux_µmol_g_s, devs = CO2_EXCLUDE_DEVS), 
          # CH4 is so variable we use a higher exclusion cutoff
-         CH4_outlier = is_outlier(CH4_flux_µmol_g_s, devs = 5.0)) %>%
+         CH4_outlier = is_outlier(CH4_flux_µmol_g_s, devs = CH4_EXCLUDE_DEVS)) %>%
   select(-incday) ->
   fluxdata
 

@@ -17,6 +17,12 @@ library(stringr)       # 1.0.0
 library(luzlogr)       # 0.1.2
 
 # -----------------------------------------------------------------------------
+# Parameters for key analytical choices
+# Defined here so they can be easily used in code AND manuscript
+CO2_EXCLUDE_DEVS <- 3.0
+CH4_EXCLUDE_DEVS <- 5.0
+
+# -----------------------------------------------------------------------------
 # Print dimensions of data frame
 print_dims <- function(d, dname=deparse(substitute(d))) {
   stopifnot(is.data.frame(d))
