@@ -9,6 +9,11 @@ bondlamberty@pnnl.gov
 ^2^Biological Sciences Division, Pacific Northwest National Laboratory, Richland, WA USA
 
 ```{r, echo=FALSE, results='hide', message=FALSE, fig.keep='none'}
+pclean <- function(x) {  # pretty formatting of p-values
+  ifelse(x < 0.001, "< 0.001", paste("=", formatC(x, digits = 3, format = 'f'))) %>%
+    paste("P", .)
+}
+
 library(dplyr, warn.conflicts = FALSE)
 setwd("../")
 source("R/5-analyze.R")
@@ -52,7 +57,7 @@ The incubation experiment concluded on 9 December 2015, following the final CO~2
 
 **Data and statistical analysis**
 
-We measured the rise in GHG concentrations from its minimum value (in the first 10 seconds of measurement after the analyzer was sealed to the soil core) to its maximum (in the first 45 seconds), considering this as the flux rate in ppm s^-1^ (CO2) or ppb s^-1^ (CH4). This value was calculated for each sample, i.e. each individual core measurement throughout the 100-day incubation. 
+We measured the rise in GHG concentrations from its minimum value (in the first 10 seconds of measurement after the analyzer was sealed to the soil core) to its maximum (in the first 45 seconds), considering this as the flux rate in ppm s^-1^ (CO~2~) or ppb s^-1^ (CH~4~). This value was calculated for each sample, i.e. each individual core measurement throughout the 100-day incubation. 
 
 ```{r, echo=FALSE}
 # TODO: this isn't good--fragile if files move or change names
@@ -73,6 +78,8 @@ The GHG concentration measurements for each sample (i.e., each gas, core, and da
 * Q10 computation
 * stats
 
+The effect of temperature and treatment (drought, controlled drought, or field moisture conditions) on cumulative gas fluxes was evaluted with a post-hoc Tukey Honest Significant Differences test.
+
 All data analysis and statistics were performed using R version 3.2.3 {R Development Core Team, 2016 #4314}. This experiment was run as an "open experiment" with all analysis code, data (from raw instrument data to final summaries), diagnostics, etc., available at https://github.com/bpbond/cpcrw_incubation. The flux data backing the main results have been archived at TODO.
 
 #### Results
@@ -85,6 +92,9 @@ All data analysis and statistics were performed using R version 3.2.3 {R Develop
 * Statistical tests of WC, T, C, N on individual core fluxes (Table 2)
 
 * Cumulative fluxes (Figure 4)
+
+Cumulative CO~2~ evolved was highly affected by temperature (`r pclean(co2_hsd$Temperature["p adj"])`), and field moisture cores emitted significantly more CO~2~ than the other two treatments at both temperatures (P < 0.001 for both). There was no difference between the 20 °C drought and controlled drought treatments (`r pclean(co2_hsd$Treatment["Drought-Controlled drought", "p adj"])`). Neither temperature (`r pclean(ch4_hsd$Temperature[,"p adj"])`) nor treatment (mean `r pclean(mean(ch4_hsd$Treatment[,"p adj"]))`) was a significant factor in predicting cumulative CH~4~ fluxes.
+
 * CO2:CH4 ratios
 * Statistical tests of WC and temperature on cumulative fluxes
 

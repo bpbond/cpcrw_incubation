@@ -6,6 +6,7 @@ source("R/0-functions.R")
 SCRIPTNAME  	<- "5-analyze.R"
 FLUXDATA   <- file.path(outputdir(scriptfolder = FALSE), "fluxdata.csv")
 FLUXDATA_CUMULATIVE <- file.path(outputdir(scriptfolder = FALSE), "fluxdata_cumulative.csv")
+FD_CUMULATIVE_CORE <- file.path(outputdir(scriptfolder = FALSE), "fd_cumulative_core.csv")
 
 library(broom)  # 0.4.0
 library(reshape2) # 1.4.1
@@ -72,8 +73,29 @@ fluxdata_figsBC %>%
   figureC
 
 # -----------------------------------------------------------------------------
-# Cumulative flux figure
+# Cumulative flux figure and Tukey HSD tests
 
+printlog("Running Tukey HSD tests on cumulative emissions...")
+fd_cumulative_core <- read_csv(FD_CUMULATIVE_CORE) %>%
+  mutate(Temperature = as.factor(Temperature))
+co2_aov <- aov(cum_flux_mgC ~ Treatment + Temperature, 
+               data = subset(fd_cumulative_core, Gas == "CO2"))
+co2_hsd <- TukeyHSD(co2_aov)
+print(co2_hsd)
+ch4_aov <- aov(cum_flux_mgC ~ Treatment + Temperature, 
+               data = subset(fd_cumulative_core, Gas == "CH4"))
+ch4_hsd <- TukeyHSD(ch4_aov)
+print(ch4_hsd)
+
+# Convert the significance data to data frame, for easier (clearer)
+# access later by the manuscript code
+co2_hsd$Temperature <- as.data.frame(co2_hsd$Temperature)
+co2_hsd$Treatment <- as.data.frame(co2_hsd$Treatment)
+ch4_hsd$Temperature <- as.data.frame(ch4_hsd$Temperature)
+ch4_hsd$Treatment <- as.data.frame(ch4_hsd$Treatment)
+
+
+printlog("Making plot...")
 fluxdata_cumulative <- read_csv(FLUXDATA_CUMULATIVE)
 fluxdata_cumulative$Treatment <- factor(fluxdata_cumulative$Treatment, 
                                         levels = c("Field moisture", "Controlled drought", "Drought"))
@@ -87,6 +109,7 @@ figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Tre
                 position = position_dodge(0.9), width = 0.4) +  
   facet_grid(Gas ~ ., scales = "free") +
   ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$inctime_days)), "days"))
+
 
 # -----------------------------------------------------------------------------
 # Examine data distribution
