@@ -96,6 +96,20 @@ All data analysis and statistics were performed using R version 3.2.3 {R Develop
 Cumulative CO~2~ evolved was highly affected by temperature (`r pclean(co2_hsd$Temperature["p adj"])`), and field moisture cores emitted significantly more CO~2~ than the other two treatments at both temperatures (P < 0.001 for both). There was no difference between the 20 °C drought and controlled drought treatments (`r pclean(co2_hsd$Treatment["Drought-Controlled drought", "p adj"])`). Neither temperature (`r pclean(ch4_hsd$Temperature[,"p adj"])`) nor treatment (mean `r pclean(mean(ch4_hsd$Treatment[,"p adj"]))`) was a significant factor in predicting cumulative CH~4~ fluxes.
 
 * CO2:CH4 ratios
+
+```{r, echo=FALSE}
+minmag <- min(gas_ratio$CO2CH4_ratio) %>% log10 %>% floor %>%
+  c("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")[.]
+minratio <- min(gas_ratio$CO2CH4_ratio / 1e6)  %>% formatC(digits = 1, format = 'f')
+mintrt <- gas_ratio$Treatment[which.min(gas_ratio$CO2CH4_ratio)]
+mintemp <- gas_ratio$Temperature[which.min(gas_ratio$CO2CH4_ratio)]
+maxratio <- max(gas_ratio$CO2CH4_ratio / 1e6) %>% formatC(digits = 1, format = 'f')
+maxtrt <- gas_ratio$Treatment[which.max(gas_ratio$CO2CH4_ratio)]
+maxtemp <- gas_ratio$Temperature[which.max(gas_ratio$CO2CH4_ratio)]
+```
+
+The production of C from CO~2~ was over `r minmag` order of magnitudes higher than that from CH~4~, with CO~2~:CH~4~ ratios ranging from `r minratio` million in the `r mintemp` °C `r maxtrt` treatment, to `r maxratio` million in the `r maxtemp` °C `r maxtrt` treatment.
+
 * Statistical tests of WC and temperature on cumulative fluxes
 
 #### Discussion

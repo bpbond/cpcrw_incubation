@@ -56,7 +56,7 @@ fluxdata %>%
 
 figsBC <- function(fd) {
   panellabels <- 
-  ggplot(fd, aes(incday, flux)) + 
+    ggplot(fd, aes(incday, flux)) + 
     geom_point() + 
     facet_grid(Temperature ~ Treatment) + 
     geom_errorbar(aes(ymin = flux - flux_sd, ymax = flux + flux_sd)) +
@@ -110,6 +110,17 @@ figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Tre
   facet_grid(Gas ~ ., scales = "free") +
   ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$inctime_days)), "days"))
 
+
+# -----------------------------------------------------------------------------
+# CO2:CH4 emissions ratio
+
+printlog("Computing emissions ratios...")
+fluxdata_cumulative %>% 
+  group_by(Treatment, Temperature) %>% 
+  summarise(CO2CH4_ratio = max(cum_flux_mgC) / min(cum_flux_mgC)) %>%
+  na.omit %>%
+  print ->
+  gas_ratio
 
 # -----------------------------------------------------------------------------
 # Examine data distribution
