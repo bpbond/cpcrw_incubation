@@ -89,8 +89,6 @@ All data analysis and statistics were performed using R version 3.2.3 {R Develop
 
 #### Results
 
-* Core BD
-
 ```{r coredata, echo=FALSE}
 bd <- with(coredata, SoilDryMass_g / CoreVolume_cm3)
 schist <- with(coredata, NonsoilMassLarge_g / (NonsoilMassLarge_g + SoilDryMass_g)) * 100
@@ -99,19 +97,19 @@ sdm <- coredata$SoilDryMass_g
 
 The `r nrow(coredata)` experimental cores had a bulk density of `r pn(mean(bd), 2)` ± `r pn(sd(bd), 2)` (mean ± sd) g cm^-3^. Large (>2 mm) particles, primarily schist, comprised `r round(mean(schist), 0)`% ± `r round(sd(schist), 0)`% of the cores' total mass. Soil (≤2 mm) dry mass was `r round(mean(sdm), 0)` ± `r round(sd(sdm), 0)` g. 
 
-* Soil WC changes over incubation
-
 ```{r wc, echo=FALSE}
 # wc and wc_alltrt are computed by 5-analyze.R script
-wcbegin <- subset(wc_alltrt, stage == "Beginning")
-wcend <- subset(wc, stage == "End")
-wcendmean <- wcend$mean
-names(wcendmean) <- wcend$Treatment
-wcendsd <- wcend$sd
-names(wcendsd) <- wcend$Treatment
+gwcbegin <- subset(gwc_alltrt, stage == "Beginning")
+gwcend <- subset(gwc, stage == "End")
+gwcendmean <- gwcend$mean
+names(gwcendmean) <- gwcend$Treatment
+gwcendsd <- gwcend$sd
+names(gwcendsd) <- gwcend$Treatment
+vwcbegin <- subset(vwc_alltrt, stage == "Beginning")
+vwcend <- subset(vwc_alltrt, stage == "End")
 ```
 
-Gravimetric water content was `r pn(wcbegin$mean, 2)` ± `r pn(wcbegin$sd, 2)` (min `r pn(wcbegin$min, 2)`, max `r pn(wcbegin$max, 2)`) at the beginning of the incubation (**Figure 1**). "Field moisture" cores were on average unchanged (`r pn(wcendmean["Field moisture"], 2)` ± `r pn(wcendsd["Field moisture"], 2)`) at the end of the incubation, but both the drought treatments, which did not differ from each other in their effect on gravimetric water content, had declined to `r pn(wcendmean["Drought"], 2)` ±  `r pn(wcendsd["Drought"], 2)`.
+Gravimetric water content was `r pn(gwcbegin$mean, 2)` ± `r pn(gwcbegin$sd, 2)` (min `r pn(gwcbegin$min, 2)`, max `r pn(gwcbegin$max, 2)`) at the beginning of the incubation (**Figure 1**). "Field moisture" cores were on average unchanged (`r pn(gwcendmean["Field moisture"], 2)` ± `r pn(gwcendsd["Field moisture"], 2)`) at the end of the incubation, but both the drought treatments, which did not differ from each other in their effect on gravimetric water content, had declined to `r pn(gwcendmean["Drought"], 2)` ±  `r pn(gwcendsd["Drought"], 2)`. Volumetric water content values ranged from `r pn(vwcbegin$mean, 2)` ± `r pn(vwcbegin$sd, 2)` (min `r pn(vwcbegin$min, 2)`, max `r pn(vwcbegin$max, 2)`) at the beginning of the experiment to `r pn(vwcend$mean, 2)` ± `r pn(vwcend$sd, 2)` (min `r pn(vwcend$min, 2)`, max `r pn(vwcend$max, 2)`) at the end.
 
 * Soil C, N, DOC means
 

@@ -1,6 +1,5 @@
-# Common function definitions.
-# Most critically, this file provides easy ggplot and data saving; 
-# logged csv[.gz|zip] read/write; and a few other handy things.
+# Common function and file location definitions.
+# This script is source'd by every other script before executing.
 # Ben Bond-Lamberty March 2015
 
 # -----------------------------------------------------------------------------
@@ -37,7 +36,7 @@ SEPARATOR		  <- "-------------------"
 
 # -----------------------------------------------------------------------------
 # Print dimensions of data frame
-print_dims <- function(d, dname=deparse(substitute(d))) {
+print_dims <- function(d, dname = deparse(substitute(d))) {
   stopifnot(is.data.frame(d))
   printlog(dname, "rows =", nrow(d), "cols =", ncol(d))
 } # print_dims
@@ -49,7 +48,7 @@ print_dims <- function(d, dname=deparse(substitute(d))) {
 outputdir <- function(scriptfolder = TRUE) {
   output_dir <- OUTPUT_DIR
   if(scriptfolder) output_dir <- file.path(output_dir, sub(".R$", "", SCRIPTNAME))
-  if(!file.exists(output_dir)) dir.create(output_dir)
+  if(!file.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
   output_dir
 } # outputdir
 
@@ -102,7 +101,7 @@ is_outlier <- function(x, devs = 3.2) {
   # J. Amer. Statist. Assoc., 88, 782-801.
   x <- na.omit(x)
   lims <- median(x) + c(-1, 1) * devs * mad(x, constant = 1)
-  x < lims[ 1 ] | x > lims[2]
+  x < lims[1] | x > lims[2]
 } # is_outlier
 
 # -----------------------------------------------------------------------------
@@ -116,11 +115,6 @@ save_diagnostic <- function(p, pname, printit = TRUE, ...) {
   save_plot(pname, ...)
 }
 
-
-if(!file.exists(OUTPUT_DIR)) {
-  printlog("Creating", OUTPUT_DIR)
-  dir.create(OUTPUT_DIR)
-}
 
 # -----------------------------------------------------------------------------
 #CHECKPOINTDATE	<- "2015-03-05" # comment out to not use checkpoint

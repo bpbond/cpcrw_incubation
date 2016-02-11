@@ -18,10 +18,13 @@ printlog("Welcome to", SCRIPTNAME)
 coredata <- read_csv(COREDATA_FILE, skip = 1)
 
 fluxdata_orig <- read_csv(FLUXDATA_FILE)
+fluxdata_orig$Treatment <- factor(fluxdata_orig$Treatment, 
+                                  levels = c("Field moisture", "Controlled drought", "Drought"))
 
 printlog("Transforming...")
 fluxdata_orig %>%
-  select(Core, Treatment, Temperature, inctime_days, WC_gravimetric, CO2_flux_µmol_g_s, CH4_flux_µmol_g_s,
+  select(Core, Treatment, Temperature, inctime_days, WC_gravimetric, WC_volumetric,
+         CO2_flux_µmol_g_s, CH4_flux_µmol_g_s,
          CO2_outlier, CH4_outlier) %>%
   melt(measure.vars = c("CO2_flux_µmol_g_s", "CH4_flux_µmol_g_s"),
        value.name = "flux_µmol_g_s") %>%
@@ -30,8 +33,6 @@ fluxdata_orig %>%
   mutate(Gas = substr(variable, 1, 3)) %>%
   select(-variable, -outlier_name) ->
   fluxdata
-
-fluxdata$Treatment <- factor(fluxdata$Treatment, levels = c("Field moisture", "Controlled drought", "Drought"))
 
 save_data(fluxdata, fn = "fluxdata_long.csv")
 
@@ -51,12 +52,22 @@ fluxdata %>%
   filter(!is.na(stage)) %>%
   group_by(stage, Treatment) %>% 
   summarise_each(funs(mean, sd, max, min), WC_gravimetric) ->
-  wc
+  gwc
 fluxdata %>% 
   filter(!is.na(stage)) %>%
   group_by(stage) %>% 
   summarise_each(funs(mean, sd, max, min), WC_gravimetric) ->
-  wc_alltrt
+  gwc_alltrt
+fluxdata %>% 
+  filter(!is.na(stage)) %>%
+  group_by(stage, Treatment) %>% 
+  summarise_each(funs(mean, sd, max, min), WC_volumetric) ->
+  vwc
+fluxdata %>% 
+  filter(!is.na(stage)) %>%
+  group_by(stage) %>% 
+  summarise_each(funs(mean, sd, max, min), WC_volumetric) ->
+  vwc_alltrt
 
 # -----------------------------------------------------------------------------
 # Fluxes over time figure
