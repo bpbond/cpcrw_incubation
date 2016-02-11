@@ -3,11 +3,8 @@
 # logged csv[.gz|zip] read/write; and a few other handy things.
 # Ben Bond-Lamberty March 2015
 
-INPUT_DIR     <- "data/"
-OUTPUT_DIR		<- "outputs/"
-#CHECKPOINTDATE	<- "2015-03-05" # comment out to not use checkpoint
-SEPARATOR		<- "-------------------"
-
+# -----------------------------------------------------------------------------
+# Key packages used across scripts
 library(ggplot2)       # 2.0.0
 theme_set(theme_bw())
 library(dplyr)         # 0.4.3
@@ -19,8 +16,23 @@ library(luzlogr)       # 0.1.2
 # -----------------------------------------------------------------------------
 # Parameters for key analytical choices
 # Defined here so they can be easily used in code AND manuscript
-CO2_EXCLUDE_DEVS <- 3.0
-CH4_EXCLUDE_DEVS <- 5.0
+CO2_EXCLUDE_DEVS <- 3.0    # CO2 outlier boundary, in mean absolute deviations
+CH4_EXCLUDE_DEVS <- 5.0    # CH4 outlier boundary, in mean absolute deviations
+
+# -----------------------------------------------------------------------------
+# Key files and directories shared between scripts
+OUTPUT_DIR		         <- "outputs/"
+DIAGNOSTICS_DIR        <- "qc_plots/"
+RAWDATA_FILE           <- file.path(OUTPUT_DIR, "rawdata.csv.gz")
+RAWDATA_SAMPLES_FILE   <- file.path(OUTPUT_DIR, "rawdata_samples.csv.gz")
+SUMMARYDATA_FILE       <- file.path(OUTPUT_DIR, "summarydata.csv")
+SUMMARYDATA_CLEAN_FILE <- file.path(OUTPUT_DIR, "summarydata_clean.csv")
+FLUXDATA_FILE          <- file.path(OUTPUT_DIR, "fluxdata.csv")
+FLUXDATA_CUM_FILE      <- file.path(OUTPUT_DIR, "fluxdata_cum.csv")
+FLUXDATA_CUM_CORE_FILE <- file.path(OUTPUT_DIR, "fluxdata_cum_core.csv")
+
+SEPARATOR		  <- "-------------------"
+
 
 # -----------------------------------------------------------------------------
 # Print dimensions of data frame
@@ -33,7 +45,7 @@ print_dims <- function(d, dname=deparse(substitute(d))) {
 # Return output directory (perhaps inside a script-specific folder)
 # If caller specifies `scriptfolder=FALSE`, return OUTPUT_DIR
 # If caller specifies `scriptfolder=TRUE` (default), return OUTPUT_DIR/SCRIPTNAME
-outputdir <- function(scriptfolder=TRUE) {
+outputdir <- function(scriptfolder = TRUE) {
   output_dir <- OUTPUT_DIR
   if(scriptfolder) output_dir <- file.path(output_dir, sub(".R$", "", SCRIPTNAME))
   if(!file.exists(output_dir)) dir.create(output_dir)
@@ -42,7 +54,7 @@ outputdir <- function(scriptfolder=TRUE) {
 
 # -----------------------------------------------------------------------------
 # Save a ggplot figure
-save_plot <- function(pname, p=last_plot(), ptype=".pdf", scriptfolder=TRUE, ...) {
+save_plot <- function(pname, p = last_plot(), ptype = ".pdf", scriptfolder = TRUE, ...) {
   fn <- file.path(outputdir(scriptfolder), paste0(pname, ptype))
   printlog("Saving", fn)
   ggsave(fn, p, ...)
@@ -50,36 +62,40 @@ save_plot <- function(pname, p=last_plot(), ptype=".pdf", scriptfolder=TRUE, ...
 
 # -----------------------------------------------------------------------------
 # Save a data frame
-save_data <- function(df, fname=paste0(deparse(substitute(df)), ".csv"), scriptfolder=TRUE, gzip=FALSE, ...) {
-  fn <- file.path(outputdir(scriptfolder), fname)
-  if(gzip) {
-    printlog("Saving", fn, "[gzip]")    
-    fn <- gzfile(paste0(fn, ".gz"))
+save_data <- function(df, 
+                      fn = paste0(deparse(substitute(df)), ".csv"), 
+                      scriptfolder = TRUE, 
+                      gzip = FALSE, ...) {
+  # If no directory name supplied, construct a path by calling outputdir()
+  if(dirname(fn) == ".") {
+    fqfn <- file.path(outputdir(scriptfolder), fn)
   } else {
-    printlog("Saving", fn)    
+    if(scriptfolder) warning("Not writing to script folder")
+    fqfn <- fn
   }
-  write.csv(df, fn, row.names=FALSE, ...)
+  
+  # If ends in ".gz" strip off and set gzip flag
+  if(grepl(".gz$", fqfn)) {
+    fqfn <- gsub(".gz$", "", fqfn)
+    gzip <- TRUE
+  }
+  
+  printlog("Saving", fqfn)    
+  readr::write_csv(df, path = fqfn, ...)
+  
+  # If gzip flag set, or filename ends with ".gz", attempt to gzip
+  if(gzip) {
+    if(require(R.utils, quietly = TRUE)) {
+      printlog("gzipping", fqfn)
+      R.utils::gzip(fqfn, overwrite = TRUE)    
+    } else {
+      warning("R.utils not available - can't gzip")
+    }
+  }
 } # save_data
 
 # -----------------------------------------------------------------------------
-# Open a (possibly compressed) csv file and return data
-read_csv <- function(fn, datadir=".", ...) {
-  if(is.null(datadir)) {  # NULL signifies absolute path
-    fqfn <- fn 
-  } else {
-    fqfn <- file.path(datadir, fn)      
-  }
-  printlog("Opening", fqfn)
-  if(grepl(".gz$", fqfn)) {
-    fqfn <- gzfile(fqfn)
-  } else if(grepl(".zip$", fqfn)) {
-    fqfn <- unz(fqfn)
-  }
-  invisible(read.csv(fqfn, stringsAsFactors=F, ...))
-} # read_csv (I had this name before Hadley!)
-
-# -----------------------------------------------------------------------------
-is_outlier <- function(x, devs=3.2) {
+is_outlier <- function(x, devs = 3.2) {
   # See: Davies, P.L. and Gather, U. (1993).
   # "The identification of multiple outliers" (with discussion)
   # J. Amer. Statist. Assoc., 88, 782-801.
@@ -91,9 +107,11 @@ is_outlier <- function(x, devs=3.2) {
 # -----------------------------------------------------------------------------
 # save a plot to the diagnostic plot folder (used by README.md)
 save_diagnostic <- function(p, pname, printit = TRUE, ...) {
-  print(p)
+  if(printit) print(p)
   printlog("Saving diagnostic for", pname)
-  ggsave(paste0("qc_plots/", pname, ".png"))
+  paste0(pname, ".png") %>%
+    file.path(DIAGNOSTICS_DIR, .) %>%
+    ggsave
   save_plot(pname, ...)
 }
 
@@ -104,5 +122,6 @@ if(!file.exists(OUTPUT_DIR)) {
 }
 
 # -----------------------------------------------------------------------------
+#CHECKPOINTDATE	<- "2015-03-05" # comment out to not use checkpoint
 #if(exists("CHECKPOINTDATE") & require(checkpoint))
 #    try(checkpoint(CHECKPOINTDATE)) # 'try' b/c errors w/o network (issue #171)

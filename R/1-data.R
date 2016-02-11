@@ -54,16 +54,13 @@ process_directory <- function(input_path, tempfile) {
   }
 }
 
-
 # ==============================================================================
 # Main 
 
 openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE)
 
 printlog("Welcome to", SCRIPTNAME)
-
 printlog("Data directory is", DATA_DIR)
-
 tf <- tempfile()
 printlog("Tempfile is", tf)
 
@@ -76,7 +73,7 @@ print_dims(rawdata)
 print(summary(rawdata))
 
 printlog("Writing output file...")
-save_data(rawdata, scriptfolder = FALSE, gzip = TRUE)
+save_data(rawdata, fn = RAWDATA_FILE, scriptfolder = FALSE)
 
 printlog("All done with", SCRIPTNAME)
 closelog()

@@ -6,7 +6,6 @@ source("R/0-functions.R")
 SCRIPTNAME  	<- "4-fluxes.R"
 PROBLEM       <- FALSE
 
-SUMMARYDATA   <- file.path(outputdir(scriptfolder = FALSE), "summarydata_clean.csv")
 DRYMASSDATA   <- "data/drymasses.csv"
 
 library(reshape2)      # 1.4.1
@@ -18,7 +17,7 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 
 printlog("Welcome to", SCRIPTNAME)
 
-summarydata <- read_csv(SUMMARYDATA)
+summarydata <- read_csv(SUMMARYDATA_CLEAN_FILE)
 print_dims(summarydata)
 
 drymassdata <- read_csv(DRYMASSDATA, skip = 1)
@@ -132,7 +131,7 @@ p <- p + ggtitle("Dry mass-corrected flux rates")
 print(p)
 save_diagnostic(p, "CH4_outliers")
 
-save_data(fluxdata, scriptfolder = FALSE)
+save_data(fluxdata, fn = FLUXDATA_FILE, scriptfolder = FALSE)
 
 
 # -----------------------------------------------------------------------------
@@ -195,7 +194,7 @@ fluxdata %>%
   summarise(cum_flux_mgC = last(value)) -> 
   fd_cumulative_core
 
-save_data(fd_cumulative_core, scriptfolder = FALSE)
+save_data(fd_cumulative_core, fn = FLUXDATA_CUM_CORE_FILE, scriptfolder = FALSE)
 
 fd_cumulative_core %>%   # already grouped by Treatment, Temperature, Gas
   summarise(cum_flux_mgC_sd = sd(cum_flux_mgC),
@@ -229,7 +228,7 @@ p3 <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatmen
   ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$inctime_days)), "days")) +
   ggtitle("Cumulative C by gas, treatment, temperature")
 save_diagnostic(p3, "cumulative_gas")
-save_data(fluxdata_cumulative, scriptfolder = FALSE)
+save_data(fluxdata_cumulative, fn = FLUXDATA_CUM_FILE, scriptfolder = FALSE)
 
 # -----------------------------------------------------------------------------
 # Done!

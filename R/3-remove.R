@@ -11,7 +11,6 @@ PROBLEM       <- FALSE
 CATEGORY_ERROR <- "Error"
 CATEGORY_OUTLIER <- "Outlier"
 
-SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata.csv")  # output from script 2
 REMOVALS     <- file.path("data/", "removals.csv")
 
 # ==============================================================================
@@ -22,7 +21,7 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in summary data...")
-summarydata <- read_csv(SUMMARYDATA) %>%
+summarydata <- read_csv(SUMMARYDATA_FILE) %>%
   mutate(DATETIME = ymd_hms(DATETIME))
 print_dims(summarydata)
 
@@ -79,7 +78,7 @@ for(i in seq_len(nrow(removals))) {
 
 printlog(SEPARATOR)
 printlog("All done with removals and exclusions")
-save_data(summarydata_clean, scriptfolder=FALSE)
+save_data(summarydata_clean, fn = SUMMARYDATA_CLEAN_FILE, scriptfolder = FALSE)
 
 printlog("Removed data:", nrow(removed_data), "of", nrow(summarydata), "=",
          round(nrow(removed_data) / nrow(summarydata) * 100, 1), "%")

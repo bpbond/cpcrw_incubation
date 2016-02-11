@@ -10,11 +10,7 @@ source("R/0-functions.R")
 SCRIPTNAME  	<- "3.5-investigate.R"
 PROBLEM       <- FALSE
 
-SUMMARYDATA  <- file.path(OUTPUT_DIR, "summarydata_clean.csv")  # output from script 3
-RAWDATA      <- file.path(OUTPUT_DIR, "rawdata_samples.csv.gz")  # output from script 1
-TREATMENT_SUMMARYDATA  <- file.path(OUTPUT_DIR, "treatment_summary.csv")  # output from script 3
-
-library(digest)
+library(digest)  # 0.6.9
 
 # -----------------------------------------------------------------------------
 # make diagnostic plots etc. for a particular gas
@@ -90,9 +86,9 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in raw data...")
-rawdata <- readr::read_csv(RAWDATA)
+rawdata <- readr::read_csv(RAWDATA_FILE)
 printlog("Reading in summary data...")
-summarydata <- read_csv(SUMMARYDATA)
+summarydata <- read_csv(SUMMARYDATA_FILE)
 summarydata$DATETIME <- ymd_hms(summarydata$DATETIME)
 printlog("Reading in treatment summaries...")
 tsummary <- read_csv(TREATMENT_SUMMARYDATA)

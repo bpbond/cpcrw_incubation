@@ -1,12 +1,9 @@
-# Computes fluxes. In progress.
-# Ben Bond-Lamberty December 2015
+# Final analysis script: statistical tests, final plots, etc.
+# Ben Bond-Lamberty January 2016
 
 source("R/0-functions.R")
 
 SCRIPTNAME  	<- "5-analyze.R"
-FLUXDATA   <- file.path(outputdir(scriptfolder = FALSE), "fluxdata.csv")
-FLUXDATA_CUMULATIVE <- file.path(outputdir(scriptfolder = FALSE), "fluxdata_cumulative.csv")
-FD_CUMULATIVE_CORE <- file.path(outputdir(scriptfolder = FALSE), "fd_cumulative_core.csv")
 
 library(broom)  # 0.4.0
 library(reshape2) # 1.4.1
@@ -18,7 +15,7 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 
 printlog("Welcome to", SCRIPTNAME)
 
-fluxdata_orig <- read_csv(FLUXDATA)
+fluxdata_orig <- read_csv(FLUXDATA_FILE)
 
 printlog("Transforming...")
 fluxdata_orig %>%
@@ -34,7 +31,7 @@ fluxdata_orig %>%
 
 fluxdata$Treatment <- factor(fluxdata$Treatment, levels = c("Field moisture", "Controlled drought", "Drought"))
 
-save_data(fluxdata, fname = "fluxdata_long")
+save_data(fluxdata, fn = "fluxdata_long.csv")
 
 # -----------------------------------------------------------------------------
 # Water content over time figure
@@ -76,7 +73,7 @@ fluxdata_figsBC %>%
 # Cumulative flux figure and Tukey HSD tests
 
 printlog("Running Tukey HSD tests on cumulative emissions...")
-fd_cumulative_core <- read_csv(FD_CUMULATIVE_CORE) %>%
+fd_cumulative_core <- read_csv(FLUXDATA_CUM_CORE_FILE) %>%
   mutate(Temperature = as.factor(Temperature))
 co2_aov <- aov(cum_flux_mgC ~ Treatment + Temperature, 
                data = subset(fd_cumulative_core, Gas == "CO2"))
@@ -96,7 +93,7 @@ ch4_hsd$Treatment <- as.data.frame(ch4_hsd$Treatment)
 
 
 printlog("Making plot...")
-fluxdata_cumulative <- read_csv(FLUXDATA_CUMULATIVE)
+fluxdata_cumulative <- read_csv(FLUXDATA_CUM_FILE)
 fluxdata_cumulative$Treatment <- factor(fluxdata_cumulative$Treatment, 
                                         levels = c("Field moisture", "Controlled drought", "Drought"))
 fluxdata_cumulative$Temperature <- as.factor(fluxdata_cumulative$Temperature)

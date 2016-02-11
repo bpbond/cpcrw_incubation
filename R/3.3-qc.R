@@ -8,10 +8,6 @@ source("R/0-functions.R")
 SCRIPTNAME  	<- "3-qc.R"
 PROBLEM       <- FALSE
 
-SUMMARYDATA     <- file.path(OUTPUT_DIR, "summarydata_clean.csv")  # output from script 3
-RAWDATA_SAMPLES <- file.path(OUTPUT_DIR, "rawdata_samples.csv.gz")  # output from script 1
-
-
 # Main ===========================================================================
 
 openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # open log
@@ -19,7 +15,7 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in summary data...")
-summarydata <- read_csv(SUMMARYDATA)
+summarydata <- read_csv(SUMMARYDATA_CLEAN_FILE)
 print_dims(summarydata)
 
 summarydata$DATETIME <- ymd_hms(summarydata$DATETIME)
@@ -42,7 +38,7 @@ print(summarydata %>% group_by(Core) %>% summarise(n()) %>% as.data.frame())
 
 summarydata %>%   # save a list of samples and corresponding cores
   select(DATETIME, MPVPosition, Core) %>% 
-  save_data(fname="samplelist.csv")
+  save_data(fn = "samplelist.csv")
 
 printlog("Summaries for max_CH4 and max_CO2:")
 summary(summarydata$max_CO2)
@@ -116,7 +112,7 @@ core_cv <- core_cv[1:25,]    # only do this many detail plots
 MAX_COMBINED_PLOTS <- 9
 
 printlog("Reading in raw data...")
-rawdata <- readr::read_csv(RAWDATA_SAMPLES, col_types = "ccddddcid")
+rawdata <- readr::read_csv(RAWDATA_SAMPLES_FILE, col_types = "ccddddcid")
 rawdata$samplenum <- as.factor(rawdata$samplenum)
 summarydata$samplenum <- as.factor(summarydata$samplenum)
 

@@ -12,7 +12,6 @@ source("R/0-functions.R")
 SCRIPTNAME  	<- "2-summarize.R"
 PROBLEM       <- FALSE
 
-RAWDATA      <- file.path(OUTPUT_DIR, "rawdata.csv.gz")  # output from script 1
 VALVEMAP     <- "data/valvemap.csv"
 TREATMENTS   <- "data/treatments.csv"
 
@@ -48,7 +47,8 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in raw data...")
-rawdata <- readr::read_csv(RAWDATA, col_types = "ccddddiiiddddddddc") %>%
+rawdata <- read_csv(RAWDATA_FILE, col_types = "ccddddiiiddddddddc") %>%
+#readr::read_csv(file.path(INPUT_DIR, RAWDATA_FILE), col_types = "ccddddiiiddddddddc") %>%
   # immediate discard columns we don't need
   select(DATE, TIME, MPVPosition, CH4_dry, CO2_dry, h2o_reported)
 print_dims(rawdata)
@@ -86,7 +86,7 @@ rawdata_samples <- rawdata %>%
 
 # Load and QC the valvemap data
 printlog("Loading valve map data...")
-valvemap <- read_csv(VALVEMAP, skip = 1)
+valvemap <- read_csv(VALVEMAP, skip = 1, col_types = "ccnncdc")
 printlog( "Converting date/time info to POSIXct..." )
 valvemap$StartDateTime <- mdy_hm(paste(valvemap$Date, valvemap$Time_set_start))
 valvemap <- arrange(valvemap, StartDateTime)
@@ -180,8 +180,8 @@ save_data(MPVPosition_checkdata)
 # -----------------------------------------------------------------------------
 # Done! 
 
-save_data(summarydata, scriptfolder = FALSE)
-save_data(rawdata_samples, scriptfolder = FALSE, gzip = TRUE)
+save_data(summarydata, fn = SUMMARYDATA_FILE, scriptfolder = FALSE)
+save_data(rawdata_samples, fn = RAWDATA_SAMPLES_FILE, scriptfolder = FALSE)
 
 printlog("All done with", SCRIPTNAME)
 closelog()
