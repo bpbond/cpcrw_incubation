@@ -1,7 +1,7 @@
 ---
 title: 'Running an open experiment: transparency and reproducibility in soil and ecosystem
   science'
-author: "Ben Bond-Lamberty^1^, Peyton Smith^2^, Vanessa Bailey^2^"
+author: "Ben Bond-Lamberty^1^, A. Peyton Smith^2^, Vanessa Bailey^2^"
 date: "February 2, 2016"
 output: word_document
 ---

@@ -1,6 +1,6 @@
 ---
 title: Temperature and moisture effects on greenhouse gas emissions from deep active-layer boreal soils
-author: "Ben Bond-Lamberty^1^, Peyton Smith^2^, Vanessa Bailey^2^"
+author: "Ben Bond-Lamberty^1^, A. Peyton Smith^2^, Vanessa Bailey^2^"
 output: html_document
 ---
 ^1^Joint Global Change Research Institute, DOE Pacific Northwest National Laboratory, College Park, MD USA; 
@@ -15,6 +15,9 @@ pclean <- function(x) {  # pretty formatting of p-values
   ifelse(x < 0.001, "< 0.001", paste("=", formatC(x, digits = 3, format = 'f'))) %>%
     paste("P", .)
 }
+
+# 'Pretty n' function to round a numeric value and print that # of digits
+pn <- function(x, n) formatC(round(x, n), digits = n, format = 'f')
 
 # Run the analysis script, which will leave a lot of figures, tables, and data in memory for us
 setwd("../")
@@ -86,7 +89,29 @@ All data analysis and statistics were performed using R version 3.2.3 {R Develop
 
 #### Results
 
-* Soil WC changes over incubation (Figure 1)
+* Core BD
+
+```{r coredata, echo=FALSE}
+bd <- with(coredata, SoilDryMass_g / CoreVolume_cm3)
+schist <- with(coredata, NonsoilMassLarge_g / (NonsoilMassLarge_g + SoilDryMass_g)) * 100
+sdm <- coredata$SoilDryMass_g
+```
+
+The `r nrow(coredata)` experimental cores had a bulk density of `r pn(mean(bd), 2)` ± `r pn(sd(bd), 2)` (mean ± sd) g cm^-3^. Large (>2 mm) particles, primarily schist, comprised `r round(mean(schist), 0)`% ± `r round(sd(schist), 0)`% of the cores' total mass. Soil (≤2 mm) dry mass was `r round(mean(sdm), 0)` ± `r round(sd(sdm), 0)` g. 
+
+* Soil WC changes over incubation
+
+```{r wc, echo=FALSE}
+# wc and wc_alltrt are computed by 5-analyze.R script
+wcbegin <- subset(wc_alltrt, stage == "Beginning")
+wcend <- subset(wc, stage == "End")
+wcendmean <- wcend$mean
+names(wcendmean) <- wcend$Treatment
+wcendsd <- wcend$sd
+names(wcendsd) <- wcend$Treatment
+```
+
+Gravimetric water content was `r pn(wcbegin$mean, 2)` ± `r pn(wcbegin$sd, 2)` (min `r pn(wcbegin$min, 2)`, max `r pn(wcbegin$max, 2)`) at the beginning of the incubation (**Figure 1**). "Field moisture" cores were on average unchanged (`r pn(wcendmean["Field moisture"], 2)` ± `r pn(wcendsd["Field moisture"], 2)`) at the end of the incubation, but both the drought treatments, which did not differ from each other in their effect on gravimetric water content, had declined to `r pn(wcendmean["Drought"], 2)` ±  `r pn(wcendsd["Drought"], 2)`.
 
 * Soil C, N, DOC means
 

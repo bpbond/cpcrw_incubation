@@ -6,8 +6,6 @@ source("R/0-functions.R")
 SCRIPTNAME  	<- "4-fluxes.R"
 PROBLEM       <- FALSE
 
-DRYMASSDATA   <- "data/drymasses.csv"
-
 library(reshape2)      # 1.4.1
 
 # ==============================================================================
@@ -20,7 +18,7 @@ printlog("Welcome to", SCRIPTNAME)
 summarydata <- read_csv(SUMMARYDATA_CLEAN_FILE)
 print_dims(summarydata)
 
-drymassdata <- read_csv(DRYMASSDATA, skip = 1)
+drymassdata <- read_csv(COREDATA_FILE, skip = 1)
 summarydata <- left_join(summarydata, drymassdata, by = "Core")
 
 # -----------------------------------------------------------------------------

@@ -15,6 +15,8 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 
 printlog("Welcome to", SCRIPTNAME)
 
+coredata <- read_csv(COREDATA_FILE, skip = 1)
+
 fluxdata_orig <- read_csv(FLUXDATA_FILE)
 
 printlog("Transforming...")
@@ -34,12 +36,27 @@ fluxdata$Treatment <- factor(fluxdata$Treatment, levels = c("Field moisture", "C
 save_data(fluxdata, fn = "fluxdata_long.csv")
 
 # -----------------------------------------------------------------------------
-# Water content over time figure
+# Water content over time figure and data
 
 figureA <- ggplot(fluxdata_orig, aes(inctime_days, WC_gravimetric, color=Treatment, group=Core)) 
 figureA <- figureA + geom_point() + geom_line()
 figureA <- figureA + facet_grid(~Temperature) 
 figureA <- figureA + xlab("Incubation day") + ylab("Gravimetric water content (fraction dry mass)")
+
+fluxdata$incday <- floor(fluxdata$inctime_days)
+fluxdata$stage <- NA
+fluxdata$stage[fluxdata$incday == min(fluxdata$incday)] <- "Beginning"
+fluxdata$stage[fluxdata$incday == max(fluxdata$incday)] <- "End"
+fluxdata %>% 
+  filter(!is.na(stage)) %>%
+  group_by(stage, Treatment) %>% 
+  summarise_each(funs(mean, sd, max, min), WC_gravimetric) ->
+  wc
+fluxdata %>% 
+  filter(!is.na(stage)) %>%
+  group_by(stage) %>% 
+  summarise_each(funs(mean, sd, max, min), WC_gravimetric) ->
+  wc_alltrt
 
 # -----------------------------------------------------------------------------
 # Fluxes over time figure
@@ -84,13 +101,12 @@ ch4_aov <- aov(cum_flux_mgC ~ Treatment + Temperature,
 ch4_hsd <- TukeyHSD(ch4_aov)
 print(ch4_hsd)
 
-# Convert the significance data to data frame, for easier (clearer)
+# Convert the significance data to data frame, for easier (and clearer)
 # access later by the manuscript code
 co2_hsd$Temperature <- as.data.frame(co2_hsd$Temperature)
 co2_hsd$Treatment <- as.data.frame(co2_hsd$Treatment)
 ch4_hsd$Temperature <- as.data.frame(ch4_hsd$Temperature)
 ch4_hsd$Treatment <- as.data.frame(ch4_hsd$Treatment)
-
 
 printlog("Making plot...")
 fluxdata_cumulative <- read_csv(FLUXDATA_CUM_FILE)
