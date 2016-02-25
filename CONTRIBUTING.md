@@ -1,10 +1,10 @@
-**tl;dr** We welcome contributions, but they become our property when made. We alone judge when contributions merit formal acknowledgment or co-authorship, and do so following standard scientific norms.
+**tl;dr** We welcome contributions, but they become our property when made. We alone judge when contributions merit formal acknowledgment or co-authorship; in doing so we follow standard scientific norms and [PNNL](http://www.pnnl.gov) legal requirements.
 
 # How to contribute
 
 We welcome outside contributions. In particular, we're happy to have mistakes pointed out, other analyses suggested, and better ways to do things brought to our attention. In advance, *thank you*!
 
-That said, this repository does differ in subtle ways from a typical open-source software project. Specifically, we reserve to ourselves sole discretion about when contributions merit co-authorship on papers and other research products, versus formal acknowledgment, versus just a "hey, thanks!" in an issue. In other words, because we have a lot of work invested in this project, and the end product is quite valuable career-wise, we need to be deliberate about which contributions we accept, and how they're rewarded.
+That said, this repository differs in subtle ways from a typical open-source software project. Specifically, we reserve to ourselves sole discretion about when contributions merit co-authorship on papers and other research products, versus formal acknowledgment, versus just a "hey, thanks!" in an issue. In other words, because we have a lot of work invested in this project, and the end product is quite valuable career-wise, we need to be deliberate about which contributions we accept, and how they're rewarded.
 
 ## Getting Started
 
@@ -12,7 +12,7 @@ That said, this repository does differ in subtle ways from a typical open-source
 * **Open an issue** (after making sure one does not already exist) describing your question or proposed change.
 * Clearly describe the issue, including steps to reproduce when it is a bug.
 * Interact with the project maintainers to refine/change/prioritize your issue. We may then invite a pull request (below), or may not.
-* Trivial changes to comments or documentation do not require creating a new issue.
+* Trivial changes to comments or documentation do not require creating a new issue--just submit a PR.
 
 ## Making Changes
 
