@@ -10,7 +10,7 @@ library(dplyr)         # 0.4.3
 library(readr)         # 0.2.2
 library(lubridate)     # 1.5.0
 library(stringr)       # 1.0.0
-library(luzlogr)       # 0.1.2
+library(luzlogr)       # 0.2.0
 
 # -----------------------------------------------------------------------------
 # Parameters for key analytical choices
