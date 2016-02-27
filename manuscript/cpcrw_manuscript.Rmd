@@ -38,6 +38,8 @@ The magnitude, timing, and form-in particular as methane (CH~4~) or carbon dioxi
 
 Temperature and moisture typically have strong and often interactive influences on soil GHG emissions. A long literature of laboratory incubations, field observations, and meta-analyses has documented increased CO2 fluxes with rising temperature {Davidson, 2006 #1669}{Hashimoto, 2015 #4231}{Treat, 2015 #4217}. GHG responses to wetting and thawing dynamics are much less certain, with substantial variability between studies {Kim, 2012 #2863}. The anaerobic conditions common following permafrost thaw lower CO~2~ emissions but increase those of CH~4~ {Treat, 2015 #4217;Treat, 2014 #4213}, and interact with soil temperature effects in long-term incubations {Elberling, 2013 #3720}. Such laboratory studies have weaknesses, but their controlled environments provide an important way to elucidate the key mechanisms controlling GHG from high-latitude soils {Schuur, 2015 #4319}. TODO: add Kirschbaum 2006. Most studies have focused on surface soils or permafrost soils, however, neglecting deep soils that experience fluctuating temperature with season and moisture with potential permafrost thaw ..or something less awkward (TODO; CITE). Such deep but unfrozen soils were identified as subject to strong effects from a two-decade warming experiment in the Alaskan Arctic {Sistla, 2013 #3666}.  
 
+TODO: look at Podrebarac (2016) - Soils isolated during incubation underestimate temperature sensitivity of respiration and its response to climate history
+
 The goal of this study was to examine how temperature and moisture control C loss and GHG (CO~2~ and CH~4~) emissions from soils sampled from the bottom of the annual active layer--i.e., directly above permafrost--in an Alaskan boreal forest. We also aimed to characterize the chemical and biological properties of these soils as they were subjected to a 100-day incubation at difference temperature and moisture levels. We hypothesized that soils maintained at field moisture and high temperature would lose more C, both as CO~2~ and CH~4~, than cores incubated at 4˚C, due to increased aerobic and anaerobic microbial activity.
 
 #### Methods
@@ -96,6 +98,8 @@ sdm <- coredata$SoilDryMass_g
 ```
 
 The `r nrow(coredata)` experimental cores had a bulk density of `r pn(mean(bd), 2)` ± `r pn(sd(bd), 2)` (mean ± sd) g cm^-3^. Large (>2 mm) particles, primarily schist, comprised `r round(mean(schist), 0)`% ± `r round(sd(schist), 0)`% of the cores' total mass. Soil (≤2 mm) dry mass was `r round(mean(sdm), 0)` ± `r round(sd(sdm), 0)` g. 
+
+Sample DOC was `r pn(cndata_summary["DOC_mg_kg_mean"], 2)` ± `r pn(cndata_summary["DOC_mg_kg_sd"], 2)` mg kg^-1^. Carbon content was `r pn(cndata_summary["C_percent_mean"], 2)`% ± `r pn(cndata_summary["C_percent_sd"], 2)`%, while N content was `r pn(cndata_summary["N_percent_mean"], 2)`% ± `r pn(cndata_summary["N_percent_sd"], 2)`%. Neither temperature was treatment exerted any significant effect on these properties (P > 0.1 for all).
 
 ```{r wc, echo=FALSE}
 # wc and wc_alltrt are computed by 5-analyze.R script

@@ -22,14 +22,18 @@ CH4_EXCLUDE_DEVS <- 5.0    # CH4 outlier boundary, in mean absolute deviations
 # Key files and directories shared between scripts
 OUTPUT_DIR		         <- "outputs/"
 DIAGNOSTICS_DIR        <- "qc_plots/"
+
 RAWDATA_FILE           <- file.path(OUTPUT_DIR, "rawdata.csv.gz")
 RAWDATA_SAMPLES_FILE   <- file.path(OUTPUT_DIR, "rawdata_samples.csv.gz")
+VALVEMAP               <- "data/valvemap.csv"
+TREATMENTS             <- "data/treatments.csv"
 SUMMARYDATA_FILE       <- file.path(OUTPUT_DIR, "summarydata.csv")
 SUMMARYDATA_CLEAN_FILE <- file.path(OUTPUT_DIR, "summarydata_clean.csv")
 FLUXDATA_FILE          <- file.path(OUTPUT_DIR, "fluxdata.csv")
 FLUXDATA_CUM_FILE      <- file.path(OUTPUT_DIR, "fluxdata_cum.csv")
 FLUXDATA_CUM_CORE_FILE <- file.path(OUTPUT_DIR, "fluxdata_cum_core.csv")
 COREDATA_FILE          <- "data/drymasses.csv"
+CNDATA_FILE            <- "data/uga-soil_samples.csv"
 
 SEPARATOR		  <- "-------------------"
 

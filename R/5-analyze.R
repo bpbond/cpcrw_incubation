@@ -37,7 +37,39 @@ fluxdata_orig %>%
 save_data(fluxdata, fn = "fluxdata_long.csv")
 
 # -----------------------------------------------------------------------------
+# Read C, N, DOC data; summarise; test for treatment effects; merge with fluxdata
+
+printlog(SEPARATOR)
+printlog("Reading", CNDATA_FILE)
+read_csv(CNDATA_FILE) %>%
+  select(DOC_mg_kg,	C_percent, N_percent, Core) %>%
+  left_join(read_csv(TREATMENTS, skip = 1), by = "Core") ->
+  cndata
+
+cndata %>%
+  group_by(Core) %>%
+  summarise_each(funs(mean(., na.rm = TRUE)), DOC_mg_kg, C_percent, N_percent) %>%
+  summarise_each(funs(mean, sd), DOC_mg_kg, C_percent, N_percent) %>%
+  print %>%
+  unlist(.[1,]) ->
+  cndata_summary
+
+lm(formula = DOC_mg_kg ~ Treatment * Temperature, data = cndata) %>%
+  anova %>% print
+lm(formula = C_percent ~ Treatment * Temperature, data = cndata) %>%
+  anova %>% print
+lm(formula = N_percent ~ Treatment * Temperature, data = cndata) %>%
+  anova %>% print
+
+# fluxdata %>%
+#   left_join(cndata, by = c("Core", "Treatment", "Temperature")) ->
+#   fluxdata
+
+# -----------------------------------------------------------------------------
 # Water content over time figure and data
+
+printlog(SEPARATOR)
+printlog("Water content over time...")
 
 figureA <- ggplot(fluxdata_orig, aes(inctime_days, WC_gravimetric, color=Treatment, group=Core)) 
 figureA <- figureA + geom_point() + geom_line()
@@ -72,7 +104,8 @@ fluxdata %>%
 # -----------------------------------------------------------------------------
 # Fluxes over time figure
 
-printlog("fluxes over time...")
+printlog(SEPARATOR)
+printlog("Fluxes over time...")
 fluxdata %>%
   mutate(incday = floor(inctime_days)) %>%
   group_by(Gas, Temperature,Treatment, incday) %>%
@@ -100,6 +133,7 @@ fluxdata_figsBC %>%
 # -----------------------------------------------------------------------------
 # Cumulative flux figure and Tukey HSD tests
 
+printlog(SEPARATOR)
 printlog("Running Tukey HSD tests on cumulative emissions...")
 fd_cumulative_core <- read_csv(FLUXDATA_CUM_CORE_FILE) %>%
   mutate(Temperature = as.factor(Temperature))
@@ -138,6 +172,7 @@ figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Tre
 # -----------------------------------------------------------------------------
 # CO2:CH4 emissions ratio
 
+printlog(SEPARATOR)
 printlog("Computing emissions ratios...")
 fluxdata_cumulative %>% 
   group_by(Treatment, Temperature) %>% 
@@ -186,6 +221,7 @@ save_data(shapiro_trans)
 # -----------------------------------------------------------------------------
 # Does WC affect gas fluxes within temperature and treatment?
 
+printlog(SEPARATOR)
 printlog("Summarizing WC effect...")
 fluxdata %>%
   filter(flux_µmol_g_s > 0) %>%

@@ -12,8 +12,6 @@ source("R/0-functions.R")
 SCRIPTNAME  	<- "2-summarize.R"
 PROBLEM       <- FALSE
 
-VALVEMAP     <- "data/valvemap.csv"
-TREATMENTS   <- "data/treatments.csv"
 
 # -----------------------------------------------------------------------------
 # QC the valvemap data
