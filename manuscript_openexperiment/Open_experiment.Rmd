@@ -1,6 +1,5 @@
 ---
-title: 'Running an open experiment: transparency and reproducibility in soil and ecosystem
-  science'
+title: 'Running an open experiment: transparency and reproducibility in soil and ecosystem science'
 author: "Ben Bond-Lamberty^1^, A. Peyton Smith^2^, Vanessa Bailey^2^"
 date: "February 2, 2016"
 output: html_document
