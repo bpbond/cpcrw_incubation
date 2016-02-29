@@ -5,6 +5,9 @@ source("R/0-functions.R")
 
 SCRIPTNAME  	<- "5-analyze.R"
 
+library(nlme)          # 3.1-122
+#library(MASS)          # 7.3-45
+
 library(broom)  # 0.4.0
 library(reshape2) # 1.4.1
 
@@ -34,8 +37,6 @@ fluxdata_orig %>%
   select(-variable, -outlier_name) ->
   fluxdata
 
-save_data(fluxdata, fn = "fluxdata_long.csv")
-
 # -----------------------------------------------------------------------------
 # Read C, N, DOC data; summarise; test for treatment effects; merge with fluxdata
 
@@ -43,12 +44,16 @@ printlog(SEPARATOR)
 printlog("Reading", CNDATA_FILE)
 read_csv(CNDATA_FILE) %>%
   select(DOC_mg_kg,	C_percent, N_percent, Core) %>%
+  group_by(Core) %>%
+  # Summarise by core, averaging duplicates
+  summarise_each(funs(mean(., na.rm = TRUE)), DOC_mg_kg, C_percent, N_percent) ->
+  cndata_orig
+
+cndata_orig %>%
   left_join(read_csv(TREATMENTS, skip = 1), by = "Core") ->
   cndata
 
 cndata %>%
-  group_by(Core) %>%
-  summarise_each(funs(mean(., na.rm = TRUE)), DOC_mg_kg, C_percent, N_percent) %>%
   summarise_each(funs(mean, sd), DOC_mg_kg, C_percent, N_percent) %>%
   print %>%
   unlist(.[1,]) ->
@@ -61,9 +66,12 @@ lm(formula = C_percent ~ Treatment * Temperature, data = cndata) %>%
 lm(formula = N_percent ~ Treatment * Temperature, data = cndata) %>%
   anova %>% print
 
-# fluxdata %>%
-#   left_join(cndata, by = c("Core", "Treatment", "Temperature")) ->
-#   fluxdata
+fluxdata %>%
+  left_join(cndata_orig, by = "Core") ->
+  fluxdata
+
+save_data(fluxdata, fn = "fluxdata_long.csv")
+
 
 # -----------------------------------------------------------------------------
 # Water content over time figure and data
@@ -82,7 +90,7 @@ fluxdata$stage[fluxdata$incday == min(fluxdata$incday)] <- "Beginning"
 fluxdata$stage[fluxdata$incday == max(fluxdata$incday)] <- "End"
 fluxdata %>% 
   filter(!is.na(stage)) %>%
-  group_by(stage, Treatment) %>% 
+  group_by(stage, Treatment) %>%
   summarise_each(funs(mean, sd, max, min), WC_gravimetric) ->
   gwc
 fluxdata %>% 
@@ -100,6 +108,25 @@ fluxdata %>%
   group_by(stage) %>% 
   summarise_each(funs(mean, sd, max, min), WC_volumetric) ->
   vwc_alltrt
+
+
+# -----------------------------------------------------------------------------
+# Did 'Treatment' affect water content?
+
+printlog(SEPARATOR)
+printlog("Treatment effect on water content...")
+fluxdata %>%
+  filter(Temperature == 20) ->
+  fluxdata20
+fluxdata20$Treatment <- factor(fluxdata20$Treatment, levels = c("Drought", "Controlled drought", "Field moisture"))
+m_wc <- lme(WC_gravimetric ~ Treatment,
+            data = fluxdata20, 
+            random = ~ 1 | Core)
+print(summary(m_wc))
+p_trt_wc <- summary(m_wc)$tTable["TreatmentControlled drought", "p-value"]
+
+
+# No significant difference between Drought and Controlled drought in the 20C chamber
 
 # -----------------------------------------------------------------------------
 # Fluxes over time figure
@@ -218,28 +245,28 @@ fluxdata %>%
 print(shapiro_trans)
 save_data(shapiro_trans)
 
-# -----------------------------------------------------------------------------
-# Does WC affect gas fluxes within temperature and treatment?
-
-printlog(SEPARATOR)
-printlog("Summarizing WC effect...")
-fluxdata %>%
-  filter(flux_µmol_g_s > 0) %>%
-  group_by(Gas, Treatment, Temperature) %>%
-  filter(!outlier) %>%
-  do(mod = lm(log(flux_µmol_g_s) ~ WC_gravimetric, data = .)) %>%
-  broom::glance(mod) %>%
-  select(Gas, Treatment, Temperature, adj.r.squared, sigma, p.value, AIC) ->
-  #  mutate(signif = p.value < 0.05) ->
-  WC_effect
-
-print(WC_effect)
-save_data(WC_effect)
-
-# A quick visualization
-p <- qplot(WC_gravimetric, flux_µmol_g_s, data=fluxdata) 
-p <- p + facet_grid(Gas~Temperature, scales="free") + geom_smooth(method='lm')
-save_plot(p, pname = "WC_gravimetric_effect")
+# # -----------------------------------------------------------------------------
+# # Does WC affect gas fluxes within temperature and treatment?
+# 
+# printlog(SEPARATOR)
+# printlog("Summarizing WC effect...")
+# fluxdata %>%
+#   filter(flux_µmol_g_s > 0) %>%
+#   group_by(Gas, Treatment, Temperature) %>%
+#   filter(!outlier) %>%
+#   do(mod = lm(log(flux_µmol_g_s) ~ WC_gravimetric, data = .)) %>%
+#   broom::glance(mod) %>%
+#   select(Gas, Treatment, Temperature, adj.r.squared, sigma, p.value, AIC) ->
+#   #  mutate(signif = p.value < 0.05) ->
+#   WC_effect
+# 
+# print(WC_effect)
+# save_data(WC_effect)
+# 
+# # A quick visualization
+# p <- qplot(WC_gravimetric, flux_µmol_g_s, data = fluxdata) 
+# p <- p + facet_grid(Gas ~ Temperature, scales = "free") + geom_smooth(method = 'lm')
+# save_plot(p, pname = "WC_gravimetric_effect")
 
 # -----------------------------------------------------------------------------
 # Per-core models - look at R2, etc. variability
@@ -265,14 +292,20 @@ save_plot(p, pname = "WC_gravimetric_effect")
 # -----------------------------------------------------------------------------
 # Effects of temperature and moisture on gas fluxes
 
-# Fitting a non-mixed-effects model for now
-# TODO: later, might want to explore having Core as a random effect
-
 # Fit gases separately, just for simplicity
+printlog(SEPARATOR)
 printlog("Fitting CO2 model...")
-m_co2 <- lm(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric,
-            data = fluxdata, subset = Gas == "CO2")
-print(summary(m_co2))
+
+# Including C_percent and running stepwise add/drop (below) results in a final model
+# with nonsignificant terms (in particular C_percent, which isn't significant anywhere).
+# Not sure why this is the case, so exclude from initial model
+m_co2_lme <- lme(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric + 
+                   (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
+                 data = fluxdata,
+                 subset = Gas == "CO2" & !outlier,
+                 random = ~ 1 | Core, 
+                 method = "ML")
+step_co2_lme <- MASS::stepAIC(m_co2_lme, direction = "both")
 
 # TODO: a Q10 calculation. Use nls?
 # Q10 = R2/R1 ^ (10/(T2-T1))
@@ -281,15 +314,15 @@ print(summary(m_co2))
 #             error=function( e ) NA )
 # }
 
-#lme(effort ~ Type, data = ergoStool, random = ~ 1 | Subject))
-# library(nlme)
-# m_co2_lme <- lme(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric,
-#                  data = fluxdata, random = ~ 1 | Core)
-
+printlog(SEPARATOR)
 printlog("Fitting CH4 model...")
-m_ch4 <- lm(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric,
-            data = fluxdata, subset = Gas == "CH4")
-print(summary(m_ch4))
+m_ch4_lme <- lme(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric + 
+                   (Temperature + WC_gravimetric) * (C_percent + N_percent + DOC_mg_kg), # C_percent + 
+                 data = fluxdata, 
+                 subset = Gas == "CH4" & !outlier,
+                 random = ~ 1 | Core, 
+                 method = "ML")
+step_ch4_lme <- MASS::stepAIC(m_ch4_lme, direction = "both")
 
 
 printlog("All done with", SCRIPTNAME)

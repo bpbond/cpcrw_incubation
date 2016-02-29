@@ -85,9 +85,9 @@ The GHG concentration measurements for each sample (i.e., each gas, core, and da
 * Q10 computation
 * stats
 
-The effect of temperature and treatment (drought, controlled drought, or field moisture conditions) on cumulative gas fluxes was evaluted with a post-hoc Tukey Honest Significant Differences test.
+The effects of temperature, gravimetric water content, C percent, N percent, and DOC concentration on instantaneous gas fluxes were evaluated using a linear mixed-effects model fit by the R function *lme* in the R 'nlme' package, , version `r packageVersion("nlme")`. Because the dependent variable (CO~2~ or CH~4~ flux) was non-normally distributed, it was transformed using a natural-logarithm transformation. Core number was treated as a random effect in the model. We then used performed stepwise model selection by Akaike's information criterion (AIC) using the *stepAIC* function in the R 'MASS' package, version `r packageVersion("MASS")`. A linear mixed-effects model was also used to evaluate the effect of treatment on core water content. The effect of temperature and treatment (drought, controlled drought, or field moisture conditions) on cumulative gas fluxes was evaluted with a post-hoc Tukey Honest Significant Differences test.
 
-All data analysis and statistics were performed using R version 3.2.3 {R Development Core Team, 2016 #4314}. This experiment was run as an "open experiment" with all analysis code, data (from raw instrument data to final summaries), diagnostics, etc., available at https://github.com/bpbond/cpcrw_incubation. The flux data backing the main results have been archived at TODO.
+All data analysis and statistics were performed using R version `r R.version.string` {R Development Core Team, 2016 #4314}. This experiment was run as an "open experiment" with all analysis code, data (from raw instrument data to final summaries), diagnostics, etc., available at https://github.com/bpbond/cpcrw_incubation. The flux data backing the main results have been archived at TODO.
 
 #### Results
 
@@ -113,7 +113,7 @@ vwcbegin <- subset(vwc_alltrt, stage == "Beginning")
 vwcend <- subset(vwc_alltrt, stage == "End")
 ```
 
-Gravimetric water content was `r pn(gwcbegin$mean, 2)` ± `r pn(gwcbegin$sd, 2)` (min `r pn(gwcbegin$min, 2)`, max `r pn(gwcbegin$max, 2)`) at the beginning of the incubation (**Figure 1**). "Field moisture" cores were on average unchanged (`r pn(gwcendmean["Field moisture"], 2)` ± `r pn(gwcendsd["Field moisture"], 2)`) at the end of the incubation, but both the drought treatments, which did not differ from each other in their effect on gravimetric water content, had declined to `r pn(gwcendmean["Drought"], 2)` ±  `r pn(gwcendsd["Drought"], 2)`. Volumetric water content values ranged from `r pn(vwcbegin$mean, 2)` ± `r pn(vwcbegin$sd, 2)` (min `r pn(vwcbegin$min, 2)`, max `r pn(vwcbegin$max, 2)`) at the beginning of the experiment to `r pn(vwcend$mean, 2)` ± `r pn(vwcend$sd, 2)` (min `r pn(vwcend$min, 2)`, max `r pn(vwcend$max, 2)`) at the end.
+Gravimetric water content was `r pn(gwcbegin$mean, 2)` ± `r pn(gwcbegin$sd, 2)` (min `r pn(gwcbegin$min, 2)`, max `r pn(gwcbegin$max, 2)`) at the beginning of the incubation (**Figure 1**). "Field moisture" cores were on average unchanged (`r pn(gwcendmean["Field moisture"], 2)` ± `r pn(gwcendsd["Field moisture"], 2)`) at the end of the incubation, but both the drought treatments, which did not differ from each other in their effect on gravimetric water content (P = `r pn(p_trt_wc, 3)`), had declined to `r pn(gwcendmean["Drought"], 2)` ±  `r pn(gwcendsd["Drought"], 2)`. Volumetric water content values ranged from `r pn(vwcbegin$mean, 2)` ± `r pn(vwcbegin$sd, 2)` (min `r pn(vwcbegin$min, 2)`, max `r pn(vwcbegin$max, 2)`) at the beginning of the experiment to `r pn(vwcend$mean, 2)` ± `r pn(vwcend$sd, 2)` (min `r pn(vwcend$min, 2)`, max `r pn(vwcend$max, 2)`) at the end.
 
 * Soil C, N, DOC means
 
@@ -191,18 +191,17 @@ We are grateful to Jamie Hollingsworth for information about, and faciliating ac
 
 ------
 
-**Table 1.** Summary of gravimetric water content effects on gas fluxes, by treatment and temperature.
+**Table 1.** Statistical tests of WC, T, C, N on individual core CO2 fluxes.
 
 ```{r table1, echo=FALSE}
-# Print out the `WC_effect` data frame in a nice-looking table
-WC_effect$Gas[WC_effect$Gas == "CO2"] <- "CO<sub>2</sub>"  # html
-WC_effect$Gas[WC_effect$Gas == "CH4"] <- "CH<sub>4</sub>"  # html
-knitr::kable(WC_effect, digits = 3, col.names = c("Gas", "Treatment", "Temperature", "R<sup>2</sup>", "Sigma", "P", "AIC"))
+knitr::kable(summary(step_co2_lme)$tTable, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
 ```
 
-APS comment: So are we seeing more CH4 produced in cores that I watered? Something to note in discussion?  TODO
+**Table 2.** Statistical tests of WC, T, C, N on individual core CH4 fluxes.
 
-**Table 2.** Statistical tests of WC, T, C, N on individual core fluxes.
+```{r table2, echo=FALSE}
+knitr::kable(summary(step_ch4_lme)$tTable, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
+```
 
 **Figure 1.** Core water content across the course of the incubation experiment by temperature (left panel 4 °C, right panel 20 °C) and treatment.
 
