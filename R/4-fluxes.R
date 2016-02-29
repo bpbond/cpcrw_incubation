@@ -29,17 +29,18 @@ summarydata %>%
   filter(Treatment != "Ambient") %>%
   mutate(WC_gravimetric = 
            (Mass_g - CoreSleeveMass_g - NonsoilMassLarge_g - SoilDryMass_g) / 
-           (SoilDryMass_g),
+           SoilDryMass_g,
          WC_volumetric = (Mass_g - CoreSleeveMass_g - NonsoilMassLarge_g - SoilDryMass_g) / 
-           (SoilVolume_cm3)) %>%
-  select(Core, SoilDryMass_g, SoilVolume_cm3, WC_gravimetric, WC_volumetric,
+           SoilVolume_cm3) %>%
+  select(Core, Mass_g, SoilDryMass_g, SoilVolume_cm3, 
+         WC_gravimetric, WC_volumetric,
          Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, inctime_days) ->
   fluxdata
 
 print(summary(fluxdata$WC_gravimetric))
 print(summary(fluxdata$WC_volumetric))
 
-p <- ggplot(fluxdata, aes(inctime_days, WC_gravimetric, color=paste(Treatment, Temperature), group=Core))
+p <- ggplot(fluxdata, aes(inctime_days, WC_gravimetric, color = paste(Treatment, Temperature), group=Core))
 p <- p + geom_line() + facet_wrap(~Core) + scale_color_discrete("")
 print(p)
 save_plot("WC_gravimetric")
@@ -56,7 +57,7 @@ fluxdata %>%
 # Flux computation
 
 # At this point, `fluxdata` has slopes (CO2 ppm/s and CH4 ppb/s).
-# We want to convert this to mg C/g soil/s, using
+# We want to convert this to mg C/s, using
 # A = dC/dt * V/M * Pa/RT (cf. Steduto et al. 2002), where
 # 	A is the flux (µmol/g/s)
 #	  dC/dt is raw respiration as above (mole fraction/s)
@@ -79,23 +80,23 @@ Pa 			<- 101						# kPa				(Richland is ~120 m asl)
 R 			<- 8.3145e+3			# cm3 kPa K−1 mol−1
 Tair    <- 273.1 + fluxdata$Temperature     # C -> K
 
-# Calculate mass-corrected respiration, µmol/g soil/s
-fluxdata$CO2_flux_µmol_g_s <- 
+# Calculate mass-corrected respiration, µmol/s
+CO2_flux_µmol_g_s <- 
   with(fluxdata,
        CO2_ppm_s / 1 * # from ppm/s to µmol/s
-         V_cm3 / SoilDryMass_g * Pa / (R * Tair)) # ideal gas law
-fluxdata$CH4_flux_µmol_g_s <- 
+         V_cm3 * Pa / (R * Tair)) # ideal gas law
+CH4_flux_µmol_g_s <- 
   with(fluxdata,
        CH4_ppb_s / 1000 * # from ppb/s to µmol/s
-         V_cm3 / SoilDryMass_g * Pa / (R * Tair)) # ideal gas law
+         V_cm3 * Pa / (R * Tair)) # ideal gas law
 
 # Calculate flux of mg C/hr
-fluxdata$CO2_flux_mgC_hr <- with(fluxdata, CO2_flux_µmol_g_s * SoilDryMass_g) / # get rid of /g soil
+fluxdata$CO2_flux_mgC_hr <- CO2_flux_µmol_g_s /
   1e6 * # to mol 
   12 *  # to g C
   1000 * # to mg C
   60 * 60 # to /hr
-fluxdata$CH4_flux_mgC_hr <- with(fluxdata, CH4_flux_µmol_g_s * SoilDryMass_g) / # get rid of /g soil
+fluxdata$CH4_flux_mgC_hr <- CH4_flux_µmol_g_s /
   1e6 * # to mol 
   16 *  # to g C
   1000 *  # to mg C
@@ -109,23 +110,21 @@ printlog("Identifying and plotting outliers...")
 fluxdata %>%
   mutate(incday = floor(inctime_days)) %>%
   group_by(Treatment, Temperature, incday) %>% 
-  mutate(CO2_outlier = is_outlier(CO2_flux_µmol_g_s, devs = CO2_EXCLUDE_DEVS), 
+  mutate(CO2_outlier = is_outlier(CO2_flux_mgC_hr, devs = CO2_EXCLUDE_DEVS), 
          # CH4 is so variable we use a higher exclusion cutoff
-         CH4_outlier = is_outlier(CH4_flux_µmol_g_s, devs = CH4_EXCLUDE_DEVS)) %>%
+         CH4_outlier = is_outlier(CH4_flux_mgC_hr, devs = CH4_EXCLUDE_DEVS)) %>%
   select(-incday) ->
   fluxdata
 
 fluxdata$incday <- NULL  # why doesn't the `select` above work?
 
-p <- ggplot(fluxdata, aes(inctime_days, CO2_flux_µmol_g_s, color = CO2_outlier))
-p <- p + geom_point() + facet_grid(Temperature~Treatment)
-p <- p + ggtitle("Dry mass-corrected flux rates")
+p <- ggplot(fluxdata, aes(inctime_days, CO2_flux_mgC_hr, color = CO2_outlier))
+p <- p + geom_point() + facet_grid(Temperature ~ Treatment)
 print(p)
 #save_plot("CO2_outliers")
 save_diagnostic(p, "CO2_outliers")
-p <- ggplot(fluxdata, aes(inctime_days, CH4_flux_µmol_g_s, color = CH4_outlier))
-p <- p + geom_point() + facet_grid(Temperature~Treatment)
-p <- p + ggtitle("Dry mass-corrected flux rates")
+p <- ggplot(fluxdata, aes(inctime_days, CH4_flux_mgC_hr, color = CH4_outlier))
+p <- p + geom_point() + facet_grid(Temperature ~ Treatment)
 print(p)
 save_diagnostic(p, "CH4_outliers")
 
@@ -209,11 +208,11 @@ fd_cumulative$Temperature <- as.factor(fd_cumulative$Temperature)
 
 # Add a few dummy rows so graph bars are spaced correctly
 dmy <- data.frame(Treatment = "Controlled drought",
-                   Temperature = 4,
-                   Gas = unique(fd_cumulative$Gas),
-                   cum_flux_mgC = NA,
-                   cum_flux_mgC_sd = NA,
-                   stringsAsFactors = FALSE)
+                  Temperature = 4,
+                  Gas = unique(fd_cumulative$Gas),
+                  cum_flux_mgC = NA,
+                  cum_flux_mgC_sd = NA,
+                  stringsAsFactors = FALSE)
 fluxdata_cumulative <- rbind(fd_cumulative, dmy)
 
 p3 <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
