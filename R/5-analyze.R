@@ -26,11 +26,12 @@ fluxdata_orig$Treatment <- factor(fluxdata_orig$Treatment,
 
 printlog("Transforming...")
 fluxdata_orig %>%
-  select(Core, Treatment, Temperature, inctime_days, WC_gravimetric, WC_volumetric,
-         CO2_flux_µmol_g_s, CH4_flux_µmol_g_s,
+  select(Core, Treatment, Temperature, inctime_days, 
+         Mass_g, SoilDryMass_g, WC_gravimetric, WC_volumetric,
+         CO2_flux_mgC_hr, CH4_flux_mgC_hr,
          CO2_outlier, CH4_outlier) %>%
-  melt(measure.vars = c("CO2_flux_µmol_g_s", "CH4_flux_µmol_g_s"),
-       value.name = "flux_µmol_g_s") %>%
+  melt(measure.vars = c("CO2_flux_mgC_hr", "CH4_flux_mgC_hr"),
+       value.name = "flux_mgC_hr") %>%
   melt(measure.vars = c("CO2_outlier", "CH4_outlier"), 
        variable.name = "outlier_name", value.name = "outlier") %>%
   mutate(Gas = substr(variable, 1, 3)) %>%
@@ -48,6 +49,9 @@ read_csv(CNDATA_FILE) %>%
   # Summarise by core, averaging duplicates
   summarise_each(funs(mean(., na.rm = TRUE)), DOC_mg_kg, C_percent, N_percent) ->
   cndata_orig
+
+# Compute correlations between the variables
+cndata_cor <- cor(cndata_orig[-1])
 
 cndata_orig %>%
   left_join(read_csv(TREATMENTS, skip = 1), by = "Core") ->
@@ -70,8 +74,30 @@ fluxdata %>%
   left_join(cndata_orig, by = "Core") ->
   fluxdata
 
+
+# -----------------------------------------------------------------------------
+# Compute normalized fluxes
+
+printlog(SEPARATOR)
+printlog("Computing normalized fluxes...")
+
+fluxdata %>%
+  mutate(flux_µgC_g_day = flux_mgC_hr / SoilDryMass_g * 1000 * 24,
+         flux_µgC_gC_day = flux_µgC_g_day * C_percent) ->
+  fluxdata
+
+fluxdata %>%
+  group_by(Gas) %>%
+  summarise_each(funs(min, max, mean, sd), flux_µgC_g_day, flux_µgC_gC_day) ->
+  fluxsummary
+
 save_data(fluxdata, fn = "fluxdata_long.csv")
 
+nms <- fluxsummary$Gas
+fluxsummary <- as.data.frame(t(fluxsummary[-1]))
+colnames(fluxsummary) <- nms
+
+save_data(fluxsummary)
 
 # -----------------------------------------------------------------------------
 # Water content over time figure and data
@@ -125,7 +151,6 @@ m_wc <- lme(WC_gravimetric ~ Treatment,
 print(summary(m_wc))
 p_trt_wc <- summary(m_wc)$tTable["TreatmentControlled drought", "p-value"]
 
-
 # No significant difference between Drought and Controlled drought in the 20C chamber
 
 # -----------------------------------------------------------------------------
@@ -136,7 +161,7 @@ printlog("Fluxes over time...")
 fluxdata %>%
   mutate(incday = floor(inctime_days)) %>%
   group_by(Gas, Temperature,Treatment, incday) %>%
-  summarise(flux = mean(flux_µmol_g_s), flux_sd = sd(flux_µmol_g_s)) ->
+  summarise(flux = mean(flux_µgC_g_day), flux_sd = sd(flux_µgC_g_day)) ->
   fluxdata_figsBC
 
 figsBC <- function(fd) {
@@ -145,7 +170,7 @@ figsBC <- function(fd) {
     geom_point() + 
     facet_grid(Temperature ~ Treatment) + 
     geom_errorbar(aes(ymin = flux - flux_sd, ymax = flux + flux_sd)) +
-    xlab("Incubation day") + ylab(expression(µmol~g^{-1}~s^{-1}))
+    xlab("Incubation day") + ylab(expression(µg~C~g~C^{-1}~day^{-1}))
 }
 
 fluxdata_figsBC %>%
@@ -213,15 +238,15 @@ fluxdata_cumulative %>%
 # Log-transforming doesn't fix the lack of normality in our data,
 # but it's a major improvement; see graphs.
 
-fluxdata <- fluxdata %>% filter(flux_µmol_g_s > 0) 
+fluxdata <- fluxdata %>% filter(flux_µgC_gC_day > 0) 
 
 printlog("Graphing flux distributions and testing for normality...")
-p <- ggplot(fluxdata, aes(x = flux_µmol_g_s)) + geom_histogram(bins = 30)
+p <- ggplot(fluxdata, aes(x = flux_µgC_gC_day)) + geom_histogram(bins = 30)
 p <- p + facet_grid(~Gas, scales = "free") + ggtitle("Distribution of raw data")
 print(p)
 save_plot("distribution_raw")
 
-p <- ggplot(fluxdata, aes(x = log(flux_µmol_g_s))) + geom_histogram(bins = 30)
+p <- ggplot(fluxdata, aes(x = log(flux_µgC_gC_day))) + geom_histogram(bins = 30)
 p <- p + facet_grid(~Gas, scales = "free") + ggtitle("Distribution of log-transformed data")
 print(p)
 save_plot("distribution_log")
@@ -229,7 +254,7 @@ save_plot("distribution_log")
 printlog("Shapiro-Wilk normality test on raw data:")
 fluxdata %>%
   group_by(Gas) %>%
-  do(norm = shapiro.test(.$flux_µmol_g_s)) %>%
+  do(norm = shapiro.test(.$flux_µgC_gC_day)) %>%
   tidy(norm) %>%
   print ->
   shapiro
@@ -238,11 +263,10 @@ save_data(shapiro)
 printlog("Shapiro-Wilk normality test on log-transformed data:")
 fluxdata %>%
   group_by(Gas) %>%
-  do(norm = shapiro.test(log(.$flux_µmol_g_s))) %>%
+  do(norm = shapiro.test(log(.$flux_µgC_gC_day))) %>%
   tidy(norm) %>%
   print ->
   shapiro_trans
-print(shapiro_trans)
 save_data(shapiro_trans)
 
 # # -----------------------------------------------------------------------------
@@ -296,10 +320,10 @@ save_data(shapiro_trans)
 printlog(SEPARATOR)
 printlog("Fitting CO2 model...")
 
-# Including C_percent and running stepwise add/drop (below) results in a final model
-# with nonsignificant terms (in particular C_percent, which isn't significant anywhere).
-# Not sure why this is the case, so exclude from initial model
-m_co2_lme <- lme(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric + 
+# C_percent and N_percent are *highly* correlated (r=0.98+)
+# Generally it seems that N_percent produces slightly better model fits,
+# so we use it here, not considering C_percent further
+m_co2_lme <- lme(log(flux_µgC_gC_day) ~ Temperature * WC_gravimetric + 
                    (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
                  data = fluxdata,
                  subset = Gas == "CO2" & !outlier,
@@ -316,8 +340,8 @@ step_co2_lme <- MASS::stepAIC(m_co2_lme, direction = "both")
 
 printlog(SEPARATOR)
 printlog("Fitting CH4 model...")
-m_ch4_lme <- lme(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric + 
-                   (Temperature + WC_gravimetric) * (C_percent + N_percent + DOC_mg_kg), # C_percent + 
+m_ch4_lme <- lme(log(flux_µgC_gC_day) ~ Temperature * WC_gravimetric + 
+                   (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
                  data = fluxdata, 
                  subset = Gas == "CH4" & !outlier,
                  random = ~ 1 | Core, 
