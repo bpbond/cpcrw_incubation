@@ -19,9 +19,12 @@ pclean <- function(x) {  # pretty formatting of p-values
 # 'Pretty n' function to round a numeric value and print that # of digits
 pn <- function(x, n) formatC(round(x, n), digits = n, format = 'f')
 
-# Run the analysis script, which will leave a lot of figures, tables, and data in memory for us
+# Run the main analysis script, which will leave figures, tables, and data 
+# in memory for us. Need to temporarily change the working directory to do so.
+olddir <- getwd()
 setwd("../")
 source("R/5-analyze.R")
+setwd(olddir)
 ```
 
 #### Abstract
@@ -34,7 +37,7 @@ Alaska forests under particular stress - browning {Ju, 2016 #4320}
 
 High latitude ecosystems are being subjected to rapid changes in climate {IPCC, 2013 #3916} and fire occurrence and intensity {Kasischke, 2010 #2631}. This has a wide variety of effects on ecosystems and society, notably in northwestern North America and Alaska {Hinzman, 2005 #4315}. As a result, rising temperatures and increasing fire will result in permafrost degradation {Pastick, 2015 #4311} and changes in soil temperature and hydrology that are expected to increase soil greenhouse gas (GHG) fluxes to the atmosphere, promoting a positive climate feedback {Treat, 2015 #4217}{Koven, 2011 #3092}.
 
-The magnitude, timing, and form-in particular as methane (CH~4~) or carbon dioxide (CO~2~)-of such a feedback remain highly uncertain {Schuur, 2015 #4319}. While northern soils hold enormous quantities {Tarnocai, 2009 #2231} of potentially mineralizable soil organic carbon (SOC), vegetation succession dynamics promote permafrost resilience to even large temperature changes {Jorgenson, 2010 #2627}. Such dynamics may however be disrupted by increased fire disturbance {Johnstone, 2010 #2465}. In addition, the stability of SOC is itself highly uncertain, as it depends on soil temperature and moisture, the ages of and ratio between the carbon and nitrogen pools {Weiss, 2015 #4317}, and its protection from competent microorganisms, enzymes, and resources {Bailey, 2012 #3624}, whether by organomineral sorption, chemical lability, or physical location {Schmidt, 2011 #3135}.
+The magnitude, timing, and form-in particular as methane (CH~4~) or carbon dioxide (CO~2~)-of such a feedback remain highly uncertain {Schuur, 2015 #4319}. While northern soils hold enormous quantities {Tarnocai, 2009 #2231} of potentially mineralizable soil organic carbon (SOC), vegetation succession dynamics promote permafrost resilience to even large temperature changes {Jorgenson, 2010 #2627}. Such dynamics may however be disrupted by increased fire disturbance {Johnstone, 2010 #2465}. In addition, the stability of SOC is itself highly uncertain, as it depends on soil temperature and moisture, the ages of and ratio between the carbon (C) and nitrogen (N) pools {Weiss, 2015 #4317}, and its protection from competent microorganisms, enzymes, and resources {Bailey, 2012 #3624}, whether by organomineral sorption, chemical lability, or physical location {Schmidt, 2011 #3135}.
 
 Temperature and moisture typically have strong and often interactive influences on soil GHG emissions. A long literature of laboratory incubations, field observations, and meta-analyses has documented increased CO2 fluxes with rising temperature {Davidson, 2006 #1669}{Hashimoto, 2015 #4231}{Treat, 2015 #4217}. GHG responses to wetting and thawing dynamics are much less certain, with substantial variability between studies {Kim, 2012 #2863}. The anaerobic conditions common following permafrost thaw lower CO~2~ emissions but increase those of CH~4~ {Treat, 2015 #4217;Treat, 2014 #4213}, and interact with soil temperature effects in long-term incubations {Elberling, 2013 #3720}. Such laboratory studies have weaknesses, but their controlled environments provide an important way to elucidate the key mechanisms controlling GHG from high-latitude soils {Schuur, 2015 #4319}. TODO: add Kirschbaum 2006. Most studies have focused on surface soils or permafrost soils, however, neglecting deep soils that experience fluctuating temperature with season and moisture with potential permafrost thaw ..or something less awkward (TODO; CITE). Such deep but unfrozen soils were identified as subject to strong effects from a two-decade warming experiment in the Alaskan Arctic {Sistla, 2013 #3666}.  
 
@@ -60,7 +63,8 @@ On 18 August 2015 cores were placed into one of two growth chambers (Conviron CM
 
 For each measurement, a six-core treatment group was connected to a Picarro A0311 multiplexer that was in turn connected to a Picarro G2301 GHG Analyzer (Picarro Inc., Santa Clara, CA, USA). Dry CH~4~ and CO~2~ concentrations were monitored for 2 minutes, and this was repeated 2-3 times before moving on to a new treatment group. Cores were weighed immediately after gas measurements. Ambient air was measured between treatment groups, and before starting measurements in a chamber. BEN: How was ambient air measurements used in this study? don't see any mention of it in remaining text, etc. (TODO)
 
-The incubation experiment concluded on 9 December 2015, following the final CO~2~ and CH~4~ readings. Each soil core was maintained at the treatment-dependent temperature and moisture content (by mass) until removed for destructive sampling, December 14-18, 2015. Sub-samples were collected and composited throughout each soil core for dissolved organic carbon analysis (110 ± 24 g dry mass equivalent) and dry-mass calculations (~28 g each). The remaining core material was air-dried and separated into particles (>2 mm diameter) and soil (≤2 mm) using a U.S. Standard Test Sieve No. 10 (Fisherbrand,  Pittsburg, PA, USA). The dry mass and volume of soil were used in calculations of gravimetric and volumetric soil moisture content, respectively {Gardner, 1986 #4345}. Soil volume was caclulated as the total core volume minus the volume of particles >2 mm diameter, with the latter determined by water displacement. Air-dried soil and sub-samples stored at -20 °C were sent to the Agricultural and Environmental Services Laboratory at the University of Georgia Extension in February 2016 for total C, N, and dissolved organic C. TODO: get UGA analytical methods.
+The incubation experiment concluded on 9 December 2015, following the final CO~2~ and CH~4~ readings. Each soil core was maintained at the treatment-dependent temperature and moisture content (by mass) until removed for destructive sampling, December 14-18, 2015. Sub-samples were collected and composited throughout each soil core for dissolved organic carbon analysis (110 ± 24 g dry mass equivalent) and dry-mass calculations (~28 g each). The remaining core material was air-dried and separated into particles (>2 mm diameter) and soil (≤2 mm) using a U.S. Standard Test Sieve No. 10 (Fisherbrand,  Pittsburg, PA, USA). The dry mass and volume of soil were used in calculations of gravimetric and volumetric soil moisture content, respectively {Gardner, 1986 #4345}. Soil volume was caclulated as the total core volume minus the volume of particles >2 mm diameter, with the latter determined by water displacement. 
+Air-dried soil and sub-samples stored at -20 °C were sent to the Agricultural and Environmental Services Laboratory at the University of Georgia Extension in February 2016 for total C, N, and dissolved organic C. Samples were combusted in an oxygen atmosphere at 1350 °C, converting elemental C and N into gaseous form. Infrared cells were then used to to determine C content, and a thermal conductivity cell to determine N. TODO: confirm UGA analytical methods and exact instruments.
 
 **Data and statistical analysis**
 
@@ -115,13 +119,9 @@ vwcend <- subset(vwc_alltrt, stage == "End")
 
 Gravimetric water content was `r pn(gwcbegin$mean, 2)` ± `r pn(gwcbegin$sd, 2)` (min `r pn(gwcbegin$min, 2)`, max `r pn(gwcbegin$max, 2)`) at the beginning of the incubation (**Figure 1**). "Field moisture" cores were on average unchanged (`r pn(gwcendmean["Field moisture"], 2)` ± `r pn(gwcendsd["Field moisture"], 2)`) at the end of the incubation, but both the drought treatments, which did not differ from each other in their effect on gravimetric water content (P = `r pn(p_trt_wc, 3)`), had declined to `r pn(gwcendmean["Drought"], 2)` ±  `r pn(gwcendsd["Drought"], 2)`. Volumetric water content values ranged from `r pn(vwcbegin$mean, 2)` ± `r pn(vwcbegin$sd, 2)` (min `r pn(vwcbegin$min, 2)`, max `r pn(vwcbegin$max, 2)`) at the beginning of the experiment to `r pn(vwcend$mean, 2)` ± `r pn(vwcend$sd, 2)` (min `r pn(vwcend$min, 2)`, max `r pn(vwcend$max, 2)`) at the end.
 
-* Soil C, N, DOC means
-
-* Gas fluxes over incubation (Figures 2 and 3)
+After removal of known problematic data, and exclusion of statistical outliers, CO~2~ flux rates measured during the incubation ranged from `r pn(fluxsummary["flux_µgC_gC_day_min", "CO2"]/1000, 3)` mg C g C^-1^ day^-1^ (`r pn(fluxsummary["flux_µgC_g_day_min", "CO2"]/1000, 3)` mg C g soil^-1^ day^-1^) to a maximum of `r pn(fluxsummary["flux_µgC_gC_day_max", "CO2"]/1000, 3)` (`r pn(fluxsummary["flux_µgC_g_day_max", "CO2"]/1000, 3)`), with a mean of `r pn(fluxsummary["flux_µgC_gC_day_mean", "CO2"]/1000, 3)` (`r pn(fluxsummary["flux_µgC_g_day_mean", "CO2"]/1000, 3)`). CH~4~ rates ranged from `r pn(fluxsummary["flux_µgC_gC_day_min", "CH4"]*1000, 3)` ng C g C^-1^ day^-1^ (`r pn(fluxsummary["flux_µgC_g_day_min", "CH4"]*1000, 3)` ng C g soil^-1^ day^-1^) to a maximum of `r pn(fluxsummary["flux_µgC_gC_day_max", "CH4"]*1000, 3)` (`r pn(fluxsummary["flux_µgC_g_day_max", "CH4"]*1000, 3)`), with a mean of `r pn(fluxsummary["flux_µgC_gC_day_mean", "CH4"]*1000, 3)` (`r pn(fluxsummary["flux_µgC_g_day_mean", "CH4"]*1000, 3)`). Gas fluxes varied considerably over the course of the incubation (**Figures 2 and 3**).
 
 * Statistical tests of WC, T, C, N on individual core fluxes (Table 2)
-
-* Cumulative fluxes (Figure 4)
 
 Cumulative CO~2~ evolved was highly affected by temperature (`r pclean(co2_hsd$Temperature["p adj"])`), and "field moisture" cores emitted significantly more CO~2~ than the other two treatments at both temperatures (P < 0.001 for both). There was no difference between the 20 °C "drought" and "controlled drought" treatments (`r pclean(co2_hsd$Treatment["Drought-Controlled drought", "p adj"])`). Neither temperature (`r pclean(ch4_hsd$Temperature[,"p adj"])`) nor treatment (mean `r pclean(mean(ch4_hsd$Treatment[,"p adj"]))`) was a significant factor in predicting cumulative CH~4~ fluxes.
 
@@ -132,8 +132,6 @@ APS comments to address re above - TODO:
 * Totally surprised by this [last sentence above]. Assumed CH4 would be higher in cores sitting in water (i.e. field moist) – perhaps this CH4→ CO2 ‘effect’ is occurring in these cores as well!?!! 
 * Cumulative CO2 between cores held at 4˚ C and cores held at 20˚ C in the“field moisture” treatment did not (???!!!) differ (TRUE?!! Kinda looks that way and that is interesting and useful
 
-
-* CO2:CH4 ratios
 
 ```{r compute_ratios, echo=FALSE}
 # Ratio data is stored in the `gas_ratio` d.f. computed by analysis script
