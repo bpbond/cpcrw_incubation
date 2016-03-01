@@ -159,13 +159,13 @@ p_trt_wc <- summary(m_wc)$tTable["TreatmentControlled drought", "p-value"]
 printlog(SEPARATOR)
 printlog("Fluxes over time...")
 fluxdata %>%
+  filter(!outlier) %>%
   mutate(incday = floor(inctime_days)) %>%
   group_by(Gas, Temperature,Treatment, incday) %>%
   summarise(flux = mean(flux_µgC_g_day), flux_sd = sd(flux_µgC_g_day)) ->
   fluxdata_figsBC
 
 figsBC <- function(fd) {
-  panellabels <- 
     ggplot(fd, aes(incday, flux)) + 
     geom_point() + 
     facet_grid(Temperature ~ Treatment) + 
@@ -238,7 +238,10 @@ fluxdata_cumulative %>%
 # Log-transforming doesn't fix the lack of normality in our data,
 # but it's a major improvement; see graphs.
 
-fluxdata <- fluxdata %>% filter(flux_µgC_gC_day > 0) 
+# Remove outliers and zero fluxes from the data set
+fluxdata %>% 
+  filter(flux_µgC_gC_day > 0 & !outlier) ->
+  fluxdata
 
 printlog("Graphing flux distributions and testing for normality...")
 p <- ggplot(fluxdata, aes(x = flux_µgC_gC_day)) + geom_histogram(bins = 30)

@@ -105,15 +105,17 @@ fluxdata$CH4_flux_mgC_hr <- CH4_flux_µmol_g_s /
 # -----------------------------------------------------------------------------
 # Outlier identification - see 
 # For each gas, group by Treatment, Temperature, and incubation day
-
 printlog("Identifying and plotting outliers...")
 fluxdata %>%
-  mutate(incday = floor(inctime_days)) %>%
-  group_by(Treatment, Temperature, incday) %>% 
-  mutate(CO2_outlier = is_outlier(CO2_flux_mgC_hr, devs = CO2_EXCLUDE_DEVS), 
+  arrange(inctime_days) %>%
+  ungroup %>%
+  mutate(group = cut(1:nrow(fluxdata), OUTLIER_GROUPS)) %>%
+  group_by(Treatment, Temperature, group) %>% 
+         # Identify outliers by flux/mass, i.e. normalizing for mass and water
+  mutate(CO2_outlier = is_outlier(CO2_flux_mgC_hr / Mass_g, devs = CO2_EXCLUDE_DEVS), 
          # CH4 is so variable we use a higher exclusion cutoff
-         CH4_outlier = is_outlier(CH4_flux_mgC_hr, devs = CH4_EXCLUDE_DEVS)) %>%
-  select(-incday) ->
+         CH4_outlier = is_outlier(CH4_flux_mgC_hr / Mass_g, devs = CH4_EXCLUDE_DEVS)) %>%
+  select(-group) ->
   fluxdata
 
 fluxdata$incday <- NULL  # why doesn't the `select` above work?

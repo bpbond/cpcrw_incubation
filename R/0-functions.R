@@ -15,8 +15,9 @@ library(luzlogr)       # 0.2.0
 # -----------------------------------------------------------------------------
 # Parameters for key analytical choices
 # Defined here so they can be easily used in code AND manuscript
-CO2_EXCLUDE_DEVS <- 3.0    # CO2 outlier boundary, in mean absolute deviations
-CH4_EXCLUDE_DEVS <- 5.0    # CH4 outlier boundary, in mean absolute deviations
+OUTLIER_GROUPS   <- 10     # Divide data into groups and identify outliers in each
+CO2_EXCLUDE_DEVS <- 5.0    # CO2 outlier boundary, in mean absolute deviations
+CH4_EXCLUDE_DEVS <- 10.0   # CH4 outlier boundary, in mean absolute deviations
 
 # -----------------------------------------------------------------------------
 # Key files and directories shared between scripts
