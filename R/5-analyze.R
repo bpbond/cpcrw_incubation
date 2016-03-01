@@ -323,10 +323,13 @@ save_data(shapiro_trans)
 printlog(SEPARATOR)
 printlog("Fitting CO2 model...")
 
+# Add a small value to all flux values to ensure they're positive before log-transform
+fluxdata$flux_µgC_gC_day1 <- fluxdata$flux_µgC_gC_day + FLUX_ADDITION
+
 # C_percent and N_percent are *highly* correlated (r=0.98+)
 # Generally it seems that N_percent produces slightly better model fits,
 # so we use it here, not considering C_percent further
-m_co2_lme <- lme(log(flux_µgC_gC_day) ~ Temperature * WC_gravimetric + 
+m_co2_lme <- lme(log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric + 
                    (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
                  data = fluxdata,
                  subset = Gas == "CO2" & !outlier,
@@ -343,7 +346,7 @@ step_co2_lme <- MASS::stepAIC(m_co2_lme, direction = "both")
 
 printlog(SEPARATOR)
 printlog("Fitting CH4 model...")
-m_ch4_lme <- lme(log(flux_µgC_gC_day) ~ Temperature * WC_gravimetric + 
+m_ch4_lme <- lme(log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric + 
                    (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
                  data = fluxdata, 
                  subset = Gas == "CH4" & !outlier,
