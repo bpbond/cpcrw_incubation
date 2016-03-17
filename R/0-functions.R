@@ -1,9 +1,11 @@
-# Common function and file location definitions.
-# This script is source'd by every other script before executing.
+# Common constant, file location, and function definitions
+# This support script is source'd by every other script before executing
 # Ben Bond-Lamberty March 2015
 
 # -----------------------------------------------------------------------------
-# Key packages used across scripts
+# Run under:
+#   R version 3.2.3 (2015-12-10), x86_64-apple-darwin13.4.0 (64-bit)
+# Key packages used across scripts:
 library(ggplot2)       # 2.0.0
 theme_set(theme_bw())
 library(dplyr)         # 0.4.3
@@ -12,10 +14,13 @@ library(lubridate)     # 1.5.0
 library(stringr)       # 1.0.0
 library(luzlogr)       # 0.2.0
 
+#if(require(checkpoint))   # 0.3.15
+#    try(checkpoint("2016-04-01")) # 'try' b/c errors w/o network
+
 # -----------------------------------------------------------------------------
 # Parameters for key analytical choices
 # Defined here so they can be easily used in code AND manuscript
-OUTLIER_GROUPS   <- 10     # Divide data into groups and identify outliers in each
+OUTLIER_GROUPS   <- 10     # Divide data into date groups and identify outliers in each
 CO2_EXCLUDE_DEVS <- 5.0    # CO2 outlier boundary, in mean absolute deviations
 CH4_EXCLUDE_DEVS <- 10.0   # CH4 outlier boundary, in mean absolute deviations
 FLUX_ADDITION <- 0.1       # Added to fluxes before log transformation
@@ -51,6 +56,7 @@ print_dims <- function(d, dname = deparse(substitute(d))) {
 # Return output directory (perhaps inside a script-specific folder)
 # If caller specifies `scriptfolder=FALSE`, return OUTPUT_DIR
 # If caller specifies `scriptfolder=TRUE` (default), return OUTPUT_DIR/SCRIPTNAME
+# This lets scripts easily write logs/data to their own folder, or not
 outputdir <- function(scriptfolder = TRUE) {
   output_dir <- OUTPUT_DIR
   if(scriptfolder) output_dir <- file.path(output_dir, sub(".R$", "", SCRIPTNAME))
@@ -101,17 +107,17 @@ save_data <- function(df,
 } # save_data
 
 # -----------------------------------------------------------------------------
+# Identify outliers.
+# See: Davies, P.L. and Gather, U. (1993), "The identification of multiple outliers"
+# (with discussion), J. Amer. Statist. Assoc., 88, 782-801.
 is_outlier <- function(x, devs = 3.2) {
-  # See: Davies, P.L. and Gather, U. (1993).
-  # "The identification of multiple outliers" (with discussion)
-  # J. Amer. Statist. Assoc., 88, 782-801.
   x <- na.omit(x)
   lims <- median(x) + c(-1, 1) * devs * mad(x, constant = 1)
   x < lims[1] | x > lims[2]
 } # is_outlier
 
 # -----------------------------------------------------------------------------
-# save a plot to the diagnostic plot folder (used by README.md)
+# Save a plot to the diagnostic plot folder (used by README.md)
 save_diagnostic <- function(p, pname, printit = TRUE, ...) {
   if(printit) print(p)
   printlog("Saving diagnostic for", pname)
@@ -119,10 +125,4 @@ save_diagnostic <- function(p, pname, printit = TRUE, ...) {
     file.path(DIAGNOSTICS_DIR, .) %>%
     ggsave
   save_plot(pname, ...)
-}
-
-
-# -----------------------------------------------------------------------------
-#CHECKPOINTDATE	<- "2015-03-05" # comment out to not use checkpoint
-#if(exists("CHECKPOINTDATE") & require(checkpoint))
-#    try(checkpoint(CHECKPOINTDATE)) # 'try' b/c errors w/o network (issue #171)
+} # save_diagnostic
