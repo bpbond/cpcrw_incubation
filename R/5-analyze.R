@@ -165,7 +165,7 @@ printlog(SEPARATOR)
 printlog("Fluxes over time...")
 fluxdata %>%
   filter(!outlier) %>%
-  mutate(incday = floor(inctime_days)) %>%
+  mutate(incday = round(inctime_days, 0)) %>%
   group_by(Gas, Temperature, Treatment, incday) %>%
   summarise(flux = mean(flux_µgC_g_day), 
             flux_sd = sd(flux_µgC_g_day),
