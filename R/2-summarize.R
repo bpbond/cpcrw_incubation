@@ -86,7 +86,7 @@ rawdata_samples <- rawdata %>%
 printlog("Loading valve map data...")
 valvemap <- read_csv(VALVEMAP, skip = 1, col_types = "ccnncdc")
 printlog( "Converting date/time info to POSIXct..." )
-valvemap$StartDateTime <- mdy_hm(paste(valvemap$Date, valvemap$Time_set_start))
+valvemap$StartDateTime <- mdy_hm(paste(valvemap$Date, valvemap$Time_set_start_UTC))
 valvemap <- arrange(valvemap, StartDateTime)
 valvemap$valvemaprow <- seq_len(nrow(valvemap))
 qc_valvemap(valvemap)
