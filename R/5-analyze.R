@@ -1,4 +1,5 @@
 # Final analysis script: statistical tests, final plots, etc.
+# Called by the R Markdown document (the manuscript).
 # Ben Bond-Lamberty January 2016
 
 source("R/0-functions.R")
@@ -26,17 +27,21 @@ fluxdata_orig$Treatment <- factor(fluxdata_orig$Treatment,
 
 printlog("Transforming...")
 fluxdata_orig %>%
-  select(Core, Treatment, Temperature, inctime_days, 
+  select(samplenum, Core, Treatment, Temperature, inctime_days, 
          Mass_g, SoilDryMass_g, WC_gravimetric, WC_volumetric,
          CO2_flux_mgC_hr, CH4_flux_mgC_hr,
          CO2_outlier, CH4_outlier) %>%
   melt(measure.vars = c("CO2_flux_mgC_hr", "CH4_flux_mgC_hr"),
        value.name = "flux_mgC_hr") %>%
-  melt(measure.vars = c("CO2_outlier", "CH4_outlier"), 
-       variable.name = "outlier_name", value.name = "outlier") %>%
   mutate(Gas = substr(variable, 1, 3)) %>%
-  select(-variable, -outlier_name) ->
+  select(-variable) ->
   fluxdata
+
+# Combine the gas-specific outlier fields into a single outlier flag
+# I originally was using reshape2::melt but this was duplicating rows
+fluxdata$outlier <- fluxdata$CO2_outlier
+fluxdata$outlier[fluxdata$Gas == "CH4"] <- fluxdata$CH4_outlier[fluxdata$Gas == "CH4"]
+fluxdata$CO2_outlier <- fluxdata$CH4_outlier <- NULL
 
 # -----------------------------------------------------------------------------
 # Read C, N, DOC data; summarise; test for treatment effects; merge with fluxdata
@@ -161,8 +166,11 @@ printlog("Fluxes over time...")
 fluxdata %>%
   filter(!outlier) %>%
   mutate(incday = floor(inctime_days)) %>%
-  group_by(Gas, Temperature,Treatment, incday) %>%
-  summarise(flux = mean(flux_µgC_g_day), flux_sd = sd(flux_µgC_g_day)) ->
+  group_by(Gas, Temperature, Treatment, incday) %>%
+  summarise(flux = mean(flux_µgC_g_day), 
+            flux_sd = sd(flux_µgC_g_day),
+            n = n(),
+            samplenums = paste(samplenum, collapse = " ")) ->
   fluxdata_figsBC
 
 figsBC <- function(fd) {
