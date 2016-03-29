@@ -148,8 +148,8 @@ fluxdata$CH4_flux_mgC_hr_clean[fluxdata$CH4_outlier] <- NA
 fluxdata %>%
   group_by(Core) %>%
   arrange(inctime_days) %>%
-  mutate(CO2_flux_mgC_hr_interp = approx(inctime_days, CO2_flux_mgC_hr_clean, xout = inctime_days, rule = 2)$y,
-         CH4_flux_mgC_hr_interp = approx(inctime_days, CH4_flux_mgC_hr_clean, xout = inctime_days, rule = 2)$y) %>%
+  mutate(CO2_flux_mgC_hr_interp = approx(inctime_days, CO2_flux_mgC_hr_clean, xout = inctime_days, rule = 2)[['y']],
+         CH4_flux_mgC_hr_interp = approx(inctime_days, CH4_flux_mgC_hr_clean, xout = inctime_days, rule = 2)[['y']]) %>%
   group_by(Core) %>%
   mutate(delta_hrs = (inctime_days - lag(inctime_days)) * 24,
          CO2_flux_mgC = CO2_flux_mgC_hr_interp * delta_hrs,
