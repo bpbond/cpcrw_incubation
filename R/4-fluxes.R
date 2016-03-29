@@ -32,7 +32,7 @@ summarydata %>%
            SoilDryMass_g,
          WC_volumetric = (Mass_g - CoreSleeveMass_g - NonsoilMassLarge_g - SoilDryMass_g) / 
            SoilVolume_cm3) %>%
-  select(Core, Mass_g, SoilDryMass_g, SoilVolume_cm3, 
+  select(samplenum, Core, Mass_g, SoilDryMass_g, SoilVolume_cm3, 
          WC_gravimetric, WC_volumetric,
          Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, inctime_days) ->
   fluxdata
@@ -117,7 +117,7 @@ fluxdata %>%
          CH4_outlier = is_outlier(CH4_flux_mgC_hr / Mass_g, devs = CH4_EXCLUDE_DEVS)) ->
   fluxdata
 
-fluxdata$incday <- fluxdata$grp <- NULL  # why doesn't the `select` above work?
+fluxdata$grp <- NULL  # why doesn't the `select` above work?
 
 p <- ggplot(fluxdata, aes(inctime_days, CO2_flux_mgC_hr, color = CO2_outlier))
 p <- p + geom_point() + facet_grid(Temperature ~ Treatment)
