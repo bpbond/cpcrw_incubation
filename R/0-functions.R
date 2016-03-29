@@ -8,7 +8,7 @@
 # Key packages used across scripts:
 library(ggplot2)       # 2.0.0
 theme_set(theme_bw())
-library(dplyr)         # 0.4.3
+library(dplyr)         # 0.4.3.9001
 library(readr)         # 0.2.2
 library(lubridate)     # 1.5.0
 library(stringr)       # 1.0.0

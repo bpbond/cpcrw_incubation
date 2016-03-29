@@ -109,16 +109,15 @@ printlog("Identifying and plotting outliers...")
 fluxdata %>%
   arrange(inctime_days) %>%
   ungroup %>%
-  mutate(group = cut(1:nrow(fluxdata), OUTLIER_GROUPS)) %>%
-  group_by(Treatment, Temperature, group) %>% 
+  mutate(grp = cut(1:nrow(fluxdata), OUTLIER_GROUPS)) %>%
+  group_by(Treatment, Temperature, grp) %>% 
          # Identify outliers by flux/mass, i.e. normalizing for mass and water
   mutate(CO2_outlier = is_outlier(CO2_flux_mgC_hr / Mass_g, devs = CO2_EXCLUDE_DEVS), 
          # CH4 is so variable we use a higher exclusion cutoff
-         CH4_outlier = is_outlier(CH4_flux_mgC_hr / Mass_g, devs = CH4_EXCLUDE_DEVS)) %>%
-  select(-group) ->
+         CH4_outlier = is_outlier(CH4_flux_mgC_hr / Mass_g, devs = CH4_EXCLUDE_DEVS)) ->
   fluxdata
 
-fluxdata$incday <- NULL  # why doesn't the `select` above work?
+fluxdata$incday <- fluxdata$grp <- NULL  # why doesn't the `select` above work?
 
 p <- ggplot(fluxdata, aes(inctime_days, CO2_flux_mgC_hr, color = CO2_outlier))
 p <- p + geom_point() + facet_grid(Temperature ~ Treatment)
@@ -203,11 +202,6 @@ fd_cumulative_core %>%   # already grouped by Treatment, Temperature, Gas
 
 printlog("Flux summary plot...")
 
-# Tweak the data set - factors, names, etc.
-fd_cumulative$Treatment <- factor(fd_cumulative$Treatment, 
-                                  levels = c("Drought", "Controlled drought", "Field moisture"))
-fd_cumulative$Temperature <- as.factor(fd_cumulative$Temperature)
-
 # Add a few dummy rows so graph bars are spaced correctly
 dmy <- data.frame(Treatment = "Controlled drought",
                   Temperature = 4,
@@ -215,7 +209,13 @@ dmy <- data.frame(Treatment = "Controlled drought",
                   cum_flux_mgC = NA,
                   cum_flux_mgC_sd = NA,
                   stringsAsFactors = FALSE)
-fluxdata_cumulative <- rbind(fd_cumulative, dmy)
+fluxdata_cumulative <- bind_rows(fd_cumulative, dmy)
+
+# Tweak the data set - factors, names, etc.
+fluxdata_cumulative$Treatment <- factor(fluxdata_cumulative$Treatment, 
+                                  levels = c("Drought", "Controlled drought", "Field moisture"))
+fluxdata_cumulative$Temperature <- as.factor(fluxdata_cumulative$Temperature)
+
 
 p3 <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
   geom_bar(stat = 'identity', position = position_dodge()) +
