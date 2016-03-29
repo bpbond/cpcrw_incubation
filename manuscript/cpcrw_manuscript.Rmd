@@ -33,15 +33,11 @@ Abstract.
 
 #### Introduction
 
-Alaska forests under particular stress - browning {Ju, 2016 #4320}
-
-High latitude ecosystems are being subjected to rapid changes in climate {IPCC, 2013 #3916} and fire occurrence and intensity {Kasischke, 2010 #2631}. This has a wide variety of effects on ecosystems and society, notably in northwestern North America and Alaska {Hinzman, 2005 #4315}. As a result, rising temperatures and increasing fire will result in permafrost degradation {Pastick, 2015 #4311} and changes in soil temperature and hydrology that are expected to increase soil greenhouse gas (GHG) fluxes to the atmosphere, promoting a positive climate feedback {Treat, 2015 #4217}{Koven, 2011 #3092}.
+High latitude ecosystems are being subjected to rapid changes in climate {IPCC, 2013 #3916} and fire occurrence and intensity {Kasischke, 2010 #2631}. This has a wide variety of effects on ecosystems and society, notably in northwestern North America and Alaska {Hinzman, 2005 #4315}{Ju, 2016 #4320}. As a result, rising temperatures and increasing fire will result in permafrost degradation {Pastick, 2015 #4311}{Zhang, 2015 #4372} and changes in soil temperature and hydrology that are expected to increase soil greenhouse gas (GHG) fluxes to the atmosphere, promoting a positive climate feedback {Treat, 2015 #4217}{Koven, 2011 #3092}.
 
 The magnitude, timing, and form-in particular as methane (CH~4~) or carbon dioxide (CO~2~)-of such a feedback remain highly uncertain {Schuur, 2015 #4319}. While northern soils hold enormous quantities {Tarnocai, 2009 #2231} of potentially mineralizable soil organic carbon (SOC), vegetation succession dynamics promote permafrost resilience to even large temperature changes {Jorgenson, 2010 #2627}. Such dynamics may however be disrupted by increased fire disturbance {Johnstone, 2010 #2465}. In addition, the stability of SOC is itself highly uncertain, as it depends on soil temperature and moisture, the ages of and ratio between the carbon (C) and nitrogen (N) pools {Weiss, 2015 #4317}, and its protection from competent microorganisms, enzymes, and resources {Bailey, 2012 #3624}, whether by organomineral sorption, chemical lability, or physical location {Schmidt, 2011 #3135}.
 
 Temperature and moisture typically have strong and often interactive influences on soil GHG emissions. A long literature of laboratory incubations, field observations, and meta-analyses has documented increased CO2 fluxes with rising temperature {Davidson, 2006 #1669}{Hashimoto, 2015 #4231}{Treat, 2015 #4217}. GHG responses to wetting and thawing dynamics are much less certain, with substantial variability between studies {Kim, 2012 #2863}. The anaerobic conditions common following permafrost thaw lower CO~2~ emissions but increase those of CH~4~ {Treat, 2015 #4217;Treat, 2014 #4213}, and interact with soil temperature effects in long-term incubations {Elberling, 2013 #3720}. Such laboratory studies have weaknesses, but their controlled environments provide an important way to elucidate the key mechanisms controlling GHG from high-latitude soils {Schuur, 2015 #4319}. TODO: add Kirschbaum 2006. Most studies have focused on surface soils or permafrost soils, however, neglecting deep soils that experience fluctuating temperature with season and moisture with potential permafrost thaw ..or something less awkward (TODO; CITE). Such deep but unfrozen soils were identified as subject to strong effects from a two-decade warming experiment in the Alaskan Arctic {Sistla, 2013 #3666}.  
-
-TODO: look at Podrebarac (2016) - Soils isolated during incubation underestimate temperature sensitivity of respiration and its response to climate history
 
 The goal of this study was to examine how temperature and moisture control C loss and GHG (CO~2~ and CH~4~) emissions from soils sampled from the bottom of the annual active layer--i.e., directly above permafrost--in an Alaskan boreal forest. We also aimed to characterize the chemical and biological properties of these soils as they were subjected to a 100-day incubation at difference temperature and moisture levels. We hypothesized that soils maintained at field moisture and high temperature would lose more C, both as CO~2~ and CH~4~, than cores incubated at 4˚C, due to increased aerobic and anaerobic microbial activity.
 
@@ -49,7 +45,7 @@ The goal of this study was to examine how temperature and moisture control C los
 
 **Field sampling**
 
-The field component of this research took place in Caribou-Poker Creeks Research Watershed (CPCRW), part of the Bonanza Creek LTER (http://www.lter.uaf.edu/default.cfm). Annual average air temperature was -2.5 °C, and annual average precipitation was 400 mm {Petrone, 2006 #4313}. The watershed's lowlands and north-facing slopes are dominated by black spruce (*Picea mariana*), feathermoss (*Pleurozium schreberi* and others), and *Sphagnum* spp.; the drier south slopes tend to be deciduous with a mixture of quaking aspen (*Populus tremuloides*), paper birch (*Betula neoalaskana*), and patches of alder (*Alnus crispa*). 
+The field component of this research took place in Caribou-Poker Creeks Research Watershed (CPCRW), part of the Bonanza Creek LTER (http://www.lter.uaf.edu/research/study-sites-cpcrw). CPCRW is located in the Yukon-Tanana Uplands northeast of Fairbanks, AK, a part of the boreal forest that has seen strong increases in air temperature and forest browning {Ju, 2016 #4320} over several decades. Annual average air temperature was -2.5 °C, and annual average precipitation 400 mm {Petrone, 2006 #4313}. The watershed's lowlands and north-facing slopes are dominated by black spruce (*Picea mariana*), feathermoss (*Pleurozium schreberi* and others), and *Sphagnum* spp.; the drier south slopes tend to be deciduous with a mixture of quaking aspen (*Populus tremuloides*), paper birch (*Betula neoalaskana*), and patches of alder (*Alnus crispa*). 
 
 We sampled soils from a southeast slope (65.1620 °N, 147.4874 °W) at CPCRW, in a 60 m transition zone between lowland *Picea mariana* Mill BSP. and upland *Betula neoalaskana*, with significant white spruce (*Picea glauca*) presence. Stand density in this transition zone was 4060 ± 2310 trees ha^-1^, with basal area of 27.9 ± 7.0 m^2^ ha^-1^. The forest was at least 90 years old {cf. \\Morishita, 2014 #4316} according to tree rings taken at the stem base of several of the largest white spruce. The soil is characterized as a poorly-drained silt loam, and on average had ~20 cm of organic material over the mineral soil.
 
@@ -124,6 +120,9 @@ After removal of known problematic data, and exclusion of statistical outliers, 
 
 Cumulative CO~2~ evolved was highly affected by temperature (`r pclean(co2_hsd$Temperature["p adj"])`), and "field moisture" cores emitted significantly more CO~2~ than the other two treatments at both temperatures (P < 0.001 for both). There was no difference between the 20 °C "drought" and "controlled drought" treatments (`r pclean(co2_hsd$Treatment["Drought-Controlled drought", "p adj"])`). Neither temperature (`r pclean(ch4_hsd$Temperature[,"p adj"])`) nor treatment (mean `r pclean(mean(ch4_hsd$Treatment[,"p adj"]))`) was a significant factor in predicting cumulative CH~4~ fluxes.
 
+The cumulative flux numbers above imply Q10 values of XXXX...
+
+
 APS comments to address re above - TODO:
 
 * It doesn’t look like there was an interactive effect of temp*moisture, but just checking if you included that in the stat model?
@@ -146,37 +145,57 @@ maxtemp <- gas_ratio$Temperature[which.max(gas_ratio$CO2CH4_ratio)]
 
 The production of C from CO~2~ was over `r minmag` order of magnitudes higher than that from CH~4~, with CO~2~:CH~4~ C ratios ranging from `r minratio` million in the `r mintemp` °C "`r maxtrt`" treatment, to `r maxratio` million in the `r maxtemp` °C "`r maxtrt`" treatment.
 
-
 #### Discussion
 
-Compare absolute flux rates to other published studies from boreal mineral soils.
-
-Incubation experiments can only go so far though...
-Morishita et al. {, 2014 #4316} measured GHG fluxes in the field at CPCRW and nearby forests, and found CO2 production to be correlated with both soil temperature and moisture, but CH4 uptake driven by temperature only.
-
-Treat et al. 2014 also showed that CH4 production from organic permafrost soils has a positive relationship with temperature (cites several studies: Lupasco et al. 2012, etc.).  perhaps mention (briefly) here - that these are not surface layer soils (where majority of microbial activity and C mineralization of labile C takes place) and that taking them out of depth (where they are not exposed to O2 as readily, etc.) for our laboratory incubation may differ from in situ CO2/CH4 production. 
-
-Increased temperature alone may not drive C mineralization rates in forest-mineral soils (Giardina and Ryan, 2000), but its corresponding increase in soil moisture content can lead to changes in microbial community structure and enhance anaerobic activity that may amplify CO2, CH4 and N2O fluxes (Xue et al, 2016).  
-
-Note high CO2:CH4 ratios, compare with Treat et al. and other studies.
+**Importance and context**
 
 Rises in boreal soil temperatures - who has quantified this? Changes in soil WC much less certain. Thermokarst etc., deepening of active layer - that's the larger implications of this work.
 
+Eastern Alaska high latitude warming and forest stress {Ju, 2016 #4320}.
 
-"Barfed bullets" from APS:
+**Previous results**
 
-*	Seeta’s paper: Mineral soil: greenhouse treatment (warming treatment) = 0.646 ± 0.04 GREATER THAN control = 0.43 ± 0.05 C-CO2 per g soil per day in 14 day incubation ( α ≤ 0.1). Mineral soil also had greater active biomass and extractable-OM). (Sistla et al. 2013 Nature).  
-*	Xue et al. 2016: active layer, contained organic horizon: soil moisture increased in warmed plots: ~50% moisture compared to ~45% (p < 0.05. C Flux (g/m2) from ecosystem respiration was greater in warmed plots (~500 g/m2) compared to control plots (~400) (p < 0.05). Authors remarked that soil moisture/climate was important factor in shifting functional composition of microbial community (GeoChip), esp. with anaerobic activity. We did not see differences in our cum C-CH4 loss with temperature or moisture, but we did see relationship between moisture and CH4 in both field moist treatments (4˚ and 20˚) and 20˚ drought. 
+Morishita et al. {, 2014 #4316} measured GHG fluxes in the field at CPCRW and nearby forests, and found CO~2~ production to be correlated with both soil temperature and moisture, consistent with our results, TODO. Morishita et al. {, 2014 #4316} found however that CH~4~ uptake (they observed no emissions) was driven by temperature only; this is...
+
+Waldrop et al. {, 2010 #4380} incubated  active-layer and permafrost soils from near Fairbanks, AK, under varied temperature and aerobic conditions, observing Q~10~ values of 9.0 (active layer) and 2.3 (permafrost); flux rates were 0.01-0.10 µmol CH~4~ day^-1^ g^-1^ and 1-8 µg C-CO2 hr^-1^ g^-1^. 
+
+Treat et al. 2014 also showed that CH4 production from organic permafrost soils has a positive relationship with temperature (cites several studies: Lupasco et al. 2012, etc.)
 *	Treat et al. 2015. Meta-analysis of anaerobic incubations.  Mineral soils 20-100 cm depth had a mean CO2 production (ug CO2-C /g C/day) of 100.6 +/- 10.3 (33.2 +/- 3.7 per g DW)  (7840 per m2/d). All soils < 10C were 67 +/- 16 and > 20C was 172 +/- 17. Dry soils 68 +/- 8 and Fluctuating = 364 +/- 60 and inundated = 105 +/- 11. 
-*	Schaufler et al. 2010: 33.7 +/- 2.7C02-C (mg C/ m2/ hr) averaged across all temperature (5-20C) and moisture (20-80% WFPS) in forested, boreal site, with 33.7 +/- 2.7.  CH4-C = -30.2 +/- 4.5. Optimum moisture content was 40% WFPS for this site – or highest CO2 evolved at this moisture content. Carbon dioxide emissions were linearly correlated with temperature (p = 0.000) and exponentially correlated with WFPS (p = 0.000). CH4 uptake (oxidation) was highest in the northern sites (included boreal site), and was also the driest soil moisture conditions. -44.8 +/- 5.5. ug CH4-C/m2/hr and decreased with increasing soil moisture.  Effect of WFPS on CH4 oxidation, exponential, p  = 0.000.  
+
+*	Xue et al. 2016: active layer, contained organic horizon: soil moisture increased in warmed plots: ~50% moisture compared to ~45% (p < 0.05. C Flux (g/m2) from ecosystem respiration was greater in warmed plots (~500 g/m2) compared to control plots (~400) (p < 0.05). Authors remarked that soil moisture/climate was important factor in shifting functional composition of microbial community (GeoChip), esp. with anaerobic activity.
+
+*	Schaufler et al. 2010: 33.7 +/- 2.7C02-C (mg C/ m2/ hr) averaged across all temperature (5-20C) and moisture (20-80% WFPS) in forested, boreal site, with 33.7 +/- 2.7.  CH4-C = -30.2 +/- 4.5. Optimum moisture content was 40% WFPS for this site – or highest CO2 evolved at this moisture content. Carbon dioxide emissions were linearly correlated with temperature (p = 0.000) and exponentially correlated with WFPS (p = 0.000). CH4 uptake (oxidation) was highest in the northern sites (included boreal site), and was also the driest soil moisture conditions. -44.8 +/- 5.5. ug CH4-C/m2/hr and decreased with increasing soil moisture.  Effect of WFPS on CH4 oxidation, exponential, p  = 0.000.
+
 *	Wu et al. 2010. Mongolian steppe 900-1400msl. Soils = chernozems, but there was a gleyosol. Soil moisture and temperature influenced CH4. Soil drought limited CH4 uptake at all 15C. CO2 in meadow sites – increased with temperature (< 30 mg C/m2/hr @ 5C to 90 at 15C) and with moisture (<30-50 in dry treatment from 5-15C, and 50-90 in high rain treatment at 5-15C). 
+
+Seeta’s paper: Mineral soil: greenhouse treatment (warming treatment) = 0.646 ± 0.04 GREATER THAN control = 0.43 ± 0.05 C-CO2 per g soil per day in 14 day incubation ( α ≤ 0.1). Mineral soil also had greater active biomass and extractable-OM). (Sistla et al. 2013 Nature).  
+
+**Temperature versus moisture sensitivity, and CO~2~ versus CH~4~**
 
 Why would we expect to see greater CO2 evolved in higher temps? 
 
-*	Increased temp (to a certain degree) increases enzyme kinetics (i.e. Arrhenius equation) – rate of enzyme reactions increase, thus decomposition increases (and CO2 production increases) (Kirschbaun  1995, 2006 for SOM-temp, Wallenstein/Allison/Schimel for enzyme-temp, etc. so many others)
+*	Increased temp (to a certain degree) increases enzyme kinetics (i.e. Arrhenius equation) (Kirschbaun  1995, 2006 for SOM-temp, Wallenstein/Allison/Schimel for enzyme-temp, etc. so many others)
 *	Increased temperature enhances the metabolic rate of microorganisms – thus increasing the production of extracellular enzymes (state somewhere prior that extracellular enzymes catalyze fundamental biogeochemical reactions in SOC decomposition and nutrient cycling). Cusack et al. (2010) suggests temperature-sensitivity of decomposition may be indirectly related to temperature dependence of enzyme production AND turnover. 
 *	Carbon use efficiency (CUE), a measure of how well a microorganism can assimilate C into biomass relative to how much C is lost as CO2,  has been shown to vary with temperature (CITE – Lopez-Moran 2007; Price and Sowers 2004 !) with decreases in CUE at higher temperatures leading to greater CO2 production during SOM decomposition (Steinweg et al. 2008). Cite Balser and Wixon 2009 in regards to microbial-mediated effects on temp-sensitivity of C decomposition. 
-*	Higher temperatures enhance desorption rates of OM with minerals (ten Hulscher and Cornelissen 1996; Kalbitz et al. 2000 – others) making more OC available in solution (Xu & Saiers, 2010; Plante et al. 2009), and thus accessible for adjacent, competent microorganisms (CITE MORE).  If we want to get technical – warmer temperatures enhance desorption of complex OC to minerals, while simultaneously providing more surface area for simple OC compounds to interact with minerals (i.e. simple C adsorps and complex C desorps in warmer temps). 
+*	Higher temperatures enhance desorption rates of OM with minerals (ten Hulscher and Cornelissen 1996; Kalbitz et al. 2000 – others) making more OC available in solution (Xu & Saiers, 2010; Plante et al. 2009), and thus accessible for adjacent, competent microorganisms
+
+
+Note high CO2:CH4 ratios, compare with Treat et al. and other studies.
+
+Increased temperature alone may not drive C mineralization rates in forest-mineral soils (Giardina and Ryan, 2000), but its corresponding increase in soil moisture content can lead to changes in microbial community structure and enhance anaerobic activity that may amplify CO2, CH4 and N2O fluxes (Xue et al, 2016).  
+
+**Limitations and weaknesses**
+
+Incubation experiments can only go so far though...
+
+these are not surface layer soils (where majority of microbial activity and C mineralization of labile C takes place) and that taking them out of depth (where they are not exposed to O2 as readily, etc.) for our laboratory incubation may differ from in situ CO2/CH4 production. 
+
+Check out:
+Soil microbial respiration rate and temperature sensitivity along a north-south forest transect in eastern China: Patterns and influencing factors
+http://onlinelibrary.wiley.com/doi/10.1002/2015JG003217/abstract
+
+TODO: look at Podrebarac (2016) - Soils isolated during incubation underestimate temperature sensitivity of respiration and its response to climate history
+
 
 
 
