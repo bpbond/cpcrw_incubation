@@ -75,14 +75,15 @@ fluxn <- nrow(fluxdata)
 en <- sum(fluxdata$outlier)
 ```
 
-Anomalous data were excluded based on their being more than `r CO2_EXCLUDE_DEVS` (for CO~2~) or `r CH4_EXCLUDE_DEVS` (for CH~4~) mean absolute deviations {Davies, 1993 #3138} from the treatment mean within each day, treatment, and temperature. We excluded `r en` of `r fluxn` (`r round(en/fluxn*100)`%) of the gas flux measurements for this reason. Other data (`r round(rn/sdn*100)`%) were removed because of known instrument problems, e.g. the analyzer was left running after leaving a chamber. The final number of valid flux samples from the 100-day incubation was `r sum(!fluxdata$outlier)`.
+Anomalous data were excluded based on their being more than `r CO2_EXCLUDE_DEVS` (for CO~2~) or `r CH4_EXCLUDE_DEVS` (for CH~4~) mean absolute deviations {Davies, 1993 #3138} from the treatment mean within a 10-day period, treatment, and temperature. We excluded `r en` of `r fluxn` (`r round(en/fluxn*100)`%) of the gas flux measurements for this reason. Other data (`r round(rn/sdn*100)`%) were removed because of known instrument problems, e.g. the analyzer was left running after leaving a chamber. The final number of valid flux samples from the 100-day incubation was `r sum(!fluxdata$outlier)`.
 
-The GHG concentration measurements for each sample (i.e., each gas, core, and date/time) were used to calculate a linear rate of change (δc/δt), based on the concentration rise from a minimum (at 2-10 seconds after measurement began) to a maximum (at 10-45 seconds). Each core’s respiration flux (F) was then calculated following e.g. Steduto et al. {, 2002 #3383} as $F=\frac{\delta c}{\delta t} \frac{V}{M} \frac{P_a}{RT}$ where V is the core-specific system volume, M the core dry mass as determined at the end of the incubation, Pa atmospheric pressure (101 kPa; the incubation chambers were ~120 m a.s.l.), R the universal gas constant (8.3 x 10^-3^ m^3^ kPa mol^-1^ K^-1^) and T the chamber air temperature (K) at time of measurement. The final respiration rate was expressed on a dry soil mass basis (mg C kg soil^-1^ day^-1^). TODO check all units
+The GHG concentration measurements for each sample (i.e., each gas, core, and date/time) were used to calculate a linear rate of change (δc/δt), based on the concentration rise from a minimum (at 2-10 seconds after measurement began) to a maximum (at 10-45 seconds). Each core’s respiration flux (*F*) was then calculated following e.g. Steduto et al. {, 2002 #3383} as $F=\frac{\delta c}{\delta t} \frac{V}{M} \frac{P_a}{RT}$ where *V* is the core-specific system volume, *M* the core dry mass as determined at the end of the incubation, *P~a~* atmospheric pressure (101 kPa; the incubation chambers were ~120 m a.s.l.), *R* the universal gas constant (8.3 x 10^-3^ m^3^ kPa mol^-1^ K^-1^) and *T* the chamber air temperature (K) at time of measurement. The final respiration rate was expressed on a dry soil mass basis (mg C kg soil^-1^ day^-1^). TODO check all units
+
+Temperature sensitivity (Q~10~) was calculated for each gas and treatment as $\frac{F_2}{F_1}^{\left( \frac{10}{T_2-T_1} \right)}$ where *F~1~* and *F~2~* are the cumulative gas fluxes (mg C) at temperatures *T~1~* and *T~2~* (°C), respectively.
+
 
 * joined with mass and ancillary data
 * correlations
-* Q10 computation
-* stats
 
 The effects of temperature, gravimetric water content, C percent, N percent, and DOC concentration on instantaneous gas fluxes were evaluated using a linear mixed-effects model fit by the R function *lme* in the R 'nlme' package, , version `r packageVersion("nlme")`. Because the dependent variable (CO~2~ or CH~4~ flux) was non-normally distributed, it was transformed using a natural-logarithm (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^ to ensure all positive fluxes) transformation. Core number was treated as a random effect in the model. We then used performed stepwise model selection by Akaike's information criterion (AIC) using the *stepAIC* function in the R 'MASS' package, version `r packageVersion("MASS")`. A linear mixed-effects model was also used to evaluate the effect of treatment on core water content. The effect of temperature and treatment (drought, controlled drought, or field moisture conditions) on cumulative gas fluxes was evaluted with a post-hoc Tukey Honest Significant Differences test.
 
@@ -120,16 +121,7 @@ After removal of known problematic data, and exclusion of statistical outliers, 
 
 Cumulative CO~2~ evolved was highly affected by temperature (`r pclean(co2_hsd$Temperature["p adj"])`), and "field moisture" cores emitted significantly more CO~2~ than the other two treatments at both temperatures (P < 0.001 for both). There was no difference between the 20 °C "drought" and "controlled drought" treatments (`r pclean(co2_hsd$Treatment["Drought-Controlled drought", "p adj"])`). Neither temperature (`r pclean(ch4_hsd$Temperature[,"p adj"])`) nor treatment (mean `r pclean(mean(ch4_hsd$Treatment[,"p adj"]))`) was a significant factor in predicting cumulative CH~4~ fluxes.
 
-The cumulative flux numbers above imply Q10 values of XXXX...
-
-
-APS comments to address re above - TODO:
-
-* It doesn’t look like there was an interactive effect of temp*moisture, but just checking if you included that in the stat model?
-* This is good IF the controlled drought was really following the same dry-down rate of the 4C drought treatment (see comment on Figure 2 below). This way a comparison between 20C drought and 4C drought is more appropriate and meaningful.
-* Totally surprised by this [last sentence above]. Assumed CH4 would be higher in cores sitting in water (i.e. field moist) – perhaps this CH4→ CO2 ‘effect’ is occurring in these cores as well!?!! 
-* Cumulative CO2 between cores held at 4˚ C and cores held at 20˚ C in the“field moisture” treatment did not (???!!!) differ (TRUE?!! Kinda looks that way and that is interesting and useful
-
+The cumulative flux numbers above result in CH~4~ temperature sensitivity (Q~10~) values of `r pn(q10_cumulative["Field moisture", "CH4"], 1)` and `r pn(q10_cumulative["Drought", "CH4"], 1)` for the field moisture and drought treatments, respectively; the corresponding Q~10~ values  based on cumulative CO~2~ were `r pn(q10_cumulative["Field moisture", "CO2"], 1)` and `r pn(q10_cumulative["Drought", "CO2"], 1)`.
 
 ```{r compute_ratios, echo=FALSE}
 # Ratio data is stored in the `gas_ratio` d.f. computed by analysis script

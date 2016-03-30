@@ -146,8 +146,10 @@ fluxdata %>%
 
 printlog(SEPARATOR)
 printlog("Treatment effect on water content...")
+lowtemp <- min(fluxdata$Temperature, na.rm = TRUE)
+hightemp <- max(fluxdata$Temperature, na.rm = TRUE)
 fluxdata %>%
-  filter(Temperature == 20) ->
+  filter(Temperature == hightemp) ->
   fluxdata20
 fluxdata20$Treatment <- factor(fluxdata20$Treatment, levels = c("Drought", "Controlled drought", "Field moisture"))
 m_wc <- lme(WC_gravimetric ~ Treatment,
@@ -228,6 +230,18 @@ figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Tre
   facet_grid(Gas ~ ., scales = "free") +
   ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$inctime_days)), "days"))
 
+# -----------------------------------------------------------------------------
+# Q10 based on cumulative fluxes
+# TODO: I hate the hardcoded temperature values below!
+
+stopifnot(length(unique(fluxdata_cumulative$Temperature)) == 2)
+fluxdata_cumulative %>%
+  reshape2::dcast(Treatment + Gas ~ Temperature, 
+                  value.var = "cum_flux_mgC") %>%
+  mutate(Q10 = (`20` / `4`) ^ (10 / (hightemp - lowtemp))) %>%
+  reshape2::dcast(Treatment ~ Gas, value.var = "Q10") ->  
+  q10_cumulative
+rownames(q10_cumulative) <- q10_cumulative$Treatment
 
 # -----------------------------------------------------------------------------
 # CO2:CH4 emissions ratio
@@ -279,50 +293,6 @@ fluxdata %>%
   print ->
   shapiro_trans
 save_data(shapiro_trans)
-
-# # -----------------------------------------------------------------------------
-# # Does WC affect gas fluxes within temperature and treatment?
-# 
-# printlog(SEPARATOR)
-# printlog("Summarizing WC effect...")
-# fluxdata %>%
-#   filter(flux_µmol_g_s > 0) %>%
-#   group_by(Gas, Treatment, Temperature) %>%
-#   filter(!outlier) %>%
-#   do(mod = lm(log(flux_µmol_g_s) ~ WC_gravimetric, data = .)) %>%
-#   broom::glance(mod) %>%
-#   select(Gas, Treatment, Temperature, adj.r.squared, sigma, p.value, AIC) ->
-#   #  mutate(signif = p.value < 0.05) ->
-#   WC_effect
-# 
-# print(WC_effect)
-# save_data(WC_effect)
-# 
-# # A quick visualization
-# p <- qplot(WC_gravimetric, flux_µmol_g_s, data = fluxdata) 
-# p <- p + facet_grid(Gas ~ Temperature, scales = "free") + geom_smooth(method = 'lm')
-# save_plot(p, pname = "WC_gravimetric_effect")
-
-# -----------------------------------------------------------------------------
-# Per-core models - look at R2, etc. variability
-
-# printlog("Per-core models...")
-# fluxdata %>%
-#   filter(flux_µmol_g_s > 0) %>%
-#   group_by(Core, Gas) %>%
-#   do(mod = lm(log(flux_µmol_g_s) ~ Temperature * WC_gravimetric, data = .)) %>%
-#   glance(mod) %>%
-#   select(Core, Gas, adj.r.squared, sigma, p.value, AIC) ->
-#   per_core_models
-# 
-# print(per_core_models)
-# save_data(per_core_models)
-# 
-# p <- ggplot(per_core_models, aes(adj.r.squared)) + geom_histogram(bins = 30)
-# p <- p + facet_grid(Gas ~ .) 
-# p <- p + ggtitle("Per-core temp, WC models")
-# print(p)
-# save_plot("per_core_models")
 
 # -----------------------------------------------------------------------------
 # Effects of temperature and moisture on gas fluxes
