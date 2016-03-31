@@ -24,6 +24,7 @@ OUTLIER_GROUPS   <- 10     # Divide data into date groups and identify outliers 
 CO2_EXCLUDE_DEVS <- 5.0    # CO2 outlier boundary, in mean absolute deviations
 CH4_EXCLUDE_DEVS <- 10.0   # CH4 outlier boundary, in mean absolute deviations
 MAX_CO2_CV       <- 1.4    # Max allowable CO2 CV for a given core on a given day
+                           # See https://github.com/bpbond/cpcrw_incubation/issues/44
 FLUX_ADDITION <- 0.1       # Added to fluxes before log transformation
 
 # -----------------------------------------------------------------------------
