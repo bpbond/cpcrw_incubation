@@ -9,7 +9,6 @@ SCRIPTNAME  	<- "3-remove.R"
 PROBLEM       <- FALSE
 
 CATEGORY_ERROR <- "Error"
-CATEGORY_OUTLIER <- "Outlier"
 
 REMOVALS     <- file.path("data/", "removals.csv")
 
@@ -28,15 +27,17 @@ print_dims(summarydata)
 # -----------------------------------------------------------------------------
 # Removals - outliers or errors that should be automatically removed
 
+printlog("Removing pre-flagged 'Remove_this' data...")
+removed_data <- subset(summarydata, !is.na(Remove_this))
+summarydata <- subset(summarydata, is.na(Remove_this))
+printlog("Summary data observations removed:", nrow(removed_data))
+
 printlog("Reading in removal data...")
 removals <- read_csv(REMOVALS, skip = 1)
 
 summarydata_clean <- summarydata
-removed_data <- data.frame()
-excluded_data <- data.frame()
 for(i in seq_len(nrow(removals))) {
   removed <- data.frame()
-  excluded <- data.frame()
   rem <- removals[i,]
   printlog(SEPARATOR)
   printlog("Removal", i)
@@ -52,9 +53,6 @@ for(i in seq_len(nrow(removals))) {
     if(rem$Category == CATEGORY_ERROR) {
       printlog("Removed entire sample", rem$samplenum)
       removed <- subset(summarydata_clean, samplenum == rem$samplenum)
-    } else if(rem$Category == CATEGORY_OUTLIER) {
-      printlog("Excluded entire sample", rem$samplenum)
-      excluded <- subset(summarydata_clean, samplenum == rem$samplenum)
     } else {
       stop("Unknown category!")
     }
@@ -63,17 +61,10 @@ for(i in seq_len(nrow(removals))) {
     stop("Method not implemented yet!")
   }
 
-    
   printlog("Summary data observations removed:", nrow(removed))
   removed_data <- rbind(removed_data, removed)
-  printlog("Summary data observations excluded:", nrow(excluded))
-  excluded_data <- rbind(excluded_data, excluded)
 }
 
-# -----------------------------------------------------------------------------
-# Exclusions - based on statistical test
-
-# -----------------------------------------------------------------------------
 # Done! 
 
 printlog(SEPARATOR)
@@ -83,9 +74,6 @@ save_data(summarydata_clean, fn = SUMMARYDATA_CLEAN_FILE, scriptfolder = FALSE)
 printlog("Removed data:", nrow(removed_data), "of", nrow(summarydata), "=",
          round(nrow(removed_data) / nrow(summarydata) * 100, 1), "%")
 save_data(removed_data)
-printlog("Excluded data:", nrow(excluded_data), "of", nrow(summarydata), "=",
-         round(nrow(excluded_data) / nrow(summarydata) * 100, 1), "%")
-save_data(excluded_data)
 
 printlog("All done with", SCRIPTNAME)
 closelog()
