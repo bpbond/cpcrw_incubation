@@ -91,12 +91,15 @@ fluxdata %>%
          flux_µgC_gC_day = flux_µgC_g_day * C_percent) ->
   fluxdata
 
+save_data(fluxdata, fn = FLUXDATA_FINAL_FILE, scriptfolder = FALSE)
+
+# -----------------------------------------------------------------------------
+# Summarize flux information for each access by markdown code later
+
 fluxdata %>%
   group_by(Gas) %>%
   summarise_each(funs(min, max, mean, sd), flux_µgC_g_day, flux_µgC_gC_day) ->
   fluxsummary
-
-save_data(fluxdata, fn = "fluxdata_long.csv")
 
 nms <- fluxsummary$Gas
 fluxsummary <- as.data.frame(t(fluxsummary[-1]))
@@ -261,6 +264,7 @@ fluxdata_cumulative %>%
 # but it's a major improvement; see graphs.
 
 # Remove outliers and zero fluxes from the data set
+outlier_count <- sum(fluxdata$outlier)
 fluxdata %>% 
   filter(flux_µgC_gC_day > 0 & !outlier) ->
   fluxdata

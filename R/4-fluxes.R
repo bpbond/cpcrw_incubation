@@ -122,7 +122,6 @@ fluxdata$grp <- NULL  # why doesn't the `select` above work?
 p <- ggplot(fluxdata, aes(inctime_days, CO2_flux_mgC_hr, color = CO2_outlier))
 p <- p + geom_point() + facet_grid(Temperature ~ Treatment)
 print(p)
-#save_plot("CO2_outliers")
 save_diagnostic(p, "CO2_outliers")
 p <- ggplot(fluxdata, aes(inctime_days, CH4_flux_mgC_hr, color = CH4_outlier))
 p <- p + geom_point() + facet_grid(Temperature ~ Treatment)
