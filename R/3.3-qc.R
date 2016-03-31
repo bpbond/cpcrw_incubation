@@ -97,11 +97,15 @@ core_cv <- summarydata %>%
   filter(Core != "Ambient4" & Core != "Ambient20") %>%
   group_by(Date, Core) %>% 
   summarise(CO2_ppm_s_cv = sd(CO2_ppm_s) / mean(CO2_ppm_s),
+            CH4_ppb_s_cv = sd(CH4_ppb_s) / mean(CH4_ppb_s),
             min_CO2_time = mean(min_CO2_time),
             max_CO2_time = mean(max_CO2_time),
             samplenums = paste(unique(samplenum), collapse = " ")) %>% 
   ungroup() %>% 
   arrange(desc(CO2_ppm_s_cv))
+
+save_plot("CO2_core_cv", p = qplot(CO2_ppm_s_cv, data = core_cv, bins = 40))
+save_plot("CH4_core_cv", p = qplot(CH4_ppb_s_cv, data = core_cv, bins = 40))
 
 p <-  qplot(1:nrow(core_cv), CO2_ppm_s_cv, data = core_cv)
 p <- p + ggtitle("Distribution of CO2 CV by core and date")

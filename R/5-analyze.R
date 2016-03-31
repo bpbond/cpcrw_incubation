@@ -25,23 +25,38 @@ fluxdata_orig <- read_csv(FLUXDATA_FILE)
 fluxdata_orig$Treatment <- factor(fluxdata_orig$Treatment, 
                                   levels = c("Field moisture", "Controlled drought", "Drought"))
 
+# -----------------------------------------------------------------------------
+# Transform into long format and handle outliers
+
+co2_mad_outlier_count <- sum(fluxdata_orig$CO2_outlier, na.rm = TRUE)
+ch4_mad_outlier_count <- sum(fluxdata_orig$CH4_outlier, na.rm = TRUE)
+mad_outlier_count <- co2_mad_outlier_count + ch4_mad_outlier_count
+# The CV test applies to both CO2 and CH4, so # is multiplied by 2
+cv_outlier_count <- sum(fluxdata_orig$CV_outlier, na.rm = TRUE) * 2
+
 printlog("Transforming...")
 fluxdata_orig %>%
   select(samplenum, Core, Treatment, Temperature, inctime_days, 
          Mass_g, SoilDryMass_g, WC_gravimetric, WC_volumetric,
          CO2_flux_mgC_hr, CH4_flux_mgC_hr,
-         CO2_outlier, CH4_outlier) %>%
+         CO2_outlier, CH4_outlier, CV_outlier) %>%
   melt(measure.vars = c("CO2_flux_mgC_hr", "CH4_flux_mgC_hr"),
        value.name = "flux_mgC_hr") %>%
   mutate(Gas = substr(variable, 1, 3)) %>%
   select(-variable) ->
   fluxdata
 
+pre_outlier_count <- nrow(fluxdata)
+
 # Combine the gas-specific outlier fields into a single outlier flag
-# I originally was using reshape2::melt but this was duplicating rows
-fluxdata$outlier <- fluxdata$CO2_outlier
+fluxdata$outlier <- fluxdata$CO2_outlier | fluxdata$CV_outlier
 fluxdata$outlier[fluxdata$Gas == "CH4"] <- fluxdata$CH4_outlier[fluxdata$Gas == "CH4"]
-fluxdata$CO2_outlier <- fluxdata$CH4_outlier <- NULL
+fluxdata$CO2_outlier <- fluxdata$CH4_outlier <- fluxdata$CV_outlier <- NULL
+
+# Remove outliers and zero fluxes from the data set
+fluxdata %>% 
+  filter(flux_mgC_hr > 0 & !outlier) ->
+  fluxdata
 
 # -----------------------------------------------------------------------------
 # Read C, N, DOC data; summarise; test for treatment effects; merge with fluxdata
@@ -263,12 +278,6 @@ fluxdata_cumulative %>%
 # Log-transforming doesn't fix the lack of normality in our data,
 # but it's a major improvement; see graphs.
 
-# Remove outliers and zero fluxes from the data set
-outlier_count <- sum(fluxdata$outlier)
-fluxdata %>% 
-  filter(flux_µgC_gC_day > 0 & !outlier) ->
-  fluxdata
-
 printlog("Graphing flux distributions and testing for normality...")
 p <- ggplot(fluxdata, aes(x = flux_µgC_gC_day)) + geom_histogram(bins = 30)
 p <- p + facet_grid(~Gas, scales = "free") + ggtitle("Distribution of raw data")
@@ -314,7 +323,7 @@ fluxdata$flux_µgC_gC_day1 <- fluxdata$flux_µgC_gC_day + FLUX_ADDITION
 m_co2_lme <- lme(log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric + 
                    (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
                  data = fluxdata,
-                 subset = Gas == "CO2" & !outlier,
+                 subset = Gas == "CO2",
                  random = ~ 1 | Core, 
                  method = "ML")
 step_co2_lme <- MASS::stepAIC(m_co2_lme, direction = "both")
@@ -331,7 +340,7 @@ printlog("Fitting CH4 model...")
 m_ch4_lme <- lme(log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric + 
                    (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
                  data = fluxdata, 
-                 subset = Gas == "CH4" & !outlier,
+                 subset = Gas == "CH4",
                  random = ~ 1 | Core, 
                  method = "ML")
 step_ch4_lme <- MASS::stepAIC(m_ch4_lme, direction = "both")

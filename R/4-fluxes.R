@@ -109,7 +109,10 @@ printlog("Identifying and plotting outliers...")
 fluxdata %>%
   arrange(inctime_days) %>%
   ungroup %>%
-  mutate(grp = cut(1:nrow(fluxdata), OUTLIER_GROUPS)) %>%
+  mutate(grp = cut(1:nrow(fluxdata), OUTLIER_GROUPS),
+         incday = floor(inctime_days)) %>%
+
+  # Outliers based on mean absolute deviation of flux from similar cores (in time, trt, temp)
   group_by(Treatment, Temperature, grp) %>% 
          # Identify outliers by flux/mass, i.e. normalizing for mass and water
   mutate(CO2_outlier = is_outlier(CO2_flux_mgC_hr / Mass_g, devs = CO2_EXCLUDE_DEVS), 
@@ -117,16 +120,28 @@ fluxdata %>%
          CH4_outlier = is_outlier(CH4_flux_mgC_hr / Mass_g, devs = CH4_EXCLUDE_DEVS)) ->
   fluxdata
 
-fluxdata$grp <- NULL  # why doesn't the `select` above work?
+  # Outliers based on core CV on a given day
+fluxdata %>%
+  group_by(incday, Core) %>%
+  summarise(CO2cv = sd(CO2_flux_mgC_hr, na.rm = TRUE) / mean(CO2_flux_mgC_hr, na.rm = TRUE),
+            CV_outlier = CO2cv > MAX_CO2_CV) %>%
+  left_join(fluxdata, ., by = c("incday", "Core")) ->
+  fluxdata
+
+fluxdata$grp <- fluxdata$incday <- NULL  # why doesn't the `select` above work?
 
 p <- ggplot(fluxdata, aes(inctime_days, CO2_flux_mgC_hr, color = CO2_outlier))
-p <- p + geom_point() + facet_grid(Temperature ~ Treatment)
+p <- p + geom_jitter() + facet_grid(Temperature ~ Treatment)
 print(p)
 save_diagnostic(p, "CO2_outliers")
 p <- ggplot(fluxdata, aes(inctime_days, CH4_flux_mgC_hr, color = CH4_outlier))
-p <- p + geom_point() + facet_grid(Temperature ~ Treatment)
+p <- p + geom_jitter() + facet_grid(Temperature ~ Treatment)
 print(p)
 save_diagnostic(p, "CH4_outliers")
+p <- ggplot(fluxdata, aes(inctime_days, CO2_flux_mgC_hr, color = CV_outlier))
+p <- p + geom_jitter() + facet_grid(Temperature ~ Treatment)
+print(p)
+save_diagnostic(p, "CV_outliers")
 
 save_data(fluxdata, fn = FLUXDATA_FILE, scriptfolder = FALSE)
 
