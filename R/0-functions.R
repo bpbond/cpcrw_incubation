@@ -26,6 +26,7 @@ CH4_EXCLUDE_DEVS <- 10.0   # CH4 outlier boundary, in mean absolute deviations
 MAX_CO2_CV       <- 1.4    # Max allowable CO2 CV for a given core on a given day
                            # See https://github.com/bpbond/cpcrw_incubation/issues/44
 FLUX_ADDITION <- 0.1       # Added to fluxes before log transformation
+PARTICLE_DENSITY <- 2.65   # g/cm3
 
 # -----------------------------------------------------------------------------
 # Key files and directories shared between scripts

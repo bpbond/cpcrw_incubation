@@ -87,7 +87,7 @@ All data analysis and statistics were performed using R version `r R.version.str
 #### Results
 
 ```{r coredata, echo=FALSE}
-bd <- with(coredata, SoilDryMass_g / CoreVolume_cm3)
+bd <- with(coredata, SoilDryMass_g / SoilVolume_cm3)
 schist <- with(coredata, NonsoilMassLarge_g / (NonsoilMassLarge_g + SoilDryMass_g)) * 100
 sdm <- coredata$SoilDryMass_g
 ```
@@ -106,7 +106,7 @@ vwcbegin <- subset(vwc_alltrt, stage == "Beginning")
 vwcend <- subset(vwc_alltrt, stage == "End")
 ```
 
-Gravimetric water content was `r pn(gwcbegin$mean, 2)` ± `r pn(gwcbegin$sd, 2)` (min `r pn(gwcbegin$min, 2)`, max `r pn(gwcbegin$max, 2)`) at the beginning of the incubation (**Figure 1**). "Field moisture" cores were on average unchanged (`r pn(gwcendmean["Field moisture"], 2)` ± `r pn(gwcendsd["Field moisture"], 2)`) at the end of the incubation, but both the drought treatments, which did not differ from each other in their effect on gravimetric water content (P = `r pn(p_trt_wc, 3)`), had declined to `r pn(gwcendmean["Drought"], 2)` ±  `r pn(gwcendsd["Drought"], 2)`. Volumetric water content values ranged from `r pn(vwcbegin$mean, 2)` ± `r pn(vwcbegin$sd, 2)` (min `r pn(vwcbegin$min, 2)`, max `r pn(vwcbegin$max, 2)`) at the beginning of the experiment to `r pn(vwcend$mean, 2)` ± `r pn(vwcend$sd, 2)` (min `r pn(vwcend$min, 2)`, max `r pn(vwcend$max, 2)`) at the end.
+Gravimetric water content was `r pn(gwcbegin$mean, 2)` ± `r pn(gwcbegin$sd, 2)` (min `r pn(gwcbegin$min, 2)`, max `r pn(gwcbegin$max, 2)`) at the beginning of the incubation (**Figure 1**). "Field moisture" cores were on average unchanged (`r pn(gwcendmean["Field moisture"], 2)` ± `r pn(gwcendsd["Field moisture"], 2)`) at the end of the incubation, but both the drought treatments, which did not differ from each other in their effect on gravimetric water content (P = `r pn(p_trt_wc, 3)`), had declined to `r pn(gwcendmean["Drought"], 2)` ±  `r pn(gwcendsd["Drought"], 2)`. Volumetric water content values ranged from `r pn(vwcbegin$mean, 2)` ± `r pn(vwcbegin$sd, 2)` (min `r pn(vwcbegin$min, 2)`, max `r pn(vwcbegin$max, 2)`) at the beginning of the experiment to `r pn(vwcend$mean, 2)` ± `r pn(vwcend$sd, 2)` (min `r pn(vwcend$min, 2)`, max `r pn(vwcend$max, 2)`) at the end. Water filled pore space, assuming a particle density of `r PARTICLE_DENSITY` g cm^-3^, was `r pn(min(fluxdata$WFPS_percent), 0)`-`r pn(max(fluxdata$WFPS_percent), 0)`%.
 
 After removal of known problematic data, and exclusion of statistical outliers, CO~2~ flux rates measured during the incubation ranged from `r pn(fluxsummary["flux_µgC_gC_day_min", "CO2"], 2)` µg C g C^-1^ day^-1^ (`r pn(fluxsummary["flux_µgC_g_day_min", "CO2"], 2)` µg C g soil^-1^ day^-1^) to a maximum of `r pn(fluxsummary["flux_µgC_gC_day_max", "CO2"], 2)` (`r pn(fluxsummary["flux_µgC_g_day_max", "CO2"], 2)`), with a mean of `r pn(fluxsummary["flux_µgC_gC_day_mean", "CO2"], 3)` (`r pn(fluxsummary["flux_µgC_g_day_mean", "CO2"], 2)`). CH~4~ rates ranged from `r pn(fluxsummary["flux_µgC_gC_day_min", "CH4"]*1000, 2)` ng C g C^-1^ day^-1^ (`r pn(fluxsummary["flux_µgC_g_day_min", "CH4"]*1000, 2)` ng C g soil^-1^ day^-1^) to a maximum of `r pn(fluxsummary["flux_µgC_gC_day_max", "CH4"]*1000, 2)` (`r pn(fluxsummary["flux_µgC_g_day_max", "CH4"]*1000, 3)`), with a mean of `r pn(fluxsummary["flux_µgC_gC_day_mean", "CH4"]*1000, 2)` (`r pn(fluxsummary["flux_µgC_g_day_mean", "CH4"]*1000, 2)`).
 
@@ -127,13 +127,15 @@ maxtemp <- gas_ratio$Temperature[which.max(gas_ratio$CO2CH4_ratio)]
 
 The cumulative production of C from CO~2~ was over `r minmag` order of magnitudes higher than that from CH~4~, with CO~2~:CH~4~ C ratios ranging from `r minratio` million in the `r mintemp` °C "`r maxtrt`" treatment, to `r maxratio` million in the `r maxtemp` °C "`r maxtrt`" treatment. Cumulative CO~2~ evolved was highly affected by temperature (`r pclean(co2_hsd$Temperature["p adj"])`), and "field moisture" cores emitted significantly more CO~2~ than the other two treatments at both temperatures (P < 0.001 for both). There was no difference between the 20 °C "drought" and "controlled drought" treatments (`r pclean(co2_hsd$Treatment["Drought-Controlled drought", "p adj"])`). Neither temperature (`r pclean(ch4_hsd$Temperature[,"p adj"])`) nor treatment (mean `r pclean(mean(ch4_hsd$Treatment[,"p adj"]))`) was a significant factor in predicting cumulative CH~4~ fluxes.
 
-The cumulative flux numbers above result in CH~4~ temperature sensitivity (Q~10~) values of `r pn(q10_cumulative["Field moisture", "CH4"], 1)` and `r pn(q10_cumulative["Drought", "CH4"], 1)` for the field moisture and drought treatments, respectively; the corresponding Q~10~ values  based on cumulative CO~2~ were `r pn(q10_cumulative["Field moisture", "CO2"], 1)` and `r pn(q10_cumulative["Drought", "CO2"], 1)`.
+The cumulative flux numbers above result in CH~4~ temperature sensitivity (Q~10~) values of `r pn(Q10_cumulative["Field moisture", "CH4"], 1)` and `r pn(Q10_cumulative["Drought", "CH4"], 1)` for the field moisture and drought treatments, respectively; the corresponding Q~10~ values  based on cumulative CO~2~ were `r pn(Q10_cumulative["Field moisture", "CO2"], 1)` and `r pn(Q10_cumulative["Drought", "CO2"], 1)`. Computing Q~10~s based on fluxes normalized by water filled pore space decreased these values slightly: to `r pn(wfpsQ10_cumulative["Field moisture", "CH4"], 1)` and `r pn(wfpsQ10_cumulative["Drought", "CH4"], 1)` for CH~4~, respectively, and `r pn(wfpsQ10_cumulative["Field moisture", "CO2"], 1)` and `r pn(wfpsQ10_cumulative["Drought", "CO2"], 1)` for CO~2~.
 
 #### Discussion
 
 **Importance and context**
 
 Rises in boreal soil temperatures - who has quantified this? Changes in soil WC much less certain. Thermokarst etc., deepening of active layer - that's the larger implications of this work.
+
+Modeling results highly dependent on water content of soils after permafrost degradation.
 
 Eastern Alaska high latitude warming and forest stress {Ju, 2016 #4320}.
 

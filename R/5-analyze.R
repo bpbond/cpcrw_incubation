@@ -37,7 +37,7 @@ cv_outlier_count <- sum(fluxdata_orig$CV_outlier, na.rm = TRUE) * 2
 printlog("Transforming...")
 fluxdata_orig %>%
   select(samplenum, Core, Treatment, Temperature, inctime_days, 
-         Mass_g, SoilDryMass_g, WC_gravimetric, WC_volumetric,
+         Mass_g, SoilDryMass_g, WC_gravimetric, WC_volumetric, WFPS_percent,
          CO2_flux_mgC_hr, CH4_flux_mgC_hr,
          CO2_outlier, CH4_outlier, CV_outlier) %>%
   melt(measure.vars = c("CO2_flux_mgC_hr", "CH4_flux_mgC_hr"),
@@ -157,7 +157,16 @@ fluxdata %>%
   group_by(stage) %>% 
   summarise_each(funs(mean, sd, max, min), WC_volumetric) ->
   vwc_alltrt
-
+fluxdata %>% 
+  filter(!is.na(stage)) %>%
+  group_by(stage, Treatment) %>% 
+  summarise_each(funs(mean, sd, max, min), WFPS_percent) ->
+  wfps
+fluxdata %>% 
+  filter(!is.na(stage)) %>%
+  group_by(stage) %>% 
+  summarise_each(funs(mean, sd, max, min), WFPS_percent) ->
+  wfps_alltrt
 
 # -----------------------------------------------------------------------------
 # Did 'Treatment' affect water content?
@@ -246,7 +255,7 @@ figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Tre
                     ymax = cum_flux_mgC + cum_flux_mgC_sd), 
                 position = position_dodge(0.9), width = 0.4) +  
   facet_grid(Gas ~ ., scales = "free") +
-  ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$inctime_days)), "days"))
+  ylab(paste("Cumulative C (mg)"))
 
 # -----------------------------------------------------------------------------
 # Q10 based on cumulative fluxes
@@ -258,8 +267,17 @@ fluxdata_cumulative %>%
                   value.var = "cum_flux_mgC") %>%
   mutate(Q10 = (`20` / `4`) ^ (10 / (hightemp - lowtemp))) %>%
   reshape2::dcast(Treatment ~ Gas, value.var = "Q10") ->  
-  q10_cumulative
-rownames(q10_cumulative) <- q10_cumulative$Treatment
+  Q10_cumulative
+rownames(Q10_cumulative) <- Q10_cumulative$Treatment
+
+fluxdata_cumulative %>%
+  mutate(cum_flux_norm = cum_flux_mgC / WFPS_percent) %>%
+  reshape2::dcast(Treatment + Gas ~ Temperature, 
+                  value.var = "cum_flux_norm") %>%
+  mutate(Q10 = (`20` / `4`) ^ (10 / (hightemp - lowtemp))) %>%
+  reshape2::dcast(Treatment ~ Gas, value.var = "Q10") ->  
+  wfpsQ10_cumulative
+rownames(wfpsQ10_cumulative) <- wfpsQ10_cumulative$Treatment
 
 # -----------------------------------------------------------------------------
 # CO2:CH4 emissions ratio

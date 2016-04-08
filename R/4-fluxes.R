@@ -27,18 +27,19 @@ summarydata <- left_join(summarydata, drymassdata, by = "Core")
 printlog("Computing water contents...")
 summarydata %>%
   filter(Treatment != "Ambient") %>%
-  mutate(WC_gravimetric = 
-           (Mass_g - CoreSleeveMass_g - NonsoilMassLarge_g - SoilDryMass_g) / 
-           SoilDryMass_g,
-         WC_volumetric = (Mass_g - CoreSleeveMass_g - NonsoilMassLarge_g - SoilDryMass_g) / 
-           SoilVolume_cm3) %>%
+  mutate(WaterMass_g = Mass_g - CoreSleeveMass_g - NonsoilMassLarge_g - SoilDryMass_g,
+         WC_gravimetric = WaterMass_g / SoilDryMass_g,
+         WC_volumetric = WaterMass_g / SoilVolume_cm3,
+         TotalPorosity = (1 - SoilDryMass_g / SoilVolume_cm3 / PARTICLE_DENSITY),
+         WFPS_percent =  (TotalPorosity - WC_volumetric) * 100) %>%
   select(samplenum, Core, Mass_g, SoilDryMass_g, SoilVolume_cm3, 
-         WC_gravimetric, WC_volumetric,
+         WC_gravimetric, WC_volumetric, WFPS_percent,
          Treatment, Temperature, CO2_ppm_s, CH4_ppb_s, inctime_days) ->
   fluxdata
 
 print(summary(fluxdata$WC_gravimetric))
 print(summary(fluxdata$WC_volumetric))
+print(summary(fluxdata$WFPS_percent))
 
 p <- ggplot(fluxdata, aes(inctime_days, WC_gravimetric, color = paste(Treatment, Temperature), group=Core))
 p <- p + geom_line() + facet_wrap(~Core) + scale_color_discrete("")
@@ -197,22 +198,23 @@ save_plot("cumulative_CH4")
 
 printlog("Calculating flux summary datasets...")
 fluxdata %>%
-  melt(id.vars = c("Treatment", "Temperature", "Core", "inctime_days"), 
+  melt(id.vars = c("Treatment", "Temperature", "Core", "inctime_days", "WFPS_percent"), 
        measure.vars = c("cumCO2_flux_mgC", "cumCH4_flux_mgC"),
        variable.name = "Gas") %>%
   mutate(Gas = substr(Gas, start = 4, stop = 6)) %>%   # rename
   group_by(Treatment, Temperature, Gas, Core) %>%
   arrange(inctime_days) %>%
-  summarise(cum_flux_mgC = last(value)) -> 
+  summarise(cum_flux_mgC = last(value), 
+            WFPS_percent = mean(WFPS_percent)) -> 
   fd_cumulative_core
 
 save_data(fd_cumulative_core, fn = FLUXDATA_CUM_CORE_FILE, scriptfolder = FALSE)
 
 fd_cumulative_core %>%   # already grouped by Treatment, Temperature, Gas
   summarise(cum_flux_mgC_sd = sd(cum_flux_mgC),
-            cum_flux_mgC = mean(cum_flux_mgC)) ->
+            cum_flux_mgC = mean(cum_flux_mgC),
+            WFPS_percent = mean(WFPS_percent)) ->
   fd_cumulative
-
 
 printlog("Flux summary plot...")
 
@@ -222,6 +224,7 @@ dmy <- data.frame(Treatment = "Controlled drought",
                   Gas = unique(fd_cumulative$Gas),
                   cum_flux_mgC = NA,
                   cum_flux_mgC_sd = NA,
+                  WFPS_percent = NA,
                   stringsAsFactors = FALSE)
 fluxdata_cumulative <- bind_rows(fd_cumulative, dmy)
 
