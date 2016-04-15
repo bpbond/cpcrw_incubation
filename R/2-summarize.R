@@ -106,9 +106,6 @@ matchfun <- function(DATETIME, MPVPosition) {
 }
 
 printlog( "Computing summary statistics for each sample..." )
-# The window in which we look for min and max concentrations
-MAX_MINCONC_TIME <- 10  # the minimum concentration has to occur in first 10 s
-MAX_MAXCONC_TIME <- 45  # the maximum concentration has to occur in first 45 s
 
 # We want to apply different criteria here, so three different pipelines
 # to compute the min and max gas concentrations
