@@ -258,6 +258,16 @@ figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Tre
   ylab(paste("Cumulative C (mg)"))
 
 # -----------------------------------------------------------------------------
+# Calculate drought reduction (%)
+
+fluxdata_cumulative %>% 
+  filter(Treatment %in% c("Drought", "Field moisture"), Gas == "CO2") %>% 
+  dcast(Temperature ~ Treatment, value.var = "cum_flux_mgC") %>% 
+  mutate(Reduction = (`Field moisture` - Drought) / `Field moisture` * 100) ->
+  drought_effect
+rownames(drought_effect) <- drought_effect$Temperature
+
+# -----------------------------------------------------------------------------
 # Q10 based on cumulative fluxes
 # TODO: I hate the hardcoded temperature values below!
 
