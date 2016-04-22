@@ -9,6 +9,8 @@ bondlamberty@pnnl.gov
 
 ^2^Biological Sciences Division, Pacific Northwest National Laboratory, Richland, WA USA
 
+[//]: This is the Rmarkdown file 
+
 ```{r setup, echo=FALSE, fig.keep='none', message=FALSE, results='hide'}
 library(dplyr, warn.conflicts = FALSE)
 
@@ -61,11 +63,11 @@ Rapid climatic changes, rising air temperatures, and increased fires are expecte
 
 #### Introduction
 
-High latitude ecosystems are being subjected to rapid changes in climate {IPCC, 2013 #3916} and fire occurrence and intensity {Kasischke, 2010 #2631}, notably in northwestern North America and Alaska {Hinzman, 2005 #4315}{Ju, 2016 #4320}. This will have a wide variety of effects on both ecosystems and society: in particular, rising temperatures and increasing fire will likely result in permafrost degradation {Pastick, 2015 #4311}{Zhang, 2015 #4372} and changes in soil temperature, with subsequent hydrology changes that will influence soil greenhouse gas (GHG) fluxes to the atmosphere. Such fluxes are a large component of the global C cycle and could thus promote a positive climate feedback {Treat, 2015 #4217}{Koven, 2011 #3092}.
+High latitude ecosystems are being subjected to rapid changes in climate {IPCC, 2013 #3916} and fire occurrence and intensity {Kasischke, 2010 #2631}, notably in northwestern North America and Alaska {Hinzman, 2005 #4315}{Ju, 2016 #4320}. This will have a wide variety of effects on both ecosystems and society: in particular, rising temperatures and increasing fire will likely result in permafrost degradation {Pastick, 2015 #4311}{Zhang, 2015 #4372} and changes in soil temperature, with subsequent hydrology changes that will influence soil greenhouse gas (GHG) fluxes to the atmosphere. Such fluxes are a large component of the global C cycle and, because of the high C stocks of northern soils {Tarnocai, 2009 #2231}, could result in a significant and positive climate feedback {Treat, 2015 #4217}{Koven, 2011 #3092}.
 
 The magnitude, timing, and form-in particular as methane (CH~4~) or carbon dioxide (CO~2~)-of such any such feedback remain highly uncertain {Schuur, 2015 #4319}. While northern soils hold enormous quantities {Tarnocai, 2009 #2231} of potentially mineralizable soil organic carbon (SOC), vegetation succession dynamics promote permafrost resilience to even large temperature changes {Jorgenson, 2010 #2627}. Such dynamics may however be disrupted by increased fire disturbance {Johnstone, 2010 #2465}. In addition, the stability of SOC is itself highly uncertain, as it depends on soil temperature and moisture, the ages of and ratio between the carbon (C) and nitrogen (N) pools {Weiss, 2015 #4317}, and its protection from competent microorganisms, enzymes, and resources {Bailey, 2012 #3624}, whether by organomineral sorption, chemical lability, or physical location {Schmidt, 2011 #3135}.
 
-Temperature and moisture typically have strong and often interactive influences on soil GHG emissions. A long literature of laboratory incubations, field observations, and meta-analyses has documented increased CO~2~ fluxes with rising temperature {Davidson, 2006 #1669}{Hashimoto, 2015 #4231}{Treat, 2015 #4217}. GHG responses to wetting and thawing dynamics are much less certain, with substantial variability between studies {Kim, 2012 #2863}. The anaerobic conditions common following permafrost thaw are expected to lower CO~2~ emissions but increase those of CH~4~ {Treat, 2015 #4217;Treat, 2014 #4213}; such interactions are critical to examine in the course of long-term incubation experiments {Elberling, 2013 #3720}. More uniformly across the landscape, however, decadal warming, and perhaps drying, trends in Alaska {Bieniek, 2014 #4389} will work to counteract these effects, with uncertain consequences for the carbon cycle and climate system. 
+Temperature and moisture typically have strong and often interactive influences on soil GHG emissions. Laboratory incubations, field observations, and meta-analyses have documented increased CO~2~, and under some conditions CH~4~ {Olefeldt, 2013 #3456}, fluxes with rising temperature {Davidson, 2006 #1669}{Hashimoto, 2015 #4231}{Treat, 2015 #4217}. GHG responses to wetting and thawing dynamics are much less certain, with substantial variability between studies {Kim, 2012 #2863}. The anaerobic conditions common following permafrost thaw are expected to lower CO~2~ emissions but increase those of CH~4~ {Treat, 2015 #4217;Treat, 2014 #4213}, and such interactions are critical to examine in the course of long-term incubation experiments {Elberling, 2013 #3720}. More uniformly across the landscape, however, decadal warming, and perhaps drying, trends in Alaska {Bieniek, 2014 #4389} will work to counteract these effects, with uncertain consequences for the carbon cycle and climate system. 
 
 The goal of this study was to examine how temperature and moisture control C loss and GHG (CO~2~ and CH~4~) emissions from soils sampled from the bottom of the annual active layer–i.e., directly above permafrost–in an Alaskan boreal forest. Most previous studies have focused on surface soils or permafrost soils, neglecting deep active-layer soils that were identified as subject to strong effects from a two-decade warming experiment in the Alaskan Arctic {Sistla, 2013 #3666}. We also aimed to characterize the chemical and biological properties of these soils as they were subjected to a 100-day incubation at different temperatures, subjecting some cores to drying treatments. We hypothesized that (i) CO~2~ would be the dominant pathway for C loss in these largely aerobic soils; (ii) soils maintained at field moisture and high temperature would lose more C-CO~2~ than cores incubated at 4˚C, due to increased aerobic and anaerobic microbial activity; and (iii) core CH~4~ fluxes would be sensitive only to temperature, as no anaerobic conditions were planned for the cores.
 
@@ -135,43 +137,33 @@ The cumulative flux numbers above result in CO~2~ temperature sensitivity (Q~10~
 
 #### Discussion
 
-**Importance and context**
-
-Rises in boreal air temperatures, and unpredictable precipitation changes, will warm and dry many soils, increase vegetation stress {Ju, 2016 #4320}, degrade permafrost and deepen the active layer {Schuur, 2015 #4319}. The resulting changes in the soil carbon cycle may already be visible {Bond-Lamberty, 2012 #3480} but are highly uncertain going forward, increasing the need for controlled laboratory studies of GHG emission dynamics from high-latitude soils.
-
-**Previous results**
-
 Several studies have measured microbial respiration and GHG fluxes from soils very close to our study site. Morishita et al. {, 2014 #4316} measured gas fluxes in the field at CPCRW and nearby forests, and found CO~2~ production to be correlated with both temperature and moisture, consistent with our results They found however that CH~4~ uptake (no emissions were observed) was driven by temperature only. Waldrop et al. {, 2010 #4380} incubated active-layer and permafrost soils from near Fairbanks, AK, under varied temperature and aerobic conditions, observing Q~10~ values of 9.0 (active layer) and 2.3 (permafrost) from -5 to 5 °C; these values are higher than we observed, consistent with the lower temperature range {Hamdi, 2013 #3664}. Waldrop et al. {, 2010 #4380} observed flux rates of 0.001-0.10 µmol CH~4~ day^-1^ g^-1^ (~`r pn(0.001 * 16 / 0.012 / 1000, 3)`-`r pn(0.1 * 16 / 0.012 / 1000, 3)` ng C g C^-1^ day^-1^), differing by orders of magnitude between sites (but roughly similar to our observed CH~4~ emissions), and ~1-5 µg C-CO2 hr^-1^ g^-1^ (~`r pn(1 * 24 / 0.012, 0)`-`r pn(5 * 24 / 0.012, 0)` µg C g C^-1^ day^-1^), considerably higher than the CO~2~ rates observed from our cores. In an incubation of active-layer Alaskan permafrost peats, Treat et al. {, 2014 #4213} found CO~2~ and CH~4~ emissions to be strongly correlated with temperature and moisture. Finally, during the first 100 days of a year-long incubation of Fairbanks-area 0-10 cm mineral soils, Neff and Hooper {, 2002 #4390} observed fluxes of ~`r pn(0.2 * 1000 * 12/44, 0)`-`r pn(1.5 * 1000 * 12/44, 0)` µg C-CO~2~ g C^-1^ day^-1^, in line with the results here.
 
-More generally, in a pan-Arctic synthesis of anaerobic soil incubations, Treat et al. {, 2015 #4217} reported mean CO~2~ rates of 47 (all mineral soils) and 101 (for 20-100 cm soils) µg C-CO~2~ g C^-1^ day^-1^, somewhat lower than our aerobic incubation results. Weiss et al. {, 2015 #4317} found CO~2~ production from Yedoma permafrost samples to be correlated with both percent C and N, consistent with our results (**Table 1**). TODO.
+More generally, in a pan-Arctic synthesis of anaerobic soil incubations, Treat et al. {, 2015 #4217} reported mean CO~2~ rates of 47 (all mineral soils) and 101 (for 20-100 cm soils) µg C-CO~2~ g C^-1^ day^-1^, somewhat lower than our aerobic incubation results. Weiss et al. {, 2015 #4317} found CO~2~ production from Yedoma permafrost samples to be correlated with both percent C and N, consistent with our results (**Table 1**). The response of soil biota to stresses such as drought tend to differ between soil types, but be broadly similar across biomes and climatic conditions {Manzoni, 2012 #3545}.
 
-**Temperature versus moisture sensitivity**
+*Temperature versus moisture sensitivity*
 
 Warming usually increases soil GHG fluxes, for example at depth in a long-term Arctic tundra experiment {Sistla, 2013 #3666}, as increased temperatures increment enzyme kinetics, enhance the production of extracellular enzymes, and enhance desorptions rates of organic matter from minerals. A key question, for both experimentalists and modelers {Falloon, 2011 #3045}, is to what degree such soils' emissions could by constrained by their moisture status–in particular, limited by low soil moisture driven by increases in high-latitude temperatures, vapor pressure deficit, and potentially precipitation changes.
 
 Our results suggest that moisture limitation could exert a large effect on CO~2~ production for deep active-layer soils (**Figure 4**): "drought" cores' cumulative production was `r pn(drought_effect["4", "Reduction"], 0)`% (4 °C) and `r pn(drought_effect["20", "Reduction"], 0)`% (20 °C) lower than the cores kept at field moisture. This effect was highly significant, and suggests that moisture limitations could exert a significant constraint on deep active-layer soils as they slowly warm. Such moisture constraints are thought to be already exerting effects on vegetation and soil fluxes at large scales {Ju, 2016 #4320}{Bond-Lamberty, 2012 #3480}, but our understanding of the interactive effects involved is poor.
 
-In contrast, the temperature sensitivities observed in this experiment are low (all less than 2.0, even when controlling for changes in soil moisture). Such values are not unprecedented in comparison to a wide range of other laboratory soil incubations {Hamdi, 2013 #3664}. It is important to note, however, that even if increased temperature alone may not always drive C mineralization rates in forest-mineral soils {Giardina, 2000 #2159}, but it is frequently linked with increases in soil moisture content can lead to changes in microbial community structure, amplifying GHG fluxes (Xue et al, 2016).  TODO: PEYTON - WHAT IS THIS CITATION?
+In contrast, the temperature sensitivities observed in this experiment were low (all less than 2.0, even when controlling for changes in soil moisture). Such values are not unprecedented in comparison to a wide range of other laboratory soil incubations {Hamdi, 2013 #3664}. It is important to note, however, that even if increased temperature alone may not always drive C mineralization rates in forest-mineral soils {Giardina, 2000 #2159}, but it is frequently linked with increases in soil moisture content can lead to changes in microbial community structure and GHG fluxes {Xue, 2016 #4361}.
 
-**Methane**
+*Methane*
 
-We observed very low, but consistently positive, CH~4~ production from these unsaturated mineral soils. This is contrast to many field studies, e.g. Schaufler et al. {, 2010 #4391} who found consistent CH~4~ uptake (oxidation) in dry conditions at a boreal site.
+We observed very low, but consistently positive, CH~4~ production from these unsaturated mineral soils. This is contrast to many field studies, e.g. Schaufler et al. {, 2010 #4391} who found consistent CH~4~ uptake (oxidation) in dry conditions at a boreal site. Our results are however broadly consistent with data from 65 studies summarized by Olefeldt et al. {Olefeldt, 2013 #3456}, who found that CH~4~ emissions were more sensitive to soil temperature in wetter ecosystems; it would have been a surprise if the little methanogenic activity in our upland, well-drained soils was temperature-sensitive at all.
 
-Treat et al. found a median CO~2~:CH~4~ production ratios of 387 for boreal sites, far lower than (but consistent with) our observed ratios of several million. 
+Methane was thus a far smaller C flux than CO~2~ from these soils. This is true more generally: for example, Treat et al. found a median CO~2~:CH~4~ production ratios of 387 for boreal sites, far lower than (but consistent with) our observed ratios of several million. MORE.
 
+*Limitations and weaknesses*
 
-**Limitations and weaknesses**
+There were weaknesses in our approach and experimental design that should be considered. Laboratory experiments offer precise control, but lack the *in situ* nature of field manipulations {Sistla, 2013 #3666}, raising uncertainties to what degree their results can be extrapolated. They also have more specific weaknesses, for example in what can be inferred about temperature sensitivity {Podrebarac, 2016 #4365}{Hamdi, 2013 #3664}. Nonetheless, the controlled environments of incubations provide an important way to elucidate the key mechanisms controlling GHG from high-latitude soils {Schuur, 2015 #4319}. 
 
-Incubation experiments can only go so far though...
+We focused on a experimental drought, rather than flooding, because of the well-drained nature of the field site: it is unlikely that the mid-slope forest we sampled in will ever suffer from thermokarst or excessive soil moisture, but too-dry conditions are a serious possibility in this low-precipitation ecosystem {Barber, 2000 #1320}. In addition, the soils here are not surface layer soils (where the majority of microbial activity and C mineralization of labile C takes place); taking them out of depth (where they are less exposed to O~2~, for example) may significantly change the abiotic conditions to which the microbial community is adapted. MORE? 
 
-Laboratory soil incubations have weaknesses, for example in what can be inferred about temperature sensitivity {Podrebarac, 2016 #4365}{Hamdi, 2013 #3664}, but their controlled environments provide an important way to elucidate the key mechanisms controlling GHG from high-latitude soils {Schuur, 2015 #4319}. 
+*Conclusions*
 
-these are not surface layer soils (where majority of microbial activity and C mineralization of labile C takes place) and that taking them out of depth (where they are not exposed to O2 as readily, etc.) for our laboratory incubation may differ from in situ CO2/CH4 production. 
-
-Necessity of integrated lab-field-modeling experiments...
-
-[//]: (comment comment comment)
-
+Rises in boreal air temperatures, and unpredictable precipitation changes, will warm and dry many soils, increase vegetation stress {Ju, 2016 #4320}{Barber, 2000 #1320}, degrade permafrost and deepen the active layer {Schuur, 2015 #4319}. The resulting changes in the soil carbon cycle may already be visible {Bond-Lamberty, 2012 #3480} but are highly uncertain going forward, increasing the need for controlled laboratory studies, ideally integrated with field and modeling experiments, of GHG emission dynamics from high-latitude soils.
 
 #### Acknowledgments
 
@@ -185,13 +177,13 @@ B.B.-L., A.P.S., and V.L.B. designed this experiment. B.B.-L. and A.P.S. perform
 
 ------
 
-**Table 1.** Linear mixed-effects model parameters, testing effects of gravimetric water content (unitless), temperature (°C), soil C (%), soil N (%),  and dissolved organic carbon (mg kg^-1^) on individual core CO~2~ fluxes (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^). Dependent variable has units of log(µg C g C^-1^ day^-1^). Columns include parameter value; standard error (SE); degrees of freedom (DF); T statistic; and P value.
+**Table 1.** Linear mixed-effects model parameters, testing effects of temperature (°C), gravimetric water content (unitless), soil C (%), soil N (%),  and dissolved organic carbon (mg kg^-1^) on individual core CO~2~ fluxes (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^); a colon (":") indicates an interaction. Dependent variable has units of log(µg C g C^-1^ day^-1^). Columns include parameter value; standard error (SE); degrees of freedom (DF); T statistic; and P value.
 
 ```{r table1, echo=FALSE}
 knitr::kable(summary(step_co2_lme)$tTable, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
 ```
 
-**Table 2.** Linear mixed-effects model parameters, testing effects of gravimetric water content (unitless), temperature (°C), soil C (%), soil N (%),  and dissolved organic carbon (mg kg^-1^) on log-transformed, individual core CH~4~ fluxes (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^). Dependent variable has units of log(µg C g C^-1^ day^-1^). Columns include parameter value; standard error (SE); degrees of freedom (DF); T statistic; and P value.
+**Table 2.** Linear mixed-effects model parameters, testing effects of temperature (°C), gravimetric water content (unitless), soil N (%),and dissolved organic carbon (DOC, mg kg^-1^) on log-transformed, individual core CH~4~ fluxes (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^); a colon (":") indicates an interaction. Dependent variable has units of log(µg C g C^-1^ day^-1^). Columns include parameter value; standard error (SE); degrees of freedom (DF); T statistic; and P value.
 
 ```{r table2, echo=FALSE}
 knitr::kable(summary(step_ch4_lme)$tTable, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
@@ -203,19 +195,19 @@ knitr::kable(summary(step_ch4_lme)$tTable, digits = 3, col.names = c("Value", "S
 figureA
 ```
 
-**Figure 2.** A faceted (Temperature ~ Treatment) plot showing normalized CO2 flux means and errors by incubation time.
+**Figure 2.** Mass-normalized CO~2~ fluxes over the 100-day incubation, by temperature (4 and 20 °C, rows) and treatment (field moisture, drought, and controlled drought; columns). Error bars show core-to-core standard deviation.
 
 ```{r figureB, echo=FALSE}
 figureB
 ```
 
-**Figure 3.** A faceted (Temperature ~ Treatment) plot showing normalized CH4 flux means and errors by incubation time.
+**Figure 3.** Mass-normalized CH~4~ fluxes over the 100-day incubation, by temperature (4 and 20 °C, rows) and treatment (field moisture, drought, and controlled drought; columns). Error bars show core-to-core standard deviation.
 
 ```{r figureC, echo=FALSE}
 figureC
 ```
 
-**Figure 4.** Cumulative fluxes over the incubation.
+**Figure 4.** Cumulative C fluxes (mg) over the incubation, by gas (CO~2~ and CH~4~, rows) and treatment (columns). TODO: these need to be normalized.
 
 ```{r figureD, echo=FALSE, warning=FALSE}
 figureD
