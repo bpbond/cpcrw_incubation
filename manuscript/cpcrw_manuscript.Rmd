@@ -14,10 +14,10 @@ bondlamberty@pnnl.gov
 library(dplyr, warn.conflicts = FALSE)
 
 pclean <- function(x, digits = 3, printP = TRUE) {  # pretty formatting of p-values
-  ltstring <- paste0("< 0.", substr("000000000", 1, digits - 1), "1")
+  ltstring <- paste0("< 0.", paste(rep("0", digits - 1), collapse = ""), "1")
   valstring <- ifelse(x < 10^-digits, ltstring, formatC(x, digits = digits, format = 'f'))
   if(printP) {
-    ifelse(x < 0.001, valstring, paste("=", valstring)) %>% paste("P", .)
+    ifelse(x < 10^-digits, valstring, paste("=", valstring)) %>% paste("P", .)
   } else {
     valstring
   }
