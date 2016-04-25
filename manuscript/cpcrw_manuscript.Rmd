@@ -1,6 +1,5 @@
 ---
-title: Temperature and moisture effects on greenhouse gas emissions from deep active-layer
-  boreal soils
+title: Temperature and moisture effects on greenhouse gas emissions from deep active-layer boreal soils
 author: "Ben Bond-Lamberty^1^, A. Peyton Smith^2^, Vanessa Bailey^2^"
 output: html_document
 ---
@@ -14,9 +13,14 @@ bondlamberty@pnnl.gov
 ```{r setup, echo=FALSE, fig.keep='none', message=FALSE, results='hide'}
 library(dplyr, warn.conflicts = FALSE)
 
-pclean <- function(x) {  # pretty formatting of p-values
-  ifelse(x < 0.001, "< 0.001", paste("=", formatC(x, digits = 3, format = 'f'))) %>%
-    paste("P", .)
+pclean <- function(x, digits = 3, printP = TRUE) {  # pretty formatting of p-values
+  ltstring <- paste0("< 0.", substr("000000000", 1, digits - 1), "1")
+  valstring <- ifelse(x < 10^-digits, ltstring, formatC(x, digits = digits, format = 'f'))
+  if(printP) {
+    ifelse(x < 0.001, valstring, paste("=", valstring)) %>% paste("P", .)
+  } else {
+    valstring
+  }
 }
 
 # 'Pretty n' function to round a numeric value and print that # of digits
@@ -180,13 +184,17 @@ B.B.-L., A.P.S., and V.L.B. designed this experiment. B.B.-L. and A.P.S. perform
 **Table 1.** Linear mixed-effects model parameters, testing effects of temperature (°C), gravimetric water content (unitless), soil C (%), soil N (%),  and dissolved organic carbon (mg kg^-1^) on individual core CO~2~ fluxes (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^); a colon (":") indicates an interaction. Dependent variable has units of log(µg C g C^-1^ day^-1^). Columns include parameter value; standard error (SE); degrees of freedom (DF); T statistic; and P value.
 
 ```{r table1, echo=FALSE}
-knitr::kable(summary(step_co2_lme)$tTable, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
+t1 <- summary(step_co2_lme)$tTable %>% round(3) %>% as.data.frame()
+t1$`p-value` <- pclean(t1$`p-value`, printP = FALSE)
+knitr::kable(t1, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
 ```
 
 **Table 2.** Linear mixed-effects model parameters, testing effects of temperature (°C), gravimetric water content (unitless), soil N (%),and dissolved organic carbon (DOC, mg kg^-1^) on log-transformed, individual core CH~4~ fluxes (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^); a colon (":") indicates an interaction. Dependent variable has units of log(µg C g C^-1^ day^-1^). Columns include parameter value; standard error (SE); degrees of freedom (DF); T statistic; and P value.
 
 ```{r table2, echo=FALSE}
-knitr::kable(summary(step_ch4_lme)$tTable, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
+t2 <- summary(step_co2_lme)$tTable %>% round(3) %>% as.data.frame()
+t2$`p-value` <- pclean(t2$`p-value`, printP = FALSE)
+knitr::kable(t2, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
 ```
 
 **Figure 1.** Core water content across the course of the incubation experiment by temperature (left panel 4 °C, right panel 20 °C) and treatment.
