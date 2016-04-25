@@ -203,7 +203,8 @@ fluxdata %>%
   fluxdata_figsBC
 
 figsBC <- function(fd) {
-    ggplot(fd, aes(incday, flux)) + 
+  fd <- filter(fd, !is.na(incday), !is.na(flux_sd), !is.na(flux))
+  ggplot(fd, aes(incday, flux)) + 
     geom_point() + 
     facet_grid(Temperature ~ Treatment) + 
     geom_errorbar(aes(ymin = flux - flux_sd, ymax = flux + flux_sd)) +
