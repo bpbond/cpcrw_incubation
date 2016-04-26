@@ -228,11 +228,11 @@ printlog(SEPARATOR)
 printlog("Running Tukey HSD tests on cumulative emissions...")
 fd_cumulative_core <- read_csv(FLUXDATA_CUM_CORE_FILE) %>%
   mutate(Temperature = as.factor(Temperature))
-co2_aov <- aov(cum_flux_mgC ~ Treatment + Temperature, 
+co2_aov <- aov(cum_flux_mgC_gC ~ Treatment + Temperature, 
                data = subset(fd_cumulative_core, Gas == "CO2"))
 co2_hsd <- TukeyHSD(co2_aov)
 print(co2_hsd)
-ch4_aov <- aov(cum_flux_mgC ~ Treatment + Temperature, 
+ch4_aov <- aov(cum_flux_mgC_gC ~ Treatment + Temperature, 
                data = subset(fd_cumulative_core, Gas == "CH4"))
 ch4_hsd <- TukeyHSD(ch4_aov)
 print(ch4_hsd)
@@ -250,22 +250,24 @@ fluxdata_cumulative$Treatment <- factor(fluxdata_cumulative$Treatment,
                                         levels = c("Field moisture", "Controlled drought", "Drought"))
 fluxdata_cumulative$Temperature <- as.factor(fluxdata_cumulative$Temperature)
 
-figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
+figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC_gC, fill = Treatment)) + 
   geom_bar(stat = 'identity', position = position_dodge()) +
   geom_errorbar(aes(color = Treatment, 
-                    ymin = cum_flux_mgC * 0.9, 
-                    ymax = cum_flux_mgC + cum_flux_mgC_sd), 
+                    ymin = cum_flux_mgC_gC * 0.9, 
+                    ymax = cum_flux_mgC_gC + cum_flux_mgC_gC_sd), 
                 position = position_dodge(0.9), width = 0.4) +  
   facet_grid(Gas ~ ., scales = "free") +
-  ylab(paste("Cumulative C (mg)")) +
+  ylab(expression(Cumulative~C~(mg~g~C^{-1}))) +
   scale_fill_brewer(palette = "Set1") + scale_color_brewer(palette = "Set1")
+
+#ylab(expression(µg~C~g~C^{-1}~day^{-1}))
 
 # -----------------------------------------------------------------------------
 # Calculate drought reduction (%)
 
 fluxdata_cumulative %>% 
   filter(Treatment %in% c("Drought", "Field moisture"), Gas == "CO2") %>% 
-  dcast(Temperature ~ Treatment, value.var = "cum_flux_mgC") %>% 
+  dcast(Temperature ~ Treatment, value.var = "cum_flux_mgC_gC") %>% 
   mutate(Reduction = (`Field moisture` - Drought) / `Field moisture` * 100) ->
   drought_effect
 rownames(drought_effect) <- drought_effect$Temperature
@@ -277,14 +279,14 @@ rownames(drought_effect) <- drought_effect$Temperature
 stopifnot(length(unique(fluxdata_cumulative$Temperature)) == 2)
 fluxdata_cumulative %>%
   reshape2::dcast(Treatment + Gas ~ Temperature, 
-                  value.var = "cum_flux_mgC") %>%
+                  value.var = "cum_flux_mgC_gC") %>%
   mutate(Q10 = (`20` / `4`) ^ (10 / (hightemp - lowtemp))) %>%
   reshape2::dcast(Treatment ~ Gas, value.var = "Q10") ->  
   Q10_cumulative
 rownames(Q10_cumulative) <- Q10_cumulative$Treatment
 
 fluxdata_cumulative %>%
-  mutate(cum_flux_norm = cum_flux_mgC / WFPS_percent) %>%
+  mutate(cum_flux_norm = cum_flux_mgC_gC / WFPS_percent) %>%
   reshape2::dcast(Treatment + Gas ~ Temperature, 
                   value.var = "cum_flux_norm") %>%
   mutate(Q10 = (`20` / `4`) ^ (10 / (hightemp - lowtemp))) %>%
@@ -299,7 +301,7 @@ printlog(SEPARATOR)
 printlog("Computing emissions ratios...")
 fluxdata_cumulative %>% 
   group_by(Treatment, Temperature) %>% 
-  summarise(CO2CH4_ratio = max(cum_flux_mgC) / min(cum_flux_mgC)) %>%
+  summarise(CO2CH4_ratio = max(cum_flux_mgC_gC) / min(cum_flux_mgC_gC)) %>%
   na.omit %>%
   print ->
   gas_ratio

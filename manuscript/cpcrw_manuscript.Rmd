@@ -14,10 +14,11 @@ bondlamberty@pnnl.gov
 library(dplyr, warn.conflicts = FALSE)
 
 # 'Pretty n' function to round a numeric value and print that # of digits
-pn <- function(x, n) formatC(round(x, n), digits = n, format = 'f')
+pn <- function(x, n) formatC(round(unlist(x), n), digits = n, format = 'f')
 
 # 'Clean p value' function to pretty-print p value(s), specifically
 pclean <- function(x, digits = 3, printP = TRUE) {
+  x <- as.vector(x)
   ltstring <- paste0("< 0.", paste(rep("0", digits - 1), collapse = ""), "1")
   valstring <- ifelse(x < 10^-digits, ltstring, pn(x, digits))
   if(printP) {

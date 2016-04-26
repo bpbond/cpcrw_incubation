@@ -167,26 +167,25 @@ fluxdata %>%
   group_by(Core) %>%
   mutate(delta_hrs = (inctime_days - lag(inctime_days)) * 24,
          CO2_flux_mgC = CO2_flux_mgC_hr_interp * delta_hrs,
-         cumCO2_flux_mgC = c(0, cumsum(CO2_flux_mgC[-1])),
+         cumCO2_flux_mgC_gC = c(0, cumsum(CO2_flux_mgC[-1])) / SoilDryMass_g,
          CH4_flux_mgC = CH4_flux_mgC_hr_interp * delta_hrs,
-         cumCH4_flux_mgC = c(0, cumsum(CH4_flux_mgC[-1]))) %>%
+         cumCH4_flux_mgC_gC = c(0, cumsum(CH4_flux_mgC[-1]))  / SoilDryMass_g) %>%
   select(-CO2_flux_mgC_hr_interp, -CH4_flux_mgC_hr_interp,
          -CO2_flux_mgC_hr_clean, -CH4_flux_mgC_hr_clean) ->
   fluxdata
-
 
 # -----------------------------------------------------------------------------
 # A few diagnostic plots
 
 printlog("Cumulative flux diagnostic plots...")
-p1 <- ggplot(fluxdata, aes(inctime_days, cumCO2_flux_mgC, group = Core)) + 
+p1 <- ggplot(fluxdata, aes(inctime_days, cumCO2_flux_mgC_gC, group = Core)) + 
   geom_line() + 
   facet_grid(Temperature ~ Treatment) +
   ggtitle("Cumulative CO2 by core and treatment")
 print(p1)
 save_plot("cumulative_CO2")
 
-p2 <- ggplot(fluxdata, aes(inctime_days, cumCH4_flux_mgC, group = Core)) + 
+p2 <- ggplot(fluxdata, aes(inctime_days, cumCH4_flux_mgC_gC, group = Core)) + 
   geom_line() + 
   facet_grid(Temperature ~ Treatment) + 
   ggtitle("Cumulative CH4 by core and treatment")
@@ -199,20 +198,20 @@ save_plot("cumulative_CH4")
 printlog("Calculating flux summary datasets...")
 fluxdata %>%
   melt(id.vars = c("Treatment", "Temperature", "Core", "inctime_days", "WFPS_percent"), 
-       measure.vars = c("cumCO2_flux_mgC", "cumCH4_flux_mgC"),
+       measure.vars = c("cumCO2_flux_mgC_gC", "cumCH4_flux_mgC_gC"),
        variable.name = "Gas") %>%
   mutate(Gas = substr(Gas, start = 4, stop = 6)) %>%   # rename
   group_by(Treatment, Temperature, Gas, Core) %>%
   arrange(inctime_days) %>%
-  summarise(cum_flux_mgC = last(value), 
+  summarise(cum_flux_mgC_gC = last(value), 
             WFPS_percent = mean(WFPS_percent)) -> 
   fd_cumulative_core
 
 save_data(fd_cumulative_core, fn = FLUXDATA_CUM_CORE_FILE, scriptfolder = FALSE)
 
 fd_cumulative_core %>%   # already grouped by Treatment, Temperature, Gas
-  summarise(cum_flux_mgC_sd = sd(cum_flux_mgC),
-            cum_flux_mgC = mean(cum_flux_mgC),
+  summarise(cum_flux_mgC_gC_sd = sd(cum_flux_mgC_gC),
+            cum_flux_mgC_gC = mean(cum_flux_mgC_gC),
             WFPS_percent = mean(WFPS_percent)) ->
   fd_cumulative
 
@@ -222,8 +221,8 @@ printlog("Flux summary plot...")
 dmy <- data.frame(Treatment = "Controlled drought",
                   Temperature = 4,
                   Gas = unique(fd_cumulative$Gas),
-                  cum_flux_mgC = NA,
-                  cum_flux_mgC_sd = NA,
+                  cum_flux_mgC_gC = NA,
+                  cum_flux_mgC_gC_sd = NA,
                   WFPS_percent = NA,
                   stringsAsFactors = FALSE)
 fluxdata_cumulative <- bind_rows(fd_cumulative, dmy)
@@ -234,14 +233,14 @@ fluxdata_cumulative$Treatment <- factor(fluxdata_cumulative$Treatment,
 fluxdata_cumulative$Temperature <- as.factor(fluxdata_cumulative$Temperature)
 
 
-p3 <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC, fill = Treatment)) + 
+p3 <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC_gC, fill = Treatment)) + 
   geom_bar(stat = 'identity', position = position_dodge()) +
   geom_errorbar(aes(color = Treatment, 
-                    ymin = cum_flux_mgC * 0.9, 
-                    ymax = cum_flux_mgC + cum_flux_mgC_sd), 
+                    ymin = cum_flux_mgC_gC * 0.9, 
+                    ymax = cum_flux_mgC_gC + cum_flux_mgC_gC_sd), 
                 position = position_dodge(0.9), width = 0.4) +  
   facet_grid(Gas ~ ., scales = "free") +
-  ylab(paste("Cumulative C (mg) over", floor(max(fluxdata$inctime_days)), "days")) +
+  ylab(paste("Cumulative C (mg/g soil C) over", floor(max(fluxdata$inctime_days)), "days")) +
   ggtitle("Cumulative C by gas, treatment, temperature")
 save_diagnostic(p3, "cumulative_gas")
 save_data(fluxdata_cumulative, fn = FLUXDATA_CUM_FILE, scriptfolder = FALSE)
