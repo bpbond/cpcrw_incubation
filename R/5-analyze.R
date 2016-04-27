@@ -260,7 +260,25 @@ figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC_gC, fill = 
   ylab(expression(Cumulative~C~(mg~g~C^{-1}))) +
   scale_fill_brewer(palette = "Set1") + scale_color_brewer(palette = "Set1")
 
-#ylab(expression(µg~C~g~C^{-1}~day^{-1}))
+# Make the labels for this figure. Kind of a PITA
+library(agricolae)  # v1.2.3
+fluxdata_cumulative %>% 
+  group_by(Gas, Treatment, Temperature) %>% 
+  summarise(cum_flux_mgC_gC = max(cum_flux_mgC_gC + cum_flux_mgC_gC_sd) * 1.1) %>%
+  mutate(trt = paste(Gas, Treatment, Temperature, sep = ":")) %>%
+  group_by(Gas) %>%
+  mutate(cum_flux_mgC_gC = max(cum_flux_mgC_gC, na.rm = TRUE) * 1.1) ->
+  labeldata
+out_co2 <- HSD.test(co2_aov, trt = c("Treatment", "Temperature"))
+out_co2$groups$trt <- paste("CO2", trimws(out_co2$groups$trt), sep = ":")
+out_ch4 <- HSD.test(ch4_aov, trt = c("Treatment", "Temperature"))
+out_ch4$groups$trt <- paste("CH4", trimws(out_ch4$groups$trt), sep = ":")
+rbind(out_co2$groups, out_ch4$groups) %>%
+  left_join(labeldata, by = "trt") ->
+  labeldata
+figureD <- figureD + geom_text(data = labeldata, 
+                               aes(label = M), 
+                               position = position_dodge(width = 1))
 
 # -----------------------------------------------------------------------------
 # Calculate drought reduction (%)
