@@ -16,7 +16,7 @@ Researchers in soil and ecosystem science, and almost every other field, are bei
 
 #### 1. Introduction
 
-Science is becomingly increasingly collaborative and data-intensive {Adams, 2012 #4348}; in conjunction with revolutions in Internet-based communication, this has created new research opportunities across former geographic and disciplinary barriers. At the same time, many factors are pushing scientists to increase data access and use "best practices" in dealing with data and code {Hart, 2015 #4292;Wilson, 2014 #4337}.
+Science is becoming increasingly collaborative and data-intensive {Adams, 2012 #4348}; in conjunction with revolutions in Internet-based communication, this has created new research opportunities across former geographic and disciplinary barriers. At the same time, many factors are pushing scientists to increase data access and use "best practices" in dealing with data and code {Hart, 2015 #4292;Wilson, 2014 #4337}.
 
 Scientific journals are adopting increasingly stringent data access and deposition policies, e.g. those of *Scientific Data*[^1], *PLOS ONE*[^2], and *Science*[^3]. These policies generally share common assumptions and goals: maximizing access to  data; encouraging deposition into structured repositories as opposed to journal supplementary information; and specifying that it is not acceptable for authors to be solely responsible for ensuring data access. Funding agencies are moving in this direction as well, with organizations such as the U.S. National Science Foundation[^4] and the U.K. Wellcome Trust[^5], along with many others, requiring explicit data management plans, unfettered reasonable access to primary data, and use of established repositories.
 

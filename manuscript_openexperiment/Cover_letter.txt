@@ -1,0 +1,27 @@
+May 17, 2016
+
+Editor, Environmental Research Letters
+
+To Whom It May Concern:
+
+With this letter we are submitting our manuscript “Running an open experiment: transparency and reproducibility in soil and ecosystem science” to ERL, which describes our recent ‘open experiment’: a soil incubation during which we made all raw data, scripts, diagnostics, final analyses, and manuscripts available in real time online. In the manuscript, we discuss the multiple factors increasingly pushing scientists to embrace reproducibility and open data, offer our work as a potential (but not the only) model for doing so, and discuss its advantages and disadvantages.
+
+We recognize this may be a non-traditional manuscript for ERL, but feel that it’s very appropriate for the journal. The topic is significant and original, as most researchers are unfamiliar with tools available to support open and reproducible science, although they are under increasing pressure to do so some colleagues, journals, and funding agencies. Relevant papers (the authors of which would be good reviewers) are:
+
+•	Hampton SE, Anderson SS, Bagby SC, Gries C, Han X, Hart E, et al. The Tao of open science for ecology. Ecosphere 2015;6(7):1-13, doi: 10.1890/ES14-00402.1.
+•	Hart E, Barmby P, LeBauer DS, Michonneau F, Mount S, Poisot T, et al. Ten simple rules for digital data storage. PeerJ 2015, doi: 10.7287/peerj.preprints.1448v1.
+
+We appreciate your time in considering this manuscript.
+
+Kind regards,
+
+-----
+Ben Bond-Lamberty (for the authors)
+Research Scientist
+Joint Global Change Research Institute
+DOE Pacific Northwest National Laboratory
+5825 University Research Ct. #3500
+College Park, MD 20740 USA
+301-314-6759; -6719 (fax)
+bondlamberty@pnnl.gov
+
