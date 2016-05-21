@@ -133,6 +133,7 @@ figureA <- ggplot(fluxdata_orig, aes(inctime_days, WC_gravimetric, color=Treatme
   facet_grid(~Temperature) + 
   xlab("Incubation day") + ylab("Gravimetric water content (fraction dry mass)") +
   scale_color_brewer(palette = "Set1")
+save_plot("figureA", figureA)
 
 fluxdata$incday <- floor(fluxdata$inctime_days)
 fluxdata$stage <- NA
@@ -221,6 +222,9 @@ fluxdata_figsBC %>%
   figsBC ->
   figureC
 
+save_plot("figureB", figureB)
+save_plot("figureC", figureC)
+
 # -----------------------------------------------------------------------------
 # Cumulative flux figure and Tukey HSD tests
 
@@ -259,6 +263,7 @@ figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC_gC, fill = 
   facet_grid(Gas ~ ., scales = "free") +
   ylab(expression(Cumulative~C~(mg~g~C^{-1}))) +
   scale_fill_brewer(palette = "Set1") + scale_color_brewer(palette = "Set1")
+save_plot("figureD", figureD)
 
 # Make the labels for this figure. Kind of a PITA
 library(agricolae)  # v1.2.3
