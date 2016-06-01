@@ -1,3 +1,3 @@
 # manuscript
 
-This folder contains our manuscript draft. Currently using Markdown, will probably switch to Word later.
+This folder contains our manuscript draft. Using RMarkdown, but Word file versions are archived as well.
