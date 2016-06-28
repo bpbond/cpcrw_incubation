@@ -4,8 +4,8 @@ title: 'Running an open experiment: transparency and reproducibility in soil and
 author: "Ben Bond-Lamberty^1^, A. Peyton Smith^2^, Vanessa Bailey^2^"
 date: "July 1, 2016"
 output:
-  html_document: default
   word_document: default
+  html_document: default
 ---
 ^1^Joint Global Change Research Institute, DOE Pacific Northwest National Laboratory, College Park, MD USA; 
 bondlamberty@pnnl.gov
@@ -84,19 +84,32 @@ We found a number of advantages to this system:
 * Late changes to the analysis pipeline (for example, when we identified an incorrect calculation) did not result in time-consuming and error-prone pasting of new data values into our manuscript.
 * Our project and experiment received more exposure and publicity than it otherwise would have.
 
-#### 3. Caveats and conclusions
+#### 3. Barriers and caveats
 
-By itself transparency does not guarantee repeatability and reproducibility {Easterbrook, 2014 #4137}, and it may raise genuine concerns about, for example, protecting scientists from harassment {Lewandowsky, 2016 #4342}. Nor will open science by itself fundamentally enhance public trust in science, as there are still many social and political challenges to overcome {Grand, 2012 #4370}.
+There were thus significant advantages to implementing and using an automated analytical pipeline in an open repository. It is worth considering in depth, however, the costs of such an approach, the investments required, and the barriers we encountered (or that many other scientists would).
+
+* More upfront time is required in an open repository system, as the basic building blocks are assembled into an automated pipeline that runs from raw data to diagnostics to final products. While frustrating, this is generally a good thing however: automation makes later analytical stages much faster (see above), while openness provides a strong incentive to write clean, clear code from the beginning, for example, as opposed to deferring documentation.
+* To our knowledge, there is no 'template' for an experimental repository such as the one used here. This results in unnecessary time re-inventing wheels, in particular with respect to repository design decisions.
+* Effective data management takes some programming skills. We believe that basic programming, like basic statistics, should be a part of almost every scientist's training, and do not view this as a huge problem going forward. For scientists used to spreadsheet-oriented data processing, however, it requires new skills and practices.
+* Version control (here, the Git software) is critical for tracking provenance, ensuring robustness, and efficiently sharing changes. It introduces significant complexity, however, particularly for any use beyond the most simple operations. We believe version control software remains too difficult for most scientists to use effectively[^9].
+* Git and GitHub are fundamentally designed for working with code, not data or long documents. This situation continues to improve on a technical level[^10], but some operations (e.g., storing very large files; tracking small changes to columnar data; commenting on words or phrases) remain awkward or even impossible.
+
+[^9]: https://xkcd.com/1597/
+[^10]: E.g., https://github.com/blog/1885-better-word-highlighting-in-diffs
+
+In summary, while tools and platforms such as Git, GitHub, RStudio, and RMarkdown have drastically improved the feasibility and accessibility of running an 'open experiment', they remain significant hurdles for many scientists. We applaud efforts to lower the technical and information hurdles to open science {Hampton, 2015 #4420}.
+
+A number of caveats are also in order. The model we present here--a public repository updated throughout the experiment, analysis, and publication process--is far from perfect. For example, there are a number of "best practices" of scientific computing {Wilson, 2014 #4337} that we did not employ, in particular with respect to automation. In addition, this approach may not be appropriate for, nor applicable to, all study types, even in our professional fields of soil, ecosystem, and global change science; it certainly is not appropriate for sensitive human-subject data. 
+
+More generally, by itself transparency does not guarantee repeatability and reproducibility {Easterbrook, 2014 #4137}, and it may raise genuine concerns about, for example, protecting scientists from harassment {Lewandowsky, 2016 #4342}. Nor will open science by itself fundamentally enhance public trust in science, as there are still many social and political challenges to overcome {Grand, 2012 #4370}.
 
 Scientists also frequently cite other concerns: about data sharing, being "scooped", not receiving sufficient credit, and time constraints {Wolkovich, 2012 #3303}. The benefits are not always clear to researchers who might otherwise be open to following open-data practices {Molloy, 2011 #4366}{Hampton, 2015 #4420}. We cannot easily dismiss all of these concerns: for example, does our community adequately credit researchers who contribute to global databases that subsequently produce high-impact papers? Such meta-analyses rely on the collection of primary data, and it is critical that field and experimental researchers' efforts are adequately valued and cited {Kueffer, 2011 #4335}. 
 
-We also recognize that, in general, our professional and career incentives do not yet align well with "an open research culture" {Nosek, 2015 #4343}. That is, scientists do not receive 'proper' credit for datasets relative to publications, even when the former may be much more broadly valuable, in almost every area: hiring, promotion and tenure decisions, impact metrics, etc. The advent of 'data descriptor' articles, in journals such as *Scientific Data*, improves but does not solve this problem.
+Finally, we recognize that, in general, our professional and career incentives do not yet align well with "an open research culture" {Nosek, 2015 #4343}. That is, scientists do not receive 'proper' credit for datasets relative to publications, even when the former may be much more broadly valuable, in almost every area: hiring, promotion and tenure decisions, impact metrics, etc. The advent of 'data descriptor' articles, in journals such as *Scientific Data*, improves but does not solve this problem.
 
-The model we present here--a public repository updated throughout the experiment, analysis, and publication process--is far from perfect. First, there are a number of "best practices" of scientific computing {Wilson, 2014 #4337} that we did not employ, in particular with respect to automation. Second, this approach may not be appropriate for, nor applicable to, all study types, even in our professional fields of soil, ecosystem, and global change science; it certainly is not appropriate for sensitive human-subject data. Third, Git and GitHub are designed for working with code, not data. Although this situation continues to improve on a technical level[^9], it still requires a fair amount of coding expertise to set up and run an experimental repository such as the one detailed here. We applaud efforts to lower the technical and information hurdles to open science {Hampton, 2015 #4420}.
+#### 4. Conclusions
 
-[^9]: https://github.com/blog/1885-better-word-highlighting-in-diffs
-
-In summary, a variety of forces continue to push scientists towards more transparency in their methods, code, and data, with the goals of increasing reproducibility, enabling syntheses and meta-analyses, and improving trust in, and return from, publicly-funded science. The open experiment example we highlight here offers instrument-to-final product reproducibility and a very high level of transparency, although it is only one of a number of possible models {Hampton, 2015 #4420}. Elements of this case study (e.g., the use of issue-tracking software) might be usefully adopted in isolation, but we hope the entire experiment will be an example of individual scientists' decisions and practices {Wolkovich, 2012 #3303} having a larger impact. We encourage the communities in our respective fields to consider its advantages, and to lead rather than follow with respect to scientific reproducibility, transparency, and data availability.
+A variety of forces continue to push scientists towards more transparency in their methods, code, and data, with the goals of increasing reproducibility, enabling syntheses and meta-analyses, and improving trust in, and return from, publicly-funded science. The open experiment example we highlight here offers instrument-to-final product reproducibility and a very high level of transparency, although it is only one of a number of possible models {Hampton, 2015 #4420}. Elements of this case study (e.g., the use of issue-tracking or version control software) might be usefully adopted in isolation, but we hope the entire experiment will be an example of individual scientists' decisions and practices {Wolkovich, 2012 #3303} having a larger impact. We encourage the communities in our respective fields to consider its advantages, and to lead rather than follow with respect to scientific reproducibility, transparency, and data availability.
 
 #### Acknowledgments
 

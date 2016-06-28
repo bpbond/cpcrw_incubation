@@ -9,6 +9,9 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+We thank all referees for their thoughtful comments and careful assessment. Responses to their comments (italicized) are below, and significant changes in the manuscript text are marked in red.
+
+
 **Referee 2**
 
 *This is a rather unusual manuscript, reporting not on science but on a new way that science might be conducted.   I was prepared to dislike the paper, but I found it rather interesting and easy to read. It might even convince me to join a disaggregate group of scientists to pursue a study of interest.  If there is a special section of ERL that publishes such papers, I would encourage you to include it.*
@@ -34,5 +37,4 @@ Thank you.
 
 *I don't have any recommendations for major changes to this short piece. However, I think the caveats section (section 3) could benefit from more discussion on barriers to adopting this approach, not just from the incentive side, but from the skills needed, time invested, and challenges in using systems like github to run experiments. It would be helpful to discuss what was hard in getting the open experiment to work, what took the most time, what tools were the most difficult or least developed or accessible to scientists. If anything most of us are well convinced of the arguments the authors make on why to share data and code and incentives are showing up in multiple places. The challenge is finding the time, motivation, and technical skills to do so. So perhaps some discussion of how the authors dealt with those would help convince the otherwise skittish researcher that this isn’t as hard as it looks to do!*
 
-TODO.
-
+We have taken much of the material in the former "Conclusions" section and split into a new section, "Barriers and caveats", which discusses some of these issues (skills, time, barriers for an 'average' scientist) in much greater depth.
