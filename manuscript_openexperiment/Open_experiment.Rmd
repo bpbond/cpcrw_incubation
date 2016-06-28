@@ -2,8 +2,10 @@
 title: 'Running an open experiment: transparency and reproducibility in soil and ecosystem
   science'
 author: "Ben Bond-Lamberty^1^, A. Peyton Smith^2^, Vanessa Bailey^2^"
-date: "February 2, 2016"
-output: word_document
+date: "July 1, 2016"
+output:
+  html_document: default
+  word_document: default
 ---
 ^1^Joint Global Change Research Institute, DOE Pacific Northwest National Laboratory, College Park, MD USA; 
 bondlamberty@pnnl.gov
@@ -34,7 +36,10 @@ Here we briefly discuss what we see as the primary arguments for data sharing an
 
 Reproducibility of experimental results is at the heart of science and a requirement for results to be accepted as factual {Kuhn, 1962 #4341}. Too often, however, sufficient details and data are not publicly available to even *repeat* a study (i.e. perform it again in a comparable manner, while not expecting exactly the same result). For example, surveying the 2000-2014 biomedical literature, Iqbal et al. {, 2016 #4334} found that none of 441 randomly-chosen studies provided raw data, and only one provided full protocols. The issues of reproducibility and repeatability in ecology (and its many related fields) have been raised and debated for years {Cassey, 2006 #4349}{Ellison, 2010 #4363} but ecological, soil science, and global change journals differ widely in their data deposition requirements, when such requirements exist at all.
 
-As data and code have become increasingly intertwined, the availability of the latter has become a fundamental problem as well. Specialized modeling groups have worked to improve reproducibility and archiving practices {Thornton, 2005 #2310}. More generally, scientists in all fields are increasingly building and using software in their work, though often without strong training in this area {Wilson, 2014 #4337}. In addition to open-source data analysis languages such as R {R Development Core Team, 2016 #4314}, scientific workflow systems such as Kepler (https://kepler-project.org) or Taverna (http://www.taverna.org.uk) record information about the data processing, analytical process and decisions, and statistical analysis. Providing open code does not magically produce bug-free code, mistake-free analyses, or instantly better science {Easterbrook, 2014 #4137}. But it does encourage authors to invest the time upfront to clean up their code, data, and documentation when a paper is written, rather than deferring this task--often until key details have been forgotten, if not forever. This also allows for real-time peer review of both code and data.
+As data and code have become increasingly intertwined, the availability of the latter has become a fundamental problem as well. Specialized modeling groups have worked to improve reproducibility and archiving practices {Thornton, 2005 #2310}. More generally, scientists in all fields are increasingly building and using software in their work, though often without strong training in this area {Wilson, 2014 #4337}. In addition to open-source data analysis languages such as R {R Development Core Team, 2016 #4314}, scientific workflow systems such as Kepler[^6] or Taverna[^7] record information about the data processing, analytical process and decisions, and statistical analysis. Providing open code does not magically produce bug-free code, mistake-free analyses, or instantly better science {Easterbrook, 2014 #4137}. But it does encourage authors to invest the time upfront to clean up their code, data, and documentation when a paper is written, rather than deferring this task--often until key details have been forgotten, if not forever. This also allows for real-time peer review of both code and data.
+
+[^6]: https://kepler-project.org
+[^7]: http://www.taverna.org.uk
 
 **1.2. Data loss**
 
@@ -64,10 +69,10 @@ This system had a number of characteristics:
 * The version control system let us make incremental changes, work out problems, look at histories (i.e., who made what change when).
 * An issue tracker let us discuss problems, reference changes in the repository, create to-do lists, and assign responsibilities.
 * An informational webpage provided non-technical explanations of the experiment and broader project.
-* Manuscripts were directly tied into the data system (cf. **Figure 1**), with numerical results flowing directly into e.g. results sections. This meant that changes to the data (and thus statistical results, etc.) propagated automatically and consistently. Tools such as R Markdown[^7] have made this process much easier to build and maintain.
+* Manuscripts were directly tied into the data system (cf. **Figure 1**), with numerical results flowing directly into e.g. results sections. This meant that changes to the data (and thus statistical results, etc.) propagated automatically and consistently. Tools such as R Markdown[^8] have made this process much easier to build and maintain.
 * Log files provide an audit trail {Ellison, 2010 #4363} of what analytical steps were taken and, critically, the specific versions used for each unit of software, including the main R system itself. This is critical as software changes with time, a potentially large problem in reproducing previous analyses.
 
-[^6]: http://rmarkdown.rstudio.com
+[^8]: http://rmarkdown.rstudio.com
 
 We found a number of advantages to this system:
 
@@ -87,9 +92,9 @@ Scientists also frequently cite other concerns: about data sharing, being "scoop
 
 We also recognize that, in general, our professional and career incentives do not yet align well with "an open research culture" {Nosek, 2015 #4343}. That is, scientists do not receive 'proper' credit for datasets relative to publications, even when the former may be much more broadly valuable, in almost every area: hiring, promotion and tenure decisions, impact metrics, etc. The advent of 'data descriptor' articles, in journals such as *Scientific Data*, improves but does not solve this problem.
 
-The model we present here--a public repository updated throughout the experiment, analysis, and publication process--is far from perfect. First, there are a number of "best practices" of scientific computing {Wilson, 2014 #4337} that we did not employ, in particular with respect to automation. Second, this approach may not be appropriate for, nor applicable to, all study types, even in our professional fields of soil, ecosystem, and global change science; it certainly is not appropriate for sensitive human-subject data. Third, Git and GitHub are designed for working with code, not data. Although this situation continues to improve on a technical level[^7], it still requires a fair amount of coding expertise to set up and run an experimental repository such as the one detailed here. We applaud efforts to lower the technical and information hurdles to open science {Hampton, 2015 #4420}.
+The model we present here--a public repository updated throughout the experiment, analysis, and publication process--is far from perfect. First, there are a number of "best practices" of scientific computing {Wilson, 2014 #4337} that we did not employ, in particular with respect to automation. Second, this approach may not be appropriate for, nor applicable to, all study types, even in our professional fields of soil, ecosystem, and global change science; it certainly is not appropriate for sensitive human-subject data. Third, Git and GitHub are designed for working with code, not data. Although this situation continues to improve on a technical level[^9], it still requires a fair amount of coding expertise to set up and run an experimental repository such as the one detailed here. We applaud efforts to lower the technical and information hurdles to open science {Hampton, 2015 #4420}.
 
-[^7]: https://github.com/blog/1885-better-word-highlighting-in-diffs
+[^9]: https://github.com/blog/1885-better-word-highlighting-in-diffs
 
 In summary, a variety of forces continue to push scientists towards more transparency in their methods, code, and data, with the goals of increasing reproducibility, enabling syntheses and meta-analyses, and improving trust in, and return from, publicly-funded science. The open experiment example we highlight here offers instrument-to-final product reproducibility and a very high level of transparency, although it is only one of a number of possible models {Hampton, 2015 #4420}. Elements of this case study (e.g., the use of issue-tracking software) might be usefully adopted in isolation, but we hope the entire experiment will be an example of individual scientists' decisions and practices {Wolkovich, 2012 #3303} having a larger impact. We encourage the communities in our respective fields to consider its advantages, and to lead rather than follow with respect to scientific reproducibility, transparency, and data availability.
 
@@ -108,6 +113,6 @@ B.B.-L. designed the repository and script system described here, and wrote the 
 
 ![Repository and workflow](figure1.png)
 
-**Figure 2.** Two of the many diagnostic figures that were produced as the incubation experiment proceeded. They show (top) the number of replicate measurements made on each soil core, by date of measurement, and (bottom) measurements with a data mismatch problem, indicating a data entry or other error (in the figure no errors, which would be in red, are extant). A wide range of similar diagnostic graphics (see https://github.com/bpbond/cpcrw_incubation#current-diagnostics) and statistics let us quickly identify problems or interesting patterns in the data. All diagnostics were publicly available in real time. 
+**Figure 2.** Two of the many diagnostic figures that were produced as the incubation experiment proceeded. Top: the number of replicate measurements made on each soil core (y), by date of measurement (x); the 'gap' at 2015-11-11/12 shows a potential problem in our data-processing pipeline, related to the instrument's clock crossing midnight. Bottom: data matches between multiplexer valve number (y) and soil core, by date of measurement (x); grey dots indicate that every valve has been correctly matched with a soil core, while a red dot would indicate a data entry problem or other error. A wide range of similar diagnostic graphics and statistics let us quickly identify problems or interesting patterns in the data. All diagnostics were publicly available in real time. 
 
 ![Sample diagnostics](figure2.png)

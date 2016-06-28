@@ -9,3 +9,30 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+**Referee 2**
+
+*This is a rather unusual manuscript, reporting not on science but on a new way that science might be conducted.   I was prepared to dislike the paper, but I found it rather interesting and easy to read. It might even convince me to join a disaggregate group of scientists to pursue a study of interest.  If there is a special section of ERL that publishes such papers, I would encourage you to include it.*
+
+Thank you.
+
+*Only a couple of specialized comments*
+*1.       The authors should standardize whether web citations are given in the text or in footnotes.  I prefer the latter to keep the text clean.*
+
+We agree, and have moved all web citations--except the one referencing the main repository, the subject of this manuscript--to footnotes. (We will obviously follow journal requirements if they differ from this, however.)
+
+*2.       Figure 2, particularly the lower panel, needs a lot more explanation before it will be easy for readers to understand.*
+
+We have expanded and hopefully clarified the Figure 2 caption.
+
+**Referee 3**
+
+*The manuscript is a perspective and case study analysis on the value of running an "open" experiment. The idea behind this is to lay out the protocol, the treatments, the results and even the manuscript drafts all open for public viewing and commenting in real time, as data come in and results are developed. It's a fresh and radical approach to doing science and could strongly benefit rebuilding trust in our field, as the authors document and adequately reference literature on the topic.*
+
+*As a journal editor, I have been pushing in every article to provide a clear data access statement and to publish data in open and public repositories. It's nice to have a manuscript to point to on good reason for doing so with a clear example.*
+
+Thank you.
+
+*I don't have any recommendations for major changes to this short piece. However, I think the caveats section (section 3) could benefit from more discussion on barriers to adopting this approach, not just from the incentive side, but from the skills needed, time invested, and challenges in using systems like github to run experiments. It would be helpful to discuss what was hard in getting the open experiment to work, what took the most time, what tools were the most difficult or least developed or accessible to scientists. If anything most of us are well convinced of the arguments the authors make on why to share data and code and incentives are showing up in multiple places. The challenge is finding the time, motivation, and technical skills to do so. So perhaps some discussion of how the authors dealt with those would help convince the otherwise skittish researcher that this isn’t as hard as it looks to do!*
+
+TODO.
+
