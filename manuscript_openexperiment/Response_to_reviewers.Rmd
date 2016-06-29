@@ -2,7 +2,9 @@
 title: "Response_to_reviewers"
 author: "Ben Bond-Lamberty"
 date: "June 28, 2016"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
