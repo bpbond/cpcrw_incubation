@@ -1,5 +1,7 @@
 Hurray! The main manuscript for this work is now [online](http://www.biogeosciences-discuss.net/bg-2016-234/).
 
+Double hurray! The 'open experiment' manuscript has been [published in ERL](http://dx.doi.org/10.1088/1748-9326/11/8/084004).
+
 # **DISCLAIMER**
 **All the data and results in this repository are provisional and subject to normal scientific fair use expectations.** In particular, the diagnostics below present data that may not have been fully QC'd, checked, or interpreted. We do our best, but make no guarantees as to its correctness.
 
