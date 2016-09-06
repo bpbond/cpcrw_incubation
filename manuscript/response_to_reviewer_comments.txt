@@ -31,25 +31,26 @@ We thank both referees for their thoughtful comments.
 1-13. I cannot tell if C:N, %C and %N were measured at the end of the incubation. Could these results be collated in a table in the manuscript? Otherwise the methods section appears to be detailed and well written.
 
 1-14. Line 232: In this section it would also be interesting to know the soil respiration decay rate per treatment over the course of the incubation experiment.
-Line 238-240: Confusingly worded sentence.
 
-1-15. I don’t think that the summary of nearby respiration studies add very much to the discussion section. Perhaps if the similarities and discrepancies were more integral to the central findings of the paper or integrated differently into the discussion they would seem more meaningful here. Perhaps comparing with other boreal incubations (eg: Lee et al., 2012; Lavoie et al., 2011) would help to provide some additional context.
+1-15. Line 238-240: Confusingly worded sentence.
 
-1-16. Line 270: There is missing punctuation after the word “results”.
+1-16. I don’t think that the summary of nearby respiration studies add very much to the discussion section. Perhaps if the similarities and discrepancies were more integral to the central findings of the paper or integrated differently into the discussion they would seem more meaningful here. Perhaps comparing with other boreal incubations (eg: Lee et al., 2012; Lavoie et al., 2011) would help to provide some additional context.
 
-1-17. Line 286-293: Perhaps the new synthesis by Schadel et al., 2016, would also be a useful comparison here.
+1-17. Line 270: There is missing punctuation after the word “results”.
 
-1-18. Line 293: That soil moisture may be as important a control on microbial respiration as temperature is an important finding in recent incubation studies, and the potential to define its interaction with temperature will help modelers of soil decomposition better constrain the physical parameters of microbial respiration rates. This feels buried in the manuscript, and I think that it would improve the paper if it were highlighted better throughout the text.
+1-18. Line 286-293: Perhaps the new synthesis by Schadel et al., 2016, would also be a useful comparison here.
 
-1-19. Line 311-317: This section could be better explained in the context of the discussion or omitted altogether. It seems less important to defend the plausibility of relatively low temperature sensitivity, but instead to try to explain it in the context of these soil characteristics. Could low temperature sensitivity be the result of low C quality in this deep soil environment?
+1-19. Line 293: That soil moisture may be as important a control on microbial respiration as temperature is an important finding in recent incubation studies, and the potential to define its interaction with temperature will help modelers of soil decomposition better constrain the physical parameters of microbial respiration rates. This feels buried in the manuscript, and I think that it would improve the paper if it were highlighted better throughout the text.
 
-1-20. Line 322-332: This section, which lays out the crux of the paper, the interaction between temperature and moisture sensitivity in driving microbial respiration is relatively vague. It would be good to describe the less-temperature-sensitive processes that would be important to consider for more stable-C metabolism. And how does moisture play a role here? Perhaps DOC becomes more limiting in the drought conditions?
+1-20. Line 311-317: This section could be better explained in the context of the discussion or omitted altogether. It seems less important to defend the plausibility of relatively low temperature sensitivity, but instead to try to explain it in the context of these soil characteristics. Could low temperature sensitivity be the result of low C quality in this deep soil environment?
 
-1-21. Line 356: The Janssens et al., 2010, citation refers to a meta-analysis of temperate forest soils that are not nitrogen limited. There are studies focusing on Arctic N cycling that would be more appropriate, and many Arctic studies have shown that N availability can limit C mineralization rates. Is this site considered to be N limited in the deep active layer?
+1-21. Line 322-332: This section, which lays out the crux of the paper, the interaction between temperature and moisture sensitivity in driving microbial respiration is relatively vague. It would be good to describe the less-temperature-sensitive processes that would be important to consider for more stable-C metabolism. And how does moisture play a role here? Perhaps DOC becomes more limiting in the drought conditions?
 
-1-22. Line 367: Is this comparison, with North American soils, relevant to this study?
+1-22. Line 356: The Janssens et al., 2010, citation refers to a meta-analysis of temperate forest soils that are not nitrogen limited. There are studies focusing on Arctic N cycling that would be more appropriate, and many Arctic studies have shown that N availability can limit C mineralization rates. Is this site considered to be N limited in the deep active layer?
 
-1-23. Line 383-384: Can you be more explicit in your meaning here? How do you mean that there is weakness in what can be inferred about temperature sensitivity from experiments?
+1-23. Line 367: Is this comparison, with North American soils, relevant to this study?
+
+1-24. Line 383-384: Can you be more explicit in your meaning here? How do you mean that there is weakness in what can be inferred about temperature sensitivity from experiments?
 
 
 ## Referee #2
