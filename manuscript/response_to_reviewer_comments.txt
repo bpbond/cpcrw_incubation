@@ -1,9 +1,10 @@
 # Response to referee comments
-# Note that using LaTeX command below, as that's what Biogeosciences uses
+# Note LaTeX command below, as that's what Biogeosciences uses; see
 # http://www.biogeosciences.net/peer_review/commenting_on_a_paper.html
 # BBL September 2016
 
-We thank both referees for their thoughtful comments, which we have numbered below for convenient referencing. Line numbers refer to the discussion manuscript. 
+
+We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the Biogeosciences instructions, we have not prepared a revised manuscript, but instead respond below to all comments and questions.
 
 {\bf Response to Referee #1}
 
