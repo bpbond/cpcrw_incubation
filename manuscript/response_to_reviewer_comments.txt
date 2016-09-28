@@ -40,7 +40,7 @@ The second question largely repeats, we think, both referees' suggestions to bet
 
 {\it 1-8. Line 31-34: I cannot find discussion of this point in the rest of the text, and while important, this statement is relatively vague and there are no cited references. Since it underpins the rational for studying deep, unfrozen Arctic soils, it would be helpful to expand on this more in the manuscript. }
 
-Referee #2 raised this point as well (comment 2-6), and it's a good point. We will better describe why deep active-layer soils, such as those studied here, and important and distinctive relative to permafrost or shallow active layer soils. For example: 
+Referee #2 raised this point as well (comment 2-6), and it's a good one. We will better describe why deep active-layer soils, such as those studied here, and important and distinctive relative to permafrost or shallow active layer soils. For example: 
 
 \begin{itemize}
   \item Decomposition rates swing wildly between the frozen and unfrozen states of soil, due to the phase changes involved, microbial community dynamics, etc. Q10 respiratory coefficients, for example, are extremely high near the freeze-thaw boundary (Monson et al. 2006).
@@ -198,7 +198,7 @@ TODO
 
 {\it 2-10. 7) In the discussion, it would be good to also include the warming potential of CO2 and CH4 especially when making assumptions about the permafrost C feedback, it is briefly mentioned in line 348 but a more in depth discussion would be good }
 
-That's a very good point–thank you–and will integrate well with an expanded comparison to the Schädel et al. (2016) paper (cf. 2-2 above) and other publications (2-4 above).
+That's a very good point–thank you–and will integrate well with an expanded comparison to the Schädel et al. (2016) paper (cf. comment 2-2 above) and other publications (comment 2-4 above).
 
 {\it 2-11. 8) the conclusions might be a bit strong given the data and previous results published }
 
