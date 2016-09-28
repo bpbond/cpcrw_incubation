@@ -4,7 +4,7 @@
 # BBL September 2016
 
 
-We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the Biogeosciences instructions, we have not prepared a revised manuscript, but instead respond below to all comments and questions.
+We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} email instructions, we have not prepared a revised manuscript, but instead respond below to all comments and questions.
 
 {\bf Response to Referee #1}
 
@@ -78,7 +78,7 @@ This will be fixed.
 
 {\it 1-18. Line 286-293: Perhaps the new synthesis by Schadel et al., 2016, would also be a useful comparison here. }
 
-This point was also made by Referee #2. The fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand this paragraph, discussing and comparing to Schädel et al. (2016) in depth, particularly their findings of higher aerobic than anaerobic respiration; respiration dominance of CO2 versus CH4; and Q10 values.
+This point was also made by Referee #2 (comment 2-2). The fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand this paragraph, discussing and comparing to Schädel et al. (2016) in depth, particularly their findings of higher aerobic than anaerobic respiration; respiration dominance of CO2 versus CH4; and Q10 values.
 
 {\it 1-19. Line 293: That soil moisture may be as important a control on microbial respiration as temperature is an important finding in recent incubation studies, and the potential to define its interaction with temperature will help modelers of soil decomposition better constrain the physical parameters of microbial respiration rates. This feels buried in the manuscript, and I think that it would improve the paper if it were highlighted better throughout the text. }
 
@@ -105,6 +105,9 @@ It's true that Colman and Schimel (2014) include only a few studies that could b
 TODO
 
 
+
+We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} email instructions, we have not prepared a revised manuscript, but instead respond below to all comments and questions.
+
 {\bf Response to Referee #2}
 
 {\it 2-1. This paper studies... This is a useful dataset that adds to the growing body of literature on C release from permafrost once thawed. There is a good amount of publications that deal with warmer temperatures in the Arctic and changing soil moisture condition but not many have simulated drought conditions... }
@@ -113,31 +116,39 @@ We appreciate the referee's assessment of the utility and interest of this datas
 
 {\it 2-2. It seems like this paper was published as a discussion paper before Schädel et al. 2016 was published and hence a discussion of the meta-analysis was not possible but should be addressed in the revisions. }
 
-This point was also made by Referee #1. Yes, the fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand the discussion on this point, comparing our results to Schädel et al. (2016) in depth, particularly their findings of higher aerobic than anaerobic respiration; respiration dominance of CO2 versus CH4; and Q10 values.
+This point was also made by Referee #1 (comment 1-18). Yes, the fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand the discussion on this point, comparing our results to Schädel et al. (2016) in depth, particularly their findings of higher aerobic than anaerobic respiration; respiration dominance of CO2 versus CH4; and Q10 values.
 
 {\it 2-3. The importance of the results would be more obvious if the discussion also contained an upscaling or circumpolar aspect of drought in the Arctic. It would be useful to have some discussion about the area that is expected to be most affected by drought. This is important as changes in temperature will affect most of the Arctic, whereas drought effects or dry soils will occur more locally. }
 
-TODO
+We will add this to the discussion, noting in particular, for example, observable anthropogenic influences on high-latitude precipitation (Wan et al. 2015); drier and warmer conditions in boreal Eurasia (Buermann et al. 2015); that growing season length in interior Alaska has increased by 45\% in the last century with no increase in precipitation (Wendler and Shulski 2009); and the complex and still-unresolved dynamics at play, meaning that, as the referee notes, drying and drought will probably be highly local in effect (Zhang et al. 2012).
 
 {\it 2-4. 1) Throughout the manuscript, I have noticed that important papers from the permafrost literature are missing. This applies to C stocks in the permafrost area, Tarnocai et al. 2009 is a good paper but there are more recent and more accurate estimates of permafrost C stocks described in Hugelius et al. 2014 and Schuur et al. 2015 that should be cited. When it comes to the permafrost C feedback, Schuur et al. 2015 is currently the best and most up to date review. In addition, Koven et al. 2015 is a good one too. The discussion on incubation literature should include papers like Lavoie et al. 2011, Dutta et al. 2006, and Schädel et al. 2014. }
 
-TODO
+We appreciate the referee drawing our attention to these omissions. Schuur et al. (2015) is already cited, Hugelius (2014) and Koven (2015; though we do cite his 2011 paper) are useful additions. The Lavoie paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, is also a good comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but we agree it would also be a good addition. 
 
 {\it 2-5. 2) L. 31: Permafrost thaws and does not melt }
 
-Thanks; this wording will be fixed.
+This wording will be fixed.
 
 {\it 2-6. 3) A better explanation is needed why deep-active layer soils are different to active layer or permafrost soils, I couldn’t find a strong argument for why they would behave differently. Also, deep-active layer soils are those that are the most impacted by inter annual variability in thaw depth and so they might switch between active layer in one year to permafrost in another, that’s worth some discussion as well. }
 
-TODO
+This is a good point. We will better describe why deep active-layer soils, such as those studied here, and important and distinctive relative to permafrost or shallow active layer soils. For example: 
+
+\begin{itemize}
+  \item Decomposition rates swing wildly between the frozen and unfrozen states of soil, due to the phase changes involved, microbial community dynamics, etc. Q10 respiratory coefficients, for example, are extremely high near the freeze-thaw boundary (Monson et al. 2006).
+  \item Deep active-layer soils are subject to distinctive freeze-thaw and cryoturbation dynamics, which are likely to change their sensitivity to climate change and feedback potential.
+  \item The depth of thaw can change the source/sink status of boreal ecosystems (Goulden et al. 1998) and potentially entire biomes (Harden et al. 2012, Hayes et al. 2011).
+  \item Seasonally frozen soils pose particular problems for accurate modeling of high-latitude carbon dynamics (Nicolsky et al. 2007, Bao et al. 2016).
+  \item Deep soil carbon is likely to be a highly important contributor to future climate feedbacks. The modeling studies of Koven et al. (2011, 2015), for example, found that one-third of 21st century climate-induced carbon loss originated from seasonally frozen soil carbon.
+\end{itemize}
 
 {\it 2-7. 4) The statistics in this paper are generally good and I would like to compliment the authors on making the entire data set and analysis available online. I would still suggest that the manuscript would profit from some additional details on collinearity of the tested variables as well as model outputs such as AIC. }
 
-TODO
+Thank you. We appreciate the useful suggestions, and will provide these additional details in our revised manuscript.
 
-{\it 2-8. 5) Add a table with soil properties such as bulk density, %C etc. }
+{\it 2-8. 5) Add a table with soil properties such as bulk density, \%C etc. }
 
-This useful suggestion was also made by Referee #1. We will do so.
+This useful suggestion was also made by Referee #1 (comment 1-13). We will do so.
 
 {\it 2-9. 6) Why not include C/N as a variable in the statistical analysis? Schädel et al. 2014 showed that C/N is a good predictor of C release and can be used as a scaling factor. It would be interesting to see if C release from short-term incubations show the same result }
 
@@ -149,4 +160,31 @@ That's a very good point–thank you–and will integrate well with an expanded 
 
 {\it 2-11. 8) the conclusions might be a bit strong given the data and previous results published }
 
-TODO
+We will add a sentence of caveats, noting in particular the useful but incremental nature of this study, given previous work and limitations of the experimental design.
+
+{\bf New references cited:}
+
+Bao, H., T. Koike, K. Yang, L. Wang, M. Shrestha and P. Lawford (2016). "Development of an enthalpy-based frozen soil model and its validation in a cold region in China." Journal of Geophysical Research-Atmospheres 121(10): 5259-5280.
+
+Buermann, W., B. Parida, M. Jung, G. M. MacDonald, C. J. Tucker and M. Reichstein (2014). "Recent shift in Eurasian boreal forest greening response may be associated with warmer and drier summers." Geophysical Research Letters in press.
+
+Goulden, M. L., S. C. Wofsy, J. W. Harden, S. E. Trumbore, P. M. Crill, S. T. Gower, T. Fries, B. C. Daube, S.-M. Fan, D. J. Sutton, A. M. Bazzaz and J. W. Munger (1998). "Sensitivity of boreal forest carbon balance to soil thaw." Science 279: 214-217.
+
+Harden, J. W., C. D. Koven, C.-L. Ping, G. Hugelius, A. D. McGuire, P. Camill, T. Jorgenson, P. Kuhry, G. J. Michaelson, J. A. O'Donnell, E. A. G. Schuur, C. Tarnocai, K. D. Johnson and G. Grosse (2012). "Field information links permafrost carbon to physical vulnerabilities of thawing." Geophysical Research Letters 39: L15704.
+
+Hayes, D. J., A. D. McGuire, D. W. Kicklighter, K. R. Gurney, T. J. Burnside and J. M. Melillo (2011). "Is the northern high-latitude land-based CO2 sink weakening?" Global Biochemical Cycles 25: GB3018.
+
+Koven, C. D., B. Ringeval, P. Friedlingstein, P. Ciais, P. Cadule, D. Khvorostyanov, G. Krinner and C. Tarnocai (2011). "Permafrost carbon-climate feedbacks accelerate global warming." Proceedings of the National Academy of Science 108(36): 14769-14774.
+
+Koven, C. D., D. M. Lawrence and W. J. Riley (2015). "Permafrost carbon−climate feedback is sensitive to deep soil carbon decomposability but not deep soil nitrogen dynamics." Proceedings of the National Academy of Science 112(12): 3752-3757.
+
+Monson, R. K., D. L. Lipson, S. P. Burns, A. A. Turnipseed, A. C. Delany, M. W. WIlliams and S. K. Schmidt (2006). "Winter forest soil respiration controlled by climate and microbial community composition." Nature 439: 711-714.
+
+Nicolsky, D. J., V. E. Romanovsky, V. A. Alexeev and D. M. Lawrence (2007). "Improved modeling of permafrost dynamics in a GCM land-surface scheme." Geophysical Research Letters 34: L08501.
+
+Wan, H., X. Zhang, F. W. Zwiers and S.-K. Min (2015). "Attributing northern high-latitude precipitation change over the period 1966–2005 to human influence." Climate Dynamics 45(7): 1713-1726.
+
+Wendler, G. and M. Shulski (2009). "A century of climate change for Fairbanks, Alaska." Arctic 62(3): 295-300.
+
+Zhang, X., J. He, J. Zhang, I. Polyakov, R. Gerdes, J. Inoue and P. Wu (2012). "Enhanced poleward moisture transport and amplified northern high-latitude wetting trend." Nature Climate Change 3: 47-51.
+
