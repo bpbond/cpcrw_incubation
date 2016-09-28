@@ -14,19 +14,19 @@ Thank you.
 
 {\it 1-2. I do think that the paper has within it data that is relevant to the scope of BG, but I think that a more in depth analysis of the data, and a better contextualization of the data within the Arctic literature is required. The methods and concepts are not novel, but this is an understudied system and very timely work. More is needed in order to reach substantial conclusions. }
 
-We agree that the methods and concepts are not particularly novel (although drought incubations are fairly unusual), and that this is an understudied system and timely–thank you.
+We appreciate this comment, and agree that the methods and concepts are not particularly novel–although drought incubations are fairly unusual–and that this is an understudied system and timely.
 
 {\it 1-3. I think that the work would benefit from a more thorough comparison with boreal forest incubations across the Arctic. }
 
-TODO
+This point was raised, indirectly, by Referee #2 (comment 2-4). We will do so, for example comparing with studies such as the Schädel et al. (2016) meta-analysis (and references therein), Dutta et al. (2006), Lavoie et al. (2011), Karhu et al. (2010), and Czimczik et al. (2006, 2010).
 
 {\it 1-4. N section would benefit from more Arctic-centric comparisons of N limitations and in particular of boreal forest N dynamics. Q10 can be temperature dependent, also depending on N limitation in the system. }
 
-TODO
+We will supplement this section with a better comparison to, for example, Lavoie et al. (2011), who incubated upland Alaskan boreal soils at two temperatures and two N addition levels; Sistla et al. (2012); and the combination meta-analysis and modeling study of Bouskill et al. (2014) that at N addition at high latitudes.
 
 {\it 1-5. This study raises interesting questions. In mineral soils, under woody vegetation that might be of low C quality, and slower C pool, one might expect higher temperature sensitivity. I think that these questions, even if not addressed directly by the data presented, should have been discussed more explicitly. Comparison with other Arctic woody plant systems would be instructive. }
 
-TODO
+This is similar to the referee's comment 1-9 (please see our response to that below), with the added factor of C quality. This idea, and studies focusing on it with respect to mineralization, has a long history (e.g. Nadelhoffer al. 1991) but has been the subject of debate (e.g. Kleber 2010). We will address these questions more explicitly in our revision. HELP
 
 {\it 1-6. Studies have shown that moisture can have a weaker effect on temperature sensitivity early on during an incubation experiment, in the presence of more labile C. This relative to the effect on moisture on the Q-10 of cumulative respiration, reflecting slow turning over C – this could be an interesting analysis to include here, and would help to assess how }
 
@@ -34,19 +34,29 @@ TODO
 
 {\it 1-7. How do your results in terms of temperature and moisture sensitivity (especially under drought conditions) scale with Alaskan climate change predictions from modelers? How does it compare with deep soils incubations (mineral soils) from the Arctic, and from boreal ecosystems? }
 
-TODO
+The first question is similar to a point raised by Referee #2 (comment 2-3). We will discuss this in more depth, noting in particular, for example, observable anthropogenic influences on high-latitude precipitation (Wan et al. 2015); drier and warmer conditions in boreal Eurasia (Buermann et al. 2015); that growing season length in interior Alaska has increased by 45\% in the last century with no increase in precipitation (Wendler and Shulski 2009); and the complex and still-unresolved dynamics at play, meaning that, as the referee notes, drying and drought will probably be highly local in effect (Zhang et al. 2012).
+
+The second question largely repeats, we think, both referees' suggestions to better compare our results to previous work, in particular boreal and Arctic incubations; see our responses to 1-3 and 1-4 above.
 
 {\it 1-8. Line 31-34: I cannot find discussion of this point in the rest of the text, and while important, this statement is relatively vague and there are no cited references. Since it underpins the rational for studying deep, unfrozen Arctic soils, it would be helpful to expand on this more in the manuscript. }
 
-TODO
+Referee #2 raised this point as well (comment 2-6), and it's a good point. We will better describe why deep active-layer soils, such as those studied here, and important and distinctive relative to permafrost or shallow active layer soils. For example: 
+
+\begin{itemize}
+  \item Decomposition rates swing wildly between the frozen and unfrozen states of soil, due to the phase changes involved, microbial community dynamics, etc. Q10 respiratory coefficients, for example, are extremely high near the freeze-thaw boundary (Monson et al. 2006).
+  \item Deep active-layer soils are subject to distinctive freeze-thaw and cryoturbation dynamics, which are likely to change their sensitivity to climate change and feedback potential.
+  \item The depth of thaw can change the source/sink status of boreal ecosystems (Goulden et al. 1998) and potentially entire biomes (Harden et al. 2012, Hayes et al. 2011).
+  \item Seasonally frozen soils pose particular problems for accurate modeling of high-latitude carbon dynamics (Nicolsky et al. 2007, Bao et al. 2016).
+  \item Deep soil carbon is likely to be a highly important contributor to future climate feedbacks. The modeling studies of Koven et al. (2011, 2015), for example, found that one-third of 21st century climate-induced carbon loss originated from seasonally frozen soil carbon.
+\end{itemize}
 
 {\it 1-9. Lines 48-60: I think that this section would benefit from an introduction of the interactions between the specific ecosystem (upland boreal forest) you are studying, and its interaction with soil chemistry, since vegetation type is influential in terms of soil carbon quality and quantity. Woody plant biomass tends to have a higher C:N ratio relative to herbaceous dominated systems, and this tends to result in lower quality resources for microbial communities. }
 
-TODO
+Vegetation and ecosystem type is a significant factor that is not well explored here, we agree. We will add some points about this, noting for example the work of Högberg et al. (2007) on soil microbial community composition, the relationship of vegetation type and soil respiration (Raich and Schlesinger 1992, Bond-Lamberty and Thomson 2010), and how plant functional types affect ecosystem response more generally (Chapin et al. 1996).
 
 {\it 1-10. Lines 70-72: These are really important considerations, and it seems appropriate to discuss them more explicitly. How is the temperature and precipitation regime of the boreal forest of interior AK expected to change? There are also indirect effects of vegetation type on soil temperatures that could be discussed here. }
 
-TODO
+We agree, although this largely echoes comments 1-7 and 1-9; please see our responses above.
 
 {\it 1-11. Lines 72-74: While these are important questions, they are not really addressed in this study, and so either it might make sense to leave it out, or to discuss the particulars as they apply to this study, ie: the importance and questions related to C:N ratios. }
 
@@ -54,11 +64,11 @@ That's a good point–thank you. We will qualify this sentence, better tying it 
 
 {\it 1-12. Lines 77-80: I think a stronger argument for why deep active-layer soils can be made, and it would be helpful to clarify what are the “strong effects” of warming. }
 
-TODO
+Agreed. See our response to comment 1-8 above.
 
-{\it 1-13. I cannot tell if C:N, %C and %N were measured at the end of the incubation. Could these results be collated in a table in the manuscript? Otherwise the methods section appears to be detailed and well written. }
+{\it 1-13. I cannot tell if C:N, \%C and \%N were measured at the end of the incubation. Could these results be collated in a table in the manuscript? Otherwise the methods section appears to be detailed and well written. }
 
-C and N were measured only in the 'extra' group (l. 128-129). This will be clarified in lines 162-, which we agree were a bit ambiguous. A table summarizing the moisture content, pH, soil carbon and N, and bulk density data is an excellent idea and will be added.
+C and N were measured for all samples post-incubation, and in the 'extra' group (l. 128-129) pre-incubation. This will be clarified in the methods, particularly lines 162-, which we agree were a bit ambiguous. A table summarizing the moisture content, pH, soil C and N, and bulk density data is an excellent idea and will be added.
 
 {\it 1-14. Line 232: In this section it would also be interesting to know the soil respiration decay rate per treatment over the course of the incubation experiment. }
 
@@ -66,11 +76,11 @@ This will be included in the new table (see comment 1-13 above).
 
 {\it 1-15. Line 238-240: Confusingly worded sentence. }
 
-Agreed. This will be changed to "The interaction between water content and percent N was also highly significant (P < 0.001), although cores with N > X% exhibited little relationship between water content and CO2 flux (data not shown)."
+Agreed. This will be changed to "The interaction between water content and percent N was also highly significant (P < 0.001), although cores with N > X\% exhibited little relationship between water content and CO2 flux (data not shown)." TODO
 
 {\it 1-16. I don’t think that the summary of nearby respiration studies add very much to the discussion section. Perhaps if the similarities and discrepancies were more integral to the central findings of the paper or integrated differently into the discussion they would seem more meaningful here. Perhaps comparing with other boreal incubations (eg: Lee et al., 2012; Lavoie et al., 2011) would help to provide some additional context. }
 
-TODO
+We agree that the comparison to other boreal respiration studies needs improvement, and this echoes Reviewer 2's comment 2-4. We will restructure and improve this summary and comparison section. The Lavoie (2011) paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, may also prove a useful comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but it would also be a good addition. 
 
 {\it 1-17. Line 270: There is missing punctuation after the word “results”. }
 
@@ -82,19 +92,19 @@ This point was also made by Referee #2 (comment 2-2). The fact that we didn't ci
 
 {\it 1-19. Line 293: That soil moisture may be as important a control on microbial respiration as temperature is an important finding in recent incubation studies, and the potential to define its interaction with temperature will help modelers of soil decomposition better constrain the physical parameters of microbial respiration rates. This feels buried in the manuscript, and I think that it would improve the paper if it were highlighted better throughout the text. }
 
-TODO
+Thanks for the useful suggestion; we will do so.
 
 {\it 1-20. Line 311-317: This section could be better explained in the context of the discussion or omitted altogether. It seems less important to defend the plausibility of relatively low temperature sensitivity, but instead to try to explain it in the context of these soil characteristics. Could low temperature sensitivity be the result of low C quality in this deep soil environment? }
 
-TODO
+That is an interesting and useful thought. In our revision, we will explore this idea... HELP
 
 {\it 1-21. Line 322-332: This section, which lays out the crux of the paper, the interaction between temperature and moisture sensitivity in driving microbial respiration is relatively vague. It would be good to describe the less-temperature-sensitive processes that would be important to consider for more stable-C metabolism. And how does moisture play a role here? Perhaps DOC becomes more limiting in the drought conditions? }
 
-TODO
+HELP
 
 {\it 1-22. Line 356: The Janssens et al., 2010, citation refers to a meta-analysis of temperate forest soils that are not nitrogen limited. There are studies focusing on Arctic N cycling that would be more appropriate, and many Arctic studies have shown that N availability can limit C mineralization rates. Is this site considered to be N limited in the deep active layer? }
 
-TODO
+We agree that referring and comparing to studies such as Lavoie et al. (2011) and Bouskill et al. (2014), which focused specifically on high latitudes, would be a useful addition. We don't know of any studies examining the N limitation of deep soils at this site, but Allison et al. (2008, 2011) used fertilization and incubation experiments to examine how Alaskan boreal biota (plants and microbes) responded to N addition. We will discuss these results in our revision, along with other studies examining the relationship between N availability and C mineralization.
 
 {\it 1-23. Line 367: Is this comparison, with North American soils, relevant to this study? }
 
@@ -102,7 +112,39 @@ It's true that Colman and Schimel (2014) include only a few studies that could b
 
 {\it 1-24. Line 383-384: Can you be more explicit in your meaning here? How do you mean that there is weakness in what can be inferred about temperature sensitivity from experiments? }
 
-TODO
+We basically meant what the title of the Podrebarac et al. (2016) paper says: "Soils isolated during incubation underestimate temperature sensitivity of respiration and its response to climate history". I.e., incubation soils are isolated from their natural environment, and as a result we need to be cautious about extrapolating incubation results to {\it in situ} responses. We will clarify this in the text.
+
+
+{\bf New references cited:}
+
+Allison, S. D., C. I. Czimczik and K. K. Treseder (2008). "Microbial activity and soil respiration under nitrogen addition in Alaskan boreal forest." Global Change Biology 14(5): 1156-1168.
+
+Allison, S. D., T. B. Gartner, M. C. Mack, K. McGuire and K. K. Treseder (2011). "Nitrogen alters carbon dynamics during early succession in boreal forest." Soil Biology and Biochemistry 42: 1157-1164.
+
+Bond-Lamberty, B. and A. M. Thomson (2010). "A global database of soil respiration data." Biogeosciences 7: 1915-1926.
+
+Bouskill, N. J., W. J. Riley and J. Y. Tang (2014). "Meta-analysis of high-latitude nitrogen-addition and warming studies implies ecological mechanisms overlooked by land models." Biogeosciences 11: 6969-6983.
+
+Chapin III, F. S., M. S. Bret-Harte, S. E. Hobbie and H. Zhong (1996). "Plant functional types as predictors of transient responses of arctic vegetation to global change." Journal of Vegetation Science 7: 347-358.
+
+Czimczik, C. I., S. E. Trumbore, M. S. Carbone and G. C. Winston (2006). "Changing sources of soil respiration with time since fire in a boreal forest." Global Change Biology 12(6): 957-971.
+
+Czimczik, C. I. and J. M. Welker (2010). "Radiocarbon content of CO2 respired from high Arctic tundra in northwest Greenland." Arctic, Antarctic, and Alpine Research 42(3): 342-350.
+
+Dutta, K., E. A. G. Schuur, J. C. Neff and S. A. Zimov (2006). "Potential carbon release from permafrost soils of Northeastern Siberia." Global Change Biology 12: 2336-2351.
+
+Högberg, M. N., P. Högberg and D. D. Myrold (2007). "Is microbial community composition in boreal forest soils determined by pH, C-to-N ratio, the trees, or all three?" Oecologia 150(4): 590-601.
+
+Karhu, K., H. Fritze, K. Hämäläinen, P. Vanhala, H. Jungner, M. Oinonen, E. Sonninen, M. Tuomi, P. Spetz, V. Kitunen and J. Liski (2010). "Temperature sensitivity of soil carbon fractions in boreal forest soil." Ecology 91(2): 370-376.
+
+Kleber, M. (2010). "What is recalcitrant soil organic matter?" Environmental Chemistry 7(4): 320-332.
+
+Lavoie, M., M. C. Mack and E. A. G. Schuur (2011). "Effects of elevated nitrogen and temperature on carbon and nitrogen dynamics in Alaskan arctic and boreal soils." Journal of Geophysical Research-Biogeosciences 116: G03013.
+
+Nadelhoffer, K. J., A. E. Giblin, G. R. Shaver and J. A. Laundre (1991). "Effects of temperature and substrate quality on element mineralization in six arctic soils." Ecology 72(1): 242-253.
+
+Raich, J. W. and W. H. Schlesinger (1992). "The global carbon dioxide flux in soil respiration and its relationship to vegetation and climate." Tellus B 44(2): 81-99.
+
 
 
 
@@ -161,6 +203,7 @@ That's a very good point–thank you–and will integrate well with an expanded 
 {\it 2-11. 8) the conclusions might be a bit strong given the data and previous results published }
 
 We will add a sentence of caveats, noting in particular the useful but incremental nature of this study, given previous work and limitations of the experimental design.
+
 
 {\bf New references cited:}
 
