@@ -30,7 +30,7 @@ This is similar to the referee's comment 1-9 (please see our response to that be
 
 {\it 1-6. Studies have shown that moisture can have a weaker effect on temperature sensitivity early on during an incubation experiment, in the presence of more labile C. This relative to the effect on moisture on the Q-10 of cumulative respiration, reflecting slow turning over C – this could be an interesting analysis to include here, and would help to assess how }
 
-TODO
+This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see https://github.com/bpbond/cpcrw_incubation/commit/18884c836d855b94417f7ae2cef910c577bc40b) that examines if and how temperature and moisture sensitivities change over incubation time. Currently we do not any evidence for changes in CO2 moisture sensitivity with time, and weak changes in CO2 temperature sensitivity; CH4 emissions show a weak decline in moisture sensitivity with time. We will discuss this issue, referencing previous work such as Reichstein et al. (2005).
 
 {\it 1-7. How do your results in terms of temperature and moisture sensitivity (especially under drought conditions) scale with Alaskan climate change predictions from modelers? How does it compare with deep soils incubations (mineral soils) from the Arctic, and from boreal ecosystems? }
 
@@ -76,7 +76,7 @@ This will be included in the new table (see comment 1-13 above).
 
 {\it 1-15. Line 238-240: Confusingly worded sentence. }
 
-Agreed. This will be changed to "The interaction between water content and percent N was also highly significant (P < 0.001), although cores with N > X\% exhibited little relationship between water content and CO2 flux (data not shown)." TODO
+Agreed. This will be changed to "The interaction between water content and percent N was also highly significant (P < 0.001), although cores with N > X\% exhibited little relationship between water content and CO2 flux (data not shown)."
 
 {\it 1-16. I don’t think that the summary of nearby respiration studies add very much to the discussion section. Perhaps if the similarities and discrepancies were more integral to the central findings of the paper or integrated differently into the discussion they would seem more meaningful here. Perhaps comparing with other boreal incubations (eg: Lee et al., 2012; Lavoie et al., 2011) would help to provide some additional context. }
 
@@ -145,6 +145,7 @@ Nadelhoffer, K. J., A. E. Giblin, G. R. Shaver and J. A. Laundre (1991). "Effect
 
 Raich, J. W. and W. H. Schlesinger (1992). "The global carbon dioxide flux in soil respiration and its relationship to vegetation and climate." Tellus B 44(2): 81-99.
 
+Reichstein, M., J.-A. Subke, A. C. Angeli and J. D. Tenhunen (2005). "Does the temperature sensitivity of decomposition of soil organic matter depend upon water content, soil horizon, or incubation time?" Global Change Biology 11(10): 1754-1767.
 
 
 
@@ -166,7 +167,7 @@ We will add this to the discussion, noting in particular, for example, observabl
 
 {\it 2-4. 1) Throughout the manuscript, I have noticed that important papers from the permafrost literature are missing. This applies to C stocks in the permafrost area, Tarnocai et al. 2009 is a good paper but there are more recent and more accurate estimates of permafrost C stocks described in Hugelius et al. 2014 and Schuur et al. 2015 that should be cited. When it comes to the permafrost C feedback, Schuur et al. 2015 is currently the best and most up to date review. In addition, Koven et al. 2015 is a good one too. The discussion on incubation literature should include papers like Lavoie et al. 2011, Dutta et al. 2006, and Schädel et al. 2014. }
 
-We appreciate the referee drawing our attention to these omissions. Schuur et al. (2015) is already cited, Hugelius (2014) and Koven (2015; though we do cite his 2011 paper) are useful additions. The Lavoie paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, is also a good comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but we agree it would also be a good addition. 
+We appreciate the referee drawing our attention to these omissions. While Schuur et al. (2015) is already cited, Hugelius (2014) and Koven (2015; though we do cite his 2011 paper) are useful additions. The Lavoie paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, is also a good comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but we agree it would also be a good addition. 
 
 {\it 2-5. 2) L. 31: Permafrost thaws and does not melt }
 
@@ -194,7 +195,7 @@ This useful suggestion was also made by Referee #1 (comment 1-13). We will do so
 
 {\it 2-9. 6) Why not include C/N as a variable in the statistical analysis? Schädel et al. 2014 showed that C/N is a good predictor of C release and can be used as a scaling factor. It would be interesting to see if C release from short-term incubations show the same result }
 
-TODO
+This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see https://github.com/bpbond/cpcrw_incubation/commit/426a91e1bbd21200718b334d3295fbef40a1ea6) to compute C/N and examines its significance as a predictor. Currently C/N seems to be a poorer predictor than %N. We will discuss this issue, referencing previous work such as Schädel et al (2014).
 
 {\it 2-10. 7) In the discussion, it would be good to also include the warming potential of CO2 and CH4 especially when making assumptions about the permafrost C feedback, it is briefly mentioned in line 348 but a more in depth discussion would be good }
 
