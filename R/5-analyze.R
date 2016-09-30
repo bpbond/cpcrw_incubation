@@ -6,11 +6,12 @@ source("R/0-functions.R")
 
 SCRIPTNAME  	<- "5-analyze.R"
 
-library(nlme)          # 3.1-122
-#library(MASS)          # 7.3-45
+library(nlme)       # 3.1-128
+#library(MASS)       # 7.3-45
 
-library(broom)  # 0.4.0
-library(reshape2) # 1.4.1
+library(broom)      # 0.4.1
+library(reshape2)   # 1.4.1
+library(agricolae)  # v1.2.4
 
 # ==============================================================================
 # Main 
@@ -266,7 +267,7 @@ figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC_gC, fill = 
 save_plot("figureD", figureD)
 
 # Make the labels for this figure. Kind of a PITA
-library(agricolae)  # v1.2.3
+# Uses `HSD.test` in the `agricolae` package
 fluxdata_cumulative %>% 
   group_by(Gas, Treatment, Temperature) %>% 
   summarise(cum_flux_mgC_gC = max(cum_flux_mgC_gC + cum_flux_mgC_gC_sd) * 1.1) %>%
@@ -373,10 +374,17 @@ printlog("Fitting CO2 model...")
 # Add a small value to all flux values to ensure they're positive before log-transform
 fluxdata$flux_µgC_gC_day1 <- fluxdata$flux_µgC_gC_day + FLUX_ADDITION
 
+# Reviewer 1 had an interesting suggestion: see if moisture effects
+# change over time (specifically, the reviewer said, "Studies have shown that 
+# moisture can have a weaker effect on temperature sensitivity early on during 
+# an incubation experiment, in the presence of more labile C.")
+# Test this by looking at different thirds of the data
+fluxdata$third <- cut(fluxdata$incday, breaks = 3)
+
 # C_percent and N_percent are *highly* correlated (r=0.98+)
 # Generally it seems that N_percent produces slightly better model fits,
 # so we use it here, not considering C_percent further
-m_co2_lme <- lme(log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric + 
+m_co2_lme <- lme(log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric +
                    (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
                  data = fluxdata,
                  subset = Gas == "CO2",
@@ -384,22 +392,29 @@ m_co2_lme <- lme(log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric +
                  method = "ML")
 step_co2_lme <- MASS::stepAIC(m_co2_lme, direction = "both")
 
-# TODO: a Q10 calculation. Use nls?
-# Q10 = R2/R1 ^ (10/(T2-T1))
-# fit_q10_model <- function( d ) {		# returns model or NA if nls errors out
-#   tryCatch( nls( Resp_mass ~ R20 * Q10 ^ ( ( Tair-20 )/10 ), data=d, start=c( R20=5, Q10=2 ) ),
-#             error=function( e ) NA )
-# }
+# Test Reviewer 1's suggestion about water (and temperature) 
+# sensitivities changing with time
+m_co2_lme_thirds <- update(m_co2_lme, ~ . + 
+                                     WC_gravimetric * third + 
+                                     Temperature * third)
+step_co2_lme_thirds <- MASS::stepAIC(m_co2_lme_thirds, direction = "both")
 
 printlog(SEPARATOR)
 printlog("Fitting CH4 model...")
 m_ch4_lme <- lme(log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric + 
+                   WC_gravimetric * third +
                    (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
                  data = fluxdata, 
                  subset = Gas == "CH4",
                  random = ~ 1 | Core, 
                  method = "ML")
 step_ch4_lme <- MASS::stepAIC(m_ch4_lme, direction = "both")
+
+# Test Reviewer 1's suggestion about water (and temperature) sensitivity changing with time
+m_ch4_lme_thirds <- update(m_ch4_lme, ~ . + 
+                                     WC_gravimetric * third + 
+                                     Temperature * third)
+step_ch4_lme_thirds <- MASS::stepAIC(m_ch4_lme_thirds, direction = "both")
 
 
 printlog("All done with", SCRIPTNAME)
