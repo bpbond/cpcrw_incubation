@@ -68,27 +68,33 @@ read_csv(CNDATA_FILE) %>%
   select(DOC_mg_kg,	C_percent, N_percent, Core) %>%
   group_by(Core) %>%
   # Summarise by core, averaging duplicates
-  summarise_each(funs(mean(., na.rm = TRUE)), DOC_mg_kg, C_percent, N_percent) ->
+  summarise_each(funs(mean(., na.rm = TRUE)), DOC_mg_kg, C_percent, N_percent) %>%
+  # Compute C:N ratio, following Reviewer 2's suggestion
+  mutate(CN = ifelse(N_percent > 0, C_percent / N_percent, NA)) ->
   cndata_orig
 
 # Compute correlations between the variables
-cndata_cor <- cor(cndata_orig[-1])
+cndata_cor <- cor(cndata_orig[-1], use = "complete.obs")
 
 cndata_orig %>%
   left_join(read_csv(TREATMENTS, skip = 1), by = "Core") ->
   cndata
 
 cndata %>%
-  summarise_each(funs(mean, sd), DOC_mg_kg, C_percent, N_percent) %>%
-  print %>%
-  unlist(.[1,]) ->
+  summarise_each(funs(mean, sd), DOC_mg_kg, C_percent, N_percent, CN) %>%
+  print ->
   cndata_summary
+# This isn't working via dplyr - compute manually
+cndata_summary$CN_mean <- mean(cndata$CN, na.rm = TRUE)
+cndata_summary$CN_sd <- sd(cndata$CN, na.rm = TRUE)
 
 lm(formula = DOC_mg_kg ~ Treatment * Temperature, data = cndata) %>%
   anova %>% print
 lm(formula = C_percent ~ Treatment * Temperature, data = cndata) %>%
   anova %>% print
 lm(formula = N_percent ~ Treatment * Temperature, data = cndata) %>%
+  anova %>% print
+lm(formula = CN ~ Treatment * Temperature, data = cndata) %>%
   anova %>% print
 
 fluxdata %>%
@@ -110,7 +116,7 @@ fluxdata %>%
 save_data(fluxdata, fn = FLUXDATA_FINAL_FILE, scriptfolder = FALSE)
 
 # -----------------------------------------------------------------------------
-# Summarize flux information for each access by markdown code later
+# Summarize flux information for easy access by markdown code later
 
 fluxdata %>%
   group_by(Gas) %>%
@@ -365,7 +371,7 @@ fluxdata %>%
 save_data(shapiro_trans)
 
 # -----------------------------------------------------------------------------
-# Effects of temperature and moisture on gas fluxes
+# Effects of temperature, moisture, C, N, etc. on gas fluxes
 
 # Fit gases separately, just for simplicity
 printlog(SEPARATOR)
@@ -384,10 +390,12 @@ fluxdata$third <- cut(fluxdata$incday, breaks = 3)
 # C_percent and N_percent are *highly* correlated (r=0.98+)
 # Generally it seems that N_percent produces slightly better model fits,
 # so we use it here, not considering C_percent further
+# Reviewer 2 suggests adding C:N as a predictor, too, but it doesn't appear
+# to be significant, and requires removing ~3% of data (due to NA)
 m_co2_lme <- lme(log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric +
                    (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg), # C_percent + 
                  data = fluxdata,
-                 subset = Gas == "CO2",
+                 subset = Gas == "CO2", #  & !is.na(CN)
                  random = ~ 1 | Core, 
                  method = "ML")
 step_co2_lme <- MASS::stepAIC(m_co2_lme, direction = "both")
