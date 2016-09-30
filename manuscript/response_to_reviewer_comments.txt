@@ -4,7 +4,7 @@
 # BBL September 2016
 
 
-We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} email instructions, we have not prepared a revised manuscript, but instead respond below to all comments and questions.
+We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} email instructions, we have not yet prepared a revised manuscript, but instead respond below to all comments and questions.
 
 {\bf Response to Referee #1}
 
@@ -18,7 +18,7 @@ We appreciate this comment, and agree that the methods and concepts are not part
 
 {\it 1-3. I think that the work would benefit from a more thorough comparison with boreal forest incubations across the Arctic. }
 
-This point was raised, indirectly, by Referee #2 (comment 2-4). We will do so, for example comparing with studies such as the Schädel et al. (2016) meta-analysis (and references therein), Dutta et al. (2006), Lavoie et al. (2011), Karhu et al. (2010), and Czimczik et al. (2006, 2010).
+This point was raised by Referee #2 as well (comment 2-4). We will do so, comparing for example with studies such as the Schädel et al. (2016) meta-analysis (and references therein), Dutta et al. (2006), Lavoie et al. (2011), Karhu et al. (2010), and Czimczik et al. (2006, 2010).
 
 {\it 1-4. N section would benefit from more Arctic-centric comparisons of N limitations and in particular of boreal forest N dynamics. Q10 can be temperature dependent, also depending on N limitation in the system. }
 
@@ -26,11 +26,11 @@ We will supplement this section with a better comparison to, for example, Lavoie
 
 {\it 1-5. This study raises interesting questions. In mineral soils, under woody vegetation that might be of low C quality, and slower C pool, one might expect higher temperature sensitivity. I think that these questions, even if not addressed directly by the data presented, should have been discussed more explicitly. Comparison with other Arctic woody plant systems would be instructive. }
 
-This is similar to the referee's comment 1-9 (please see our response to that below), with the added factor of C quality. This idea, and studies focusing on it with respect to mineralization, has a long history (e.g. Nadelhoffer al. 1991) but has been the subject of debate (e.g. Kleber 2010). We will address these questions more explicitly in our revision. HELP
+This is similar to the referee's comment 1-9 (please see our response to that below), with the added factor of C quality. This idea, and studies focusing on it with respect to mineralization, has a long history (e.g. Nadelhoffer al. 1991); as the referee notes, from fundamental biokinetics (Davidson and Janssens 2006) we expect that decomposition Q10 should be inversely related to litter carbon quality. We will address these questions more explicitly in our revision, referring for example to incubation studies on this question (Fierer et al. 2005).
 
 {\it 1-6. Studies have shown that moisture can have a weaker effect on temperature sensitivity early on during an incubation experiment, in the presence of more labile C. This relative to the effect on moisture on the Q-10 of cumulative respiration, reflecting slow turning over C – this could be an interesting analysis to include here, and would help to assess how }
 
-This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see https://github.com/bpbond/cpcrw_incubation/commit/18884c836d855b94417f7ae2cef910c577bc40b) that examines if and how temperature and moisture sensitivities change over incubation time. Currently we do not any evidence for changes in CO2 moisture sensitivity with time, and weak changes in CO2 temperature sensitivity; CH4 emissions show a weak decline in moisture sensitivity with time. We will discuss this issue, referencing previous work such as Reichstein et al. (2005).
+This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see \url{https://github.com/bpbond/cpcrw_incubation/commit/18884c836d855b94417f7ae2cef910c577bc40b}) that examines if and how temperature and moisture sensitivities change over incubation time. Currently we do not observe any evidence for changes in CO2 moisture sensitivity with time, and only weak changes in CO2 temperature sensitivity; CH4 emissions show a weak decline in moisture sensitivity with time. We will discuss this issue, referencing previous work such as Reichstein et al. (2005).
 
 {\it 1-7. How do your results in terms of temperature and moisture sensitivity (especially under drought conditions) scale with Alaskan climate change predictions from modelers? How does it compare with deep soils incubations (mineral soils) from the Arctic, and from boreal ecosystems? }
 
@@ -68,7 +68,7 @@ Agreed. See our response to comment 1-8 above.
 
 {\it 1-13. I cannot tell if C:N, \%C and \%N were measured at the end of the incubation. Could these results be collated in a table in the manuscript? Otherwise the methods section appears to be detailed and well written. }
 
-C and N were measured for all samples post-incubation, and in the 'extra' group (l. 128-129) pre-incubation. This will be clarified in the methods, particularly lines 162-, which we agree were a bit ambiguous. A table summarizing the moisture content, pH, soil C and N, and bulk density data is an excellent idea and will be added.
+C and N were measured for all samples post-incubation, and in the 'extra' group (l. 128-129) pre-incubation. This will be clarified in the methods, particularly lines 162-, which we agree were ambiguous. A table summarizing the moisture content, pH, soil C and N, and bulk density data is an excellent idea and will be added. Reviewer 2 also raised the idea of looking at C/N, and we have responded to it in detail (see comment 2-9). 
 
 {\it 1-14. Line 232: In this section it would also be interesting to know the soil respiration decay rate per treatment over the course of the incubation experiment. }
 
@@ -80,7 +80,7 @@ Agreed. This will be changed to "The interaction between water content and perce
 
 {\it 1-16. I don’t think that the summary of nearby respiration studies add very much to the discussion section. Perhaps if the similarities and discrepancies were more integral to the central findings of the paper or integrated differently into the discussion they would seem more meaningful here. Perhaps comparing with other boreal incubations (eg: Lee et al., 2012; Lavoie et al., 2011) would help to provide some additional context. }
 
-We agree that the comparison to other boreal respiration studies needs improvement, and this echoes Reviewer 2's comment 2-4. We will restructure and improve this summary and comparison section. The Lavoie (2011) paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, may also prove a useful comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but it would also be a good addition. 
+We agree that the comparison to other boreal respiration studies needs improvement, and this echoes Referee #2's comment 2-4. We will restructure and improve this summary and comparison section. The Lavoie (2011) paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, may also prove a useful comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but it would also be a good addition. 
 
 {\it 1-17. Line 270: There is missing punctuation after the word “results”. }
 
@@ -96,11 +96,11 @@ Thanks for the useful suggestion; we will do so.
 
 {\it 1-20. Line 311-317: This section could be better explained in the context of the discussion or omitted altogether. It seems less important to defend the plausibility of relatively low temperature sensitivity, but instead to try to explain it in the context of these soil characteristics. Could low temperature sensitivity be the result of low C quality in this deep soil environment? }
 
-That is an interesting and useful thought. In our revision, we will explore this idea... HELP
+We appreciate this useful advice and question. Certainly temperature sensitivity is, at least in theory, related to C quality (see our answer to 1-5 above), although low-quality litter (i.e. in a boreal coniferous forest) might be expected to be associated with {/it higher} Q10? In our revision, we will explore these ideas, considering how how factors such as vegetation, soil characteristics, and climate might explain the low observed temperature sensitivity. HELP
 
 {\it 1-21. Line 322-332: This section, which lays out the crux of the paper, the interaction between temperature and moisture sensitivity in driving microbial respiration is relatively vague. It would be good to describe the less-temperature-sensitive processes that would be important to consider for more stable-C metabolism. And how does moisture play a role here? Perhaps DOC becomes more limiting in the drought conditions? }
 
-HELP
+This is indeed interesting to consider: what mechanisms might produce a Q10 {/it increase} under drought conditions? This is opposite to what is usually observed (e.g. Jassal et al. 2008), but the field is rife with contradictory results (von Lützow and Kögel-Knabner 2009). We will make this paragraph more specific in all these areas. HELP
 
 {\it 1-22. Line 356: The Janssens et al., 2010, citation refers to a meta-analysis of temperate forest soils that are not nitrogen limited. There are studies focusing on Arctic N cycling that would be more appropriate, and many Arctic studies have shown that N availability can limit C mineralization rates. Is this site considered to be N limited in the deep active layer? }
 
@@ -114,8 +114,9 @@ It's true that Colman and Schimel (2014) include only a few studies that could b
 
 We basically meant what the title of the Podrebarac et al. (2016) paper says: "Soils isolated during incubation underestimate temperature sensitivity of respiration and its response to climate history". I.e., incubation soils are isolated from their natural environment, and as a result we need to be cautious about extrapolating incubation results to {\it in situ} responses. We will clarify this in the text.
 
-
-{\bf New references cited:}
+\newpage
+\begin{footnotesize}
+{\bf References cited in response:}
 
 Allison, S. D., C. I. Czimczik and K. K. Treseder (2008). "Microbial activity and soil respiration under nitrogen addition in Alaskan boreal forest." Global Change Biology 14(5): 1156-1168.
 
@@ -131,9 +132,15 @@ Czimczik, C. I., S. E. Trumbore, M. S. Carbone and G. C. Winston (2006). "Changi
 
 Czimczik, C. I. and J. M. Welker (2010). "Radiocarbon content of CO2 respired from high Arctic tundra in northwest Greenland." Arctic, Antarctic, and Alpine Research 42(3): 342-350.
 
+Davidson, E. A. and I. A. Janssens (2006). "Temperature sensitivity of soil carbon decomposition and feedbacks to climate change." Nature 440: 165-173.
+
 Dutta, K., E. A. G. Schuur, J. C. Neff and S. A. Zimov (2006). "Potential carbon release from permafrost soils of Northeastern Siberia." Global Change Biology 12: 2336-2351.
 
+Fierer, N., J. M. Craine, K. McLauchlan and J. P. Schimel (2005). "Litter quality and the temperature sensitivity of decomposition." Ecology 86(2): 320-326.
+
 Högberg, M. N., P. Högberg and D. D. Myrold (2007). "Is microbial community composition in boreal forest soils determined by pH, C-to-N ratio, the trees, or all three?" Oecologia 150(4): 590-601.
+
+Jassal, R. S., T. A. Black, M. D. Novak, D. Gaumont-Guay and Z. Nesic (2008). "Effect of soil water stress on soil respiration and its temperature sensitivity in an 18-year-old temperate Douglas-fir stand." Global Change Biology 14(6): 1305-1318.
 
 Karhu, K., H. Fritze, K. Hämäläinen, P. Vanhala, H. Jungner, M. Oinonen, E. Sonninen, M. Tuomi, P. Spetz, V. Kitunen and J. Liski (2010). "Temperature sensitivity of soil carbon fractions in boreal forest soil." Ecology 91(2): 370-376.
 
@@ -147,9 +154,13 @@ Raich, J. W. and W. H. Schlesinger (1992). "The global carbon dioxide flux in so
 
 Reichstein, M., J.-A. Subke, A. C. Angeli and J. D. Tenhunen (2005). "Does the temperature sensitivity of decomposition of soil organic matter depend upon water content, soil horizon, or incubation time?" Global Change Biology 11(10): 1754-1767.
 
+von Lützow, M. and I. Kögel-Knabner (2009). "Temperature sensitivity of soil organic matter decomposition—what do we know?" Biology and Fertility of Soils 46(1): 1-15.
+
+\end{footnotesize}
 
 
-We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} email instructions, we have not prepared a revised manuscript, but instead respond below to all comments and questions.
+
+We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} email instructions, we have not yet prepared a revised manuscript, but instead respond below to all comments and questions.
 
 {\bf Response to Referee #2}
 
@@ -195,7 +206,7 @@ This useful suggestion was also made by Referee #1 (comment 1-13). We will do so
 
 {\it 2-9. 6) Why not include C/N as a variable in the statistical analysis? Schädel et al. 2014 showed that C/N is a good predictor of C release and can be used as a scaling factor. It would be interesting to see if C release from short-term incubations show the same result }
 
-This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see https://github.com/bpbond/cpcrw_incubation/commit/426a91e1bbd21200718b334d3295fbef40a1ea6) to compute C/N and examines its significance as a predictor. Currently C/N seems to be a poorer predictor than %N. We will discuss this issue, referencing previous work such as Schädel et al (2014).
+This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see \url{https://github.com/bpbond/cpcrw_incubation/commit/426a91e1bbd21200718b334d3295fbef40a1ea6}) to compute C/N and examines its significance as a predictor. Currently C/N seems to be a poorer predictor than \%N. We will discuss this issue, referencing previous work such as Schädel et al (2014).
 
 {\it 2-10. 7) In the discussion, it would be good to also include the warming potential of CO2 and CH4 especially when making assumptions about the permafrost C feedback, it is briefly mentioned in line 348 but a more in depth discussion would be good }
 
@@ -205,8 +216,9 @@ That's a very good point–thank you–and will integrate well with an expanded 
 
 We will add a sentence of caveats, noting in particular the useful but incremental nature of this study, given previous work and limitations of the experimental design.
 
-
-{\bf New references cited:}
+\newpage
+\begin{footnotesize}
+{\bf References cited in response:}
 
 Bao, H., T. Koike, K. Yang, L. Wang, M. Shrestha and P. Lawford (2016). "Development of an enthalpy-based frozen soil model and its validation in a cold region in China." Journal of Geophysical Research-Atmospheres 121(10): 5259-5280.
 
@@ -232,3 +244,4 @@ Wendler, G. and M. Shulski (2009). "A century of climate change for Fairbanks, A
 
 Zhang, X., J. He, J. Zhang, I. Polyakov, R. Gerdes, J. Inoue and P. Wu (2012). "Enhanced poleward moisture transport and amplified northern high-latitude wetting trend." Nature Climate Change 3: 47-51.
 
+\end{footnotesize}
