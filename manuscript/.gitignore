@@ -1,0 +1,5 @@
+# LaTeX crap
+*.aux
+*.log
+*.pdf
+*.synctex.gz
