@@ -1,10 +1,13 @@
-# Response to referee comments
-# Note LaTeX command below, as that's what Biogeosciences uses; see
-# http://www.biogeosciences.net/peer_review/commenting_on_a_paper.html
-# BBL September 2016
+% Response to referee comments
+% Note LaTeX command below, as that's what Biogeosciences uses; see
+% http://www.biogeosciences.net/peer_review/commenting_on_a_paper.html
+% BBL September 2016
 
+% October 2016: added Reviewer 3 comments (which somehow did not show up online)
+% and editor's decision letter at end
 
-We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} instructions, we have not yet prepared a revised manuscript, but respond below to all comments and questions.
+% ======================================================================================
+We thank all referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} instructions, we have not yet prepared a revised manuscript, but respond below to all comments and questions.
 
 {\bf Response to Referee #1}
 
@@ -159,8 +162,8 @@ von Lützow, M. and I. Kögel-Knabner (2009). "Temperature sensitivity of soil o
 \end{footnotesize}
 
 
-
-We thank both referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} email instructions, we have not yet prepared a revised manuscript, but respond below to all comments and questions.
+% ======================================================================================
+We thank all referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} instructions, we have not yet prepared a revised manuscript, but respond below to all comments and questions.
 
 {\bf Response to Referee #2}
 
@@ -245,3 +248,147 @@ Wendler, G. and M. Shulski (2009). "A century of climate change for Fairbanks, A
 Zhang, X., J. He, J. Zhang, I. Polyakov, R. Gerdes, J. Inoue and P. Wu (2012). "Enhanced poleward moisture transport and amplified northern high-latitude wetting trend." Nature Climate Change 3: 47-51.
 
 \end{footnotesize}
+
+
+% ======================================================================================
+We thank all referees for their thoughtful comments, which we have numbered for convenient referencing. Per the {\it Biogeosciences} instructions, we have not yet prepared a revised manuscript, but respond below to all comments and questions.
+
+{\bf Response to Referee #3 (comments were not online before editor's decision) }
+
+{\it 3.1. This manuscript presents...interesting and surprising correlations between CO2 production and soil nitrogen content. The main point of this paper, and I think that it’s an important one, is that many upland forest soils in the boreal region that have permafrost will dry, and the majority of C will be emitted as CO2, but the magnitude of C emission will decrease under drought conditions (imposed by freely draining and no water inputs) by ~ 50-70\%. Overall, I enjoyed reading this paper! It was nicely written although vague in a few parts. }
+
+Thank you.
+
+{\it 3.2. My main criticism is that I think that the authors over-emphasize the results of the daily emissions and that the authors should further explore (or report) the results of the controls of the cumulative C emissions. I’m curious as to whether the relationships with soil C/N and \%N observed in daily emissions still hold on cumulative emissions. The comparison between these soil parameters (i.e. ones that probably don’t change much throughout the course of the incubation, including temperature) and the cumulative fluxes is perhaps more appropriate. Perhaps modelers find the controls on daily fluxes interesting and these are likely quite useful in regards to the relationship between moisture and C production (i.e. changes on a daily basis), but I think that the controls on cumulative fluxes are quite interesting and could be further explored. }
+
+This is an interesting and useful suggestion. We agree that rebalancing the manuscript, focusing a bit more on controls on cumulative emissions and a bit less on the instantaneous fluxes, would strengthen it. In our revision, we will more fully explore controls on the cumulative emissions, and as a first step have added the analytical code to do so (see \url{https://github.com/bpbond/cpcrw_incubation/commit/2d62e73ab79f7f0c8d7289919cddedb0a22ec275}). At the moment, it looks like only \%N exerts a weak effect on cumulative CO2 fluxes, and none of the tested covariates (\%C, \%N, C/N, DOC) affects cumulative CH4.
+
+{\it 3.3. For example, how do the results of soil properties vs. emissions compare to those of Schädel et al. (2014) and Schädel et al. (2016)? How do the moisture results compare to those of Wickland et al. (2008)? }
+
+The other referees both mentioned this as well. The fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand this, discussing and comparing to Schädel et al. (2014, 2016) and Wickland et al. (2008).
+
+{\it 3.4. I do think that the time series of fluxes could be moved to the supplemental materials if the cumulative fluxes are explored in greater detail. I think this paper could be shortened a little bit although I didn’t find the length of the paper onerous. Along these lines, I think that the results summarized above from the cumulative emissions should be included in the abstract. }
+
+We will consider these suggestions with respect to length and supplemental materials; results dealing with cumulative emissions will certainly be included in the abstract.
+
+{\it 3.5. 22: Daily CO2 fluxes?
+26: positive or negative correlation?
+27: daily CH4 flux?
+28: cumulative production as CO2…as CH4. }
+
+We will clarify these points.
+
+{\it 3.6. 29: Not really sure how the comparison as to the relative controls of T and moisture are evaluated. }
+
+Agreed, this was more of a qualitative statement than a quantitative one. We will be more precise.
+
+{\it 3.7. 50: see also updates in Hugelius et al. (2014)
+63: Under some conditions (Olefeldt et al 2013): vague and confusing. Please clarify. }
+
+Reviewer 2 also raised the issue (comment 2.4) of our incomplete citation of relevant literature. In our revision, we will make better use of references such as Hugelius et al. (2014) and Wickland et al. (2008), both in the introduction and discussion.
+
+{\it 3.8. 67: “substantial variabilities between studies” WHY? }
+
+We will expand on this point, pointing out that such variability originates from factors such soil effects on drainage, phase changes, different experimental protocols, etc.
+
+{\it 3.9. 72: Yes, this is an important question, but given that this isn’t measured in this study, perhaps this sentence should be omitted or re-written. }
+
+Good point; we will do so.
+
+{\it 3.10. 101: When did sampling occur?
+112: Specify at the time of sampling
+140: How frequently was moisture adjusted? Requires a bit more explanation. Were instantaneous moisture values used in analysis? }
+
+Sampling date is reported in line 110. We will clarify 80 cm at the time of sampling. Moisture adjustment was done after every mass measurement, i.e. every timepoint shown in Figure 1. This will be clarified, and we will consider if adding this to Figures 2 and 3 if readable and useful.
+
+{\it 3.11. 211: Please remember to complete DOI }
+
+We will!
+
+{\it 3.12. 215: Not sure what this value for soil dry mass indicates }
+
+It's just useful, we think, to give readers a good sense of sample mass.
+
+{\it 3.13. 216: Standard deviation for \%C and \%N is nearly 100\%. Check values. }
+
+Thanks. There was a great of variability (obviously), but distributed throughout the data set–i.e., this isn't driven by one or two outliers. We will re-check, however.
+
+{\it 3.14. 229: add units
+231: add units
+233: positively correlated
+241: positively correlated
+245-246: 106 }
+
+These will be fixed.
+
+{\it 3.15. 253-254: So what variables were significant in predicting cumulative C emissions? }
+
+Please see our response to comment 3.2 above.
+
+{\it 3.16. 262: First mention of vegetation stress, remove, not clear how it’s related. }
+
+We will better integrate this point, mentioning it in the introduction and clarifying its relationship to the study goals.
+
+{\it 3.17. 270. Add “.” }
+
+This will be fixed.
+
+{\it 3.18. 271: Specify soil type in which these measurements were made (results not surprising for a forest soil) }
+
+Upland Cryosols; we will clarify this.
+
+{\it 3.19. 272: What about results from Wickland et al. (2008). Study found threshold for moisture importance
+305-307: again, see Wickland et al. (2008) }
+
+Please see our response to comment 3.7 above.
+
+{\it 3.20. 322-324: cool! }
+
+Agreed. Tantalizing.
+
+{\it 3.21. 344-345: Specify that the results in Treat et al. (2015) were for anaerobic incubations and were thus likely to be much smaller. }
+
+Thanks; we will do so.
+
+{\it 3.22. 347-348: See also Lee et al. (2012)
+364-365: See also Schadel et al. (2014). Also, I thought this section was a bit vague, probably could be shortened slightly. }
+
+Thanks for the Lee et al. reference, which we had not considered (see our response to 3.7 above). We'll take a hard look at lines 362-378 and tighten.
+
+{\it 3.23. 383-384: “specific weaknesses”: vague
+384: See also lag effects found in Treat et al. (2015) }
+
+Good points! We will clarify and note this.
+
+{\it 3.24. 393: “taking them out of depth” rephrase. Also could use this argument for the section on CH4 production. }
+
+Yes, it's awkward; we will reword. Thanks for the suggestion.
+
+{\it 3.25. Fig.1 : Edit figure to be color-blind friendly. }
+
+We thought we were already doing so in using the {\tt RColorBrewer} package, not the default palette of {\tt ggplot2}, but will investigate and fix this if necessary.
+
+{\it 3.26. Fig. 2,3: When did watering / moisture adjustment occur? Consider indicating with arrows and specifying in text. }
+
+Moisture adjustment was done after every mass measurement, i.e. every timepoint shown in Figure 1. This will be clarified, and we will consider if adding this to Figures 2 and 3 if readable and useful.
+
+{\it 3.27. Fig. 4: Switch top and bottom panels as CO2 is always discussed before CH4. Also edit colors and patterns to be color-blind friendly. }
+
+Good point. Re colors, see our response to 3.25 above.
+
+
+
+% ======================================================================================
+
+Associate Editor Decision: Reconsider after major revisions (06 Oct 2016) by Michael Weintraub
+Comments to the Author:
+Thank you for your submission to Biogeosciences. Your MS has received three reviews from highly qualified reviewers in this field, all of whom thought that this is a valuable dataset worth publishing, but offered numerous substantive comments to improve the paper. Thus, I will be happy to consider a revised submission that substantively addresses these reviewer comments. Based on the responses to reviewers 1 and 2, it looks like there is a sound plan for addressing the reviewers’ critical comments. 
+
+Unfortunately, I discovered too late that the comments from the third reviewer do not show up in the Biogeosciences system, so I have pasted them below. Please also consider these comments, which are generally consistent with those of reviewers 1 and 2, when revising your manuscript. 
+
+Please clearly describe how the text was revised according to the reviewer comments when submitting your revised manuscript. Thank you for your efforts, and for your support of Biogeosciences.
+
+Sincerely,
+Mike Weintraub
+Associate Editor
+Biogeosciences
