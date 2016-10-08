@@ -237,8 +237,9 @@ save_plot("figureC", figureC)
 
 printlog(SEPARATOR)
 printlog("Running Tukey HSD tests on cumulative emissions...")
-fd_cumulative_core <- read_csv(FLUXDATA_CUM_CORE_FILE) %>%
-  mutate(Temperature = as.factor(Temperature))
+read_csv(FLUXDATA_CUM_CORE_FILE) %>%
+  mutate(Temperature = as.factor(Temperature)) ->
+  fd_cumulative_core
 co2_aov <- aov(cum_flux_mgC_gC ~ Treatment + Temperature, 
                data = subset(fd_cumulative_core, Gas == "CO2"))
 co2_hsd <- TukeyHSD(co2_aov)
@@ -291,6 +292,31 @@ rbind(out_co2$groups, out_ch4$groups) %>%
 figureD <- figureD + geom_text(data = labeldata, 
                                aes(label = M), 
                                position = position_dodge(width = 1))
+
+# -----------------------------------------------------------------------------
+# Test effects of %C, %N, etc. on cumulative fluxes (per Referee 3 suggestion)
+
+printlog("Merging cumulative fluxes with CN data...")
+fd_cumulative_core %>%
+  left_join(cndata_orig, by = "Core") ->
+  fd_cumulative_r3
+fd_cumulative_r3 <- fd_cumulative_r3[complete.cases(fd_cumulative_r3),]
+
+printlog("Fitting CO2 model for cumulative fluxes...")
+m_co2_cum <- lm(cum_flux_mgC_gC ~ Temperature + Treatment +
+                   N_percent + DOC_mg_kg + CN, # C_percent + 
+                 data = fd_cumulative_r3, 
+                 subset = Gas == "CO2")
+step_co2_cum <- MASS::stepAIC(m_co2_cum, direction = "both")
+print(summary(m_co2_cum))
+
+printlog("Fitting CH4 model for cumulative fluxes...")
+m_ch4_cum <- lm(cum_flux_mgC_gC ~ Temperature + Treatment +
+                   N_percent + DOC_mg_kg + CN, # C_percent + 
+                 data = fd_cumulative_r3, 
+                 subset = Gas == "CH4")
+step_ch4_cum <- MASS::stepAIC(m_ch4_cum, direction = "both")
+print(summary(step_ch4_cum))
 
 # -----------------------------------------------------------------------------
 # Calculate drought reduction (%)
@@ -403,8 +429,8 @@ step_co2_lme <- MASS::stepAIC(m_co2_lme, direction = "both")
 # Test Reviewer 1's suggestion about water (and temperature) 
 # sensitivities changing with time
 m_co2_lme_thirds <- update(m_co2_lme, ~ . + 
-                                     WC_gravimetric * third + 
-                                     Temperature * third)
+                             WC_gravimetric * third + 
+                             Temperature * third)
 step_co2_lme_thirds <- MASS::stepAIC(m_co2_lme_thirds, direction = "both")
 
 printlog(SEPARATOR)
@@ -420,8 +446,8 @@ step_ch4_lme <- MASS::stepAIC(m_ch4_lme, direction = "both")
 
 # Test Reviewer 1's suggestion about water (and temperature) sensitivity changing with time
 m_ch4_lme_thirds <- update(m_ch4_lme, ~ . + 
-                                     WC_gravimetric * third + 
-                                     Temperature * third)
+                             WC_gravimetric * third + 
+                             Temperature * third)
 step_ch4_lme_thirds <- MASS::stepAIC(m_ch4_lme_thirds, direction = "both")
 
 
