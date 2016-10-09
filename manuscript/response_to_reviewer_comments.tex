@@ -1,57 +1,49 @@
 % Response to referee comments, with reference to changed points in text
-% Doing this in LaTeX seemed easiest since the response to reviewers doc was already set up that way
-% ...but jeez I wish Biogeosciences would support Markdown
+% Doing this in LaTeX seemed easiest since the response to reviewers doc
+% was already set up that way...but I wish Biogeosciences would support Markdown
 % BBL October 2016
+% TODO means haven't addressed yet; LINES means addressed, need to fill in line #s
 
-\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
-\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\documentclass[11pt, oneside]{article}
+\usepackage{geometry}
 \usepackage{url}
-\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
-\usepackage{graphicx}				% Use pdf, png, jpg, or epsÂ§ with pdflatex; use eps in DVI mode
-								% TeX will automatically convert eps --> pdf in pdflatex		
+\geometry{letterpaper} 
+\usepackage{graphicx}		
 
 \begin{document}
 
 % ======================================================================================
 {\bf Response to Referee \#1}
 
-{\it 1.1. The authors have measured... This manuscript contributes to the growing body of Arctic permafrost and active layer incubation literature... There has been a lot of focus in incubation studies on the effect of inundation on CO2 and CH4 emissions, but drought is an important factor to consider as well. }
-
-Thank you.
-
-{\it 1.2. I do think that the paper has within it data that is relevant to the scope of BG, but I think that a more in depth analysis of the data, and a better contextualization of the data within the Arctic literature is required. The methods and concepts are not novel, but this is an understudied system and very timely work. More is needed in order to reach substantial conclusions. }
-
-We appreciate this comment, and agree that the methods and concepts are not particularly novel-although drought incubations are fairly unusual-and that this is an understudied system and timely.
-
 {\it 1.3. I think that the work would benefit from a more thorough comparison with boreal forest incubations across the Arctic. }
 
-This point was raised by Referee \#2 as well (comment 2.4). We will do so, comparing for example with studies such as the Schädel et al. (2016) meta-analysis (and references therein), Dutta et al. (2006), Lavoie et al. (2011), Karhu et al. (2010), and Czimczik et al. (2006, 2010). {\bf See lines TODO.}
+This point was raised by Referee \#2 as well (comment 2.4). We will do so, comparing for example with studies such as the Schädel et al. (2016) meta-analysis (and references therein), Dutta et al. (2006), Lavoie et al. (2011), Karhu et al. (2010), and Czimczik et al. (2006, 2010). {\bf See new lines TODO.}
 
 {\it 1.4. N section would benefit from more Arctic-centric comparisons of N limitations and in particular of boreal forest N dynamics. Q10 can be temperature dependent, also depending on N limitation in the system. }
 
-We will supplement this section with a better comparison to, for example, Lavoie et al. (2011), who incubated upland Alaskan boreal soils at two temperatures and two N addition levels; Sistla et al. (2012); and the combination meta-analysis and modeling study of Bouskill et al. (2014) that at N addition at high latitudes. {\bf See lines TODO.}
+We will supplement this section with a better comparison to, for example, Lavoie et al. (2011), who incubated upland Alaskan boreal soils at two temperatures and two N addition levels; Sistla et al. (2012); and the combination meta-analysis and modeling study of Bouskill et al. (2014) that at N addition at high latitudes. {\bf See new lines TODO.}
 
 {\it 1.5. This study raises interesting questions. In mineral soils, under woody vegetation that might be of low C quality, and slower C pool, one might expect higher temperature sensitivity. I think that these questions, even if not addressed directly by the data presented, should have been discussed more explicitly. Comparison with other Arctic woody plant systems would be instructive. }
 
-This is similar to the referee's comment 1.9 (please see our response to that below), with the added factor of C quality. This idea, and studies focusing on it with respect to mineralization, has a long history (e.g. Nadelhoffer al. 1991); as the referee notes, from fundamental biokinetics (Davidson and Janssens 2006) we expect that decomposition Q10 should be inversely related to litter carbon quality. We will address these questions more explicitly in our revision, referring for example to incubation studies on this question (Fierer et al. 2005). {\bf See lines TODO.}
+This is similar to the referee's comment 1.9 (please see our response to that below), with the added factor of C quality. This idea, and studies focusing on it with respect to mineralization, has a long history (e.g. Nadelhoffer al. 1991); as the referee notes, from fundamental biokinetics (Davidson and Janssens 2006) we expect that decomposition Q10 should be inversely related to litter carbon quality. We will address these questions more explicitly in our revision, referring for example to incubation studies on this question (Fierer et al. 2005). {\bf See new lines TODO.}
 
 {\it 1.6. Studies have shown that moisture can have a weaker effect on temperature sensitivity early on during an incubation experiment, in the presence of more labile C. This relative to the effect on moisture on the Q-10 of cumulative respiration, reflecting slow turning over C - this could be an interesting analysis to include here, and would help to assess how }
 
-This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see \url{https://github.com/bpbond/cpcrw_incubation/commit/18884c836d855b94417f7ae2cef910c577bc40b}) that examines if and how temperature and moisture sensitivities change over incubation time in this experiment. Currently we do not observe any evidence for changes in CO2 moisture sensitivity with time, and only weak changes in CO2 temperature sensitivity; CH4 emissions show a weak decline in moisture sensitivity with time. We will discuss this issue, referencing previous work such as Reichstein et al. (2005). {\bf See lines TODO.}
+This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see \url{https://github.com/bpbond/cpcrw_incubation/commit/18884c836d855b94417f7ae2cef910c577bc40b}) that examines if and how temperature and moisture sensitivities change over incubation time in this experiment. Currently we do not observe any evidence for changes in CO2 moisture sensitivity with time, and only weak changes in CO2 temperature sensitivity; CH4 emissions show a weak decline in moisture sensitivity with time. We will discuss this issue, referencing previous work such as Reichstein et al. (2005). {\bf See new lines TODO.}
 
 {\it 1.7. How do your results in terms of temperature and moisture sensitivity (especially under drought conditions) scale with Alaskan climate change predictions from modelers? How does it compare with deep soils incubations (mineral soils) from the Arctic, and from boreal ecosystems? }
 
-The first question is similar to a point raised by Referee \#2 (comment 2.3). We will discuss this in more depth, noting in particular, for example, the fact that there are observable anthropogenic influences on high-latitude precipitation (Wan et al. 2015); drier and warmer conditions in boreal Eurasia (Buermann et al. 2015), and growing season length increases in interior Alaska with no increase in precipitation (Wendler and Shulski 2009); and the complex and still-unresolved dynamics at play, meaning that, as the referee notes, drying and drought will probably be highly local in effect (Zhang et al. 2012). {\bf See lines TODO.}
+The first question is similar to a point raised by Referee \#2 (comment 2.3). We will discuss this in more depth, noting in particular, for example, the fact that there are observable anthropogenic influences on high-latitude precipitation (Wan et al. 2015); drier and warmer conditions in boreal Eurasia (Buermann et al. 2015), and growing season length increases in interior Alaska with no increase in precipitation (Wendler and Shulski 2009); and the complex and still-unresolved dynamics at play, meaning that, as the referee notes, drying and drought will probably be highly local in effect (Zhang et al. 2012). {\bf See new lines TODO.}
 
 The second question largely repeats, we think, both referees' suggestions to better compare our results to previous work, in particular boreal and Arctic incubations; see our responses to 1.3 and 1.4 above.
 
 {\it 1.8. Line 31-34: I cannot find discussion of this point in the rest of the text, and while important, this statement is relatively vague and there are no cited references. Since it underpins the rational for studying deep, unfrozen Arctic soils, it would be helpful to expand on this more in the manuscript. }
 
-Referee \#2 raised this point as well (comment 2.6), and it's a good one. We will better describe why deep active-layer soils, such as those studied here, and important and distinctive relative to permafrost or shallow active layer soils.  {\bf See lines TODO.}
+Referee \#2 raised this point as well (comment 2.6), and it's a good one. We will better describe why deep active-layer soils, such as those studied here, and important and distinctive relative to permafrost or shallow active layer soils.  {\bf See new lines LINES.}
 
 {\it 1.9. Lines 48-60: I think that this section would benefit from an introduction of the interactions between the specific ecosystem (upland boreal forest) you are studying, and its interaction with soil chemistry, since vegetation type is influential in terms of soil carbon quality and quantity. Woody plant biomass tends to have a higher C:N ratio relative to herbaceous dominated systems, and this tends to result in lower quality resources for microbial communities. }
 
-Vegetation and ecosystem type is a significant factor that is not well explored here, we agree. We will add some points about this, noting for example the work of Högberg et al. (2007) on soil microbial community composition, the relationship of vegetation type and soil respiration (Raich and Schlesinger 1992, Bond-Lamberty and Thomson 2010), and how plant functional types affect ecosystem response more generally (Chapin et al. 1996). {\bf See lines TODO.}
+Vegetation and ecosystem type is a significant factor that is not well explored here, we agree. We will add some points about this, noting for example the work of Högberg et al. (2007) on soil microbial community composition, the relationship of vegetation type and soil respiration (Raich and Schlesinger 1992, Bond-Lamberty and Thomson 2010), and how plant functional types affect ecosystem response more generally (Chapin et al. 1996). {\bf See new lines TODO.}
 
 {\it 1.10. Lines 70-72: These are really important considerations, and it seems appropriate to discuss them more explicitly. How is the temperature and precipitation regime of the boreal forest of interior AK expected to change? There are also indirect effects of vegetation type on soil temperatures that could be discussed here. }
 
@@ -59,15 +51,15 @@ We agree, although this largely echoes comments 1.7 and 1.9; please see our resp
 
 {\it 1.11. Lines 72-74: While these are important questions, they are not really addressed in this study, and so either it might make sense to leave it out, or to discuss the particulars as they apply to this study, ie: the importance and questions related to C:N ratios. }
 
-That's a good point-thank you. We will qualify this sentence, better tying it to the specific measurements made in this study (C, N, respiration rates, stress response). {\bf See lines TODO.}
+That's a good point-thank you. We will qualify this sentence, better tying it to the specific measurements made in this study (C, N, respiration rates, stress response). {\bf See new lines TODO.}
 
 {\it 1.12. Lines 77-80: I think a stronger argument for why deep active-layer soils can be made, and it would be helpful to clarify what are the 'strong effects' of warming. }
 
-Agreed. See our response to comment 1.8 above. {\bf See lines TODO.}
+Agreed. See our response to comment 1.8 above.
 
 {\it 1.13. I cannot tell if C:N, \%C and \%N were measured at the end of the incubation. Could these results be collated in a table in the manuscript? Otherwise the methods section appears to be detailed and well written. }
 
-C and N were measured for all samples post-incubation, and in the 'extra' group (l. 128-129) pre-incubation. This will be clarified in the methods, particularly lines 162-, which we agree were ambiguous. A table summarizing the moisture content, pH, soil C and N, and bulk density data is an excellent idea and will be added. Reviewer 2 also raised the idea of looking at C/N, and we have responded to that suggestion in detail (see comment 2.9). {\bf See lines TODO.}
+C and N were measured for all samples post-incubation, and in the 'extra' group (l. 128-129) pre-incubation. This will be clarified in the methods, particularly lines 162-, which we agree were ambiguous. A table summarizing the moisture content, pH, soil C and N, and bulk density data is an excellent idea and will be added. Reviewer 2 also raised the idea of looking at C/N, and we have responded to that suggestion in detail (see comment 2.9). {\bf See new lines TODO.}
 
 {\it 1.14. Line 232: In this section it would also be interesting to know the soil respiration decay rate per treatment over the course of the incubation experiment. }
 
@@ -75,43 +67,43 @@ This will be included in the new table (see comment 1.13 above).
 
 {\it 1.15. Line 238-240: Confusingly worded sentence. }
 
-Agreed. This will be changed to "The interaction between water content and percent N was also highly significant (P < 0.001), although cores with N > X\% exhibited little relationship between water content and CO2 flux (data not shown)." {\bf See lines TODO.}
+Agreed. This will be changed to "The interaction between water content and percent N was also highly significant (P < 0.001), although cores with N > X\% exhibited little relationship between water content and CO2 flux (data not shown)." {\bf See new lines TODO.}
 
 {\it 1.16. I don't think that the summary of nearby respiration studies add very much to the discussion section. Perhaps if the similarities and discrepancies were more integral to the central findings of the paper or integrated differently into the discussion they would seem more meaningful here. Perhaps comparing with other boreal incubations (eg: Lee et al., 2012; Lavoie et al., 2011) would help to provide some additional context. }
 
-We agree that the comparison to other boreal respiration studies needs improvement, and this echoes Referee \#2's comment 2.4. We will restructure and improve this summary and comparison section. The Lavoie (2011) paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, may also prove a useful comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but it would also be a good addition. {\bf See lines TODO.}
+We agree that the comparison to other boreal respiration studies needs improvement, and this echoes Referee \#2's comment 2.4. We will restructure and improve this summary and comparison section. The Lavoie (2011) paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, may also prove a useful comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but it would also be a good addition. {\bf See new lines TODO.}
 
 {\it 1.17. Line 270: There is missing punctuation after the word 'results'. }
 
-This will be fixed. {\bf See lines TODO.}
+This will be fixed. {\bf See new lines LINES.}
 
 {\it 1.18. Line 286-293: Perhaps the new synthesis by Schadel et al., 2016, would also be a useful comparison here. }
 
-This point was also made by Referee \#2 (comment 2.2). The fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand this paragraph, discussing and comparing to Schädel et al. (2016) in depth, particularly their findings of higher aerobic than anaerobic respiration; respiration dominance of CO2 versus CH4; and Q10 values. {\bf See lines TODO.}
+This point was also made by Referee \#2 (comment 2.2). The fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand this paragraph, discussing and comparing to Schädel et al. (2016) in depth, particularly their findings of higher aerobic than anaerobic respiration; respiration dominance of CO2 versus CH4; and Q10 values. {\bf See new lines TODO.}
 
 {\it 1.19. Line 293: That soil moisture may be as important a control on microbial respiration as temperature is an important finding in recent incubation studies, and the potential to define its interaction with temperature will help modelers of soil decomposition better constrain the physical parameters of microbial respiration rates. This feels buried in the manuscript, and I think that it would improve the paper if it were highlighted better throughout the text. }
 
-Thanks for the useful suggestion; we will do so. {\bf See lines TODO.}
+Thanks for the useful suggestion; we will do so. {\bf See new lines TODO.}
 
 {\it 1.20. Line 311-317: This section could be better explained in the context of the discussion or omitted altogether. It seems less important to defend the plausibility of relatively low temperature sensitivity, but instead to try to explain it in the context of these soil characteristics. Could low temperature sensitivity be the result of low C quality in this deep soil environment? }
 
-We appreciate this useful advice and question. Certainly temperature sensitivity is, at least in theory, related to C quality (see our answer to 1.5 above), although low-quality litter (i.e. in a boreal coniferous forest) might be expected to be associated with {/it higher} Q10? In our revision, we will explore these ideas, considering how how factors such as vegetation, soil characteristics, and climate might explain the low observed temperature sensitivity. {\bf See lines TODO.}
+We appreciate this useful advice and question. Certainly temperature sensitivity is, at least in theory, related to C quality (see our answer to 1.5 above), although low-quality litter (i.e. in a boreal coniferous forest) might be expected to be associated with {/it higher} Q10? In our revision, we will explore these ideas, considering how how factors such as vegetation, soil characteristics, and climate might explain the low observed temperature sensitivity. {\bf See new lines TODO.}
 
 {\it 1.21. Line 322-332: This section, which lays out the crux of the paper, the interaction between temperature and moisture sensitivity in driving microbial respiration is relatively vague. It would be good to describe the less-temperature-sensitive processes that would be important to consider for more stable-C metabolism. And how does moisture play a role here? Perhaps DOC becomes more limiting in the drought conditions? }
 
-This is indeed interesting to consider: what mechanisms might produce a Q10 {\it increase} under drought conditions? This is opposite to what is usually observed (e.g. Jassal et al. 2008), but the field is rife with contradictory results (von Lützow and Kögel-Knabner 2009). We will make this paragraph more specific in all these areas. {\bf See lines TODO.}
+This is indeed interesting to consider: what mechanisms might produce a Q10 {\it increase} under drought conditions? This is opposite to what is usually observed (e.g. Jassal et al. 2008), but the field is rife with contradictory results (von Lützow and Kögel-Knabner 2009). We will make this paragraph more specific in all these areas. {\bf See new lines TODO.}
 
 {\it 1.22. Line 356: The Janssens et al., 2010, citation refers to a meta-analysis of temperate forest soils that are not nitrogen limited. There are studies focusing on Arctic N cycling that would be more appropriate, and many Arctic studies have shown that N availability can limit C mineralization rates. Is this site considered to be N limited in the deep active layer? }
 
-We agree that referring and comparing to studies such as Lavoie et al. (2011) and Bouskill et al. (2014), which focused specifically on high latitudes, would be a useful addition. We don't know of any studies examining the N limitation of deep soils at this site, but Allison et al. (2008, 2011) used fertilization and incubation experiments to examine how Alaskan boreal biota (plants and microbes) responded to N addition. We will discuss these results in our revision, along with other studies examining the relationship between N availability and C mineralization. {\bf See lines TODO.}
+We agree that referring and comparing to studies such as Lavoie et al. (2011) and Bouskill et al. (2014), which focused specifically on high latitudes, would be a useful addition. We don't know of any studies examining the N limitation of deep soils at this site, but Allison et al. (2008, 2011) used fertilization and incubation experiments to examine how Alaskan boreal biota (plants and microbes) responded to N addition. We will discuss these results in our revision, along with other studies examining the relationship between N availability and C mineralization. {\bf See new lines TODO.}
 
 {\it 1.23. Line 367: Is this comparison, with North American soils, relevant to this study? }
 
-It's true that Colman and Schimel (2014) include only a few studies that could be termed boreal (from Maine, USA). We will either remove or de-emphasize/qualify this comparison.  {\bf See lines TODO.}
+It's true that Colman and Schimel (2014) include only a few studies that could be termed boreal (from Maine, USA). We will either remove or de-emphasize/qualify this comparison.  {\bf See new lines TODO.}
 
 {\it 1.24. Line 383-384: Can you be more explicit in your meaning here? How do you mean that there is weakness in what can be inferred about temperature sensitivity from experiments? }
 
-We basically meant what the title of the Podrebarac et al. (2016) paper says: "Soils isolated during incubation underestimate temperature sensitivity of respiration and its response to climate history". I.e., incubation soils are isolated from their natural environment, and as a result we need to be cautious about extrapolating incubation results to {\it in situ} responses. We will clarify this in the text. {\bf See lines TODO.}
+We basically meant what the title of the Podrebarac et al. (2016) paper says: "Soils isolated during incubation underestimate temperature sensitivity of respiration and its response to climate history". I.e., incubation soils are isolated from their natural environment, and as a result we need to be cautious about extrapolating incubation results to {\it in situ} responses. We will clarify this in the text. {\bf See new lines LINES.}
 
 
 % ======================================================================================
@@ -119,49 +111,45 @@ We basically meant what the title of the Podrebarac et al. (2016) paper says: "S
 
 {\bf Response to Referee \#2}
 
-{\it 2.1. This paper studies... This is a useful dataset that adds to the growing body of literature on C release from permafrost once thawed. There is a good amount of publications that deal with warmer temperatures in the Arctic and changing soil moisture condition but not many have simulated drought conditions... }
-
-We appreciate the referee's assessment of the utility and interest of this dataset and analysis--thank you.
-
 {\it 2.2. It seems like this paper was published as a discussion paper before Schädel et al. 2016 was published and hence a discussion of the meta-analysis was not possible but should be addressed in the revisions. }
 
-This point was also made by Referee \#1 (comment 1.18). Yes, the fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand the discussion on this point, comparing our results to Schädel et al. (2016) in depth, particularly their findings of higher aerobic than anaerobic respiration; respiration dominance of CO2 versus CH4; and Q10 values. {\bf See lines TODO.}
+This point was also made by Referee \#1 (comment 1.18). Yes, the fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand the discussion on this point, comparing our results to Schädel et al. (2016) in depth, particularly their findings of higher aerobic than anaerobic respiration; respiration dominance of CO2 versus CH4; and Q10 values. {\bf See new lines TODO.}
 
 {\it 2.3. The importance of the results would be more obvious if the discussion also contained an upscaling or circumpolar aspect of drought in the Arctic. It would be useful to have some discussion about the area that is expected to be most affected by drought. This is important as changes in temperature will affect most of the Arctic, whereas drought effects or dry soils will occur more locally. }
 
-We will add this to the discussion, noting in particular the fact that there are observable anthropogenic influences on high-latitude precipitation (Wan et al. 2015); drier and warmer conditions in boreal Eurasia (Buermann et al. 2015), and growing season length increases in interior Alaska with no increase in precipitation (Wendler and Shulski 2009); and the complex and still-unresolved dynamics at play, meaning that, as the referee notes, drying and drought will probably be highly local in effect (Zhang et al. 2012). {\bf See lines TODO.}
+We will add this to the discussion, noting in particular the fact that there are observable anthropogenic influences on high-latitude precipitation (Wan et al. 2015); drier and warmer conditions in boreal Eurasia (Buermann et al. 2015), and growing season length increases in interior Alaska with no increase in precipitation (Wendler and Shulski 2009); and the complex and still-unresolved dynamics at play, meaning that, as the referee notes, drying and drought will probably be highly local in effect (Zhang et al. 2012). {\bf See new lines TODO.}
 
 {\it 2.4. 1) Throughout the manuscript, I have noticed that important papers from the permafrost literature are missing. This applies to C stocks in the permafrost area, Tarnocai et al. 2009 is a good paper but there are more recent and more accurate estimates of permafrost C stocks described in Hugelius et al. 2014 and Schuur et al. 2015 that should be cited. When it comes to the permafrost C feedback, Schuur et al. 2015 is currently the best and most up to date review. In addition, Koven et al. 2015 is a good one too. The discussion on incubation literature should include papers like Lavoie et al. 2011, Dutta et al. 2006, and Schädel et al. 2014. }
 
-We appreciate the referee drawing our attention to these omissions. While Schuur et al. (2015) is already cited, Hugelius (2014) and Koven (2015; though we do cite his 2011 paper) are useful additions. The Lavoie paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, is also a good comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but we agree it would also be a reasonable addition. {\bf See lines TODO.}
+We appreciate the referee drawing our attention to these omissions. While Schuur et al. (2015) is already cited, Hugelius (2014) and Koven (2015; though we do cite his 2011 paper) are useful additions. The Lavoie paper is very useful with respect to N and microbial respiration, while Dutta et al. (2006), although it concerns Siberian soils, is also a good comparison. We had not included Schädel et al. (2014) simply because of its focus on permafrost, versus the active-layer soils studied here, but we agree it would also be a reasonable addition. {\bf See new lines TODO.}
 
 {\it 2.5. 2) L. 31: Permafrost thaws and does not melt }
 
-This wording will be fixed. {\bf See lines TODO.}
+This wording will be fixed. {\bf See new lines LINES.}
 
 {\it 2.6. 3) A better explanation is needed why deep-active layer soils are different to active layer or permafrost soils, I couldn't find a strong argument for why they would behave differently. Also, deep-active layer soils are those that are the most impacted by inter annual variability in thaw depth and so they might switch between active layer in one year to permafrost in another, that's worth some discussion as well. }
 
-This is a good point. We will better describe why deep active-layer soils, such as those studied here, and important and distinctive relative to permafrost or shallow active layer soils.  {\bf See lines TODO.}
+This is a good point. We will better describe why deep active-layer soils, such as those studied here, and important and distinctive relative to permafrost or shallow active layer soils.  {\bf See new lines LINES.}
 
 {\it 2.7. 4) The statistics in this paper are generally good and I would like to compliment the authors on making the entire data set and analysis available online. I would still suggest that the manuscript would profit from some additional details on collinearity of the tested variables as well as model outputs such as AIC. }
 
-Thank you. We appreciate the useful suggestions, and will provide these additional details in our revised manuscript. {\bf See lines TODO.}
+Thank you. We appreciate the useful suggestions, and will provide these additional details in our revised manuscript. {\bf See new lines TODO.}
 
 {\it 2.8. 5) Add a table with soil properties such as bulk density, \%C etc. }
 
-This useful suggestion was also made by Referee \#1 (comment 1.13). We will do so. {\bf See lines TODO.}
+This useful suggestion was also made by Referee \#1 (comment 1.13). We will do so. {\bf See new lines TODO.}
 
 {\it 2.9. 6) Why not include C/N as a variable in the statistical analysis? Schädel et al. 2014 showed that C/N is a good predictor of C release and can be used as a scaling factor. It would be interesting to see if C release from short-term incubations show the same result }
 
-This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see \url{https://github.com/bpbond/cpcrw_incubation/commit/426a91e1bbd21200718b334d3295fbef40a1ea6}) to compute C/N and examine its significance as a predictor. Currently C/N seems to be a poorer predictor than \%N. We will discuss this issue, referencing previous work such as Schädel et al (2014). {\bf See lines TODO.}
+This is an interesting suggestion, and an analysis we would be happy to include. As a preliminary step, before revising the manuscript, we have added code (see \url{https://github.com/bpbond/cpcrw_incubation/commit/426a91e1bbd21200718b334d3295fbef40a1ea6}) to compute C/N and examine its significance as a predictor. Currently C/N seems to be a poorer predictor than \%N. We will discuss this issue, referencing previous work such as SchŠdel et al (2014). {\bf See new lines TODO.}
 
 {\it 2.10. 7) In the discussion, it would be good to also include the warming potential of CO2 and CH4 especially when making assumptions about the permafrost C feedback, it is briefly mentioned in line 348 but a more in depth discussion would be good }
 
-That's a very good point-thank you-and will integrate well with an expanded comparison to the Schädel et al. (2016) paper (cf. comment 2.2 above) and other publications (comment 2.4 above). {\bf See lines TODO.}
+That's a very good point-thank you-and will integrate well with an expanded comparison to the SchŠdel et al. (2016) paper (cf. comment 2.2 above) and other publications (comment 2.4 above). {\bf See new lines TODO.}
 
 {\it 2.11. 8) the conclusions might be a bit strong given the data and previous results published }
 
-We will add a sentence of caveats, noting in particular the useful but incremental nature of this study. {\bf See lines TODO.}
+We will add a sentence of caveats, noting in particular the useful but incremental nature of this study. {\bf See new lines TODO.}
 
 
 % ======================================================================================
@@ -169,55 +157,51 @@ We will add a sentence of caveats, noting in particular the useful but increment
 
 {\bf Response to Referee \#3
 
-{\it 3.1. This manuscript presents...interesting and surprising correlations between CO2 production and soil nitrogen content. The main point of this paper, and I think that it's an important one, is that many upland forest soils in the boreal region that have permafrost will dry, and the majority of C will be emitted as CO2, but the magnitude of C emission will decrease under drought conditions (imposed by freely draining and no water inputs) by ~ 50-70\%. Overall, I enjoyed reading this paper! It was nicely written although vague in a few parts. }
-
-Thank you.
-
 {\it 3.2. My main criticism is that I think that the authors over-emphasize the results of the daily emissions and that the authors should further explore (or report) the results of the controls of the cumulative C emissions. I'm curious as to whether the relationships with soil C/N and \%N observed in daily emissions still hold on cumulative emissions. The comparison between these soil parameters (i.e. ones that probably don't change much throughout the course of the incubation, including temperature) and the cumulative fluxes is perhaps more appropriate. Perhaps modelers find the controls on daily fluxes interesting and these are likely quite useful in regards to the relationship between moisture and C production (i.e. changes on a daily basis), but I think that the controls on cumulative fluxes are quite interesting and could be further explored. }
 
-This is an interesting and useful suggestion. We agree that rebalancing the manuscript, focusing a bit more on controls on cumulative emissions and a bit less on the instantaneous fluxes, would strengthen it. In our revision, we will more fully explore controls on the cumulative emissions, and as a first step have added the analytical code to do so (see \url{https://github.com/bpbond/cpcrw_incubation/commit/2d62e73ab79f7f0c8d7289919cddedb0a22ec275}). At the moment, it looks like only \%N exerts a weak effect on cumulative CO2 fluxes, and none of the tested covariates (\%C, \%N, C/N, DOC) affects cumulative CH4. {\bf See lines TODO.}
+This is an interesting and useful suggestion. We agree that rebalancing the manuscript, focusing a bit more on controls on cumulative emissions and a bit less on the instantaneous fluxes, would strengthen it. In our revision, we will more fully explore controls on the cumulative emissions, and as a first step have added the analytical code to do so (see \url{https://github.com/bpbond/cpcrw_incubation/commit/2d62e73ab79f7f0c8d7289919cddedb0a22ec275}). At the moment, it looks like only \%N exerts a weak effect on cumulative CO2 fluxes, and none of the tested covariates (\%C, \%N, C/N, DOC) affects cumulative CH4. {\bf See new lines TODO.}
 
 {\it 3.3. For example, how do the results of soil properties vs. emissions compare to those of Schädel et al. (2014) and Schädel et al. (2016)? How do the moisture results compare to those of Wickland et al. (2008)? }
 
-The other referees both mentioned this as well. The fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand this, discussing and comparing to Schädel et al. (2014, 2016) and Wickland et al. (2008). {\bf See lines TODO.}
+The other referees both mentioned this as well. The fact that we didn't cite the Schädel et al. (2016) meta-analysis was a quirk of timing, as it appeared after our manuscript was submitted. In our revision, we will significantly expand this, discussing and comparing to Schädel et al. (2014, 2016) and Wickland et al. (2008). {\bf See new lines TODO.}
 
 {\it 3.4. I do think that the time series of fluxes could be moved to the supplemental materials if the cumulative fluxes are explored in greater detail. I think this paper could be shortened a little bit although I didn't find the length of the paper onerous. Along these lines, I think that the results summarized above from the cumulative emissions should be included in the abstract. }
 
-We will consider these suggestions with respect to length and supplemental materials; results dealing with cumulative emissions will certainly be included in the abstract. {\bf See lines TODO.}
+We will consider these suggestions with respect to length and supplemental materials; results dealing with cumulative emissions will certainly be included in the abstract. {\bf See new lines TODO.}
 
 {\it 3.5. 22: Daily CO2 fluxes?
 26: positive or negative correlation?
 27: daily CH4 flux?
 28: cumulative production as CO2-as CH4. }
 
-We will clarify these points. {\bf See lines TODO.}
+We will clarify these points. {\bf See new lines TODO.}
 
 {\it 3.6. 29: Not really sure how the comparison as to the relative controls of T and moisture are evaluated. }
 
-Agreed, this was more of a qualitative statement than a quantitative one. We will be more precise. {\bf See lines TODO.}
+Agreed, this was more of a qualitative statement than a quantitative one. We will be more precise. {\bf See new lines TODO.}
 
 {\it 3.7. 50: see also updates in Hugelius et al. (2014)
 63: Under some conditions (Olefeldt et al 2013): vague and confusing. Please clarify. }
 
-Reviewer 2 also raised the issue (comment 2.4) of our incomplete citation of relevant literature. In our revision, we will make better use of references such as Hugelius et al. (2014) and Wickland et al. (2008), both in the introduction and discussion. {\bf See lines TODO.}
+Reviewer 2 also raised the issue (comment 2.4) of our incomplete citation of relevant literature. In our revision, we will make better use of references such as Hugelius et al. (2014) and Wickland et al. (2008), both in the introduction and discussion. {\bf See new lines TODO.}
 
 {\it 3.8. 67: 'substantial variabilities between studies' WHY? }
 
-We will expand on this point, pointing out that such variability originates from factors such soil effects on drainage, phase changes, different experimental protocols, etc. {\bf See lines TODO.}
+We will expand on this point, pointing out that such variability originates from factors such soil effects on drainage, phase changes, different experimental protocols, etc. {\bf See new lines TODO.}
 
 {\it 3.9. 72: Yes, this is an important question, but given that this isn't measured in this study, perhaps this sentence should be omitted or re-written. }
 
-Good point; we will do so. {\bf See lines TODO.}
+Good point; we will do so. {\bf See new lines TODO.}
 
 {\it 3.10. 101: When did sampling occur?
 112: Specify at the time of sampling
 140: How frequently was moisture adjusted? Requires a bit more explanation. Were instantaneous moisture values used in analysis? }
 
-Sampling date is reported in line 110. We will clarify 80 cm at the time of sampling. Moisture adjustment was done after every mass measurement, i.e. every timepoint shown in Figure 1. This will be clarified, and we will consider if adding this to Figures 2 and 3 if readable and useful. {\bf See lines TODO.}
+Sampling date is reported in line 110. We will clarify 80 cm at the time of sampling. Moisture adjustment was done after every mass measurement, i.e. every timepoint shown in Figure 1. This will be clarified, and we will consider if adding this to Figures 2 and 3 if readable and useful. {\bf See new lines TODO.}
 
 {\it 3.11. 211: Please remember to complete DOI }
 
-We will! {\bf See lines TODO.}
+We will! {\bf See new lines TODO.}
 
 {\it 3.12. 215: Not sure what this value for soil dry mass indicates }
 
@@ -225,7 +209,7 @@ It's just useful, we think, to give readers a good sense of sample mass.
 
 {\it 3.13. 216: Standard deviation for \%C and \%N is nearly 100\%. Check values. }
 
-Thanks. There was a great of variability (obviously), but distributed throughout the data set-i.e., this isn't driven by one or two outliers. We will re-check, however. {\bf See lines TODO.}
+Thanks. There was a great of variability (obviously), but distributed throughout the data set-i.e., this isn't driven by one or two outliers. We will re-check, however. {\bf See new lines TODO.}
 
 {\it 3.14. 229: add units
 231: add units
@@ -233,7 +217,7 @@ Thanks. There was a great of variability (obviously), but distributed throughout
 241: positively correlated
 245-246: 106 }
 
-These will be fixed. {\bf See lines TODO.}
+These will be fixed. {\bf See new lines TODO.}
 
 {\it 3.15. 253-254: So what variables were significant in predicting cumulative C emissions? }
 
@@ -241,15 +225,15 @@ Please see our response to comment 3.2 above.
 
 {\it 3.16. 262: First mention of vegetation stress, remove, not clear how it's related. }
 
-We will better integrate this point, mentioning it in the introduction and clarifying its relationship to the study goals. {\bf See lines TODO.}
+We will better integrate this point, mentioning it in the introduction and clarifying its relationship to the study goals. {\bf See new lines TODO.}
 
 {\it 3.17. 270. Add '.' }
 
-This will be fixed. {\bf See lines TODO.}
+This will be fixed. {\bf See new lines LINES.}
 
 {\it 3.18. 271: Specify soil type in which these measurements were made (results not surprising for a forest soil) }
 
-Upland Cryosols; we will clarify this. {\bf See lines TODO.}
+Upland Cryosols; we will clarify this. {\bf See new lines LINES.}
 
 {\it 3.19. 272: What about results from Wickland et al. (2008). Study found threshold for moisture importance
 305-307: again, see Wickland et al. (2008) }
@@ -262,32 +246,32 @@ Agreed. Tantalizing.
 
 {\it 3.21. 344-345: Specify that the results in Treat et al. (2015) were for anaerobic incubations and were thus likely to be much smaller. }
 
-Thanks; we will do so. {\bf See lines TODO.}
+Thanks; we will do so. {\bf See new lines TODO.}
 
 {\it 3.22. 347-348: See also Lee et al. (2012)
 364-365: See also Schadel et al. (2014). Also, I thought this section was a bit vague, probably could be shortened slightly. }
 
-Thanks for the Lee et al. reference, which we had not considered (see our response to 3.7 above). We'll take a hard look at lines 362-378 and tighten. {\bf See lines TODO.}
+Thanks for the Lee et al. reference, which we had not considered (see our response to 3.7 above). We'll take a hard look at lines 362-378 and tighten. {\bf See new lines TODO.}
 
 {\it 3.23. 383-384: 'specific weaknesses': vague
 384: See also lag effects found in Treat et al. (2015) }
 
-Good points! We will clarify and note this. {\bf See lines TODO.}
+Good points! We will clarify and note this. {\bf See new lines TODO.}
 
 {\it 3.24. 393: 'taking them out of depth' rephrase. Also could use this argument for the section on CH4 production. }
 
-Yes, it's awkward; we will reword. Thanks for the suggestion. {\bf See lines TODO.}
+Yes, it's awkward; we will reword. Thanks for the suggestion. {\bf See new lines TODO.}
 
 {\it 3.25. Fig.1 : Edit figure to be color-blind friendly. }
 
-We thought we were already doing so in using the {\tt RColorBrewer} package, not the default palette of {\tt ggplot2}, but will investigate and fix this if necessary. {\bf See lines TODO.}
+We thought we were already doing so in using the {\tt RColorBrewer} package, not the default palette of {\tt ggplot2}, but will investigate and fix this if necessary. {\bf See new lines TODO.}
 
 {\it 3.26. Fig. 2,3: When did watering / moisture adjustment occur? Consider indicating with arrows and specifying in text. }
 
-Moisture adjustment was done after every mass measurement, i.e. every timepoint shown in Figure 1. This will be clarified, and we will consider if adding this to Figures 2 and 3 if readable and useful. {\bf See lines TODO.}
+Moisture adjustment was done after every mass measurement, i.e. every timepoint shown in Figure 1. This will be clarified, and we will consider if adding this to Figures 2 and 3 if readable and useful. {\bf See new lines TODO.}
 
 {\it 3.27. Fig. 4: Switch top and bottom panels as CO2 is always discussed before CH4. Also edit colors and patterns to be color-blind friendly. }
 
-Good point. Re colors, see our response to 3.25 above. {\bf See lines TODO.}
+Good point. Re colors, see our response to 3.25 above. {\bf See new lines TODO.}
 
 \end{document}  
