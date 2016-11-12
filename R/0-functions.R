@@ -6,12 +6,12 @@
 # Run under:
 #   R version 3.2.3 (2015-12-10), x86_64-apple-darwin13.4.0 (64-bit)
 # Key packages used across scripts:
-library(ggplot2)       # 2.0.0
+library(ggplot2)       # 2.1.0
 theme_set(theme_bw())
-library(dplyr)         # 0.4.3.9001
-library(readr)         # 0.2.2
-library(lubridate)     # 1.5.0
-library(stringr)       # 1.0.0
+library(dplyr)         # 0.5.0
+library(readr)         # 1.0.0
+library(lubridate)     # 1.6.0
+library(stringr)       # 1.1.0
 library(luzlogr)       # 0.2.0
 
 #if(require(checkpoint))   # 0.3.15
@@ -132,3 +132,22 @@ save_diagnostic <- function(p, pname, printit = TRUE, ...) {
     ggsave
   save_plot(pname, ...)
 } # save_diagnostic
+
+# -----------------------------------------------------------------------------
+# 'Pretty n' function to round a numeric value and print that # of digits
+pn <- function(x, n) {
+  formatC(round(unlist(x), n), digits = n, format = "f")
+} # pn
+
+# -----------------------------------------------------------------------------
+# 'Clean p value' function to pretty-print p value(s), specifically
+pclean <- function(x, digits = 3, printP = TRUE) {
+  x <- as.vector(x)
+  ltstring <- paste0("< 0.", paste(rep("0", digits - 1), collapse = ""), "1")
+  valstring <- ifelse(x < 10 ^ -digits, ltstring, pn(x, digits))
+  if(printP) {
+    paste("P", ifelse(x < 10 ^ -digits, valstring, paste("=", valstring)))
+  } else {
+    valstring
+  }
+} # pclean
