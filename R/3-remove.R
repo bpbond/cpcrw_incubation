@@ -73,7 +73,7 @@ save_data(summarydata_clean, fn = SUMMARYDATA_CLEAN_FILE, scriptfolder = FALSE)
 
 printlog("Removed data:", nrow(removed_data), "of", nrow(summarydata), "=",
          round(nrow(removed_data) / nrow(summarydata) * 100, 1), "%")
-save_data(removed_data)
+save_data(removed_data, fn = REMOVEDDATA_FILE, scriptfolder = FALSE)
 
 printlog("All done with", SCRIPTNAME)
 closelog()

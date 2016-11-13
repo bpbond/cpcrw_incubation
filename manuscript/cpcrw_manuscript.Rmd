@@ -26,32 +26,6 @@ setwd(olddir)
 ```
 
 
-```{r wc, echo=FALSE}
-# Compute soil moisture data for use in abstract and results below
-# wc and wc_alltrt are computed by 5-analyze.R script
-gwcbegin <- subset(gwc_alltrt, stage == "Beginning")
-gwcend <- subset(gwc, stage == "End")
-gwcendmean <- gwcend$mean
-names(gwcendmean) <- gwcend$Treatment
-gwcendsd <- gwcend$sd
-names(gwcendsd) <- gwcend$Treatment
-vwcbegin <- subset(vwc_alltrt, stage == "Beginning")
-vwcend <- subset(vwc_alltrt, stage == "End")
-```
-
-```{r compute_ratios, echo=FALSE}
-# Compute ratios between CO2 and CH4 for use in abstract and results below
-# Ratio data is stored in the `gas_ratio` d.f. computed by analysis script
-minmag <- min(gas_ratio$CO2CH4_ratio) %>% log10 %>% floor %>%
-  c("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")[.]
-minratio <- min(gas_ratio$CO2CH4_ratio / 1e6)  %>% formatC(digits = 1, format = 'f')
-mintrt <- gas_ratio$Treatment[which.min(gas_ratio$CO2CH4_ratio)]
-mintemp <- gas_ratio$Temperature[which.min(gas_ratio$CO2CH4_ratio)]
-maxratio <- max(gas_ratio$CO2CH4_ratio / 1e6) %>% formatC(digits = 1, format = 'f')
-maxtrt <- gas_ratio$Treatment[which.max(gas_ratio$CO2CH4_ratio)]
-maxtemp <- gas_ratio$Temperature[which.max(gas_ratio$CO2CH4_ratio)]
-```
-
 #### Abstract
 
 Rapid climatic changes, rising air temperatures, and increased fires are expected to drive permafrost degradation and alter soil carbon (C) cycling in many high-latitude ecosystems. How these soils will respond to changes in their temperature, moisture, and overlying vegetation is highly uncertain, but critical to understand given the large soil C stocks in these regions. We used a laboratory experiment to examine how temperature and moisture control CO~2~ and CH~4~ emissions from mineral soils sampled from the bottom of the annual active layer, i.e. directly above permafrost, in an Alaskan boreal forest. Gas emissions from thirty cores, subjected to two temperatures and either field moisture conditions or experimental drought, were tracked over a 100-day incubation; we also measured a variety of physical and chemical characteristics of the cores. Gravimetric water content was `r pn(gwcbegin$mean, 2)` ± `r pn(gwcbegin$sd, 2)` (unitless) at the beginning of the incubation; cores at field moisture were unchanged at the end, but drought cores had declined to `r pn(gwcendmean["Drought"], 2)` ±  `r pn(gwcendsd["Drought"], 2)`. Carbon dioxide fluxes were strongly influenced by incubation chamber temperature, core water content, and percent soil nitrogen, and had a temperature sensitivity (Q~10~) of `r pn(Q10_cumulative["Field moisture", "CO2"], 1)` and `r pn(Q10_cumulative["Drought", "CO2"], 1)` for the field moisture and drought treatments, respectively. Methane emissions were most strongly correlated with percent nitrogen, but neither temperature nor water content was a significant first-order predictor of CH~4~ fluxes. The cumulative production of C from CO~2~ was over `r minmag` orders of magnitudes higher than that from CH~4~. These results suggest that deep active-layer soils may be much more sensitive to changes in moisture than to temperature, a critical factor as discontinuous permafrost thaws [COM2.5] in interior Alaska. Deep but unfrozen high-latitude soils have been shown to be strongly affected by long-term experimental warming, and these results provide insight into their future dynamics and feedback potential with future climate change.
@@ -89,14 +63,6 @@ For each measurement, a six-core treatment group was connected to a Picarro A031
 The incubation experiment concluded on 9 December 2015, following the final CO~2~ and CH~4~ readings. Each soil core was maintained at the treatment-dependent temperature and moisture content (by mass) until removed for destructive sampling, December 14-18, 2015. Sub-samples were collected and composited throughout each soil core for dissolved organic carbon analysis (110 ± 24 g dry mass equivalent) and dry-mass calculations (~28 g each). The remaining core material was air-dried and separated into particles (>2 mm diameter) and soil (≤2 mm) using a U.S. Standard Test Sieve No. 10 (Fisherbrand,  Pittsburg, PA, USA). The dry mass and volume of soil were used in calculations of gravimetric and volumetric soil moisture content, respectively {Gardner, 1986 #4345}. Soil volume was calculated as the total core volume minus the volume of particles >2 mm diameter, with the latter determined by water displacement. Air-dried soil and sub-samples stored at -20 °C were sent to the Agricultural and Environmental Services Laboratory at the University of Georgia Extension in February 2016 for total C, N, and dissolved organic C. Samples were combusted in an oxygen atmosphere at 1350 °C, and measured for gaseous C and N using a Elementar Vario Max CNS. DOC was measured using a Shimadzu 5000 TOC Analyzer.
 
 **2.3 Data and statistical analysis**
-
-```{r compute_excludes, echo=FALSE}
-# Compute outlier and exclusion numbers
-# TODO: this isn't good--fragile if files move or change names
-rn <- readLines("../outputs/3-remove/removed_data.csv") %>% length
-sdn <- readLines("../outputs/summarydata.csv") %>% length
-fluxn <- nrow(fluxdata)
-```
 
 For each measurement of each sample throughout the 100-day incubation (i.e., each gas, core, and date/time), we used the rise in gas concentrations to calculate a flux rate in ppm s^-1^ (CO~2~) or ppb s^-1^ (CH~4~), a linear rate of change (δc/δt) based on the concentration rise from a minimum (up to `r MAX_MINCONC_TIME` seconds after measurement began) to a maximum (at `r MAX_MINCONC_TIME`-`r MAX_MAXCONC_TIME` seconds). Each core’s respiration flux (*F*) was then calculated as $F=\frac{\delta c}{\delta t} \frac{V}{M} \frac{P_a}{RT}$ where *V* is the core-specific system volume, *M* the core dry mass as determined at the end of the incubation, *P~a~* atmospheric pressure (101 kPa; the incubation chambers were ~120 m a.s.l.), *R* the universal gas constant (8.3 x 10^-3^ m^3^ kPa mol^-1^ K^-1^) and *T* the chamber air temperature (K) at time of measurement. The final respiration rate was expressed on a dry soil mass basis (µg C g soil^-1^ day^-1^).
 
@@ -182,7 +148,10 @@ B.B.-L., A.P.S., and V.L.B. designed this experiment. B.B.-L. and A.P.S. perform
 **Table 1.** Linear mixed-effects model parameters, testing effects of temperature (°C), gravimetric water content (unitless), soil C (%), soil N (%),  and dissolved organic carbon (mg kg^-1^) on individual core CO~2~ fluxes (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^); a colon (":") indicates an interaction. Dependent variable has units of log(µg C g C^-1^ day^-1^). Columns include parameter value; standard error (SE); degrees of freedom (DF); T statistic; and P value.
 
 ```{r table1, echo=FALSE}
-t1 <- summary(step_co2_lme)$tTable %>% round(3) %>% as.data.frame()
+summary(step_co2_lme)$tTable %>% 
+  round(3) %>% 
+  as.data.frame() ->
+  t1
 t1$`p-value` <- pclean(t1$`p-value`, printP = FALSE)
 knitr::kable(t1, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
 ```
@@ -190,7 +159,10 @@ knitr::kable(t1, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
 **Table 2.** Linear mixed-effects model parameters, testing effects of temperature (°C), gravimetric water content (unitless), soil N (%),and dissolved organic carbon (DOC, mg kg^-1^) on log-transformed, individual core CH~4~ fluxes (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^); a colon (":") indicates an interaction. Dependent variable has units of log(µg C g C^-1^ day^-1^). Columns include parameter value; standard error (SE); degrees of freedom (DF); T statistic; and P value.
 
 ```{r table2, echo=FALSE}
-t2 <- summary(step_co2_lme)$tTable %>% round(3) %>% as.data.frame()
+summary(step_co2_lme)$tTable %>% 
+  round(3) %>% 
+  as.data.frame() ->
+  t2
 t2$`p-value` <- pclean(t2$`p-value`, printP = FALSE)
 knitr::kable(t2, digits = 3, col.names = c("Value", "SE", "DF", "T", "P"))
 ```

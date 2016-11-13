@@ -177,6 +177,17 @@ fluxdata %>%
   summarise_each(funs(mean, sd, max, min), WFPS_percent) ->
   wfps_alltrt
 
+# Compute key soil moisture rates for use in abstract and results of ms
+gwcbegin <- subset(gwc_alltrt, stage == "Beginning")
+gwcend <- subset(gwc, stage == "End")
+gwcendmean <- gwcend$mean
+names(gwcendmean) <- gwcend$Treatment
+gwcendsd <- gwcend$sd
+names(gwcendsd) <- gwcend$Treatment
+vwcbegin <- subset(vwc_alltrt, stage == "Beginning")
+vwcend <- subset(vwc_alltrt, stage == "End")
+
+
 # -----------------------------------------------------------------------------
 # Did 'Treatment' affect water content?
 
@@ -362,6 +373,23 @@ fluxdata_cumulative %>%
   print ->
   gas_ratio
 
+# Compute ratio-related text for use in manuscript
+min(gas_ratio$CO2CH4_ratio) %>% 
+  log10 %>% 
+  floor %>%
+  c("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")[.] ->
+  minmag
+min(gas_ratio$CO2CH4_ratio / 1e6)  %>% 
+  formatC(digits = 1, format = 'f') ->
+  minratio
+mintrt <- gas_ratio$Treatment[which.min(gas_ratio$CO2CH4_ratio)]
+mintemp <- gas_ratio$Temperature[which.min(gas_ratio$CO2CH4_ratio)]
+max(gas_ratio$CO2CH4_ratio / 1e6) %>% 
+  formatC(digits = 1, format = 'f') ->
+  maxratio
+maxtrt <- gas_ratio$Treatment[which.max(gas_ratio$CO2CH4_ratio)]
+maxtemp <- gas_ratio$Temperature[which.max(gas_ratio$CO2CH4_ratio)]
+
 # -----------------------------------------------------------------------------
 # Examine data distribution
 # Log-transforming doesn't fix the lack of normality in our data,
@@ -450,6 +478,11 @@ m_ch4_lme_thirds <- update(m_ch4_lme, ~ . +
                              Temperature * third)
 step_ch4_lme_thirds <- MASS::stepAIC(m_ch4_lme_thirds, direction = "both")
 
+# -----------------------------------------------------------------------------
+# Compute outlier and exclusion numbers, to report in manuscript
+rn    <- length(readLines(REMOVEDDATA_FILE))
+sdn   <- length(readLines(SUMMARYDATA_FILE))
+fluxn <- nrow(fluxdata)
 
 printlog("All done with", SCRIPTNAME)
 closelog()

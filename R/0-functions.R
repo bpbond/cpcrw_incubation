@@ -39,6 +39,7 @@ RAWDATA_FILE           <- file.path(OUTPUT_DIR, "rawdata.csv.gz")
 RAWDATA_SAMPLES_FILE   <- file.path(OUTPUT_DIR, "rawdata_samples.csv.gz")
 VALVEMAP               <- "data/valvemap.csv"
 TREATMENTS             <- "data/treatments.csv"
+REMOVEDDATA_FILE       <- file.path(OUTPUT_DIR, "removed_data.csv")
 SUMMARYDATA_FILE       <- file.path(OUTPUT_DIR, "summarydata.csv")
 SUMMARYDATA_CLEAN_FILE <- file.path(OUTPUT_DIR, "summarydata_clean.csv")
 FLUXDATA_FILE          <- file.path(OUTPUT_DIR, "fluxdata.csv")
