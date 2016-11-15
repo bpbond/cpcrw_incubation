@@ -460,6 +460,8 @@ m_co2_lme_thirds <- update(m_co2_lme, ~ . +
                              WC_gravimetric * third + 
                              Temperature * third)
 step_co2_lme_thirds <- MASS::stepAIC(m_co2_lme_thirds, direction = "both")
+co2_temp_time <- step_co2_lme_thirds$coefficients$fixed["Temperature:third(34.3,67.7]"]
+
 
 printlog(SEPARATOR)
 printlog("Fitting CH4 model...")
@@ -477,6 +479,7 @@ m_ch4_lme_thirds <- update(m_ch4_lme, ~ . +
                              WC_gravimetric * third + 
                              Temperature * third)
 step_ch4_lme_thirds <- MASS::stepAIC(m_ch4_lme_thirds, direction = "both")
+ch4_wc_time <- step_ch4_lme_thirds$coefficients$fixed["WC_gravimetric:third(34.3,67.7]"]
 
 # -----------------------------------------------------------------------------
 # Compute outlier and exclusion numbers, to report in manuscript
