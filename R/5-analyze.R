@@ -1,5 +1,6 @@
 # Final analysis script: statistical tests, final plots, etc.
 # Called by the R Markdown document (the manuscript).
+# This has become a really big script...ugh
 # Ben Bond-Lamberty January 2016
 
 source("R/0-functions.R")
@@ -19,6 +20,8 @@ library(agricolae)  # v1.2.4
 openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # open log
 
 printlog("Welcome to", SCRIPTNAME)
+
+treatment_data <- read_csv(TREATMENTS, skip = 1)
 
 coredata <- read_csv(COREDATA_FILE, skip = 1)
 
@@ -77,7 +80,7 @@ read_csv(CNDATA_FILE) %>%
 cndata_cor <- cor(cndata_orig[-1], use = "complete.obs")
 
 cndata_orig %>%
-  left_join(read_csv(TREATMENTS, skip = 1), by = "Core") ->
+  left_join(treatment_data, by = "Core") ->
   cndata
 
 cndata %>%
@@ -492,11 +495,13 @@ fluxn <- nrow(fluxdata)
 # Make Table 1 - a lot of work for such a dinky thing!
 printlog("Making table 1...")
 TABLE1_ROUNDING <- 2
+# Summarise the relevant variables for each core (across entire incubation)
 fluxdata %>%
   group_by(Treatment, Core, Gas) %>%
   summarise_each(funs(mean), flux_µgC_gC_day1, DOC_mg_kg, C_percent, N_percent) ->
   table1_fluxdata
 
+# Pull out the two gases and rename them into separate variables
 table1_fluxdata %>%
   filter(Gas == "CO2") %>% 
   rename(CO2_µgC_gC_day1 = flux_µgC_gC_day1) ->
@@ -506,22 +511,33 @@ table1_fluxdata %>%
   rename(CH4_µgC_gC_day1 = flux_µgC_gC_day1) ->
   table1_fluxdata_ch4
 
+# Compute bulk density
+coredata %>%
+  group_by(Core) %>%
+  summarise(BD = SoilDryMass_g / SoilVolume_cm3) %>%
+  left_join(treatment_data, by = "Core") -> 
+  bd_data
+
+# Combine the pre-incubation data with incubation data
 cndata %>%
   filter(is.na(Treatment)) %>%
   mutate(Treatment = "Pre-incubation") %>%
-  bind_rows(table1_fluxdata_co2, table1_fluxdata_ch4) %>%
-  select(Treatment, DOC_mg_kg, C_percent, N_percent, CO2_µgC_gC_day1, CH4_µgC_gC_day1) %>%
+  bind_rows(table1_fluxdata_co2, table1_fluxdata_ch4, bd_data) %>%
+  select(Treatment, DOC_mg_kg, C_percent, N_percent, BD, 
+         CO2_µgC_gC_day1, CH4_µgC_gC_day1) %>%
   rename(`DOC (mg/kg)` = DOC_mg_kg,
          `C (%)` = C_percent,
          `N (%)` = N_percent,
+         `BD (g/cm3)` = BD,
          `CO2 (µg C/g C/day)` = CO2_µgC_gC_day1, 
          `CH4 (µg C/g C/day)` = CH4_µgC_gC_day1) ->
   table1_data
 
+# Compute the mean and s.d. for each treatment
 table1_data %>%
   group_by(Treatment) %>%
   summarise_all(mean, na.rm = TRUE) %>%
-  melt(id.vars = "Treatment") %>%
+  melt(id.vars = "Treatment", variable.name = "Variable") %>%
   mutate(value = pn(value, TABLE1_ROUNDING)) ->
   table1_means
 
@@ -534,9 +550,10 @@ table1_data %>%
 
 table1_means$value_sd <- table1_sds$value
 
+# Jeez, finally! Give cells a nice x ± y format
 table1_means %>%
   mutate(entry = paste(value, "±", value_sd)) %>%
-  dcast(variable ~ Treatment, value.var = "entry") -> 
+  dcast(Variable ~ Treatment, value.var = "entry") -> 
   table1
 
 

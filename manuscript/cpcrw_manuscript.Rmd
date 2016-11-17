@@ -152,10 +152,10 @@ B.B.-L., A.P.S., and V.L.B. designed this experiment. B.B.-L. and A.P.S. perform
 
 ------
 
-**Table 1.** New one.
+**Table 1.** Summary of dissolved organic carbon (DOC), percent C, percent N, and CO~2~ and CH~4~ fluxes by treatment (with pre-incubation values shown in the right-hand column). Each column summarizes (mean ± s.d.) a separate group of N=6 cores.
 
 ```{r table1, echo=FALSE}
-knitr::kable(table1)
+knitr::kable(table1, align = "r")
 ```
 
 **Table 2.** Linear mixed-effects model parameters, testing effects of temperature (°C), gravimetric water content (unitless), soil C (%), soil N (%),  and dissolved organic carbon (mg kg^-1^) on individual core CO~2~ fluxes (+`r FLUX_ADDITION` µg C g C^-1^ day^-1^); a colon (":") indicates an interaction. Dependent variable has units of log(µg C g C^-1^ day^-1^). Columns include parameter value; standard error (SE); degrees of freedom (DF); T statistic; and P value.
