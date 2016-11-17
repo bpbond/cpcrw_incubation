@@ -8,7 +8,7 @@ SCRIPTNAME  	<- "5-analyze.R"
 
 library(nlme)       # 3.1-128
 #library(MASS)       # 7.3-45
-
+library(tidyr)      # 0.6.0
 library(broom)      # 0.4.1
 library(reshape2)   # 1.4.1
 library(agricolae)  # v1.2.4
@@ -84,6 +84,7 @@ cndata %>%
   summarise_each(funs(mean, sd), DOC_mg_kg, C_percent, N_percent, CN) %>%
   print ->
   cndata_summary
+
 # This isn't working via dplyr - compute manually
 cndata_summary$CN_mean <- mean(cndata$CN, na.rm = TRUE)
 cndata_summary$CN_sd <- sd(cndata$CN, na.rm = TRUE)
@@ -315,17 +316,17 @@ fd_cumulative_r3 <- fd_cumulative_r3[complete.cases(fd_cumulative_r3),]
 
 printlog("Fitting CO2 model for cumulative fluxes...")
 m_co2_cum <- lm(cum_flux_mgC_gC ~ Temperature + Treatment +
-                   N_percent + DOC_mg_kg + CN, # C_percent + 
-                 data = fd_cumulative_r3, 
-                 subset = Gas == "CO2")
+                  N_percent + DOC_mg_kg + CN, # C_percent + 
+                data = fd_cumulative_r3, 
+                subset = Gas == "CO2")
 step_co2_cum <- MASS::stepAIC(m_co2_cum, direction = "both")
 print(summary(m_co2_cum))
 
 printlog("Fitting CH4 model for cumulative fluxes...")
 m_ch4_cum <- lm(cum_flux_mgC_gC ~ Temperature + Treatment +
-                   N_percent + DOC_mg_kg + CN, # C_percent + 
-                 data = fd_cumulative_r3, 
-                 subset = Gas == "CH4")
+                  N_percent + DOC_mg_kg + CN, # C_percent + 
+                data = fd_cumulative_r3, 
+                subset = Gas == "CH4")
 step_ch4_cum <- MASS::stepAIC(m_ch4_cum, direction = "both")
 print(summary(step_ch4_cum))
 
@@ -486,6 +487,58 @@ ch4_wc_time <- step_ch4_lme_thirds$coefficients$fixed["WC_gravimetric:third(34.3
 rn    <- length(readLines(REMOVEDDATA_FILE))
 sdn   <- length(readLines(SUMMARYDATA_FILE))
 fluxn <- nrow(fluxdata)
+
+# -----------------------------------------------------------------------------
+# Make Table 1 - a lot of work for such a dinky thing!
+printlog("Making table 1...")
+TABLE1_ROUNDING <- 2
+fluxdata %>%
+  group_by(Treatment, Core, Gas) %>%
+  summarise_each(funs(mean), flux_µgC_gC_day1, DOC_mg_kg, C_percent, N_percent) ->
+  table1_fluxdata
+
+table1_fluxdata %>%
+  filter(Gas == "CO2") %>% 
+  rename(CO2_µgC_gC_day1 = flux_µgC_gC_day1) ->
+  table1_fluxdata_co2
+table1_fluxdata %>%
+  filter(Gas == "CH4") %>% 
+  rename(CH4_µgC_gC_day1 = flux_µgC_gC_day1) ->
+  table1_fluxdata_ch4
+
+cndata %>%
+  filter(is.na(Treatment)) %>%
+  mutate(Treatment = "Pre-incubation") %>%
+  bind_rows(table1_fluxdata_co2, table1_fluxdata_ch4) %>%
+  select(Treatment, DOC_mg_kg, C_percent, N_percent, CO2_µgC_gC_day1, CH4_µgC_gC_day1) %>%
+  rename(`DOC (mg/kg)` = DOC_mg_kg,
+         `C (%)` = C_percent,
+         `N (%)` = N_percent,
+         `CO2 (µg C/g C/day)` = CO2_µgC_gC_day1, 
+         `CH4 (µg C/g C/day)` = CH4_µgC_gC_day1) ->
+  table1_data
+
+table1_data %>%
+  group_by(Treatment) %>%
+  summarise_all(mean, na.rm = TRUE) %>%
+  melt(id.vars = "Treatment") %>%
+  mutate(value = pn(value, TABLE1_ROUNDING)) ->
+  table1_means
+
+table1_data %>%
+  group_by(Treatment) %>%
+  summarise_all(sd, na.rm = TRUE) %>%
+  melt(id.vars = "Treatment") %>%
+  mutate(value = pn(value, TABLE1_ROUNDING)) ->
+  table1_sds
+
+table1_means$value_sd <- table1_sds$value
+
+table1_means %>%
+  mutate(entry = paste(value, "±", value_sd)) %>%
+  dcast(variable ~ Treatment, value.var = "entry") -> 
+  table1
+
 
 printlog("All done with", SCRIPTNAME)
 closelog()
