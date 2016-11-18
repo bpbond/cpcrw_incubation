@@ -542,7 +542,8 @@ table1_data %>%
   group_by(Treatment) %>%
   summarise_all(mean, na.rm = TRUE) %>%
   melt(id.vars = "Treatment", variable.name = "Variable") %>%
-  mutate(value = pn(value, TABLE1_ROUNDING)) ->
+  mutate(finite = is.finite(value),
+         value = pn(value, TABLE1_ROUNDING)) ->
   table1_means
 
 table1_data %>%
@@ -556,7 +557,7 @@ table1_means$value_sd <- table1_sds$value
 
 # Jeez, finally! Give cells a nice x ± y format
 table1_means %>%
-  mutate(entry = paste(value, "±", value_sd)) %>%
+  mutate(entry = ifelse(finite, paste(value, "±", value_sd), "-")) %>%
   dcast(Variable ~ Treatment, value.var = "entry") -> 
   table1
 
