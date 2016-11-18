@@ -143,7 +143,7 @@ figureA <- ggplot(fluxdata_orig, aes(inctime_days, WC_gravimetric, color=Treatme
   geom_point() + geom_line() + 
   facet_grid(~Temperature) + 
   xlab("Incubation day") + ylab("Gravimetric water content (fraction dry mass)") +
-  scale_color_brewer(palette = "Set1")
+  scale_color_manual(values = CBPALETTE)
 save_plot("figureA", figureA)
 
 fluxdata$incday <- floor(fluxdata$inctime_days)
@@ -276,17 +276,21 @@ fluxdata_cumulative <- read_csv(FLUXDATA_CUM_FILE)
 fluxdata_cumulative$Treatment <- factor(fluxdata_cumulative$Treatment, 
                                         levels = c("Field moisture", "Controlled drought", "Drought"))
 fluxdata_cumulative$Temperature <- as.factor(fluxdata_cumulative$Temperature)
+fluxdata_cumulative$Gas <- factor(fluxdata_cumulative$Gas, levels = c("CO2", "CH4"))
 
-figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC_gC, fill = Treatment)) + 
-  geom_bar(stat = 'identity', position = position_dodge()) +
-  geom_errorbar(aes(color = Treatment, 
-                    ymin = cum_flux_mgC_gC * 0.9, 
-                    ymax = cum_flux_mgC_gC + cum_flux_mgC_gC_sd), 
-                position = position_dodge(0.9), width = 0.4) +  
-  facet_grid(Gas ~ ., scales = "free") +
-  ylab(expression(Cumulative~C~(mg~g~C^{-1}))) +
-  scale_fill_brewer(palette = "Set1") + scale_color_brewer(palette = "Set1")
-save_plot("figureD", figureD)
+suppressWarnings({
+  figureD <- ggplot(fluxdata_cumulative, aes(Temperature, cum_flux_mgC_gC, fill = Treatment)) + 
+    geom_bar(stat = 'identity', position = position_dodge()) +
+    geom_errorbar(aes(color = Treatment, 
+                      ymin = cum_flux_mgC_gC * 0.9, 
+                      ymax = cum_flux_mgC_gC + cum_flux_mgC_gC_sd), 
+                  position = position_dodge(0.9), width = 0.4) +  
+    facet_grid(Gas ~ ., scales = "free") +
+    ylab(expression(Cumulative~C~(mg~g~C^{-1}))) +
+    scale_fill_manual(values = CBPALETTE) +
+    scale_color_manual(values = CBPALETTE)
+  save_plot("figureD", figureD)
+})
 
 # Make the labels for this figure. Kind of a PITA
 # Uses `HSD.test` in the `agricolae` package
