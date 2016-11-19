@@ -1,0 +1,308 @@
+Wed Feb 10 19:49:37 2016  Opening outputs//1-data/1-data.R.log.txt 
+Wed Feb 10 19:49:37 2016  Welcome to 1-data.R 
+Wed Feb 10 19:49:37 2016  Data directory is data/picarro/ 
+Wed Feb 10 19:49:37 2016  Tempfile is /var/folders/jl/gn9f6wd95dd0s53s396fy9p86dyn5r/T//RtmpCEBk0e/file132522ac27d6 
+Wed Feb 10 19:49:37 2016  Reading data/picarro//CFADS2283-20150831-171845Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:37 2016  d rows = 2679 cols = 17 
+Wed Feb 10 19:49:37 2016  Reading data/picarro//CFADS2283-20150831-181850Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:37 2016  d rows = 3618 cols = 17 
+Wed Feb 10 19:49:37 2016  Reading data/picarro//CFADS2283-20150831-191855Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:37 2016  d rows = 3611 cols = 17 
+Wed Feb 10 19:49:37 2016  Reading data/picarro//CFADS2283-20150831-201901Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:37 2016  d rows = 3617 cols = 17 
+Wed Feb 10 19:49:37 2016  Reading data/picarro//CFADS2283-20150831-211907Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:37 2016  d rows = 79 cols = 17 
+Wed Feb 10 19:49:37 2016  Reading data/picarro//CFADS2283-20150831-214200Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:37 2016  d rows = 3661 cols = 17 
+Wed Feb 10 19:49:37 2016  Reading data/picarro//CFADS2283-20150831-224205Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:38 2016  d rows = 3232 cols = 17 
+Wed Feb 10 19:49:38 2016  Reading data/picarro//CFADS2283-20150901-165631Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:38 2016  d rows = 3723 cols = 17 
+Wed Feb 10 19:49:38 2016  Reading data/picarro//CFADS2283-20150901-175636Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:38 2016  d rows = 3052 cols = 17 
+Wed Feb 10 19:49:38 2016  Reading data/picarro//CFADS2283-20150901-191109Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:38 2016  d rows = 3470 cols = 17 
+Wed Feb 10 19:49:38 2016  Reading data/picarro//CFADS2283-20150901-201115Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:38 2016  d rows = 3539 cols = 17 
+Wed Feb 10 19:49:38 2016  Reading data/picarro//CFADS2283-20150901-211120Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:38 2016  d rows = 3530 cols = 17 
+Wed Feb 10 19:49:38 2016  Reading data/picarro//CFADS2283-20150901-221126Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:39 2016  d rows = 2459 cols = 17 
+Wed Feb 10 19:49:39 2016  Reading data/picarro//CFADS2283-20150903-175802Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:39 2016  d rows = 3725 cols = 17 
+Wed Feb 10 19:49:39 2016  Reading data/picarro//CFADS2283-20150903-185950Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:39 2016  d rows = 3701 cols = 17 
+Wed Feb 10 19:49:39 2016  Reading data/picarro//CFADS2283-20150903-200040Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:39 2016  d rows = 3682 cols = 17 
+Wed Feb 10 19:49:39 2016  Reading data/picarro//CFADS2283-20150903-210051Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:39 2016  d rows = 523 cols = 17 
+Wed Feb 10 19:49:39 2016  Reading data/picarro//CFADS2283-20150903-212820Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:39 2016  d rows = 3501 cols = 17 
+Wed Feb 10 19:49:39 2016  Reading data/picarro//CFADS2283-20150903-222826Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:39 2016  d rows = 3756 cols = 17 
+Wed Feb 10 19:49:39 2016  Reading data/picarro//CFADS2283-20150903-232830Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:39 2016  d rows = 202 cols = 17 
+Wed Feb 10 19:49:39 2016  Reading data/picarro//CFADS2283-20150904-171056Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:40 2016  d rows = 3759 cols = 17 
+Wed Feb 10 19:49:40 2016  Reading data/picarro//CFADS2283-20150904-181101Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:40 2016  d rows = 2411 cols = 17 
+Wed Feb 10 19:49:40 2016  Reading data/picarro//CFADS2283-20150904-191534Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:40 2016  d rows = 3752 cols = 17 
+Wed Feb 10 19:49:40 2016  Reading data/picarro//CFADS2283-20150904-201540Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:40 2016  d rows = 3750 cols = 17 
+Wed Feb 10 19:49:40 2016  Reading data/picarro//CFADS2283-20150904-211546Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:40 2016  d rows = 2186 cols = 17 
+Wed Feb 10 19:49:40 2016  Reading data/picarro//CFADS2283-20150908-165755Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:40 2016  d rows = 3619 cols = 17 
+Wed Feb 10 19:49:40 2016  Reading data/picarro//CFADS2283-20150908-175802Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:40 2016  d rows = 3628 cols = 17 
+Wed Feb 10 19:49:41 2016  Reading data/picarro//CFADS2283-20150908-185807Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:41 2016  d rows = 3630 cols = 17 
+Wed Feb 10 19:49:41 2016  Reading data/picarro//CFADS2283-20150908-195812Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:41 2016  d rows = 1438 cols = 17 
+Wed Feb 10 19:49:41 2016  Reading data/picarro//CFADS2283-20150908-204058Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:41 2016  d rows = 3640 cols = 17 
+Wed Feb 10 19:49:41 2016  Reading data/picarro//CFADS2283-20150908-214103Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:41 2016  d rows = 1773 cols = 17 
+Wed Feb 10 19:49:41 2016  Reading data/picarro//CFADS2283-20150911-164024Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:41 2016  d rows = 3583 cols = 17 
+Wed Feb 10 19:49:41 2016  Reading data/picarro//CFADS2283-20150911-174029Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:42 2016  d rows = 3634 cols = 17 
+Wed Feb 10 19:49:42 2016  Reading data/picarro//CFADS2283-20150911-184034Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:42 2016  d rows = 2199 cols = 17 
+Wed Feb 10 19:49:42 2016  Reading data/picarro//CFADS2283-20150911-193514Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:42 2016  d rows = 3708 cols = 17 
+Wed Feb 10 19:49:42 2016  Reading data/picarro//CFADS2283-20150911-203519Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:42 2016  d rows = 1625 cols = 17 
+Wed Feb 10 19:49:42 2016  Reading data/picarro//CFADS2283-20150915-170159Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:42 2016  d rows = 3681 cols = 17 
+Wed Feb 10 19:49:42 2016  Reading data/picarro//CFADS2283-20150915-180204Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:42 2016  d rows = 3698 cols = 17 
+Wed Feb 10 19:49:42 2016  Reading data/picarro//CFADS2283-20150915-221653Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:42 2016  d rows = 3752 cols = 17 
+Wed Feb 10 19:49:42 2016  Reading data/picarro//CFADS2283-20150915-231658Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:43 2016  d rows = 3763 cols = 17 
+Wed Feb 10 19:49:43 2016  Reading data/picarro//CFADS2283-20150918-172821Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:43 2016  d rows = 3676 cols = 17 
+Wed Feb 10 19:49:43 2016  Reading data/picarro//CFADS2283-20150918-182826Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:43 2016  d rows = 3716 cols = 17 
+Wed Feb 10 19:49:43 2016  Reading data/picarro//CFADS2283-20150918-192831Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:43 2016  d rows = 3582 cols = 17 
+Wed Feb 10 19:49:43 2016  Reading data/picarro//CFADS2283-20150918-205120Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:43 2016  d rows = 3710 cols = 17 
+Wed Feb 10 19:49:43 2016  Reading data/picarro//CFADS2283-20150918-215125Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:43 2016  d rows = 1382 cols = 17 
+Wed Feb 10 19:49:43 2016  Reading data/picarro//CFADS2283-20150922-165623Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:43 2016  d rows = 3341 cols = 17 
+Wed Feb 10 19:49:43 2016  Reading data/picarro//CFADS2283-20150922-175630Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:44 2016  d rows = 3717 cols = 17 
+Wed Feb 10 19:49:44 2016  Reading data/picarro//CFADS2283-20150922-185635Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:44 2016  d rows = 3749 cols = 17 
+Wed Feb 10 19:49:44 2016  Reading data/picarro//CFADS2283-20150922-195640Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:44 2016  d rows = 2702 cols = 17 
+Wed Feb 10 19:49:44 2016  Reading data/picarro//CFADS2283-20150922-210000Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:44 2016  d rows = 3768 cols = 17 
+Wed Feb 10 19:49:44 2016  Reading data/picarro//CFADS2283-20150922-220005Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:44 2016  d rows = 3774 cols = 17 
+Wed Feb 10 19:49:44 2016  Reading data/picarro//CFADS2283-20150922-230010Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:44 2016  d rows = 678 cols = 17 
+Wed Feb 10 19:49:44 2016  Reading data/picarro//CFADS2283-20150925-163702Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:44 2016  d rows = 3331 cols = 17 
+Wed Feb 10 19:49:44 2016  Reading data/picarro//CFADS2283-20150925-173707Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:44 2016  d rows = 3710 cols = 17 
+Wed Feb 10 19:49:45 2016  Reading data/picarro//CFADS2283-20150925-183713Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:45 2016  d rows = 2940 cols = 17 
+Wed Feb 10 19:49:45 2016  Reading data/picarro//CFADS2283-20150925-194059Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:45 2016  d rows = 3758 cols = 17 
+Wed Feb 10 19:49:45 2016  Reading data/picarro//CFADS2283-20150925-204104Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:45 2016  d rows = 1421 cols = 17 
+Wed Feb 10 19:49:45 2016  Reading data/picarro//CFADS2283-20150929-171746Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:45 2016  d rows = 3507 cols = 17 
+Wed Feb 10 19:49:45 2016  Reading data/picarro//CFADS2283-20150929-181751Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:45 2016  d rows = 3687 cols = 17 
+Wed Feb 10 19:49:45 2016  Reading data/picarro//CFADS2283-20150929-191756Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:46 2016  d rows = 3684 cols = 17 
+Wed Feb 10 19:49:46 2016  Reading data/picarro//CFADS2283-20150929-201801Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:46 2016  d rows = 678 cols = 17 
+Wed Feb 10 19:49:46 2016  Reading data/picarro//CFADS2283-20150929-204449Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:46 2016  d rows = 3759 cols = 17 
+Wed Feb 10 19:49:46 2016  Reading data/picarro//CFADS2283-20150929-214454Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:46 2016  d rows = 3754 cols = 17 
+Wed Feb 10 19:49:46 2016  Reading data/picarro//CFADS2283-20151002-191636Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:46 2016  d rows = 3557 cols = 17 
+Wed Feb 10 19:49:46 2016  Reading data/picarro//CFADS2283-20151002-201640Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:46 2016  d rows = 3687 cols = 17 
+Wed Feb 10 19:49:46 2016  Reading data/picarro//CFADS2283-20151002-211647Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:46 2016  d rows = 1034 cols = 17 
+Wed Feb 10 19:49:46 2016  Reading data/picarro//CFADS2283-20151002-215052Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:46 2016  d rows = 3762 cols = 17 
+Wed Feb 10 19:49:47 2016  Reading data/picarro//CFADS2283-20151002-225057Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:47 2016  d rows = 3275 cols = 17 
+Wed Feb 10 19:49:47 2016  Reading data/picarro//CFADS2283-20151006-175702Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:47 2016  d rows = 3759 cols = 17 
+Wed Feb 10 19:49:47 2016  Reading data/picarro//CFADS2283-20151006-185707Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:47 2016  d rows = 3760 cols = 17 
+Wed Feb 10 19:49:47 2016  Reading data/picarro//CFADS2283-20151006-195712Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:47 2016  d rows = 860 cols = 17 
+Wed Feb 10 19:49:47 2016  Reading data/picarro//CFADS2283-20151006-221426Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:47 2016  d rows = 3755 cols = 17 
+Wed Feb 10 19:49:47 2016  Reading data/picarro//CFADS2283-20151006-231430Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:47 2016  d rows = 3754 cols = 17 
+Wed Feb 10 19:49:47 2016  Reading data/picarro//CFADS2283-20151015-172353Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:48 2016  d rows = 3595 cols = 17 
+Wed Feb 10 19:49:48 2016  Reading data/picarro//CFADS2283-20151015-182358Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:48 2016  d rows = 3694 cols = 17 
+Wed Feb 10 19:49:48 2016  Reading data/picarro//CFADS2283-20151015-192403Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:48 2016  d rows = 2664 cols = 17 
+Wed Feb 10 19:49:48 2016  Reading data/picarro//CFADS2283-20151015-203218Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:49 2016  d rows = 3737 cols = 17 
+Wed Feb 10 19:49:49 2016  Reading data/picarro//CFADS2283-20151015-213224Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:49 2016  d rows = 3440 cols = 17 
+Wed Feb 10 19:49:49 2016  Reading data/picarro//CFADS2283-20151020-174357Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:49 2016  d rows = 3319 cols = 17 
+Wed Feb 10 19:49:49 2016  Reading data/picarro//CFADS2283-20151020-184430Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:49 2016  d rows = 2288 cols = 17 
+Wed Feb 10 19:49:49 2016  Reading data/picarro//CFADS2283-20151020-194445Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:49 2016  d rows = 2850 cols = 17 
+Wed Feb 10 19:49:49 2016  Reading data/picarro//CFADS2283-20151020-211434Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:49 2016  d rows = 3737 cols = 17 
+Wed Feb 10 19:49:49 2016  Reading data/picarro//CFADS2283-20151020-221440Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:49 2016  d rows = 3760 cols = 17 
+Wed Feb 10 19:49:50 2016  Reading data/picarro//CFADS2283-20151027-171013Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:50 2016  d rows = 3591 cols = 17 
+Wed Feb 10 19:49:50 2016  Reading data/picarro//CFADS2283-20151027-181018Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:50 2016  d rows = 3607 cols = 17 
+Wed Feb 10 19:49:50 2016  Reading data/picarro//CFADS2283-20151027-191023Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:50 2016  d rows = 1960 cols = 17 
+Wed Feb 10 19:49:50 2016  Reading data/picarro//CFADS2283-20151027-200015Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:50 2016  d rows = 2714 cols = 17 
+Wed Feb 10 19:49:50 2016  Reading data/picarro//CFADS2283-20151027-210022Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:50 2016  d rows = 2543 cols = 17 
+Wed Feb 10 19:49:50 2016  Reading data/picarro//CFADS2283-20151027-220030Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:50 2016  d rows = 2665 cols = 17 
+Wed Feb 10 19:49:50 2016  Reading data/picarro//CFADS2283-20151027-230038Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:50 2016  d rows = 2660 cols = 17 
+Wed Feb 10 19:49:50 2016  Reading data/picarro//CFADS2283-20151103-181608Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:51 2016  d rows = 3692 cols = 17 
+Wed Feb 10 19:49:51 2016  Reading data/picarro//CFADS2283-20151103-191613Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:51 2016  d rows = 3665 cols = 17 
+Wed Feb 10 19:49:51 2016  Reading data/picarro//CFADS2283-20151103-201618Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:51 2016  d rows = 2285 cols = 17 
+Wed Feb 10 19:49:51 2016  Reading data/picarro//CFADS2283-20151103-211948Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:51 2016  d rows = 3741 cols = 17 
+Wed Feb 10 19:49:51 2016  Reading data/picarro//CFADS2283-20151103-221953Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:51 2016  d rows = 3751 cols = 17 
+Wed Feb 10 19:49:51 2016  Reading data/picarro//CFADS2283-20151103-231959Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:51 2016  d rows = 3746 cols = 17 
+Wed Feb 10 19:49:51 2016  Reading data/picarro//CFADS2283-20151104-002005Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:51 2016  d rows = 1749 cols = 17 
+Wed Feb 10 19:49:51 2016  Reading data/picarro//CFADS2283-20151111-182256Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:52 2016  d rows = 3630 cols = 17 
+Wed Feb 10 19:49:52 2016  Reading data/picarro//CFADS2283-20151111-192300Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:52 2016  d rows = 3691 cols = 17 
+Wed Feb 10 19:49:52 2016  Reading data/picarro//CFADS2283-20151111-202306Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:52 2016  d rows = 3200 cols = 17 
+Wed Feb 10 19:49:52 2016  Reading data/picarro//CFADS2283-20151111-213647Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:52 2016  d rows = 3735 cols = 17 
+Wed Feb 10 19:49:52 2016  Reading data/picarro//CFADS2283-20151111-223653Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:52 2016  d rows = 3741 cols = 17 
+Wed Feb 10 19:49:52 2016  Reading data/picarro//CFADS2283-20151111-233657Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:52 2016  d rows = 3743 cols = 17 
+Wed Feb 10 19:49:52 2016  Reading data/picarro//CFADS2283-20151112-003703Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:53 2016  d rows = 2314 cols = 17 
+Wed Feb 10 19:49:53 2016  Reading data/picarro//CFADS2283-20151120-173411Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:53 2016  d rows = 3630 cols = 17 
+Wed Feb 10 19:49:53 2016  Reading data/picarro//CFADS2283-20151120-183416Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:53 2016  d rows = 3679 cols = 17 
+Wed Feb 10 19:49:53 2016  Reading data/picarro//CFADS2283-20151120-193421Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:53 2016  d rows = 3697 cols = 17 
+Wed Feb 10 19:49:53 2016  Reading data/picarro//CFADS2283-20151120-203427Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:53 2016  d rows = 131 cols = 17 
+Wed Feb 10 19:49:53 2016  Reading data/picarro//CFADS2283-20151120-205311Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:53 2016  d rows = 3726 cols = 17 
+Wed Feb 10 19:49:53 2016  Reading data/picarro//CFADS2283-20151120-215316Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:53 2016  d rows = 2490 cols = 17 
+Wed Feb 10 19:49:53 2016  Reading data/picarro//CFADS2283-20151201-180344Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:54 2016  d rows = 3656 cols = 17 
+Wed Feb 10 19:49:54 2016  Reading data/picarro//CFADS2283-20151201-190350Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:54 2016  d rows = 3605 cols = 17 
+Wed Feb 10 19:49:54 2016  Reading data/picarro//CFADS2283-20151201-200355Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:54 2016  d rows = 2418 cols = 17 
+Wed Feb 10 19:49:54 2016  Reading data/picarro//CFADS2283-20151201-210121Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:54 2016  d rows = 3651 cols = 17 
+Wed Feb 10 19:49:54 2016  Reading data/picarro//CFADS2283-20151201-220127Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:54 2016  d rows = 3656 cols = 17 
+Wed Feb 10 19:49:54 2016  Reading data/picarro//CFADS2283-20151201-230133Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:54 2016  d rows = 3627 cols = 17 
+Wed Feb 10 19:49:54 2016  Reading data/picarro//CFADS2283-20151209-171103Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:55 2016  d rows = 3694 cols = 17 
+Wed Feb 10 19:49:55 2016  Reading data/picarro//CFADS2283-20151209-181108Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:55 2016  d rows = 3718 cols = 17 
+Wed Feb 10 19:49:55 2016  Reading data/picarro//CFADS2283-20151209-191115Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:55 2016  d rows = 3735 cols = 17 
+Wed Feb 10 19:49:55 2016  Reading data/picarro//CFADS2283-20151209-201119Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:55 2016  d rows = 2315 cols = 17 
+Wed Feb 10 19:49:55 2016  Reading data/picarro//CFADS2283-20151209-214909Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:55 2016  d rows = 3753 cols = 17 
+Wed Feb 10 19:49:55 2016  Reading data/picarro//CFADS2283-20151209-224914Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:55 2016  d rows = 3752 cols = 17 
+Wed Feb 10 19:49:55 2016  Reading data/picarro//CFADS2283-20151209-234920Z-DataLog_User.dat.gz 
+Wed Feb 10 19:49:55 2016  d rows = 1229 cols = 17 
+Wed Feb 10 19:49:55 2016  ------------------- 
+Wed Feb 10 19:49:55 2016  Reading in full data set... 
+|==                                                                             |   3%    2 MB|=====                                                                          |   7%    5 MB|========                                                                       |  10%    8 MB|===========                                                                    |  14%   11 MB|==============                                                                 |  18%   14 MB|=================                                                              |  21%   17 MB|====================                                                           |  25%   20 MB|=======================                                                        |  28%   23 MB|=========================                                                      |  32%   26 MB|============================                                                   |  36%   29 MB|===============================                                                |  39%   32 MB|==================================                                             |  43%   35 MB|=====================================                                          |  46%   37 MB|========================================                                       |  50%   40 MB|===========================================                                    |  54%   43 MB|==============================================                                 |  57%   46 MB|================================================                               |  61%   49 MB|===================================================                            |  64%   52 MB|======================================================                         |  68%   55 MB|=========================================================                      |  72%   58 MB|============================================================                   |  75%   61 MB|===============================================================                |  79%   64 MB|==================================================================             |  82%   67 MB|=====================================================================          |  86%   70 MB|========================================================================       |  90%   73 MB|==========================================================================     |  93%   75 MB|=============================================================================  |  97%   78 MB|================================================================================| 100%   81 MB
+Wed Feb 10 19:49:57 2016  rawdata rows = 385485 cols = 18 
+     DATE               TIME           FRAC_DAYS_SINCE_JAN1 FRAC_HRS_SINCE_JAN1
+ Length:385485      Length:385485      Min.   :242.4        Min.   :5817       
+ Class :character   Class :character   1st Qu.:253.4        1st Qu.:6082       
+ Mode  :character   Mode  :character   Median :271.6        Median :6518       
+                                       Mean   :281.0        Mean   :6743       
+                                       3rd Qu.:306.6        3rd Qu.:7358       
+                                       Max.   :342.7        Max.   :8224       
+  JULIAN_DAYS      EPOCH_TIME         ALARM_STATUS       INST_STATUS     species 
+ Min.   :243.4   Min.   :1.441e+09   Min.   :    0.00   Min.   :  0   Min.   :1  
+ 1st Qu.:254.4   1st Qu.:1.442e+09   1st Qu.:    0.00   1st Qu.:963   1st Qu.:1  
+ Median :272.6   Median :1.444e+09   Median :    0.00   Median :963   Median :2  
+ Mean   :282.0   Mean   :1.444e+09   Mean   :    0.51   Mean   :963   Mean   :2  
+ 3rd Qu.:307.6   3rd Qu.:1.447e+09   3rd Qu.:    0.00   3rd Qu.:963   3rd Qu.:3  
+ Max.   :343.7   Max.   :1.450e+09   Max.   :65536.00   Max.   :963   Max.   :3  
+  MPVPosition     solenoid_valves      CH4           CH4_dry           CO2        
+ Min.   : 0.000   Min.   :0       Min.   :1.561   Min.   :1.613   Min.   : 392.0  
+ 1st Qu.:10.000   1st Qu.:0       1st Qu.:1.892   1st Qu.:1.922   1st Qu.: 451.6  
+ Median :10.000   Median :0       Median :1.926   Median :1.955   Median : 477.8  
+ Mean   : 9.379   Mean   :0       Mean   :1.933   Mean   :1.966   Mean   : 494.0  
+ 3rd Qu.:10.000   3rd Qu.:0       3rd Qu.:1.967   3rd Qu.:2.000   3rd Qu.: 516.1  
+ Max.   :16.000   Max.   :0       Max.   :2.287   Max.   :2.802   Max.   :1405.3  
+    CO2_dry            H2O          h2o_reported        file          
+ Min.   : 399.1   Min.   :0.3706   Min.   :0.4744   Length:385485     
+ 1st Qu.: 458.8   1st Qu.:0.6336   1st Qu.:0.8044   Class :character  
+ Median : 486.3   Median :1.6507   Median :2.0338   Mode  :character  
+ Mean   : 504.6   Mean   :1.3325   Mean   :1.6424                     
+ 3rd Qu.: 528.3   3rd Qu.:1.8339   3rd Qu.:2.2479                     
+ Max.   :1446.0   Max.   :2.5484   Max.   :3.0640                     
+Wed Feb 10 19:49:58 2016  Writing output file... 
+Wed Feb 10 19:49:58 2016  Saving outputs//rawdata.csv 
+Wed Feb 10 19:50:07 2016  gzipping outputs//rawdata.csv 
+Wed Feb 10 19:50:10 2016  All done with 1-data.R 
+Wed Feb 10 19:50:10 2016  Closing 1-data.R.log.txt flags = 0 
+-------
+R version 3.2.3 (2015-12-10)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.11.3 (El Capitan)
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] R.utils_2.1.0     R.oo_1.19.0       R.methodsS3_1.7.0 stringr_1.0.0    
+[5] lubridate_1.5.0   dplyr_0.4.3       ggplot2_2.0.0     luzlogr_0.1.2    
+[9] readr_0.2.2      
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.3       assertthat_0.1    R6_2.1.1          grid_3.2.3       
+ [5] plyr_1.8.3        gtable_0.1.2      DBI_0.3.1         magrittr_1.5     
+ [9] scales_0.3.0      stringi_1.0-1     lazyeval_0.1.10   tools_3.2.3      
+[13] munsell_0.4.2     parallel_3.2.3    rsconnect_0.4.1.4 colorspace_1.2-6 

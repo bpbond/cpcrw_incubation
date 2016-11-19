@@ -1,0 +1,90 @@
+Thu Mar 31 11:11:07 2016  Opening outputs//3-qc/3-qc.R.log.txt 
+Thu Mar 31 11:11:07 2016  Welcome to 3-qc.R 
+Thu Mar 31 11:11:07 2016  Reading in summary data... 
+Thu Mar 31 11:11:07 2016  summarydata rows = 1443 cols = 27 
+Thu Mar 31 11:11:07 2016  ------------------- 
+Thu Mar 31 11:11:07 2016  Number of samples for each core, by date: 
+Thu Mar 31 11:11:07 2016  Saving outputs//3-qc/samples_by_date.csv 
+Thu Mar 31 11:11:07 2016  Saving diagnostic for samples_by_date 
+Thu Mar 31 11:11:09 2016  Saving outputs//3-qc/samples_by_date.pdf 
+        Core n()
+1       AL 1  43
+2      AL 10  44
+3      AL 12  45
+4      AL 13  43
+5      AL 14  45
+6      AL 15  46
+7      AL 16  43
+8      AL 18  47
+9      AL 19  46
+10      AL 2  39
+11     AL 20  44
+12     AL 21  47
+13     AL 22  43
+14     AL 23  48
+15     AL 24  46
+16     AL 25  44
+17     AL 26  45
+18     AL 27  46
+19     AL 28  46
+20     AL 29  44
+21     AL 34  44
+22     AL 36  44
+23     AL 37  47
+24     AL 38  45
+25     AL 39  44
+26      AL 5  44
+27      AL 6  46
+28      AL 7  44
+29      AL 8  44
+30      AL 9  47
+31 Ambient20  62
+32  Ambient4  38
+Thu Mar 31 11:11:09 2016  Saving outputs//3-qc/samplelist.csv 
+Thu Mar 31 11:11:09 2016  Summaries for max_CH4 and max_CO2: 
+Thu Mar 31 11:11:09 2016  ------------------- 
+Thu Mar 31 11:11:09 2016  Checking for orphan samples... 
+Thu Mar 31 11:11:09 2016  Visualizing orphan samples... 
+Thu Mar 31 11:11:09 2016  Saving diagnostic for orphan_samples 
+Thu Mar 31 11:11:10 2016  Saving outputs//3-qc/orphan_samples.pdf 
+Thu Mar 31 11:11:11 2016  Saving diagnostic for missing_mass 
+Thu Mar 31 11:11:12 2016  Saving outputs//3-qc/missing_mass.pdf 
+Thu Mar 31 11:11:13 2016  ------------------- 
+Thu Mar 31 11:11:13 2016  Computing per-date summaries... 
+Thu Mar 31 11:11:13 2016  Saving outputs//treatment_summary.csv 
+Thu Mar 31 11:11:13 2016  ------------------- 
+Thu Mar 31 11:11:13 2016  Computing core CVs... 
+Source: local data frame [6 x 7]
+
+        Date  Core CO2_ppm_s_cv CH4_ppb_s_cv min_CO2_time max_CO2_time                    samplenums
+       <chr> <chr>        <dbl>        <dbl>        <dbl>        <dbl>                         <chr>
+1 2015-10-27 AL 18     1.566356    0.6496715     4.260333     20.07100 1074 1080 1100 1106 1126 1132
+2 2015-10-27  AL 9     1.564908    1.7166353     4.682000     20.08283 1077 1083 1103 1109 1129 1135
+3 2015-09-01 AL 12     1.553454    0.5276070     8.017667     14.74167                   113 119 125
+4 2015-10-27 AL 23     1.513746    0.7808752     5.827000     19.94050 1073 1079 1099 1105 1125 1131
+5 2015-10-27 AL 21     1.499387    1.6941611     5.762500     19.54817 1076 1082 1102 1108 1128 1134
+6 2015-09-29  AL 5     1.414214    0.5409451     7.549500      9.74750                       728 734
+[1] NA
+[1] 0.6721542
+Thu Mar 31 11:17:19 2016  Saving outputs//3-qc/CO2_core_cv.pdf 
+Thu Mar 31 11:17:35 2016  Saving outputs//3-qc/CH4_core_cv.pdf 
+Thu Mar 31 11:17:48 2016  Closing outputs//3-qc/3-qc.R.log.txt flags = 0 
+-------
+R version 3.2.3 (2015-12-10)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.11.4 (El Capitan)
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] luzlogr_0.2.0    stringr_1.0.0    lubridate_1.5.0  readr_0.2.2      dplyr_0.4.3.9001 ggplot2_2.0.0   
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.4          digest_0.6.9         assertthat_0.1       grid_3.2.3           plyr_1.8.3          
+ [6] R6_2.1.2             gtable_0.1.2         DBI_0.3.1            magrittr_1.5         scales_0.3.0        
+[11] stringi_1.0-1        lazyeval_0.1.10.9000 labeling_0.3         tools_3.2.3          munsell_0.4.2       
+[16] rsconnect_0.4.1.11   colorspace_1.2-6     tibble_1.0          

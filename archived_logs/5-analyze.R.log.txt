@@ -1,0 +1,656 @@
+Sat Nov 19 09:47:23 2016  Opening outputs//5-analyze/5-analyze.R.log.txt 
+Sat Nov 19 09:47:23 2016  Welcome to 5-analyze.R 
+Sat Nov 19 09:47:23 2016  Transform into long format and handle outliers... 
+Sat Nov 19 09:47:23 2016  Transforming... 
+Sat Nov 19 09:47:23 2016  ------------------- 
+Sat Nov 19 09:47:23 2016  Reading data/uga-soil_samples.csv 
+# A tibble: 1 x 8
+  DOC_mg_kg_mean C_percent_mean N_percent_mean CN_mean DOC_mg_kg_sd
+           <dbl>          <dbl>          <dbl>   <dbl>        <dbl>
+1       157.9278          1.195     0.05777778      NA     55.73671
+# ... with 3 more variables: C_percent_sd <dbl>, N_percent_sd <dbl>,
+#   CN_sd <dbl>
+Analysis of Variance Table
+
+Response: DOC_mg_kg
+                      Df Sum Sq Mean Sq F value Pr(>F)
+Treatment              2   2184  1091.8  0.3401 0.7149
+Temperature            1   5738  5738.1  1.7876 0.1933
+Treatment:Temperature  1    914   913.9  0.2847 0.5983
+Residuals             25  80251  3210.0               
+Analysis of Variance Table
+
+Response: C_percent
+                      Df Sum Sq Mean Sq F value Pr(>F)
+Treatment              2  5.444 2.72192  1.9423 0.1644
+Temperature            1  0.099 0.09882  0.0705 0.7928
+Treatment:Temperature  1  0.011 0.01127  0.0080 0.9293
+Residuals             25 35.035 1.40141               
+Analysis of Variance Table
+
+Response: N_percent
+                      Df   Sum Sq   Mean Sq F value Pr(>F)
+Treatment              2 0.014338 0.0071692  2.1244 0.1406
+Temperature            1 0.000338 0.0003375  0.1000 0.7544
+Treatment:Temperature  1 0.000504 0.0005042  0.1494 0.7024
+Residuals             25 0.084367 0.0033747               
+Analysis of Variance Table
+
+Response: CN
+                      Df Sum Sq Mean Sq F value  Pr(>F)  
+Treatment              2  20.24  10.119  0.3009 0.74291  
+Temperature            1  31.37  31.370  0.9328 0.34376  
+Treatment:Temperature  1 188.35 188.354  5.6010 0.02636 *
+Residuals             24 807.09  33.629                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Sat Nov 19 09:47:23 2016  ------------------- 
+Sat Nov 19 09:47:23 2016  Computing normalized fluxes... 
+Sat Nov 19 09:47:23 2016  Saving outputs//fluxdata_final.csv 
+Sat Nov 19 09:47:23 2016  Saving outputs//5-analyze/fluxsummary.csv 
+Sat Nov 19 09:47:23 2016  ------------------- 
+Sat Nov 19 09:47:23 2016  Water content over time... 
+Sat Nov 19 09:47:23 2016  Saving outputs//5-analyze/figureA.pdf 
+Sat Nov 19 09:47:23 2016  ------------------- 
+Sat Nov 19 09:47:23 2016  Treatment effect on water content... 
+Linear mixed-effects model fit by REML
+ Data: fluxdata20 
+        AIC       BIC   logLik
+  -3829.862 -3804.104 1919.931
+
+Random effects:
+ Formula: ~1 | Core
+        (Intercept)   Residual
+StdDev:  0.07503578 0.05181231
+
+Fixed effects: WC_gravimetric ~ Treatment 
+                                 Value  Std.Error   DF  t-value p-value
+(Intercept)                 0.11101504 0.03073662 1261 3.611817  0.0003
+TreatmentControlled drought 0.00669358 0.04346677   15 0.153993  0.8797
+TreatmentField moisture     0.22279880 0.04346962   15 5.125391  0.0001
+ Correlation: 
+                            (Intr) TrtmCd
+TreatmentControlled drought -0.707       
+TreatmentField moisture     -0.707  0.500
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-1.5983495 -0.6820130 -0.1434692  0.2259525  3.4476118 
+
+Number of Observations: 1279
+Number of Groups: 18 
+Sat Nov 19 09:47:23 2016  ------------------- 
+Sat Nov 19 09:47:23 2016  Fluxes over time... 
+Sat Nov 19 09:47:24 2016  Saving outputs//5-analyze/figureB.pdf 
+Sat Nov 19 09:47:24 2016  Saving outputs//5-analyze/figureC.pdf 
+Sat Nov 19 09:47:24 2016  ------------------- 
+Sat Nov 19 09:47:24 2016  Running Tukey HSD tests on cumulative emissions... 
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = cum_flux_mgC_gC ~ Treatment + Temperature, data = subset(fd_cumulative_core, Gas == "CO2"))
+
+$Treatment
+                                       diff        lwr       upr     p adj
+Drought-Controlled drought        -6.285108 -17.780846  5.210629 0.3767582
+Field moisture-Controlled drought 14.561546   3.065809 26.057284 0.0110543
+Field moisture-Drought            20.846654  11.460424 30.232885 0.0000250
+
+$Temperature
+        diff      lwr      upr     p adj
+20-4 11.0938 4.005914 18.18168 0.0034517
+
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = cum_flux_mgC_gC ~ Treatment + Temperature, data = subset(fd_cumulative_core, Gas == "CH4"))
+
+$Treatment
+                                           diff           lwr          upr
+Drought-Controlled drought         4.154514e-07 -3.713613e-06 4.544516e-06
+Field moisture-Controlled drought  4.616918e-08 -4.082895e-06 4.175234e-06
+Field moisture-Drought            -3.692822e-07 -3.740649e-06 3.002085e-06
+                                      p adj
+Drought-Controlled drought        0.9661720
+Field moisture-Controlled drought 0.9995745
+Field moisture-Drought            0.9600466
+
+$Temperature
+             diff           lwr          upr     p adj
+20-4 1.628736e-06 -9.171049e-07 4.174577e-06 0.1999732
+
+Sat Nov 19 09:47:24 2016  Making plot... 
+Sat Nov 19 09:47:24 2016  Saving outputs//5-analyze/figureD.pdf 
+Sat Nov 19 09:47:25 2016  ------------------- 
+Sat Nov 19 09:47:25 2016  Merging cumulative fluxes with CN data... 
+Sat Nov 19 09:47:25 2016  Fitting CO2 model for cumulative fluxes... 
+Start:  AIC=135.17
+cum_flux_mgC_gC ~ Temperature + Treatment + N_percent + DOC_mg_kg + 
+    CN
+
+              Df Sum of Sq    RSS    AIC
+- CN           1     12.65 1904.7 133.36
+- DOC_mg_kg    1     32.04 1924.1 133.65
+<none>                     1892.0 135.16
+- N_percent    1    305.47 2197.5 137.51
+- Temperature  1   1050.66 2942.7 145.97
+- Treatment    2   2126.41 4018.4 153.01
+
+Step:  AIC=133.36
+cum_flux_mgC_gC ~ Temperature + Treatment + N_percent + DOC_mg_kg
+
+              Df Sum of Sq    RSS    AIC
+- DOC_mg_kg    1     27.32 1932.0 131.77
+<none>                     1904.7 133.36
++ CN           1     12.65 1892.0 135.16
+- N_percent    1    296.19 2200.9 135.55
+- Temperature  1   1048.41 2953.1 144.08
+- Treatment    2   2115.88 4020.6 151.03
+
+Step:  AIC=131.77
+cum_flux_mgC_gC ~ Temperature + Treatment + N_percent
+
+              Df Sum of Sq    RSS    AIC
+<none>                     1932.0 131.77
++ DOC_mg_kg    1     27.32 1904.7 133.36
++ CN           1      7.93 1924.1 133.65
+- N_percent    1    290.36 2222.4 133.83
+- Temperature  1   1029.67 2961.7 142.16
+- Treatment    2   2094.25 4026.3 149.07
+
+Call:
+lm(formula = cum_flux_mgC_gC ~ Temperature + Treatment + N_percent + 
+    DOC_mg_kg + CN, data = fd_cumulative_r3, subset = Gas == 
+    "CO2")
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-15.163  -5.176  -1.018   1.368  24.052 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(>|t|)   
+(Intercept)              3.82870    9.59607   0.399  0.69375   
+Temperature20           14.30520    4.09278   3.495  0.00205 **
+TreatmentDrought         0.77759    5.17181   0.150  0.88186   
+TreatmentField moisture 19.66254    5.20819   3.775  0.00104 **
+N_percent               60.70572   32.21047   1.885  0.07276 . 
+DOC_mg_kg               -0.02007    0.03288  -0.610  0.54787   
+CN                       0.11430    0.29797   0.384  0.70496   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 9.274 on 22 degrees of freedom
+Multiple R-squared:  0.6835,	Adjusted R-squared:  0.5971 
+F-statistic: 7.917 on 6 and 22 DF,  p-value: 0.0001258
+
+Sat Nov 19 09:47:25 2016  Fitting CH4 model for cumulative fluxes... 
+Start:  AIC=-724.53
+cum_flux_mgC_gC ~ Temperature + Treatment + N_percent + DOC_mg_kg + 
+    CN
+
+              Df  Sum of Sq        RSS     AIC
+- Treatment    2 6.8368e-12 2.5946e-10 -727.75
+- DOC_mg_kg    1 3.6438e-12 2.5627e-10 -726.11
+- CN           1 4.5392e-12 2.5716e-10 -726.01
+- Temperature  1 1.4429e-11 2.6705e-10 -724.92
+- N_percent    1 1.7708e-11 2.7033e-10 -724.56
+<none>                      2.5262e-10 -724.53
+
+Step:  AIC=-727.75
+cum_flux_mgC_gC ~ Temperature + N_percent + DOC_mg_kg + CN
+
+              Df  Sum of Sq        RSS     AIC
+- DOC_mg_kg    1 2.3530e-12 2.6181e-10 -729.49
+- CN           1 5.5218e-12 2.6498e-10 -729.14
+- Temperature  1 9.6382e-12 2.6910e-10 -728.69
+- N_percent    1 1.4918e-11 2.7438e-10 -728.13
+<none>                      2.5946e-10 -727.75
++ Treatment    2 6.8368e-12 2.5262e-10 -724.53
+
+Step:  AIC=-729.49
+cum_flux_mgC_gC ~ Temperature + N_percent + CN
+
+              Df  Sum of Sq        RSS     AIC
+- CN           1 6.5056e-12 2.6832e-10 -730.78
+- Temperature  1 7.8594e-12 2.6967e-10 -730.63
+- N_percent    1 1.6470e-11 2.7828e-10 -729.72
+<none>                      2.6181e-10 -729.49
++ DOC_mg_kg    1 2.3530e-12 2.5946e-10 -727.75
++ Treatment    2 5.5459e-12 2.5627e-10 -726.11
+
+Step:  AIC=-730.78
+cum_flux_mgC_gC ~ Temperature + N_percent
+
+              Df  Sum of Sq        RSS     AIC
+- Temperature  1 1.1250e-11 2.7957e-10 -731.59
+- N_percent    1 1.4085e-11 2.8240e-10 -731.29
+<none>                      2.6832e-10 -730.78
++ CN           1 6.5056e-12 2.6181e-10 -729.49
++ DOC_mg_kg    1 3.3367e-12 2.6498e-10 -729.14
++ Treatment    2 6.2377e-12 2.6208e-10 -727.46
+
+Step:  AIC=-731.59
+cum_flux_mgC_gC ~ N_percent
+
+              Df  Sum of Sq        RSS     AIC
+- N_percent    1 1.5821e-11 2.9539e-10 -731.99
+<none>                      2.7957e-10 -731.59
++ Temperature  1 1.1250e-11 2.6832e-10 -730.78
++ CN           1 9.8961e-12 2.6967e-10 -730.63
++ DOC_mg_kg    1 9.3740e-13 2.7863e-10 -729.68
++ Treatment    2 2.2430e-12 2.7733e-10 -727.82
+
+Step:  AIC=-731.99
+cum_flux_mgC_gC ~ 1
+
+              Df  Sum of Sq        RSS     AIC
+<none>                      2.9539e-10 -731.99
++ N_percent    1 1.5821e-11 2.7957e-10 -731.59
++ Temperature  1 1.2986e-11 2.8240e-10 -731.29
++ CN           1 7.0355e-12 2.8835e-10 -730.69
++ DOC_mg_kg    1 1.6255e-12 2.9377e-10 -730.15
++ Treatment    2 2.6100e-14 2.9536e-10 -727.99
+
+Call:
+lm(formula = cum_flux_mgC_gC ~ 1, data = fd_cumulative_r3, subset = Gas == 
+    "CH4")
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-5.403e-06 -1.946e-06 -5.980e-08  1.046e-06  1.069e-05 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 5.946e-06  6.031e-07   9.858 1.32e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.248e-06 on 28 degrees of freedom
+
+Sat Nov 19 09:47:25 2016  ------------------- 
+Sat Nov 19 09:47:25 2016  Calculating drought reduction... 
+Sat Nov 19 09:47:25 2016  ------------------- 
+Sat Nov 19 09:47:25 2016  Calculating Q10 based on cumulative fluxes... 
+Sat Nov 19 09:47:25 2016  ------------------- 
+Sat Nov 19 09:47:25 2016  Computing emissions ratios... 
+Source: local data frame [5 x 3]
+Groups: Treatment [3]
+
+           Treatment Temperature CO2CH4_ratio
+              <fctr>      <fctr>        <dbl>
+1     Field moisture           4      5284722
+2     Field moisture          20      6199729
+3 Controlled drought          20      3376598
+4            Drought           4      1447141
+5            Drought          20      2643862
+Sat Nov 19 09:47:25 2016  ------------------- 
+Sat Nov 19 09:47:25 2016  Graphing flux distributions and testing for normality... 
+Sat Nov 19 09:47:25 2016  Saving outputs//5-analyze/distribution_raw.pdf 
+Sat Nov 19 09:47:26 2016  Saving outputs//5-analyze/distribution_log.pdf 
+Sat Nov 19 09:47:26 2016  Shapiro-Wilk normality test on raw data: 
+Source: local data frame [2 x 4]
+Groups: Gas [2]
+
+    Gas statistic      p.value                      method
+  <chr>     <dbl>        <dbl>                      <fctr>
+1   CH4 0.4696536 1.716615e-47 Shapiro-Wilk normality test
+2   CO2 0.5251745 1.294526e-48 Shapiro-Wilk normality test
+Sat Nov 19 09:47:26 2016  Saving outputs//5-analyze/shapiro.csv 
+Sat Nov 19 09:47:26 2016  Shapiro-Wilk normality test on log-transformed data: 
+Source: local data frame [2 x 4]
+Groups: Gas [2]
+
+    Gas statistic      p.value                      method
+  <chr>     <dbl>        <dbl>                      <fctr>
+1   CH4 0.9889920 6.903556e-07 Shapiro-Wilk normality test
+2   CO2 0.9923874 8.557591e-06 Shapiro-Wilk normality test
+Sat Nov 19 09:47:26 2016  Saving outputs//5-analyze/shapiro_trans.csv 
+Sat Nov 19 09:47:26 2016  ------------------- 
+Sat Nov 19 09:47:26 2016  Fitting CO2 model... 
+Start:  AIC=2997.12
+log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric + (Temperature + 
+    WC_gravimetric) * (N_percent + DOC_mg_kg)
+
+                             Df    AIC
+- WC_gravimetric:DOC_mg_kg    1 2995.4
+- Temperature:DOC_mg_kg       1 2996.3
+<none>                          2997.1
+- Temperature:N_percent       1 2997.3
+- Temperature:WC_gravimetric  1 2999.2
+- WC_gravimetric:N_percent    1 3007.3
+
+Step:  AIC=2995.43
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    DOC_mg_kg + Temperature:WC_gravimetric + Temperature:N_percent + 
+    Temperature:DOC_mg_kg + WC_gravimetric:N_percent
+
+                             Df    AIC
+- Temperature:DOC_mg_kg       1 2994.4
+<none>                          2995.4
+- Temperature:N_percent       1 2995.6
++ WC_gravimetric:DOC_mg_kg    1 2997.1
+- Temperature:WC_gravimetric  1 2997.2
+- WC_gravimetric:N_percent    1 3006.4
+
+Step:  AIC=2994.4
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    DOC_mg_kg + Temperature:WC_gravimetric + Temperature:N_percent + 
+    WC_gravimetric:N_percent
+
+                             Df    AIC
+- DOC_mg_kg                   1 2992.6
+<none>                          2994.4
+- Temperature:N_percent       1 2995.0
++ Temperature:DOC_mg_kg       1 2995.4
+- Temperature:WC_gravimetric  1 2996.0
++ WC_gravimetric:DOC_mg_kg    1 2996.3
+- WC_gravimetric:N_percent    1 3006.4
+
+Step:  AIC=2992.58
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    Temperature:WC_gravimetric + Temperature:N_percent + WC_gravimetric:N_percent
+
+                             Df    AIC
+<none>                          2992.6
+- Temperature:N_percent       1 2993.3
+- Temperature:WC_gravimetric  1 2994.2
++ DOC_mg_kg                   1 2994.4
+- WC_gravimetric:N_percent    1 3006.1
+Start:  AIC=2991.12
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    DOC_mg_kg + third + Temperature:WC_gravimetric + Temperature:N_percent + 
+    Temperature:DOC_mg_kg + WC_gravimetric:N_percent + WC_gravimetric:DOC_mg_kg + 
+    WC_gravimetric:third + Temperature:third
+
+                             Df    AIC
+- WC_gravimetric:third        2 2987.4
+- Temperature:WC_gravimetric  1 2989.2
+- Temperature:N_percent       1 2989.3
+- WC_gravimetric:DOC_mg_kg    1 2989.4
+- Temperature:DOC_mg_kg       1 2990.0
+<none>                          2991.1
+- Temperature:third           2 2993.5
+- WC_gravimetric:N_percent    1 2998.4
+
+Step:  AIC=2987.41
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    DOC_mg_kg + third + Temperature:WC_gravimetric + Temperature:N_percent + 
+    Temperature:DOC_mg_kg + WC_gravimetric:N_percent + WC_gravimetric:DOC_mg_kg + 
+    Temperature:third
+
+                             Df    AIC
+- Temperature:WC_gravimetric  1 2985.4
+- Temperature:N_percent       1 2985.6
+- WC_gravimetric:DOC_mg_kg    1 2985.7
+- Temperature:DOC_mg_kg       1 2986.3
+<none>                          2987.4
+- Temperature:third           2 2989.5
++ WC_gravimetric:third        2 2991.1
+- WC_gravimetric:N_percent    1 2994.8
+
+Step:  AIC=2985.43
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    DOC_mg_kg + third + Temperature:N_percent + Temperature:DOC_mg_kg + 
+    WC_gravimetric:N_percent + WC_gravimetric:DOC_mg_kg + Temperature:third
+
+                             Df    AIC
+- Temperature:N_percent       1 2983.7
+- WC_gravimetric:DOC_mg_kg    1 2983.7
+- Temperature:DOC_mg_kg       1 2984.4
+<none>                          2985.4
++ Temperature:WC_gravimetric  1 2987.4
++ WC_gravimetric:third        2 2989.2
+- Temperature:third           2 2990.2
+- WC_gravimetric:N_percent    1 2992.8
+
+Step:  AIC=2983.72
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    DOC_mg_kg + third + Temperature:DOC_mg_kg + WC_gravimetric:N_percent + 
+    WC_gravimetric:DOC_mg_kg + Temperature:third
+
+                             Df    AIC
+- WC_gravimetric:DOC_mg_kg    1 2982.1
+- Temperature:DOC_mg_kg       1 2982.9
+<none>                          2983.7
++ Temperature:N_percent       1 2985.4
++ Temperature:WC_gravimetric  1 2985.6
++ WC_gravimetric:third        2 2987.5
+- Temperature:third           2 2988.6
+- WC_gravimetric:N_percent    1 2992.1
+
+Step:  AIC=2982.1
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    DOC_mg_kg + third + Temperature:DOC_mg_kg + WC_gravimetric:N_percent + 
+    Temperature:third
+
+                             Df    AIC
+- Temperature:DOC_mg_kg       1 2981.1
+<none>                          2982.1
++ WC_gravimetric:DOC_mg_kg    1 2983.7
++ Temperature:N_percent       1 2983.7
++ Temperature:WC_gravimetric  1 2983.8
++ WC_gravimetric:third        2 2986.0
+- Temperature:third           2 2986.6
+- WC_gravimetric:N_percent    1 2991.0
+
+Step:  AIC=2981.09
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    DOC_mg_kg + third + WC_gravimetric:N_percent + Temperature:third
+
+                             Df    AIC
+- DOC_mg_kg                   1 2979.3
+<none>                          2981.1
++ Temperature:DOC_mg_kg       1 2982.1
++ Temperature:N_percent       1 2982.5
++ Temperature:WC_gravimetric  1 2982.6
++ WC_gravimetric:DOC_mg_kg    1 2982.9
++ WC_gravimetric:third        2 2984.9
+- Temperature:third           2 2985.6
+- WC_gravimetric:N_percent    1 2990.4
+
+Step:  AIC=2979.34
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + N_percent + 
+    third + WC_gravimetric:N_percent + Temperature:third
+
+                             Df    AIC
+<none>                          2979.3
++ Temperature:N_percent       1 2980.7
++ Temperature:WC_gravimetric  1 2980.8
++ DOC_mg_kg                   1 2981.1
++ WC_gravimetric:third        2 2983.2
+- Temperature:third           2 2983.8
+- WC_gravimetric:N_percent    1 2989.7
+Sat Nov 19 09:47:28 2016  ------------------- 
+Sat Nov 19 09:47:28 2016  Fitting CH4 model... 
+Start:  AIC=-10872.19
+log(flux_µgC_gC_day1) ~ Temperature * WC_gravimetric + WC_gravimetric * 
+    third + (Temperature + WC_gravimetric) * (N_percent + DOC_mg_kg)
+
+                             Df    AIC
+- Temperature:N_percent       1 -10874
+- Temperature:DOC_mg_kg       1 -10874
+- Temperature:WC_gravimetric  1 -10874
+<none>                          -10872
+- WC_gravimetric:DOC_mg_kg    1 -10871
+- WC_gravimetric:N_percent    1 -10870
+- WC_gravimetric:third        2 -10870
+
+Step:  AIC=-10874.17
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + third + 
+    N_percent + DOC_mg_kg + Temperature:WC_gravimetric + WC_gravimetric:third + 
+    Temperature:DOC_mg_kg + WC_gravimetric:N_percent + WC_gravimetric:DOC_mg_kg
+
+                             Df    AIC
+- Temperature:DOC_mg_kg       1 -10876
+- Temperature:WC_gravimetric  1 -10875
+<none>                          -10874
+- WC_gravimetric:DOC_mg_kg    1 -10873
++ Temperature:N_percent       1 -10872
+- WC_gravimetric:third        2 -10872
+- WC_gravimetric:N_percent    1 -10870
+
+Step:  AIC=-10875.98
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + third + 
+    N_percent + DOC_mg_kg + Temperature:WC_gravimetric + WC_gravimetric:third + 
+    WC_gravimetric:N_percent + WC_gravimetric:DOC_mg_kg
+
+                             Df    AIC
+- Temperature:WC_gravimetric  1 -10877
+<none>                          -10876
+- WC_gravimetric:DOC_mg_kg    1 -10875
++ Temperature:DOC_mg_kg       1 -10874
++ Temperature:N_percent       1 -10874
+- WC_gravimetric:third        2 -10874
+- WC_gravimetric:N_percent    1 -10872
+
+Step:  AIC=-10877.22
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + third + 
+    N_percent + DOC_mg_kg + WC_gravimetric:third + WC_gravimetric:N_percent + 
+    WC_gravimetric:DOC_mg_kg
+
+                             Df    AIC
+- Temperature                 1 -10879
+<none>                          -10877
+- WC_gravimetric:DOC_mg_kg    1 -10877
++ Temperature:WC_gravimetric  1 -10876
++ Temperature:N_percent       1 -10875
++ Temperature:DOC_mg_kg       1 -10875
+- WC_gravimetric:third        2 -10874
+- WC_gravimetric:N_percent    1 -10874
+
+Step:  AIC=-10879.16
+log(flux_µgC_gC_day1) ~ WC_gravimetric + third + N_percent + 
+    DOC_mg_kg + WC_gravimetric:third + WC_gravimetric:N_percent + 
+    WC_gravimetric:DOC_mg_kg
+
+                           Df    AIC
+<none>                        -10879
+- WC_gravimetric:DOC_mg_kg  1 -10879
++ Temperature               1 -10877
+- WC_gravimetric:third      2 -10876
+- WC_gravimetric:N_percent  1 -10876
+Start:  AIC=-10870.02
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + third + 
+    N_percent + DOC_mg_kg + Temperature:WC_gravimetric + WC_gravimetric:third + 
+    Temperature:N_percent + Temperature:DOC_mg_kg + WC_gravimetric:N_percent + 
+    WC_gravimetric:DOC_mg_kg + Temperature:third
+
+                             Df    AIC
+- Temperature:third           2 -10872
+- Temperature:DOC_mg_kg       1 -10872
+- Temperature:N_percent       1 -10872
+- Temperature:WC_gravimetric  1 -10870
+<none>                          -10870
+- WC_gravimetric:DOC_mg_kg    1 -10869
+- WC_gravimetric:N_percent    1 -10868
+- WC_gravimetric:third        2 -10867
+
+Step:  AIC=-10872.19
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + third + 
+    N_percent + DOC_mg_kg + Temperature:WC_gravimetric + WC_gravimetric:third + 
+    Temperature:N_percent + Temperature:DOC_mg_kg + WC_gravimetric:N_percent + 
+    WC_gravimetric:DOC_mg_kg
+
+                             Df    AIC
+- Temperature:N_percent       1 -10874
+- Temperature:DOC_mg_kg       1 -10874
+- Temperature:WC_gravimetric  1 -10874
+<none>                          -10872
+- WC_gravimetric:DOC_mg_kg    1 -10871
+- WC_gravimetric:N_percent    1 -10870
++ Temperature:third           2 -10870
+- WC_gravimetric:third        2 -10870
+
+Step:  AIC=-10874.17
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + third + 
+    N_percent + DOC_mg_kg + Temperature:WC_gravimetric + WC_gravimetric:third + 
+    Temperature:DOC_mg_kg + WC_gravimetric:N_percent + WC_gravimetric:DOC_mg_kg
+
+                             Df    AIC
+- Temperature:DOC_mg_kg       1 -10876
+- Temperature:WC_gravimetric  1 -10875
+<none>                          -10874
+- WC_gravimetric:DOC_mg_kg    1 -10873
++ Temperature:N_percent       1 -10872
+- WC_gravimetric:third        2 -10872
++ Temperature:third           2 -10872
+- WC_gravimetric:N_percent    1 -10870
+
+Step:  AIC=-10875.98
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + third + 
+    N_percent + DOC_mg_kg + Temperature:WC_gravimetric + WC_gravimetric:third + 
+    WC_gravimetric:N_percent + WC_gravimetric:DOC_mg_kg
+
+                             Df    AIC
+- Temperature:WC_gravimetric  1 -10877
+<none>                          -10876
+- WC_gravimetric:DOC_mg_kg    1 -10875
++ Temperature:DOC_mg_kg       1 -10874
++ Temperature:N_percent       1 -10874
+- WC_gravimetric:third        2 -10874
++ Temperature:third           2 -10873
+- WC_gravimetric:N_percent    1 -10872
+
+Step:  AIC=-10877.22
+log(flux_µgC_gC_day1) ~ Temperature + WC_gravimetric + third + 
+    N_percent + DOC_mg_kg + WC_gravimetric:third + WC_gravimetric:N_percent + 
+    WC_gravimetric:DOC_mg_kg
+
+                             Df    AIC
+- Temperature                 1 -10879
+<none>                          -10877
+- WC_gravimetric:DOC_mg_kg    1 -10877
++ Temperature:WC_gravimetric  1 -10876
++ Temperature:N_percent       1 -10875
++ Temperature:DOC_mg_kg       1 -10875
+- WC_gravimetric:third        2 -10874
+- WC_gravimetric:N_percent    1 -10874
++ Temperature:third           2 -10874
+
+Step:  AIC=-10879.16
+log(flux_µgC_gC_day1) ~ WC_gravimetric + third + N_percent + 
+    DOC_mg_kg + WC_gravimetric:third + WC_gravimetric:N_percent + 
+    WC_gravimetric:DOC_mg_kg
+
+                           Df    AIC
+<none>                        -10879
+- WC_gravimetric:DOC_mg_kg  1 -10879
++ Temperature               1 -10877
+- WC_gravimetric:third      2 -10876
+- WC_gravimetric:N_percent  1 -10876
+Sat Nov 19 09:47:30 2016  ------------------- 
+Sat Nov 19 09:47:30 2016  Making table 1... 
+Sat Nov 19 09:47:30 2016  All done with 5-analyze.R 
+Sat Nov 19 09:47:30 2016  Closing outputs//5-analyze/5-analyze.R.log.txt flags = 0 
+-------
+R version 3.3.1 (2016-06-21)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.11.6 (El Capitan)
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] luzlogr_0.2.0   stringr_1.1.0   lubridate_1.6.0 readr_1.0.0    
+ [5] dplyr_0.5.0     ggplot2_2.1.0   agricolae_1.2-4 reshape2_1.4.1 
+ [9] broom_0.4.1     tidyr_0.6.0     nlme_3.1-128    MASS_7.3-45    
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.7       spdep_0.6-8       formatR_1.4      
+ [4] plyr_1.8.4        LearnBayes_2.15   tools_3.3.1      
+ [7] boot_1.3-18       digest_0.6.10     gtable_0.2.0     
+[10] evaluate_0.9      tibble_1.1        lattice_0.20-33  
+[13] Matrix_1.2-6      psych_1.6.9       DBI_0.4-1        
+[16] yaml_2.1.13       parallel_3.3.1    coda_0.18-1      
+[19] knitr_1.14        cluster_2.0.4     gtools_3.5.0     
+[22] combinat_0.0-8    grid_3.3.1        R6_2.1.3         
+[25] foreign_0.8-66    rmarkdown_1.1     sp_1.2-3         
+[28] gdata_2.17.0      klaR_0.6-12       deldir_0.1-12    
+[31] magrittr_1.5      scales_0.4.0      htmltools_0.3.5  
+[34] splines_3.3.1     gmodels_2.16.2    assertthat_0.1   
+[37] mnormt_1.5-4      colorspace_1.2-6  labeling_0.3     
+[40] stringi_1.1.2     lazyeval_0.2.0    munsell_0.4.3    
+[43] AlgDesign_1.1-7.3

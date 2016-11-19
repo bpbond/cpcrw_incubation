@@ -1,0 +1,88 @@
+Sat Nov 19 08:08:57 2016  Opening outputs//4-fluxes/4-fluxes.R.log.txt 
+Sat Nov 19 08:08:57 2016  Welcome to 4-fluxes.R 
+Sat Nov 19 08:08:57 2016  summarydata rows = 1443 cols = 27 
+Sat Nov 19 08:08:57 2016  Computing water contents... 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+0.02043 0.08162 0.19390 0.21320 0.29610 0.77040 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+0.02208 0.08820 0.20630 0.19290 0.27490 0.43190 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  21.60   35.94   42.02   43.08   49.96   64.89 
+Sat Nov 19 08:08:59 2016  Saving outputs//4-fluxes/WC_gravimetric.pdf 
+Sat Nov 19 08:09:01 2016  WC_gravimetric summary by core: 
+    Core        min       mean       max
+1  AL 28 0.02042870 0.07753193 0.2153567
+2  AL 21 0.03512526 0.07921108 0.2283142
+3   AL 2 0.02877950 0.08623502 0.1966307
+4  AL 18 0.04473194 0.08970881 0.2365969
+5   AL 1 0.03379187 0.09143346 0.2141148
+6  AL 23 0.05218199 0.09369971 0.2387187
+7  AL 26 0.03232135 0.09478852 0.1892574
+8   AL 6 0.02957486 0.10440532 0.2737097
+9  AL 24 0.04370346 0.11292525 0.2338405
+10 AL 15 0.05631090 0.11862432 0.2456379
+11 AL 14 0.03505367 0.11963919 0.2421786
+12 AL 12 0.05528194 0.12272814 0.2568097
+13 AL 37 0.04036499 0.12549111 0.2960099
+14 AL 16 0.06859640 0.13927578 0.2377936
+15 AL 19 0.07131583 0.14721094 0.2988951
+16  AL 9 0.10052910 0.16125183 0.3324868
+17 AL 27 0.13161263 0.18024512 0.2963951
+18 AL 39 0.19076525 0.20070744 0.2131555
+19 AL 34 0.21315168 0.22883794 0.2482300
+20  AL 7 0.21373103 0.23118161 0.2539711
+21 AL 13 0.16108435 0.25164578 0.3856839
+22 AL 36 0.27516468 0.29057973 0.3204669
+23 AL 38 0.27754566 0.29187060 0.3096574
+24 AL 20 0.27092311 0.30947030 0.3712860
+25 AL 29 0.29417671 0.31830895 0.3611589
+26 AL 22 0.34036750 0.35607168 0.3718059
+27 AL 25 0.35185185 0.38569335 0.4360768
+28  AL 5 0.38429994 0.39990081 0.4214997
+29 AL 10 0.49981960 0.52588968 0.5453999
+30  AL 8 0.67998579 0.71338451 0.7703783
+Sat Nov 19 08:09:01 2016  Identifying and plotting outliers... 
+Sat Nov 19 08:09:04 2016  Saving diagnostic for CO2_outliers 
+Sat Nov 19 08:09:05 2016  Saving outputs//4-fluxes/CO2_outliers.pdf 
+Sat Nov 19 08:09:07 2016  Saving diagnostic for CH4_outliers 
+Sat Nov 19 08:09:08 2016  Saving outputs//4-fluxes/CH4_outliers.pdf 
+Sat Nov 19 08:09:10 2016  Saving diagnostic for CV_outliers 
+Sat Nov 19 08:09:11 2016  Saving outputs//4-fluxes/CV_outliers.pdf 
+Sat Nov 19 08:09:12 2016  Saving outputs//fluxdata.csv 
+Sat Nov 19 08:09:12 2016  Computing cumulative C respired... 
+Sat Nov 19 08:09:12 2016  Cumulative flux diagnostic plots... 
+Sat Nov 19 08:09:13 2016  Saving outputs//4-fluxes/cumulative_CO2.pdf 
+Sat Nov 19 08:09:14 2016  Saving outputs//4-fluxes/cumulative_CH4.pdf 
+Sat Nov 19 08:09:14 2016  Calculating flux summary datasets... 
+Sat Nov 19 08:09:15 2016  Saving outputs//fluxdata_cum_core.csv 
+Sat Nov 19 08:09:15 2016  Flux summary plot... 
+Sat Nov 19 08:09:15 2016  Saving diagnostic for cumulative_gas 
+Sat Nov 19 08:09:16 2016  Saving outputs//4-fluxes/cumulative_gas.pdf 
+Sat Nov 19 08:09:17 2016  Saving outputs//fluxdata_cum.csv 
+Sat Nov 19 08:09:17 2016  All done with 4-fluxes.R 
+Sat Nov 19 08:09:17 2016  Closing outputs//4-fluxes/4-fluxes.R.log.txt flags = 0 
+-------
+R version 3.3.1 (2016-06-21)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.11.6 (El Capitan)
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] R.utils_2.3.0     R.oo_1.20.0       R.methodsS3_1.7.1 luzlogr_0.2.0     stringr_1.1.0    
+ [6] lubridate_1.6.0   readr_1.0.0       dplyr_0.5.0       ggplot2_2.1.0     agricolae_1.2-4  
+[11] reshape2_1.4.1    broom_0.4.1       tidyr_0.6.0       nlme_3.1-128      MASS_7.3-45      
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.7       spdep_0.6-8       plyr_1.8.4        LearnBayes_2.15   tools_3.3.1      
+ [6] digest_0.6.10     boot_1.3-18       tibble_1.1        gtable_0.2.0      lattice_0.20-33  
+[11] Matrix_1.2-6      psych_1.6.9       DBI_0.4-1         parallel_3.3.1    coda_0.18-1      
+[16] knitr_1.14        cluster_2.0.4     gtools_3.5.0      combinat_0.0-8    grid_3.3.1       
+[21] R6_2.1.3          foreign_0.8-66    sp_1.2-3          gdata_2.17.0      klaR_0.6-12      
+[26] deldir_0.1-12     magrittr_1.5      scales_0.4.0      splines_3.3.1     gmodels_2.16.2   
+[31] assertthat_0.1    mnormt_1.5-4      colorspace_1.2-6  labeling_0.3      stringi_1.1.2    
+[36] lazyeval_0.2.0    munsell_0.4.3     AlgDesign_1.1-7.3

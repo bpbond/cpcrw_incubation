@@ -1,0 +1,66 @@
+Sat Nov 19 08:06:47 2016  Opening outputs//2-summarize/2-summarize.R.log.txt 
+Sat Nov 19 08:06:47 2016  Welcome to 2-summarize.R 
+Sat Nov 19 08:06:47 2016  Reading in raw data... 
+Sat Nov 19 08:06:50 2016  rawdata rows = 385485 cols = 6 
+     DATE               TIME            MPVPosition        CH4_dry         CO2_dry      
+ Length:385485      Length:385485      Min.   : 0.000   Min.   :1.613   Min.   : 399.1  
+ Class :character   Class :character   1st Qu.:10.000   1st Qu.:1.922   1st Qu.: 458.8  
+ Mode  :character   Mode  :character   Median :10.000   Median :1.955   Median : 486.3  
+                                       Mean   : 9.379   Mean   :1.966   Mean   : 504.6  
+                                       3rd Qu.:10.000   3rd Qu.:2.000   3rd Qu.: 528.3  
+                                       Max.   :16.000   Max.   :2.802   Max.   :1446.0  
+  h2o_reported   
+ Min.   :0.4744  
+ 1st Qu.:0.8044  
+ Median :2.0338  
+ Mean   :1.6424  
+ 3rd Qu.:2.2479  
+ Max.   :3.0640  
+Sat Nov 19 08:06:50 2016  Removing fractional MPVPosition 
+Sat Nov 19 08:06:50 2016  Converting date/time info to POSIXct... 
+Sat Nov 19 08:06:50 2016  First timestamp: 
+[1] "2015-08-31 17:18:40 UTC"
+Sat Nov 19 08:06:50 2016  Last timestamp: 
+[1] "2015-12-10 00:08:59 UTC"
+Sat Nov 19 08:06:50 2016  Sorting by date... 
+Sat Nov 19 08:06:50 2016  Assigning sample numbers... 
+Sat Nov 19 08:06:51 2016  Computing elapsed seconds... 
+Sat Nov 19 08:06:51 2016  Loading valve map data... 
+Sat Nov 19 08:06:51 2016  Converting date/time info to POSIXct... 
+Sat Nov 19 08:06:51 2016  Computing summary statistics for each sample... 
+Sat Nov 19 08:06:52 2016  Removing N=1 and MPVPosition=0 data, and merging... 
+Sat Nov 19 08:06:52 2016  Merging Picarro and mapping data... 
+Sat Nov 19 08:06:52 2016  Reading and merging treatment data... 
+Sat Nov 19 08:06:52 2016  Computing per-second rates... 
+Sat Nov 19 08:06:52 2016  Saving a comparison of MPVPosition sequence in Picarro data and valvemap 
+Sat Nov 19 08:06:52 2016  Saving outputs//2-summarize/MPVPosition_checkdata.csv 
+Sat Nov 19 08:06:52 2016  Saving outputs//summarydata.csv 
+Sat Nov 19 08:06:52 2016  Saving outputs//rawdata_samples.csv 
+Sat Nov 19 08:06:55 2016  gzipping outputs//rawdata_samples.csv 
+Sat Nov 19 08:06:56 2016  All done with 2-summarize.R 
+Sat Nov 19 08:06:56 2016  Closing outputs//2-summarize/2-summarize.R.log.txt flags = 0 
+-------
+R version 3.3.1 (2016-06-21)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.11.6 (El Capitan)
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] R.utils_2.3.0     R.oo_1.20.0       R.methodsS3_1.7.1 luzlogr_0.2.0     stringr_1.1.0    
+ [6] lubridate_1.6.0   readr_1.0.0       dplyr_0.5.0       ggplot2_2.1.0     agricolae_1.2-4  
+[11] reshape2_1.4.1    broom_0.4.1       tidyr_0.6.0       nlme_3.1-128      MASS_7.3-45      
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.7       spdep_0.6-8       plyr_1.8.4        LearnBayes_2.15   tools_3.3.1      
+ [6] digest_0.6.10     boot_1.3-18       tibble_1.1        gtable_0.2.0      lattice_0.20-33  
+[11] Matrix_1.2-6      psych_1.6.9       DBI_0.4-1         parallel_3.3.1    coda_0.18-1      
+[16] knitr_1.14        cluster_2.0.4     gtools_3.5.0      combinat_0.0-8    grid_3.3.1       
+[21] R6_2.1.3          foreign_0.8-66    sp_1.2-3          gdata_2.17.0      klaR_0.6-12      
+[26] deldir_0.1-12     magrittr_1.5      scales_0.4.0      splines_3.3.1     gmodels_2.16.2   
+[31] assertthat_0.1    mnormt_1.5-4      colorspace_1.2-6  labeling_0.3      stringi_1.1.2    
+[36] lazyeval_0.2.0    munsell_0.4.3     AlgDesign_1.1-7.3
