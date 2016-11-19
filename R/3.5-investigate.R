@@ -49,9 +49,9 @@ investigate <- function(smry, summarydata, rawdata,
       sd_gas <- subset(summarydata, samplenum %in% samplenums)
       print(sd_gas)
       
-      p_closeup <- ggplot(sd_gas, aes_string("DATETIME", gasvar, fill="Core")) + 
+      p_closeup <- ggplot(sd_gas, aes_string("DATETIME", gasvar, fill = "Core")) + 
         geom_bar(stat='identity') + 
-        ggtitle(paste("Closeup look at", group_hash, "on incday", unique(sd_gas$incday))) +
+        ggtitle(paste("Closeup look at", group_hash, "on inctime_days", unique(sd_gas$inctime_days))) +
         geom_text(aes_string(label = "samplenum", color = gas_outlier), vjust = -0.5)
       print(p_closeup)
       save_plot(paste0(gas, "_closeup_", group_hash), ptype = ".png")
@@ -86,13 +86,12 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in raw data...")
-rawdata <- readr::read_csv(RAWDATA_FILE)
+rawdata <- read_csv(RAWDATA_FILE, col_types = "ccddddiiiddddddddc")
 printlog("Reading in summary data...")
-summarydata <- read_csv(SUMMARYDATA_FILE)
+summarydata <- read_csv(SUMMARYDATA_CLEAN_FILE)
 summarydata$DATETIME <- ymd_hms(summarydata$DATETIME)
 printlog("Reading in treatment summaries...")
-tsummary <- read_csv(TREATMENT_SUMMARYDATA)
-tsummary$Date <- ymd(tsummary$Date)
+tsummary <- read_csv(TREATMENTS, skip = 1)
 
 dev <- 3.2
 printlog("Computing outlier flags using deviation of", dev, "...")
@@ -109,7 +108,7 @@ printlog("Looking at high-variability CO2...")
 tsummary %>%
   filter(!is.na(CO2_ppm_s_sd), Treatment != "Ambient") %>% 
   arrange(desc(CO2_ppm_s_sd)) %>%
-  select(Date, Treatment, Temperature, CO2_ppm_s_sd, CO2_ppm_s, incday, samplenums) ->
+  select(Date, Treatment, Temperature, CO2_ppm_s_sd, CO2_ppm_s, inctime_days, samplenums) ->
   smry_co2
 
 save_data(smry_co2)
@@ -129,7 +128,7 @@ printlog("Looking at high-variability CH4...")
 tsummary %>%
   filter(!is.na(CH4_ppb_s_sd), Treatment != "Ambient") %>% 
   arrange(desc(CH4_ppb_s_sd)) %>%
-  select(Date, Treatment, Temperature, CH4_ppb_s_sd, CH4_ppb_s, incday, samplenums) ->
+  select(Date, Treatment, Temperature, CH4_ppb_s_sd, CH4_ppb_s, inctime_days, samplenums) ->
   smry_ch4
 
 save_data(smry_ch4)
