@@ -77,7 +77,7 @@ The effects of temperature, gravimetric water content, percent C, percent N, and
 
 Cumulative respiration for each core and gas was calculated by linearly interpolating flux rates between measurement dates and summing respired C over the entire incubation. The effect of temperature and treatment (drought, controlled drought, or field moisture conditions) on cumulative gas fluxes was evaluated with a post-hoc Tukey Honest Significant Differences test. Temperature sensitivity (Q~10~) was calculated for each gas and treatment as $\frac{F_2}{F_1}^{\left( \frac{10}{T_2-T_1} \right)}$ where *F~1~* and *F~2~* are the cumulative gas fluxes (mg C g C^-1^) at temperatures *T~1~* and *T~2~* (°C), respectively.
 
-All data analysis and statistics were performed using `r R.version.string` {R Development Core Team, 2016 #4314}. This experiment was run as an 'open experiment' {Bond-Lamberty, 2016 #4388} with all analysis code, data (from raw instrument data to final summaries), diagnostics, etc., available at https://github.com/bpbond/cpcrw_incubation. The summarized flux data backing the main results have been archived at [*DOI to be filled in*].
+All data analysis and statistics were performed using `r R.version.string` {R Development Core Team, 2016 #4314}. This experiment was run as an 'open experiment' {Bond-Lamberty, 2016 #4388} with all analysis code, data (from raw instrument data to final summaries), diagnostics, etc., available at https://github.com/bpbond/cpcrw_incubation. The summarized flux data backing the main results have been archived under the DOI m9.figshare.4240436.v1.
 
 #### 3 Results
 
