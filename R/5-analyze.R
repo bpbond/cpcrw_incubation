@@ -1,21 +1,19 @@
 # Final analysis script: statistical tests, final plots, etc.
 # Called by the R Markdown document (the manuscript).
-# This has become a really big script...ugh
-# Ben Bond-Lamberty January 2016
+# Ben Bond-Lamberty November 2016
+
+library(MASS)       # 7.3-45
+library(nlme)       # 3.1-128
+library(tidyr)      # 0.6.0
+library(broom)      # 0.4.1
+library(reshape2)   # 1.4.1
+library(agricolae)  # 1.2-4
 
 source("R/0-functions.R")
 
 SCRIPTNAME  	<- "5-analyze.R"
 
-library(nlme)       # 3.1-128
-#library(MASS)       # 7.3-45
-library(tidyr)      # 0.6.0
-library(broom)      # 0.4.1
-library(reshape2)   # 1.4.1
-library(agricolae)  # v1.2.4
-
-# ==============================================================================
-# Main 
+# ---------- Main ---------- 
 
 openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # open log
 
@@ -29,9 +27,9 @@ fluxdata_orig <- read_csv(FLUXDATA_FILE, col_types = "icddddddciddddddlldl")
 fluxdata_orig$Treatment <- factor(fluxdata_orig$Treatment, 
                                   levels = c("Field moisture", "Controlled drought", "Drought"))
 
-# -----------------------------------------------------------------------------
-# Transform into long format and handle outliers
+# ---------- Transform into long format ---------- 
 
+printlog("Transform into long format and handle outliers...")
 co2_mad_outlier_count <- sum(fluxdata_orig$CO2_outlier, na.rm = TRUE)
 ch4_mad_outlier_count <- sum(fluxdata_orig$CH4_outlier, na.rm = TRUE)
 mad_outlier_count <- co2_mad_outlier_count + ch4_mad_outlier_count
@@ -50,6 +48,8 @@ fluxdata_orig %>%
   select(-variable) ->
   fluxdata
 
+# ---------- Outliers ---------- 
+
 pre_outlier_count <- nrow(fluxdata)
 
 # Combine the gas-specific outlier fields into a single outlier flag
@@ -62,8 +62,7 @@ fluxdata %>%
   filter(flux_mgC_hr > 0 & !outlier) ->
   fluxdata
 
-# -----------------------------------------------------------------------------
-# Read C, N, DOC data; summarise; test for treatment effects; merge with fluxdata
+# ---------- Read C, N, DOC data; summarise; test; merge with fluxdata ---------- 
 
 printlog(SEPARATOR)
 printlog("Reading", CNDATA_FILE)
@@ -88,7 +87,7 @@ cndata %>%
   print ->
   cndata_summary
 
-# This isn't working via dplyr - compute manually
+# These steps aren't working via dplyr...
 cndata_summary$CN_mean <- mean(cndata$CN, na.rm = TRUE)
 cndata_summary$CN_sd <- sd(cndata$CN, na.rm = TRUE)
 
@@ -105,8 +104,7 @@ fluxdata %>%
   left_join(cndata_orig, by = "Core") ->
   fluxdata
 
-# -----------------------------------------------------------------------------
-# Compute normalized fluxes
+# ---------- Compute normalized fluxes ----------
 
 printlog(SEPARATOR)
 printlog("Computing normalized fluxes...")
@@ -118,8 +116,7 @@ fluxdata %>%
 
 save_data(fluxdata, fn = FLUXDATA_FINAL_FILE, scriptfolder = FALSE)
 
-# -----------------------------------------------------------------------------
-# Summarize flux information for easy access by markdown code later
+# ---------- Summarize flux information for easy access by markdown code later ----------
 
 fluxdata %>%
   group_by(Gas) %>%
@@ -132,12 +129,10 @@ colnames(fluxsummary) <- nms
 
 save_data(fluxsummary)
 
-# -----------------------------------------------------------------------------
-# Water content over time figure and data
+# ---------- Water content over time figure and data ----------
 
 printlog(SEPARATOR)
 printlog("Water content over time...")
-
 figureA <- ggplot(fluxdata_orig, aes(inctime_days, WC_gravimetric, color=Treatment, group=Core)) +
   geom_point() + geom_line() + 
   facet_grid(~Temperature) + 
@@ -190,9 +185,7 @@ names(gwcendsd) <- gwcend$Treatment
 vwcbegin <- subset(vwc_alltrt, stage == "Beginning")
 vwcend <- subset(vwc_alltrt, stage == "End")
 
-
-# -----------------------------------------------------------------------------
-# Did 'Treatment' affect water content?
+# ---------- Did 'Treatment' affect water content? ----------
 
 printlog(SEPARATOR)
 printlog("Treatment effect on water content...")
@@ -210,8 +203,7 @@ p_trt_wc <- summary(m_wc)$tTable["TreatmentControlled drought", "p-value"]
 
 # No significant difference between Drought and Controlled drought in the 20C chamber
 
-# -----------------------------------------------------------------------------
-# Fluxes over time figure
+# ---------- Fluxes over time figure ----------
 
 printlog(SEPARATOR)
 printlog("Fluxes over time...")
@@ -246,8 +238,7 @@ fluxdata_figsBC %>%
 save_plot("figureB", figureB)
 save_plot("figureC", figureC)
 
-# -----------------------------------------------------------------------------
-# Cumulative flux figure and Tukey HSD tests
+# ---------- Cumulative flux figure and Tukey HSD tests ----------
 
 printlog(SEPARATOR)
 printlog("Running Tukey HSD tests on cumulative emissions...")
@@ -311,9 +302,10 @@ figureD <- figureD + geom_text(data = labeldata,
                                aes(label = M), 
                                position = position_dodge(width = 1))
 
-# -----------------------------------------------------------------------------
-# Test effects of %C, %N, etc. on cumulative fluxes (per Referee 3 suggestion)
+# ---------- Test effects of %C, %N, etc. on cumulative fluxes ---------- 
+# (per Referee 3 suggestion)
 
+printlog(SEPARATOR)
 printlog("Merging cumulative fluxes with CN data...")
 fd_cumulative_core %>%
   left_join(cndata_orig, by = "Core") ->
@@ -336,9 +328,10 @@ m_ch4_cum <- lm(cum_flux_mgC_gC ~ Temperature + Treatment +
 step_ch4_cum <- MASS::stepAIC(m_ch4_cum, direction = "both")
 print(summary(step_ch4_cum))
 
-# -----------------------------------------------------------------------------
-# Calculate drought reduction (%)
+# ---------- Calculate drought reduction (%) ----------
 
+printlog(SEPARATOR)
+printlog("Calculating drought reduction...")
 fluxdata_cumulative %>% 
   filter(Treatment %in% c("Drought", "Field moisture"), Gas == "CO2") %>% 
   dcast(Temperature ~ Treatment, value.var = "cum_flux_mgC_gC") %>% 
@@ -346,9 +339,11 @@ fluxdata_cumulative %>%
   drought_effect
 rownames(drought_effect) <- drought_effect$Temperature
 
-# -----------------------------------------------------------------------------
-# Q10 based on cumulative fluxes
+# ---------- Q10 based on cumulative fluxes ---------- 
 # TODO: I hate the hardcoded temperature values below!
+
+printlog(SEPARATOR)
+printlog("Calculating Q10 based on cumulative fluxes...")
 
 stopifnot(length(unique(fluxdata_cumulative$Temperature)) == 2)
 fluxdata_cumulative %>%
@@ -368,8 +363,7 @@ fluxdata_cumulative %>%
   wfpsQ10_cumulative
 rownames(wfpsQ10_cumulative) <- wfpsQ10_cumulative$Treatment
 
-# -----------------------------------------------------------------------------
-# CO2:CH4 emissions ratio
+# ---------- CO2:CH4 emissions ratio ----------
 
 printlog(SEPARATOR)
 printlog("Computing emissions ratios...")
@@ -397,11 +391,11 @@ max(gas_ratio$CO2CH4_ratio / 1e6) %>%
 maxtrt <- gas_ratio$Treatment[which.max(gas_ratio$CO2CH4_ratio)]
 maxtemp <- gas_ratio$Temperature[which.max(gas_ratio$CO2CH4_ratio)]
 
-# -----------------------------------------------------------------------------
-# Examine data distribution
+# ---------- Examine data distribution ----------
 # Log-transforming doesn't fix the lack of normality in our data,
 # but it's a major improvement; see graphs.
 
+printlog(SEPARATOR)
 printlog("Graphing flux distributions and testing for normality...")
 p <- ggplot(fluxdata, aes(x = flux_µgC_gC_day)) + geom_histogram(bins = 30)
 p <- p + facet_grid(~Gas, scales = "free") + ggtitle("Distribution of raw data")
@@ -431,8 +425,7 @@ fluxdata %>%
   shapiro_trans
 save_data(shapiro_trans)
 
-# -----------------------------------------------------------------------------
-# Effects of temperature, moisture, C, N, etc. on gas fluxes
+# ---------- Effects of temperature, moisture, C, N, etc. on gas fluxes ----------
 
 # Fit gases separately, just for simplicity
 printlog(SEPARATOR)
@@ -488,14 +481,15 @@ m_ch4_lme_thirds <- update(m_ch4_lme, ~ . +
 step_ch4_lme_thirds <- MASS::stepAIC(m_ch4_lme_thirds, direction = "both")
 ch4_wc_time <- step_ch4_lme_thirds$coefficients$fixed["WC_gravimetric:third(34.3,67.7]"]
 
-# -----------------------------------------------------------------------------
-# Compute outlier and exclusion numbers, to report in manuscript
+# ---------- Compute outlier and exclusion numbers ----------
 rn    <- length(readLines(REMOVEDDATA_FILE))
 sdn   <- length(readLines(SUMMARYDATA_FILE))
 fluxn <- nrow(fluxdata)
 
-# -----------------------------------------------------------------------------
-# Make Table 1 - a lot of work for such a dinky thing!
+# ---------- Make Table 1 ---------- 
+# A lot of work for such a dinky thing!
+
+printlog(SEPARATOR)
 printlog("Making table 1...")
 TABLE1_ROUNDING <- 2
 # Summarise the relevant variables for each core (across entire incubation)
@@ -556,10 +550,13 @@ table1_means$value_sd <- table1_sds$value
 
 # Jeez, finally! Give cells a nice x ± y format
 table1_means %>%
-  mutate(entry = ifelse(finite, paste(value, "±", value_sd), "-")) %>%
+  mutate(Treatment = factor(Treatment, levels = c("Field moisture",
+                                                  "Controlled drought",
+                                                  "Drought",
+                                                  "Pre-incubation")),
+         entry = ifelse(finite, paste(value, "±", value_sd), "-")) %>%
   dcast(Variable ~ Treatment, value.var = "entry") -> 
   table1
-
 
 printlog("All done with", SCRIPTNAME)
 closelog()
