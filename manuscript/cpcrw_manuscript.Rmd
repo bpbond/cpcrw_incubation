@@ -1,7 +1,11 @@
 ---
-output: word_document
+output:
+  html_document: default
+  word_document: default
 ---
 [//]: This Rmarkdown file generates the Biogeosciences manuscript
+[//]: Built using rmarkdown 1.1, RStudio 1.0.44, and R 3.3.1
+[//]: November 23, 2016
 
 ---
 title: Temperature and moisture effects on greenhouse gas emissions from deep active-layer boreal soils
@@ -15,10 +19,9 @@ output: html_document
 *Correspondence to*: Ben Bond-Lamberty (bondlamberty@pnnl.gov)
 
 ```{r setup, echo=FALSE, fig.keep='none', message=FALSE, results='hide'}
-library(dplyr, warn.conflicts = FALSE)
-
-# Run the main analysis script, which will leave figures, tables, and data 
-# in memory for us. Need to temporarily change the working directory to do so.
+# Run the main analysis script, which will leave figures, tables, 
+# and data in memory for us to access. 
+# Need to temporarily change the working directory to do so.
 olddir <- getwd()
 setwd("../")
 source("R/5-analyze.R")
@@ -103,7 +106,9 @@ Rises in boreal air temperatures, and unpredictable precipitation changes, are c
 
 A number of studies have measured microbial respiration and GHG fluxes very close to our study site. Morishita et al. {, 2014 #4316} quantified GHG fluxes at CPCRW and nearby forests, and found CO~2~ production to be correlated with both temperature and moisture in upland Cryosols, consistent with our results. They found however that CH~4~ uptake was driven by temperature only. Waldrop et al. {, 2010 #4380} incubated active-layer and permafrost soils from *Picea mariana* sites near Fairbanks, AK, observing aerobic Q~10~ values of 9.0 (active layer) and 2.3 (permafrost) from -5 to 5 °C, and flux rates of 0.001-0.10 µmol CH~4~ day^-1^ g^-1^ (~`r pn(0.001 * 16 / 0.012 / 1000, 3)`-`r pn(0.1 * 16 / 0.012 / 1000, 3)` ng C g C^-1^ day^-1^), and ~1-5 µg C-CO~2~ hr^-1^ g^-1^ (~`r pn(1 * 24 / 0.012, 0)`-`r pn(5 * 24 / 0.012, 0)` µg C g C^-1^ day^-1^), considerably higher than the CO~2~ rates observed here. During the first 100 days of an incubation of Fairbanks-area 0-10 cm mineral soils, Neff and Hooper {, 2002 #4390} observed fluxes of ~`r pn(0.2 * 1000 * 12/44, 0)`-`r pn(1.5 * 1000 * 12/44, 0)` µg C-CO~2~ g C^-1^ day^-1^, in line with the results here, while Wickland and Neff {, 2008 #1820} reported that temperature and moisture exhibited interactive and similar-magnitude effects on decomposition in *P. mariana* soils. Finally, Sierra et al. {, 2016 #4504} incubated homogenized organic soils from CPCRW and observed interactions between high temperatures, moisture, and oxygen concentration.
 
-A number of synthesis studies have produced robust results documenting the dynamics and C feedback potential of Arctic and boreal soils; comparing to these results is useful because although the response of soil biota to stresses such as drought tends to differ between soil types, organisms, and vegetation, it is often broadly similar across biomes and climatic conditions {Manzoni, 2012 #3545}. Using two meta-analyses of aerobic and anaerobic permafrost soil incubations, Schädel et al. {, 2016 #4444} showed that C release was highly sensitive to temperature, and that soils released far more (220-520%) C under aerobic conditions. Our incubation was fully aerobic, but its results are consistent with the conclusion that respiration in the form of CO~2~ is likely to dominate the high latitude C feedback, and that aerobic soils, and the conditions under which currently waterlogged soils may drain, deserve particular attention. In terms of absolute flux rates, in a pan-Arctic synthesis of anaerobic soil incubations, Treat et al. {, 2015 #4217} reported mean CO~2~ rates of 47 (all mineral soils) and 101 (for 20-100 cm soils) µg C-CO~2~ g C^-1^ day^-1^, somewhat lower than our aerobic incubation results. Treat et al. {, 2014 #4213} also found CO~2~ and CH~4~ emissions to be strongly correlated with temperature and moisture based on an incubation of Alaskan peats. Whether climate change makes northern regions wetter or driers is thus a critical factor affecting the quantity and form of C release.
+A number of synthesis studies have produced robust results documenting the dynamics and C feedback potential of Arctic and boreal soils; comparing to these results is useful because although the response of soil biota to stresses such as drought tends to differ between soil types, organisms, and vegetation, it is often broadly similar across biomes and climatic conditions {Manzoni, 2012 #3545}. Using two meta-analyses of aerobic and anaerobic permafrost soil incubations, Schädel et al. {, 2016 #4444} showed that C release was highly sensitive to temperature, and that soils released far more (220-520%) C under aerobic conditions. Our incubation was fully aerobic, but its results are consistent with the conclusion that respiration in the form of CO~2~ is likely to dominate the high latitude C feedback, and that aerobic soils, and the conditions under which currently waterlogged soils may drain, deserve particular attention. In terms of absolute flux rates, Treat et al. {, 2015 #4217} reported mean CO~2~ rates of 47 (all mineral soils) and 101 (for 20-100 cm soils) µg C-CO~2~ g C^-1^ day^-1^ from a pan-Arctic synthesis of anaerobic soil incubations, somewhat lower than our aerobic incubation results. Treat et al. {, 2014 #4213} also found CO~2~ and CH~4~ emissions to be strongly correlated with temperature and moisture based on an incubation of Alaskan peats. Whether climate change makes northern regions wetter or driers is thus a critical factor affecting the quantity and form of C release.
+
+The drought treatment imposed in this experiment reduced soil C fluxes by `r pn(drought_effect["20", "Reduction"], 0)`% - `r pn(drought_effect["4", "Reduction"], 0)`%. The importance of this result depends, in part, on the spatial extent and intensity of precipitation changes across the boreal and Arctic this century. There is a detectable anthropogenic influence in high latitude precipitation {Wan, 2015 #4478}, and its changes in which exhibit high spatial variability: drier and warmer conditions in boreal Eurasia {Buermann, 2014 #3992}, for example, but growing season length increases in interior Alaska with no increase in precipitation {Wendler, 2009 #4477}. This spatial variability will interact with permafrost thaw dynamics to produce a complex patchwork of soil moisture changes {Zhang, 2012 #4479}{Watts, 2012 #4505}. This high uncertainty in this area makes it all the more important to understand the interactive effects of soil moisture and temperature on decomposition and GHG emissions {Sierra, 2015 #4203}.
 
 **4.1 Temperature versus moisture sensitivity for cumulative emissions**
 
