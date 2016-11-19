@@ -21,11 +21,11 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 
 printlog("Welcome to", SCRIPTNAME)
 
-treatment_data <- read_csv(TREATMENTS, skip = 1)
+treatment_data <- read_csv(TREATMENTS, skip = 1, col_types = "cci")
 
-coredata <- read_csv(COREDATA_FILE, skip = 1)
+coredata <- read_csv(COREDATA_FILE, skip = 1, col_types = "cddddd")
 
-fluxdata_orig <- read_csv(FLUXDATA_FILE)
+fluxdata_orig <- read_csv(FLUXDATA_FILE, col_types = "icddddddciddddddlldl")
 fluxdata_orig$Treatment <- factor(fluxdata_orig$Treatment, 
                                   levels = c("Field moisture", "Controlled drought", "Drought"))
 
@@ -67,7 +67,7 @@ fluxdata %>%
 
 printlog(SEPARATOR)
 printlog("Reading", CNDATA_FILE)
-read_csv(CNDATA_FILE) %>%
+read_csv(CNDATA_FILE, col_types = "cididdc") %>%
   select(DOC_mg_kg,	C_percent, N_percent, Core) %>%
   group_by(Core) %>%
   # Summarise by core, averaging duplicates
@@ -104,7 +104,6 @@ lm(formula = CN ~ Treatment * Temperature, data = cndata) %>%
 fluxdata %>%
   left_join(cndata_orig, by = "Core") ->
   fluxdata
-
 
 # -----------------------------------------------------------------------------
 # Compute normalized fluxes
@@ -252,7 +251,7 @@ save_plot("figureC", figureC)
 
 printlog(SEPARATOR)
 printlog("Running Tukey HSD tests on cumulative emissions...")
-read_csv(FLUXDATA_CUM_CORE_FILE) %>%
+read_csv(FLUXDATA_CUM_CORE_FILE, col_types = "ciccdd") %>%
   mutate(Temperature = as.factor(Temperature)) ->
   fd_cumulative_core
 co2_aov <- aov(cum_flux_mgC_gC ~ Treatment + Temperature, 
@@ -272,7 +271,7 @@ ch4_hsd$Temperature <- as.data.frame(ch4_hsd$Temperature)
 ch4_hsd$Treatment <- as.data.frame(ch4_hsd$Treatment)
 
 printlog("Making plot...")
-fluxdata_cumulative <- read_csv(FLUXDATA_CUM_FILE)
+fluxdata_cumulative <- read_csv(FLUXDATA_CUM_FILE, col_types = "cicddd")
 fluxdata_cumulative$Treatment <- factor(fluxdata_cumulative$Treatment, 
                                         levels = c("Field moisture", "Controlled drought", "Drought"))
 fluxdata_cumulative$Temperature <- as.factor(fluxdata_cumulative$Temperature)
