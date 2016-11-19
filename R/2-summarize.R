@@ -46,8 +46,7 @@ printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in raw data...")
 rawdata <- read_csv(RAWDATA_FILE, col_types = "ccddddiiiddddddddc") %>%
-#readr::read_csv(file.path(INPUT_DIR, RAWDATA_FILE), col_types = "ccddddiiiddddddddc") %>%
-  # immediate discard columns we don't need
+  # immediately discard columns we don't need
   select(DATE, TIME, MPVPosition, CH4_dry, CO2_dry, h2o_reported)
 print_dims(rawdata)
 print(summary(rawdata))
@@ -97,7 +96,7 @@ qc_valvemap(valvemap)
 # Function to match up Picarro data with mapping file data
 # This is done by date and valve number (see plot saved above)
 matchfun <- function(DATETIME, MPVPosition) {
-  DATETIME <- as.POSIXct(DATETIME, origin = lubridate::origin, tz="UTC")
+  DATETIME <- as.POSIXct(DATETIME, origin = lubridate::origin, tz = "UTC")
   rowmatches <- which(DATETIME >= valvemap$StartDateTime & 
                         yday(DATETIME) == yday(valvemap$StartDateTime) &
                         MPVPosition == valvemap$MPVPosition)
@@ -118,50 +117,57 @@ summarydata_min <- rawdata_samples %>%
             min_CH4_time = nth(elapsed_seconds, which.min(CH4_dry)))
 
 # Now we want to look for the max concentration AFTER the minimum
-rawdata_temp <- rawdata_samples %>%
-  left_join(summarydata_min, by = "samplenum") 
+rawdata_samples %>%
+  left_join(summarydata_min, by = "samplenum") ->
+  rawdata_temp
 
-summarydata_maxCO2 <- rawdata_temp %>%
+rawdata_temp %>%
   filter(elapsed_seconds > min_CO2_time & elapsed_seconds < MAX_MAXCONC_TIME) %>%
   summarise(max_CO2 = max(CO2_dry),
-            max_CO2_time = nth(elapsed_seconds, which.max(CO2_dry))
-            )
-summarydata_maxCH4 <- rawdata_temp %>%
+            max_CO2_time = nth(elapsed_seconds, which.max(CO2_dry))) ->
+  summarydata_maxCO2
+rawdata_temp %>%
   filter(elapsed_seconds > min_CH4_time & elapsed_seconds < MAX_MAXCONC_TIME) %>%
   summarise(max_CH4 = max(CH4_dry),
-            max_CH4_time = nth(elapsed_seconds, which.max(CH4_dry)))
+            max_CH4_time = nth(elapsed_seconds, which.max(CH4_dry))) ->
+  summarydata_maxCH4
 
 # Final pipeline: misc other data, and match up with valve map entries
-summarydata_other <- rawdata_samples %>%
+rawdata_samples %>%
   group_by(samplenum) %>%
-  summarise(
-    DATETIME = mean(DATETIME),
-    N = n(),
-    MPVPosition	= mean(MPVPosition),
-    h2o_reported = mean(h2o_reported),
-    valvemaprow = matchfun(DATETIME, MPVPosition)) 
+  summarise(DATETIME = mean(DATETIME),
+            N = n(),
+            MPVPosition	= mean(MPVPosition),
+            h2o_reported = mean(h2o_reported),
+            valvemaprow = matchfun(DATETIME, MPVPosition)) ->
+  summarydata_other
 
 # Merge pieces together to form final summary data set
 printlog("Removing N=1 and MPVPosition=0 data, and merging...")
-summarydata <- summarydata_other %>%
+summarydata_other %>%
   filter(N > 1) %>% # N=1 observations are...? Picarro quirk
   filter(MPVPosition > 0) %>% # ? Picarro quirk
   left_join(summarydata_min, by = "samplenum") %>%
   left_join(summarydata_maxCO2, by = "samplenum") %>% 
-  left_join(summarydata_maxCH4, by = "samplenum")
+  left_join(summarydata_maxCH4, by = "samplenum") ->
+  summarydata
 
 printlog("Merging Picarro and mapping data...")
-summarydata <- left_join(summarydata, valvemap, by = c("MPVPosition", "valvemaprow"), all.x=TRUE)
+summarydata %>%
+  left_join(valvemap, by = c("MPVPosition", "valvemaprow"), all.x = TRUE) ->
+  summarydata
 
 printlog("Reading and merging treatment data...")
-trtdata <- read_csv(TREATMENTS, skip = 1)
-summarydata <- left_join(summarydata, trtdata, by = "Core")
+read_csv(TREATMENTS, skip = 1, col_types = "cci") %>%
+  left_join(summarydata, ., by = "Core") ->
+  summarydata
 
 printlog("Computing per-second rates...")
-summarydata <- summarydata %>%
+summarydata %>%
   mutate(CO2_ppm_s = (max_CO2 - min_CO2) / (max_CO2_time - min_CO2_time),
          CH4_ppb_s = (max_CH4 - min_CH4) / (max_CH4_time - min_CH4_time),
-         inctime_days = 1 + as.numeric(difftime(DATETIME, min(DATETIME), units = "days")))
+         inctime_days = 1 + as.numeric(difftime(DATETIME, min(DATETIME), units = "days"))) ->
+  summarydata
 
 printlog("Saving a comparison of MPVPosition sequence in Picarro data and valvemap")
 checkdata <- select(summarydata, DATETIME, MPVPosition)

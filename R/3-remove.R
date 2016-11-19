@@ -20,8 +20,9 @@ openlog(file.path(outputdir(), paste0(SCRIPTNAME, ".log.txt")), sink = TRUE) # o
 printlog("Welcome to", SCRIPTNAME)
 
 printlog("Reading in summary data...")
-summarydata <- read_csv(SUMMARYDATA_FILE) %>%
-  mutate(DATETIME = ymd_hms(DATETIME))
+read_csv(SUMMARYDATA_FILE) %>%
+  mutate(DATETIME = ymd_hms(DATETIME)) ->
+  summarydata
 print_dims(summarydata)
 
 # -----------------------------------------------------------------------------

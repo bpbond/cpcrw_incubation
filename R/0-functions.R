@@ -1,10 +1,10 @@
 # Common constant, file location, and function definitions
 # This support script is source'd by every other script before executing
-# Ben Bond-Lamberty March 2015
+# Ben Bond-Lamberty November 2016
 
 # -----------------------------------------------------------------------------
 # Run under:
-#   R version 3.2.3 (2015-12-10), x86_64-apple-darwin13.4.0 (64-bit)
+#   R version 3.3.1 (2016-06-21), x86_64-apple-darwin13.4.0 (64-bit)
 # Key packages used across scripts:
 library(ggplot2)       # 2.1.0
 theme_set(theme_bw())

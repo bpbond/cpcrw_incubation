@@ -74,7 +74,7 @@ save_diagnostic(p, "missing_mass")
 printlog(SEPARATOR)
 printlog("Computing per-date summaries...")
 summarydata <- summarydata %>%
-  mutate(Date = strftime(DATETIME, format="%Y-%m-%d"))
+  mutate(Date = strftime(DATETIME, format = "%Y-%m-%d"))
 
 summarydata %>%
   group_by(Date, Treatment, Temperature) %>%

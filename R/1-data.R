@@ -44,8 +44,9 @@ process_directory <- function(input_path, tempfile) {
   for(f in seq_along(filelist)) {
     d <- read_outputfile(file.path(input_path, filelist[f]))
 
-    if(f > 1 & ncol(d) != ncolumns)
+    if(f > 1 & ncol(d) != ncolumns) {
       stop("Columns differ between files!")
+    }
     ncolumns <- ncol(d)
     
     first <- !file.exists(tempfile)
