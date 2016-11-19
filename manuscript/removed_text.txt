@@ -1,6 +1,5 @@
 # removed text
 
  A critical question, then, is how the structure, chemistry, and microbial communities of current active-layer soils will respond to almost-certain temperature and moisture changes in the future {Xue, 2016 #4361}.
- 
- 
- 
+
+Warming usually increases soil GHG fluxes, for example at depth in a long-term Arctic tundra experiment {Sistla, 2013 #3666}, as increased temperatures enhance the production of extracellular enzymes, increase enzyme activities, and enhance desorption rates of organic matter from minerals. A key question, for both experimentalists and modelers {Falloon, 2011 #3045}, is to what degree such soils' emissions could by constrained by their moisture status, that is itself driven by changes in factors such as high-latitude temperatures, vapor pressure deficit, and precipitation.
