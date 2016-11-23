@@ -1,7 +1,7 @@
 ---
 output:
-  html_document: default
   word_document: default
+  html_document: default
 ---
 <!---
 This Rmarkdown file generates the Biogeosciences manuscript
@@ -118,7 +118,7 @@ The cumulative GHG fluxes (**Figure 4**) integrate the entire 100-day incubation
 
 The Q~10~ values observed in this experiment were low (all less than 2.0, even when controlling for changes in soil moisture). Temperature sensitivities of ~2 are more typical {Dutta, 2006 #1427}{Schädel, 2016 #4444}, although the temperature sensitivity of C release can change over time of incubation {Dutta, 2006 #1427} and vary between soil fractions cycling over different time horizons {Karhu, 2010 #2503}{Schädel, 2014 #4472}. Observed surface CO~2~ fluxes at this CPCRW site exhibited a Q~10~ of 5.1 ± 1.4 over a temperature range of 3.5-15 °C (personal communication, C. Anderson); these surface fluxes were measured over multiple months and include root respiration, however, preventing any direct comparison. While increased temperature does not always drive C mineralization rates in forest mineral soils {Giardina, 2000 #2159}, it is linked with increases in soil moisture content can lead to changes in microbial community structure and GHG fluxes {Xue, 2016 #4361}. 
 
-Interestingly, Q~10~ values were lower in the drought treatment cores, a mathematical consequence of the fact that drought restricted CO~2~ respiration more at 4 °C than at 20 °C. There is evidence that climate warming changes the microbial decay dynamics of soil organic C compounds generally considered to be stable {Frey, 2013 #4062}{Bond-Lamberty, 2016 #4371}. Conditions such as drought can change the amount and quality of DOC available to microbes {e.g., \Lundquist, 1999 #4506}, but we observed no DOC changes between treatments here. Deep active layer soils store large quantities of soil C {Mueller, 2015 #4435} but are not subject to abundant inputs of fresh C from vegetation, so the starting quality of the native soil C in active layer soils is older, more microbially processed, and dominated by more stable "heavy" organic C {Karlsson, 2011 #4436}. Thus, it may not be surprising that these more stable C compounds would be metabolized by processes that have been reported to be less temperature-sensitive.
+Interestingly, Q~10~ values were lower in the drought treatment cores, a mathematical consequence of the fact that drought restricted CO~2~ respiration more at 4 °C than at 20 °C. There is evidence that climate warming changes the microbial decay dynamics of soil organic C compounds generally considered to be stable {Frey, 2013 #4062}{Bond-Lamberty, 2016 #4371}. Conditions such as drought can change the amount and quality of DOC available to microbes {\Lundquist, 1999 #4506}, but we observed no DOC changes between treatments here. Deep active layer soils store large quantities of soil C {Mueller, 2015 #4435} but are not subject to abundant inputs of fresh C from vegetation, so the starting quality of the native soil C in active layer soils is older, more microbially processed, and dominated by more stable "heavy" organic C {Karlsson, 2011 #4436}. Thus, it may not be surprising that these more stable C compounds would be metabolized by processes that have been reported to be less temperature-sensitive.
 
 **4.2 Soil nitrogen**
 
@@ -150,7 +150,7 @@ B.B.-L., A.P.S., and V.L.B. designed this experiment. B.B.-L. and A.P.S. perform
 
 ------
 
-**Table 1.** Summary of dissolved organic carbon (DOC), percent C, percent N, and CO~2~ and CH~4~ fluxes by treatment. The "Field moisture" and "Drought" columns summarize (mean ± s.d.) 12 cores, combining two groups of N=6 at each incubation temperature, while the "Controlled drought" and "Pre-incubation" columns are N=6. 
+**Table 1.** Summary of dissolved organic carbon (DOC), percent C, percent N, bulk density (BD), and CO~2~ and CH~4~ fluxes by treatment. The "Field moisture" and "Drought" columns summarize (mean ± s.d.) 12 cores, combining two groups of N=6 at each incubation temperature, while the "Controlled drought" and "Pre-incubation" columns are N=6. 
 
 <!---
 TODO: Table 1 comes in from script with units like "mg/kg", not "mg kg-1"
