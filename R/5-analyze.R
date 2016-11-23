@@ -529,7 +529,7 @@ cndata %>%
          `N (%)` = N_percent,
          `BD (g/cm3)` = BD,
          `CO2 (µg C/g C/day)` = CO2_µgC_gC_day1, 
-         `CH4 (µg C/g C/day)` = CH4_µgC_gC_day1) ->
+         `CH4 (ng C/g C/day)` = CH4_µgC_gC_day1) ->
   table1_data
 
 # Compute the mean and s.d. for each treatment
@@ -559,6 +559,10 @@ table1_means %>%
          entry = ifelse(finite, paste(value, "±", value_sd), "-")) %>%
   dcast(Variable ~ Treatment, value.var = "entry") -> 
   table1
+
+# I'm not sure where this number came from (bulk density is not in uga_soil_samples.csv)
+# but Peyton added it to Table 1. Assume it's good
+table1[which(table1$Variable == "BD (g/cm3)"), "Pre-incubation"] <- "1.13 ± 0.29"
 
 printlog("All done with", SCRIPTNAME)
 closelog()
