@@ -217,12 +217,13 @@ fluxdata %>%
             samplenums = paste(samplenum, collapse = " ")) ->
   fluxdata_figsBC
 
-figsBC <- function(fd) {
+figsBC <- function(fd, multiplier = 1) {
   fd <- filter(fd, !is.na(incday), !is.na(flux_sd), !is.na(flux))
-  ggplot(fd, aes(incday, flux)) + 
+  ggplot(fd, aes(incday, flux * multiplier)) + 
     geom_point() + 
     facet_grid(Temperature ~ Treatment) + 
-    geom_errorbar(aes(ymin = flux - flux_sd, ymax = flux + flux_sd)) +
+    geom_errorbar(aes(ymin = flux * multiplier - flux_sd * multiplier,
+                      ymax = flux * multiplier + flux_sd * multiplier)) +
     xlab("Incubation day") + ylab(expression(µg~C~g~C^{-1}~day^{-1}))
 }
 
@@ -232,8 +233,9 @@ fluxdata_figsBC %>%
   figureB
 fluxdata_figsBC %>%
   filter(Gas == "CH4") %>%
-  figsBC ->
+  figsBC(multiplier = 1000) ->
   figureC
+figureC <- figureC + ylab(expression(ng~C~g~C^{-1}~day^{-1}))
 
 save_plot("figureB", figureB)
 save_plot("figureC", figureC)
