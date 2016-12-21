@@ -1,4 +1,4 @@
-Hurray! The main manuscript for this work is now [online](http://www.biogeosciences-discuss.net/bg-2016-234/).
+Hurray! The main manuscript for this work is now [published](http://dx.doi.org/10.5194/bg-13-6669-2016). Discussion version is [here](http://www.biogeosciences-discuss.net/bg-2016-234/).
 
 Double hurray! The 'open experiment' manuscript has been [published in ERL](http://dx.doi.org/10.1088/1748-9326/11/8/084004).
 
