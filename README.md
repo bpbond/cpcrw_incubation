@@ -1,6 +1,7 @@
-Hurray! The main manuscript for this work is now [published](http://dx.doi.org/10.5194/bg-13-6669-2016). Discussion version is [here](http://www.biogeosciences-discuss.net/bg-2016-234/).
+Hurray! The main manuscript for this work is now [published](http://dx.doi.org/10.5194/bg-13-6669-2016) in Biogeosciences. Discussion version is [here](http://www.biogeosciences-discuss.net/bg-2016-234/). Many thanks to the Copernicus publications staff, editor Mike Weintraub, and three anonymous reviewers for their criticisms, insight, and help with this manuscript.
 
-Double hurray! The 'open experiment' manuscript has been [published in ERL](http://dx.doi.org/10.1088/1748-9326/11/8/084004).
+The accompanying 'open experiment' manuscript, describing the repository and scripts used, has been [published in ERL](http://dx.doi.org/10.1088/1748-9326/11/8/084004).
+
 
 # **DISCLAIMER**
 **All the data and results in this repository are provisional and subject to normal scientific fair use expectations.** In particular, the diagnostics below present data that may not have been fully QC'd, checked, or interpreted. We do our best, but make no guarantees as to its correctness.
