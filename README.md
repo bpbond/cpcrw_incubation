@@ -1,3 +1,5 @@
+**August 29, 2017 reproducibility note:** See [this issue](https://github.com/bpbond/cpcrw_incubation/issues/49) for fixing some issues that may crop up when re-running these scripts.
+
 Hurray! The main manuscript for this work is now [published](http://dx.doi.org/10.5194/bg-13-6669-2016) in Biogeosciences. Discussion version is [here](http://www.biogeosciences-discuss.net/bg-2016-234/). Many thanks to the Copernicus publications staff, editor Mike Weintraub, and three anonymous reviewers for their criticisms, insight, and help with this manuscript.
 
 The accompanying 'open experiment' manuscript, describing the repository and scripts used, has been [published in ERL](http://dx.doi.org/10.1088/1748-9326/11/8/084004).
